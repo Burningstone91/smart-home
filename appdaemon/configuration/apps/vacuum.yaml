@@ -1,0 +1,25 @@
+vacuum_app:
+  module: vacuum
+  class: VacuumAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: someone,everyone,vacation
+    modes: guest_mode
+    days: Tuesday,Thursday,Saturday,Sunday
+  entities:
+    vacuum: vacuum.roomba
+  properties:
+    cleaning_time: "11:00:00"
+
+notify_when_vacuum_bin_full:
+  module: vacuum
+  class: NotifyWhenBinFull
+  dependencies:
+  - notification_app
+  - vacuum_app
+  entities:
+    vacuum: vacuum.roomba
+  notifications:
+    targets: Dimitri
+    interval: 3600

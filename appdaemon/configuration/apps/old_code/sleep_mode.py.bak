@@ -1,0 +1,74 @@
+import appdaemon.plugins.hass.hassapi as hass
+import datetime
+
+######################################################################################
+# App to control sleep mode, controlled by a Hue Dimmer Switch
+# Sleep mode: turn off all lights, send harmony command "Power Off",
+# start a playlist on spotify in bedroom
+# Hue Dimmer Switch:
+#   On Button: Start sleep mode
+#   Off Button: Stop music in x min
+#   Off Button long press: Stop music
+#   Dim - Button: Volume Down
+#   Dim + Button: Volume Up
+#
+# args:
+#
+# hue_dimmer: Dimmer Switch entity_id, which controls sleep mode
+# delay: seconds for timer to stop music, default 1200
+# sleep_playlist: playlist to play in sleep mode
+######################################################################################
+
+
+class SleepMode(hass.Hass):
+
+    def initialize(self):
+        self.handle = None
+        self.delay = self.args.get('delay', 1200)
+
+        if 'hue_dimmer' in self.args:
+            self.listen_state(self.activate_scene, self.args['hue_dimmer'])
+        else:
+            self.log("Keine Fernbedienung konfiguriert")
+        # timer to shutdown music at 2 o'clock
+        self.run_daily(self.pause, datetime.time(2, 0, 0))
+
+    def activate_scene(self, entity, attribute, old, new, kwargs):
+        self.log(self.get_state(self.args['hue_dimmer']))
+        if new == '1_click_up':
+            self.sleep_mode()
+        elif new == '2_click_up':
+            self.call_service(
+                'media_player/volume_up', entity_id='media_player.spotify')
+        elif new == '3_click_up':
+            self.call_service(
+                'media_player/volume_down', entity_id='media_player.spotify')
+        elif new == '4_click_up':
+            self.handle = self.run_in(self.pause, self.delay)
+        elif new == '4_hold_up':
+            self.pause()
+        else:
+            self.log("Tastendruck nicht konfiguriert")
+
+    def sleep_mode(self):
+        self.call_service(
+            'media_player/select_source',
+            entity_id='media_player.spotify',
+            source='HEOS 5')
+        self.call_service(
+            'media_player/volume_set',
+            entity_id='media_player.spotify',
+            volume_level=7)
+        self.call_service(
+            'media_player/play_media',
+            entity_id='media_player.spotify',
+            media_content_type='playlist',
+            media_content_id=self.args['sleep_playlist'])
+        self.turn_off('group.all_lights')
+        self.turn_off('remote.wohnzimmer')
+        self.log("Alle Lichter und Geräte ausgeschaltet, Playliste gestartet")
+
+    def pause(self):
+        self.call_service(
+            'media_player/media_pause', entity_id='media_player.spotify')
+        self.log("Pausiere Musik")

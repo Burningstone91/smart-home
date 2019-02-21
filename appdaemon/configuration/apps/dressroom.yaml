@@ -1,0 +1,36 @@
+motion_light_dress_room:
+  module: motion_light
+  class: MotionLightAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    motion_sensor: binary_sensor.bewegung_ankleidezimmer
+    lux_sensor: sensor.lux_ankleidezimmer
+    lights:
+      morning: light.ankleidezimmer
+      day: light.ankleidezimmer
+      night: light.ankleidezimmer
+  properties:
+    lux_threshold: 200
+    timer_sec: 900
+    day_state_time:
+      morning: "05:30:00"
+      day: "10:30:00"
+      night: "22:00:00"
+    brightness_level:
+      morning: 30
+      day: 90
+      night: 20
+    light_color:
+      morning: orange
+      day: white
+      night: orange
+
+dimmer_switch_ankleidezimmer:
+  module: dimmer_switch
+  class: DimmerSwitch
+  entities:
+    dimmer_switch: dimmschalter_ankleidezimmer
+    lights: light.ankleidezimmer

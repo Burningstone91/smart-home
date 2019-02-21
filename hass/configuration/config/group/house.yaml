@@ -1,0 +1,34 @@
+house:
+  name: Wohnung
+  entities:
+    - group.presence
+    - group.security
+    - group.modes
+    - group.alarms
+    - group.climate
+presence:
+  name: Anwesenheit
+  entities:
+    - input_select.house_presence
+    - input_select.sabrina_presence
+    - input_select.dimitri_presence
+security:
+  name: Alarmanlage
+  entities:
+    - input_select.alarm_state
+    - sensor.tuer_wohnung
+modes:
+  name: Hausmodi
+  entities:
+    - input_boolean.guest_mode
+    - input_boolean.cleaning_mode
+    - input_boolean.sleep_mode
+alarms:
+  name: Wecker
+  entities:
+    - sensor.dimitri_wecker_uhrzeit
+climate:
+  name: Klima
+  entities:
+    - sensor.averagehumidity
+    - sensor.averagetemperature

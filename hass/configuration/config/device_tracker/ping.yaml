@@ -1,0 +1,15 @@
+- platform: ping
+  hosts:
+    sabrina_pc: !secret sabrina_pc_ip
+
+- platform: ping
+  hosts:
+    dimitri_pc: !secret dimitri_pc_ip
+
+- platform: ping
+  hosts:
+    sabrina_phone: !secret sabrina_handy_ip
+
+- platform: ping
+  hosts:
+    dimitri_phone: !secret dimitri_handy_ip

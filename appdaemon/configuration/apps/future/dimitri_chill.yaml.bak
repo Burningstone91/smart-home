@@ -1,0 +1,16 @@
+dimitri_chill_app:
+  module: dimitri_chill
+  class: DimitriChillAutomation
+  dependencies:
+    - media_player_app
+    - presence_app
+  disabled_states:
+    presence: everyone,noone,vacation
+    modes: guest_mode
+    days: Saturday,Friday
+  entities:
+    media_player: media_player.spotify
+    source_entity: media_player.denon_avr_wohnzimmer
+  properties:
+    chill_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+    source: WohnzimmerAVR

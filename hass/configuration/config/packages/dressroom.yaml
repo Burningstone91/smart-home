@@ -1,0 +1,34 @@
+light:
+  - platform: group
+    name: ankleidezimmer
+    entities:
+      - light.decke_1_ankleidezimmer
+      - light.decke_2_ankleidezimmer
+      - light.decke_3_ankleidezimmer
+
+sensor:
+  - platform: template
+    sensors:
+      tuer_ankleidezimmer:
+        value_template: '{% if states.binary_sensor.tuer_ankleidezimmer %}
+          {% if states.binary_sensor.tuer_ankleidezimmer.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Tür Ankleidezimmer'
+
+      fenster_ankleidezimmer:
+        value_template: '{% if states.binary_sensor.fenster_ankleidezimmer %}
+          {% if states.binary_sensor.fenster_ankleidezimmer.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Fenster Ankleidezimmer'

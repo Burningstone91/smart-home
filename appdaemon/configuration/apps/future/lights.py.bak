@@ -1,0 +1,98 @@
+import random
+
+from appbase import AppBase
+
+
+class LightsAutomation(AppBase):
+
+    def initialize(self) -> None:
+        super().initialize()
+        self.colorloop_handles = {}
+
+    def start_colorloop(self, lights: list, **kwargs: dict) -> None:
+        self.stop_colorloop(lights)
+
+        brightness = self.pcnt_to_value(kwargs.get('brightness', 70))
+        transition_time = kwargs.get('transition_time', 900)
+
+        for light in lights:
+            self.colorloop_handles[light] = self.run_every(self.transition_to_color,
+                                                           transition_time,
+                                                           brightness=brightness,
+                                                           transition=transition_time)
+
+    def transition_to_color(self, **kwargs: dict) -> None:
+        for light in self.lights:
+            self.turn_on(light,
+                         color_name=self.random_color(),
+                         brightness=kwargs['brightness'],
+                         transition=kwargs['transition'])
+
+    def stop_colorloop(self, lights: list) -> None:
+        for light in lights:
+            if light in self.colorloop_handles:
+                self.cancel_timer(self.colorloop_handles[light])
+                self.colorloop_handles.pop(light)
+
+    def random_color(self) -> str:
+        colors = {1: 'orange',
+                  2: 'yellow',
+                  3: 'violet',
+                  4: 'turquoise',
+                  5: 'purple',
+                  6: 'olive',
+                  7: 'magenta',
+                  8: 'lime',
+                  9: 'indigo',
+                  10: 'aqua',
+                  11: 'green',
+                  12: 'blue'}
+        return colors[random.randint(1, 13)]
+
+    def pcnt_to_value(self, brightness: int) -> float:
+        return 255 / 100 * brightness
+
+
+
+
+
+
+
+    def notify_with_light(self, light_entities: str,
+                          cancel: bool = False) -> None:
+        notification_bulb = self.entities['notification_bulb_bool']
+        light_entities = light_entities.split(',')
+
+        if self.get_state(notification_bulb) == 'off':
+            self.save_current_light_config(light_entities)
+            self.turn_on(notification_bulb)
+            for light in light_entities:
+                self.turn_on(light, color_name='red', brightness=255)
+        elif cancel:
+            self.turn_lights_back_to_previous_state(light_entities)
+            self.turn_off(notification_bulb)
+
+    def save_current_light_config(self, entities: list) -> None:
+        self.current_light_config = {}
+        for light in entities:
+            current_config = {
+                light: {
+                    'state': self.get_state(light),
+                    'color': self.get_state(light, attribute='rgb_color'),
+                    'brightness': self.get_state(light, attribute='brightness')
+                }
+            }
+            self.current_light_config.update(current_config)
+
+    def turn_lights_back_to_previous_state(self, entities: list) -> None:
+        for light in entities:
+            if light in self.current_light_config:
+                config = self.current_light_config[light]
+                if config['state'] == 'off':
+                    self.turn_off(light)
+                if config['color']:
+                    self.turn_on(light,
+                                 brightness=config['brightness'],
+                                 rgb_color=config['color'])
+                else:
+                    self.turn_on(light, brightness=config['brightness'])

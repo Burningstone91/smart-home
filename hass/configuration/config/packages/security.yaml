@@ -1,0 +1,9 @@
+input_select:
+  alarm_state:
+    name: Status Alarmanlage
+    options:
+      - Ungesichert
+      - Scharf ohne Bewegung
+      - Scharf mit Bewegung
+      - Einbrecher
+    initial: Ungesichert

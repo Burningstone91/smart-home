@@ -1,0 +1,74 @@
+from typing import Union
+
+from appbase import AppBase
+from house_config import HOUSE, MODES
+
+
+##############################################################################
+# App to start chill mode when Dimitri arrives alone and noone is home
+# stops chill mode when someone else arrives
+#
+# dependencies: presence_app, media_player_app
+# args:
+#
+# entities:
+#   media_player:
+#   source_entity: entity id of the media player to turn off (for Denon AVR)
+# properties:
+#   chill_playlist: spotify playlist to play in chill mode
+#   source: media player source if media player has multiple sources
+##############################################################################
+
+
+class DimitriChillAutomation(AppBase):
+
+    def initialize(self):
+        super().initialize()
+
+        if 'media_player' in self.entities:
+            self.media_player = self.entities['media_player']
+            self.chill_playlist = self.properties['chill_playlist']
+            self.source = self.properties['source']
+            self.source_entity = self.entities.get('source_entity')
+
+            # start chill mode if Dimitri arrives home and noone home
+            self.listen_state(self.start_chill_mode,
+                              HOUSE['presence_state'],
+                              constrain_app_enabled=1)
+
+            # cancel chill mode if someone arrives home
+            self.listen_state(self.cancel_chill_mode, HOUSE['presence_state'])
+
+        else:
+            self.log("Kein Medienplayer konfiguriert, keine Aktion!")
+
+    def start_chill_mode(self, entity: Union[str, dict], attribute: str,
+                         old: str, new: str, kwargs: dict) -> None:
+        if len(self.persons_home) == 1 and 'Dimitri' in self.persons_arrived:
+            self.media_player_app.play_media(
+                self.media_player,
+                self.chill_playlist,
+                self.source,
+                volume=40)
+            self.turn_on(MODES['dimitri_chill_mode'])
+            self.log("Chillmodus gestartet! Relax!")
+
+    def cancel_chill_mode(self, entity: Union[str, dict], attribute: str,
+                          old: str, new: str, kwargs: dict) -> None:
+        if self.get_state(MODES['dimitri_chill_mode']) == 'on':
+            if not new == self.presence_app.HouseState['someone'].value:
+                self.media_player_app.stop(
+                    self.media_player, source_entity=self.source_entity)
+                self.turn_off(MODES['dimitri_chill_mode'])
+                self.log("Jemand anderes ist gerade gekommen, beende Chillmodus!")
+
+    @property
+    def persons_home(self) -> list:
+        return self.presence_app.who_in_state(
+            self.presence_app.PresenceState.home,
+            self.presence_app.PresenceState.just_arrived)
+
+    @property
+    def persons_arrived(self) -> list:
+        return self.presence_app.who_in_state(
+            self.presence_app.PresenceState.just_arrived)

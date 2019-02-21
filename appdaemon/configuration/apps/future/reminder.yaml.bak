@@ -1,0 +1,11 @@
+send_reminders:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - notification_app
+  disables_states:
+    presence: vacation
+  notifications:
+    targets: Dimitri
+  reminders:
+    finanznachrichten_lesen: Finanznachrichten lesen,06:38:00,Monday,Tuesday,Wednesday,Thursday,Friday

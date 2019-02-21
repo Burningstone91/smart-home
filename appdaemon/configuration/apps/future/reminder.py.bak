@@ -1,0 +1,54 @@
+import datetime
+
+from appbase import AppBase
+
+
+##############################################################################
+# App to send reminders, creates callback for each reminder in reminders arg
+#
+# ARGS:
+# yaml args:
+#
+# notifications:
+#   targets:
+# reminders:
+#   unique_id: reminder has the following form: message,time,days
+#              days can be in any order and also need to be comma separated
+#              without space between
+#              example: Nachrichten lesen,06:30:00,Monday,Tuesday,Wednesday,Thursday,Friday
+##############################################################################
+
+
+class ReminderAutomation(AppBase):
+    def initialize(self):
+        super().initialize()
+
+        self.reminders = self.args.get('reminders')
+
+        time = datetime.datetime.now()
+        seconds_add = (round((time.minute * 60 + time.second) / 900) + 1) * 900
+        time = ((time.replace(minute=0, second=0, microsecond=0)) +
+                (datetime.timedelta(seconds=seconds_add)))
+
+        self.run_every(self.check_for_reminders, time, 900)
+
+        for reminder, config in self.reminders:
+            self.run_at(self.prepare_reminders,
+                        config.split(',')[1],
+                        message=config.split(',')[0],
+                        days=config.split(',')[2:])
+
+    def prepare_reminders(self, *args: list, **kwargs) -> None:
+        if self.constrain_app_enabled and self.is_reminder_day(kwargs['days']):
+            self.send_reminders(kwargs['message'])
+     
+    def is_reminder_day(self, days: list) -> bool:
+        return datetime.datetime.now().strftime("%A") in days
+
+    def send_reminders(self, message: str) -> None:
+        self.notification_app.notify(
+            'single',
+            'emergency',
+            message,
+            "Erinnerung",
+            self.notifications['targets'])

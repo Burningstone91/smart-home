@@ -1,0 +1,35 @@
+light:
+  - platform: group
+    name: schlafzimmer
+    entities:
+      - light.decke_1_schlafzimmer
+      - light.decke_2_schlafzimmer
+      - light.decke_3_schlafzimmer
+      - light.kugellampe_schlafzimmer
+
+sensor:
+  - platform: template
+    sensors:
+      tuer_schlafzimmer:
+        value_template: '{% if states.binary_sensor.tuer_schlafzimmer %}
+          {% if states.binary_sensor.tuer_schlafzimmer.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Tür Schlafzimmer'
+
+      fenster_schlafzimmer:
+        value_template: '{% if states.binary_sensor.fenster_schlafzimmer %}
+          {% if states.binary_sensor.fenster_schlafzimmer.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Fenster Schlafzimmer'

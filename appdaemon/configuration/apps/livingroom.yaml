@@ -1,0 +1,50 @@
+remote_app:
+  module: home_cinema
+  class: RemoteAutomation
+  entities:
+    harmony_remote: remote.wohnzimmer
+  properties:
+    activities:
+      fernsehen: 47893654
+      nintendo_switch: 50967913
+      filme/serien: 28640579
+      poweroff: -1
+
+scene_lights_app:
+  module: home_cinema
+  class: SceneLights
+  dependencies:
+    - presence_app
+    - remote_app
+  disabled_states:
+    - presence: noone,vacation
+  entities:
+    lights: light.wohnzimmer
+  properties:
+    transition_on: 2
+    transition_off: 120
+    scene_color:
+      fernsehen: blue
+      nintendo_switch: green
+      filme/serien: orange
+    scene_brightness:
+      fernsehen: 50
+      nintendo_switch: 70
+      filme/serien: 30
+
+dimmer_switch_wohnzimmer:
+  module: dimmer_switch
+  class: DimmerSwitch
+  entities:
+    dimmer_switch: dimmschalter_wohnzimmer
+    lights: light.wohnzimmer
+
+#phone_call:
+#  module: home_cinema
+#  class: PhoneCall
+#  dependencies:
+#    - presence_app
+#    - remote_app
+#  disabled_states: noone,vacation
+#  properties:
+#    roku_id: 60477263

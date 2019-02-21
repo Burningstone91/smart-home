@@ -1,0 +1,38 @@
+climate_app:
+  module: climate
+  class: ClimateAutomation
+  entities:
+    humidity_sensors: sensor.luftfeuchtigkeit_schlafzimmer,sensor.luftfeuchtigkeit_buero,sensor.luftfeuchtigkeit_ankleidezimmer,sensor.luftfeuchtigkeit_bad_klein
+    temperature_senors: sensor.temperatur_schlafzimmer,sensor.temperatur_buero,sensor.temperatur_ankleidezimmer
+    average_temperature_sensor: sensor.averagetemperature
+    window_sensors: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche
+  thresholds:
+    humidity_room: 60
+
+notify_on_high_humidity:
+  module: climate
+  class: NotifyOnHighHumidity
+  dependencies:
+    - climate_app
+    - notification_app
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+    modes: guest_mode
+  notifications:
+    targets: Dimitri
+
+notify_on_window_open:
+  module: climate
+  class: NotifyOnWindowOpen
+  dependencies:
+    - climate_app
+    - notification_app
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+    modes: guest_mode
+  entities:
+    notification_lights: light.buero,light.ankleidezimmer
+  notifications:
+    targets: Dimitri

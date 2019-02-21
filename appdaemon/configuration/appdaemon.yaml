@@ -1,0 +1,10 @@
+log:
+  logfile: /conf/logs/appdaemon.log
+  errorfile: /conf/logs/error.log
+appdaemon:
+  threads: '10'
+  plugins:
+    HASS:
+      type: hass
+      token: !secret appdaemon_token
+      ha_url: !secret appdaemon_url

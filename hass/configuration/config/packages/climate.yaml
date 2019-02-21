@@ -1,0 +1,18 @@
+sensor:
+  - platform: min_max
+    entity_ids:
+      - sensor.luftfeuchtigkeit_buero
+      - sensor.luftfeuchtigkeit_schlafzimmer
+      - sensor.luftfeuchtigkeit_wohnzimmer
+      - sensor.luftfeuchtigkeit_bad_klein
+    name: Durchschnittliche Luftfeuchtigkeit Innen
+    type: mean
+
+  - platform: min_max
+    entity_ids:
+      - sensor.temperatur_buero
+      - sensor.temperatur_schlafzimmer
+      - sensor.temperatur_ankleidezimmer
+      - sensor.temperatur_bad_klein
+    name: Durchschnittliche Temperatur Innen
+    type: mean

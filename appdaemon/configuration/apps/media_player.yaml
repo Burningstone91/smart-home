@@ -1,0 +1,3 @@
+media_player_app:
+  module: media_player
+  class: MediaPlayerAutomation

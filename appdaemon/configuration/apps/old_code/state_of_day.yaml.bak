@@ -1,0 +1,7 @@
+state_of_day_app:
+  module: state_of_day
+  class: DayStateAutomation
+  properties:
+    morning_time: "05:30:00"
+    day_time: "09:30:00"
+    night_time: "22:00:00"

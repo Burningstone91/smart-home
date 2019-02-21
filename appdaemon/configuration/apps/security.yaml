@@ -1,0 +1,38 @@
+security_app:
+  module: security
+  class: SecurityAutomation
+  entities:
+    motion: binary_sensor.bewegung_buero,binary_sensor.bewegung_schlafzimmer,binary_sensor.bewegung_ankleidezimmer,binary_sensor.bewegung_bad_klein
+    other_security: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche,sensor.tuer_wohnung,sensor.tuer_buero,sensor.tuer_ankleidezimmer,sensor.tuer_bad_gross,sensor.tuer_bad_klein,sensor.tuer_schlafzimmer,sensor.tuer_reduit
+    alarm_lights: light.ankleidezimmer
+
+arm_when_everyone_gone:
+  module: security
+  class: ArmOnDeparture
+  dependencies: 
+    - presence_app
+    - security_app
+
+disarm_when_someone_home:
+  module: security
+  class: DisarmOnArrival
+  dependencies:
+    - presence_app
+    - security_app
+
+arm_disarm_when_cleaning:
+  module: security
+  class: ArmDisarmCleaning
+  dependencies:
+    - presence_app
+    - security_app
+
+notify_on_alarm_change:
+  module: security
+  class: NotificationOnChange
+  dependencies:
+    - presence_app
+    - security_app
+    - notification_app
+  notifications:
+    targets: Dimitri

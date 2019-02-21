@@ -1,0 +1,77 @@
+sensor:
+  - platform: mqtt_room
+    device_id: cd1381f62e7d
+    name: 'Dimitri'
+    state_topic: 'room_presence'
+    timeout: 5
+    away_timeout: 300
+
+  - platform: mqtt_room
+    device_id: f913395bc892
+    name: 'Sabrina'
+    state_topic: 'room_presence'
+    timeout: 5
+    away_timeout: 300
+
+  - platform: mqtt
+    name: "Dimitri Wecker Uhrzeit"
+    value_template: '{{ value_json.RSSI }}'
+    state_topic: 'android_alarms'
+    json_attributes_topic: 'android_alarms'
+
+  - platform: template
+    sensors:
+      dimitri_home:
+        friendly_name: "Dimitri Home Status"
+        value_template: >-
+          {% if is_state('input_select.dimitri_presence', 'zu Hause') or is_state('input_select.dimitri_presence', 'gerade angekommen') %}
+            home
+          {% elif is_state('input_select.dimitri_presence', 'gerade gegangen') or is_state('input_select.dimitri_presence', 'weg') or is_state('input_select.dimitri_presence', 'lange weg') %}
+            away
+          {% else %}
+            error
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_select.dimitri_presence', 'zu Hause') or is_state('input_select.dimitri_presence', 'gerade angekommen') %}
+            /local/presence/dimitri_home.jpg  
+          {% elif is_state('input_select.dimitri_presence', 'gerade gegangen') or is_state('input_select.dimitri_presence', 'weg') or is_state('input_select.dimitri_presence', 'lange weg') %}
+            /local/presence/dimitri_away.jpg
+          {% endif %}
+
+      sabrina_home:
+        friendly_name: "Sabrina Home Status"
+        value_template: >-
+          {% if is_state('input_select.sabrina_presence', 'zu Hause') or is_state('input_select.sabrina_presence', 'gerade angekommen') %}
+            home
+          {% elif is_state('input_select.sabrina_presence', 'gerade gegangen') or is_state('input_select.sabrina_presence', 'weg') or is_state('input_select.sabrina_presence', 'lange weg') %}
+            away
+          {% else %}
+            error
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_select.sabrina_presence', 'zu Hause') or is_state('input_select.sabrina_presence', 'gerade angekommen') %}
+            /local/presence/sabrina_home.jpg  
+          {% elif is_state('input_select.sabrina_presence', 'gerade gegangen') or is_state('input_select.sabrina_presence', 'weg') or is_state('input_select.sabrina_presence', 'lange weg') %}
+            /local/presence/sabrina_away.jpg
+          {% endif %}
+
+input_select:
+  dimitri_presence:
+    name: Dimitri
+    options:
+      - zu Hause
+      - gerade angekommen
+      - gerade gegangen
+      - weg
+      - lange weg
+    initial: zu Hause
+
+  sabrina_presence:
+    name: Sabrina
+    options:
+      - zu Hause
+      - gerade angekommen
+      - gerade gegangen
+      - weg
+      - lange weg
+    initial: zu Hause

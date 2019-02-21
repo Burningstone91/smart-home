@@ -1,0 +1,8 @@
+host: !secret host_ip
+username: !secret influxdb_user
+password: !secret influxdb_key
+include:
+  entities:
+    - input_select.dimitri_presence
+    - input_select.sabrina_presence
+    - input_select.house_presence

@@ -1,0 +1,3 @@
+presence_app:
+  module: presence
+  class: PresenceAutomation

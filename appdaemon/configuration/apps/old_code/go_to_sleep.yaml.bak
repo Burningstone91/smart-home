@@ -1,0 +1,22 @@
+go_to_sleep_app:
+  module: go_to_sleep
+  class: SleepAutomation
+  dependencies:
+    - media_player_app
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    dimmer_switch: dimmschalter_schlafzimmer_master
+    media_player: media_player.spotify
+    wakeup_light: light.kugellampe_schlafzimmer
+    turn_off_entities: group.all_lights,remote.wohnzimmer
+  properties:
+    delay: 1200
+    shutdown_time: "03:00:00"
+    sleep_time_start: "19:00:00"
+    wakeup_time_start: "05:00:00"
+    sleep_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+    wakeup_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+    transition: 900
+    source: "HEOS 5"

@@ -1,0 +1,5 @@
+github_pull:
+  alias: "Update Github to Production"
+  sequence:
+    - service: shell_command.git_pull_restart_hass
+    - service: homeassistant.restart

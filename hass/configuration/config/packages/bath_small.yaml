@@ -1,0 +1,31 @@
+sensor:
+  - platform: template
+    sensors:
+      tuer_bad_klein:
+        value_template: '{% if states.binary_sensor.tuer_bad_klein %}
+          {% if states.binary_sensor.tuer_bad_klein.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Tür Bad klein'
+
+  - platform: template
+    sensors:
+      bad_klein_multisensor_battery:
+        friendly_name: 'Bad klein Multisensor Batterie'
+        value_template: >-
+          {%- if states.zwave.aeotec_zw100_multisensor_6_10 -%}
+            {{ states.zwave.aeotec_zw100_multisensor_6_10.attributes.battery_level }}
+          {%- else -%}
+            n/a
+          {%- endif -%}
+        unit_of_measurement: '%'
+        device_class: battery
+        entity_id: zwave.aeotec_zw100_multisensor_6_10
+
+
+######## add google mini or similar later ##############

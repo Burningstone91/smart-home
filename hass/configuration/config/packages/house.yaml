@@ -1,0 +1,25 @@
+sensor:
+  - platform: template
+    sensors:
+      tuer_wohnung:
+        value_template: '{% if states.binary_sensor.tuer_wohnung %}
+          {% if states.binary_sensor.tuer_wohnung.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Tür Wohnung'
+
+input_select:
+  house_presence:
+    name: Haus
+    options:
+      - Alle sind zu Hause
+      - Ferien
+      - Jemand ist zu Hause
+      - Niemand ist zu Hause
+    initial: Jemand ist zu Hause
+

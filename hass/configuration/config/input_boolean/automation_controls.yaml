@@ -1,0 +1,81 @@
+################################ Living Room #################################
+
+remote_app:
+  name: Fernbedienung
+  initial: True
+
+scene_light_app:
+  name: Lichterszenen Wohnzimmer
+  initial: True
+
+phone_call:
+  name: Pause/Play bei Telefonat
+  initial: True
+
+################################## Bedroom ###################################
+
+motion_light_bedroom:
+  name: Bewegung Schlafzimmer
+  initial: True
+
+sleep_app:
+  name: Einschlafmodus
+  initial: True
+
+turn_on_sleep_mode_forgot:
+  name: Schlafmodus einschalten wenn es vergessen wurde
+  initial: True
+
+turn_off_sleep_mode_forgot:
+  name: Schlafmodus ausschalten wenn es vergessen wurde
+  initial: True
+
+################################# Dress room #################################
+
+motion_light_dress_room:
+  name: Bewegung Ankleidezimmer
+  initial: True
+
+################################### Office ###################################
+
+motion_light_office:
+  name: Bewegung Büro
+  initial: True
+
+################################## Security ##################################
+
+arm_when_everyone_gone:
+  name: Alarm scharf wenn alle gegangen sind
+  initial: True
+
+disarm_when_someone_home:
+  name: Alarm ausschalten wenn jemand zu Hause ist
+  initial: True
+
+arm_disarm_when_cleaning:
+  name: Bewegungssensoren ein/ausschalten wenn Pedro putzt/fertig ist
+  initial: True
+
+notify_on_alarm_change:
+  name: Benachrichtige wenn sich der Alarm Status ändert
+  initial: True
+
+################################## Climate ###################################
+
+notify_on_high_humidity:
+  name: Benachrichtige wenn die Luftfeuchtigkeit in einem Zimmer zu hoch ist
+  initial: True
+
+notify_on_window_open:
+  name: Benachrichtige wenn ein Fenster länger als 10 Minuten offen ist
+  initial: True
+
+################################## Vacuum ####################################
+
+vacuum_app:
+  name: Staubsaugerautomatisierung
+  initial: True
+  
+notify_when_vacuum_bin_full:
+  name: Benachrichtige wenn der Abfalleimer des Staubsaugers voll ist
+  initial: True

@@ -1,0 +1,85 @@
+motion_light_bedroom:
+  module: motion_light
+  class: MotionLightAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    motion_sensor: binary_sensor.bewegung_schlafzimmer
+    lux_sensor: sensor.lux_schlafzimmer
+    lights:
+      morning: light.kugellampe_schlafzimmer
+      day: light.decke_1_schlafzimmer,light.decke_2_schlafzimmer,light.decke_3_schlafzimmer
+      night: light.kugellampe_schlafzimmer
+  properties:
+    lux_threshold: 200
+    timer_sec: 300
+    day_state_time:
+      morning: "05:30:00"
+      day: "13:30:00"
+      night: "22:00:00"
+    brightness_level:
+      morning: 10
+      day: 70
+      night: 10
+    light_color:
+      morning: orange
+      day: orange
+      night: orange
+
+dimmer_switch_schlafzimmer:
+  module: dimmer_switch
+  class: DimmerSwitch
+  entities:
+    dimmer_switch: dimmschalter_schlafzimmer
+    lights: light.schlafzimmer
+
+sleep_app:
+  module: sleep
+  class: SleepAutomation
+  dependencies:
+    - media_player_app
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    dimmer_switch: dimmschalter_schlafzimmer_master
+    media_player: media_player.spotify
+    wakeup_light: light.kugellampe_schlafzimmer
+    turn_off_entities: group.all_lights,remote.wohnzimmer
+  properties:
+    delay: 1200
+    shutdown_time: "03:00:00"
+    sleep_time_start: "19:00:00"
+    wakeup_time_start: "05:00:00"
+    sleep_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+    wakeup_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+    transition: 900
+    source: "HEOS 5"
+
+turn_on_sleep_mode_forgot:
+  module: switches
+  class: ToggleAtTime
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
+  entities:
+    switch: input_boolean.sleep_mode
+  properties:
+    schedule_time: "03:00:00"
+    state: "on"
+
+turn_off_sleep_mode_forgot:
+  module: switches
+  class: ToggleAtTime
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
+  entities:
+    switch: input_boolean.sleep_mode
+  properties:
+    schedule_time: "13:30:00"
+    state: "off"

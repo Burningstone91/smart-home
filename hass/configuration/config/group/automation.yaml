@@ -1,0 +1,56 @@
+automations:
+  name: Smart Home
+  entities:
+    - grop.living_room_automations
+    - group.office_automations
+    - group.dress_room_automations
+    - group.bedroom_automations
+    - group.security_automations
+    - group.climate_automations
+    - group.vacuum_automations
+    - group.mode_automations
+
+living_room_automations:
+  name: Wohnzimmerautomatisierungen
+  entities:
+    - input_boolean.remote_app
+    - input_boolean.scene_lights_app
+    - input_boolean.phone_call
+
+office_automations:
+  name: Büroautomatisierungen
+  entities:
+    - input_boolean.motion_light_office
+
+dress_room_automations:
+  name: Ankleidezimmer Automatisierungen
+  entities:
+    - input_boolean.motion_light_dress_room
+
+bedroom_automations:
+  name: Büro Automatisierungen
+  entities:
+    - input_boolean.motion_light_bedroom
+    - input_boolean.sleep_app
+    - input_boolean.turn_on_sleep_mode_forgot
+    - input_boolean.turn_off_sleep_mode_forgot
+
+security_automations:
+  name: Sicherheit Automatisierungen
+  entities:
+    - input_boolean.arm_when_everyone_gone
+    - input_boolean.disarm_when_someone_home
+    - input_boolean.arm_disarm_when_cleaning
+    - input_boolean.notify_on_alarm_change
+
+climate_automations:
+  name: Klima Automatisierungen
+  entities:
+    - input_boolean.notify_on_high_humidity
+    - input_boolean.notify_on_window_open
+
+vacuum_automations:
+  name: Staubsauger Automatisierungen
+  entities:
+    - input_boolean.vacuum_app
+    - input_boolean.notify_when_vacuum_bin_full

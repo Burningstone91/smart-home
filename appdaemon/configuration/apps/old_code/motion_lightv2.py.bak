@@ -1,0 +1,153 @@
+from typing import Union
+
+from appbase import AppBase
+from house_config import HOUSE
+
+LIGHT_TIMER = 'light_timer'
+
+##############################################################################
+# App to turn on light when motion is detected, then turn off after a delay
+# If one of the no_action_devices is on (PC, AV Receiver, etc) a trigger of
+# the motion sensor has no effect, light turns only on if lux is above
+# threshold
+#
+# args:
+#
+# entities:
+#   day_lights: entity id of lights to control during day, comma separated
+#   evening_lights: entity id of lights to control in evening, comma separated
+#   motion_sensor: entity id of motion sensor
+#   lux_sensor: entity id of lux sensor
+#   no_action: devices which will lead to no action on motion if they are on
+# properties:
+#   lux_threshold: value above which light will not turn on, default 100 lux
+#   timer_sec: seconds until light turns off when no motion, default 30 sec
+#   brightness_level: brightness level in % for  periods of day, default 75%
+#     Morgen Wochentag: 30
+#     Tag Wochentag: 80
+#     Nacht Wochentag: 20
+#     Morgen Wochenende: 30
+#     Tag Wochenende: 80
+#     Nacht Wochenende: 20
+#   light_color: ligh tcolor for periods of day, e.g. orange, default white
+#     Morgen Wochentag: orange
+#     Tag Wochentag: white
+#     Nacht Wochentag:
+#     Morgen Wochenende:
+#     Tag Wochenende:
+#     Nacht Wochenende:
+##############################################################################
+
+
+class MotionLightAutomation(AppBase):
+
+    def initialize(self):
+        super().initialize()
+        self.handle = None
+        self.brightness_map = self.properties.get('brightness_level', {})
+        self.color_map = self.properties.get('light_color', {})
+        self.delay = self.properties.get('timer_sec', 30)
+        self.day_lights = self.entities.get('day_lights', '').split(',')
+        self.evening_lights = self.entities.get('evening_lights', '').split(',')
+        self.all_lights = list(set().union(self.day_lights, self.evening_lights))
+        self.no_action_entities = self.entities.get('no_action', '').split(',')
+
+        if 'motion_sensor' in self.entities:
+            # take action when motion is detected
+            self.listen_state(self.motion,
+                              self.entities['motion_sensor'],
+                              constrain_app_enabled=1)
+        else:
+            self.log("Kein Bewegungssensor konfiguriert, keine Aktion!")
+
+        # turn on and off with set brightness on day state changes because
+        # light turns on first in previous state so it may be too bright
+        self.listen_state(self.day_state_change,
+                         HOUSE['state_of_day'],
+                         constrain_app_enabled=1)
+
+    def motion(self, entity: Union[str, dict], attribute: str,
+               old: str, new: str, kwargs: dict) -> None:
+        if new == 'on':
+            self.log("Bewegung erkannt")
+            if not self.no_action_state:
+                if self.lights_on:
+                    self.log("Licht ist bereits an, Timer neustarten")
+                    self.turn_off_delayed()
+                elif self.lux_high:
+                    self.log("Lichtstärke ist genug hoch, keine Aktion")
+                else:
+                    self.turn_light_on()
+                    self.turn_off_delayed()
+
+    def day_state_change(self, entity: Union[str, dict], attribute: str,
+                         old: str, new: str, kwargs: dict) -> None:
+        if not self.no_action_state:
+            if not self.lights_on:
+                self.turn_light_on()
+                self.turn_light_off()
+
+    def turn_off_delayed(self) -> None:
+        if LIGHT_TIMER in self.handles:
+            self.cancel_timer(self.handles[LIGHT_TIMER])
+            self.handles.pop(LIGHT_TIMER)
+            self.log("Timer angehalten.")
+        self.handles[LIGHT_TIMER] = self.run_in(self.turn_light_off,
+                                                self.delay)
+        self.log("Timer für {} Sekunden eingeschaltet".format(self.delay))
+
+    @property
+    def no_action_state(self) -> bool:
+        no_action = False
+        on_states = ['on', 'home']
+        for entity in self.no_action_entities:
+            if self.get_state(entity) in on_states:
+                no_action = True
+                self.log("{} ist eingeschaltet, keine Aktion".format(entity))
+        return no_action
+
+    @property
+    def lights_on(self) -> list:
+        return [entity for entity in self.all_lights
+                if self.get_state(entity) == 'on']
+
+    @property
+    def lux_high(self) -> bool:
+        lux_above_threshold = False
+        if 'lux_sensor' in self.entities:
+            lux_sensor = self.entities['lux_sensor']
+            lux_threshold = self.properties.get('lux_threshold', 100)
+            if float(self.get_state(lux_sensor)) > float(lux_threshold):
+                lux_above_threshold = True
+        return lux_above_threshold
+
+    def turn_light_on(self) -> None:
+        state_of_day = self.get_state(HOUSE['state_of_day'])
+        for entity in self.lights(state_of_day):
+            self.turn_on(entity,
+                         brightness=self.brightness(state_of_day),
+                         color_name=self.light_color(state_of_day))
+        self.log("{} wurden eingeschaltet".format(self.lights(state_of_day)))
+        self.log("Helligkeit {} %, Lichtfarbe {}".format(self.brightness(state_of_day),
+                                                         self.light_color(state_of_day)))
+
+    def lights(self, day_state: str) -> list:
+        day_list = ['Tag Wochentag', 'Tag Wochenende']
+        if day_state in day_list:
+            return [entity for entity in self.day_lights]
+        else:
+            return [entity for entity in self.evening_lights]
+
+    def brightness(self, day_state: str) -> float:
+        brightness_level = self.brightness_map.get(day_state, 75)
+        return 255 / 100 * int(brightness_level)
+
+    def light_color(self, day_state: str) -> str:
+        return self.color_map.get(day_state, 'white')
+
+    def turn_light_off(self, *args: list) -> None:
+        if not self.no_action_state:
+            for entity in self.all_lights:
+                self.turn_off(entity)
+            self.log("{} wurde(n) durch App ausgeschaltet".format(
+                self.all_lights))

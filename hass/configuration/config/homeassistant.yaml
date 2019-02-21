@@ -1,0 +1,9 @@
+name: Smart Home
+latitude: !secret latitude
+longitude: !secret longitude
+elevation: !secret elevation
+unit_system: metric
+packages: !include_dir_named packages/
+time_zone: Europe/Zurich
+customize: !include customize/customize.yaml
+customize_glob: !include customize/customize_glob.yaml

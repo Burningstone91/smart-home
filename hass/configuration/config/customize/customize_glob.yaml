@@ -1,0 +1,14 @@
+"sensor.aeotec_zw100_multisensor_*_alarm_level*":
+  hidden: True
+"sensor.aeotec_zw100_multisensor_*_alarm_type*":
+  hidden: True
+"sensor.aeotec_zw100_multisensor_*_burglar*":
+  hidden: True
+"sensor.aeotec_zw100_multisensor_*_sourcenodeid*":
+  hidden: True
+"sensor.aeotec_zw100_multisensor_*_ultraviolet*":
+  hidden: True
+"binary_sensor.fenster*":
+  hidden: True
+"binary_sensor.tuer*":
+  hidden: True

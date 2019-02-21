@@ -1,0 +1,78 @@
+from typing import Union
+
+from appbase import AppBase
+from house_config import PERSONS
+
+
+class RemoteAutomation(AppBase):
+    def initialize(self) -> None:
+        super().initialize()
+        self.remote = self.entities['harmony_remote']
+        self.activities = self.properties['activities']
+
+    @property
+    def current_device_id(self) -> Union[int, None]:
+        activity_name = self.get_state(self.remote,
+                                       attribute='current_activity')
+        try:
+            return self.activities[activity_name.replace(' ', '_').lower()]
+        except KeyError:
+            return None
+
+    @property
+    def current_activity_name(self) -> Union[str, None]:
+        return self.get_state(self.remote, attribute='current_activity')
+
+    @property
+    def remote_is_off(self) -> bool:
+        return self.current_device_id == -1
+
+    def send_command(self, command: str) -> None:
+        if self.current_device_id:
+            self.call_service(
+                'remote/send_command',
+                entity_id=self.remote,
+                device=self.current_device_id,
+                command=command)
+
+
+class PhoneCall(AppBase):
+    def initialize(self) -> None:
+        super().initialize()
+        self.lights = self.entities.get('lights', '').split(',')
+
+        for person, attribute in PERSONS.items():
+            self.listen_state(self.phone_call_changed,
+                              attribute['phone_call_bool'])
+
+    def phone_call_changed(self, entity: Union[str, dict], attribute: str,
+                           old: str, new: str, kwargs: dict) -> None:
+        if not self.remote_app.remote_is_off:
+            if new == 'on':
+                self.remote_app.send_command('Pause')
+                self.old__brightness = {}
+                for light in self.lights:
+                    self.old__brightness[light] = self.get_state(light,
+                                                                 attribute='brightness')
+                    self.turn_on(light, brightness=200, transition=2)
+
+            else:
+                self.remote_app.send_command('Play')
+                for light in self.lights:
+                    self.turn_on(light,
+                                 brightness=self.old__brightness[light],
+                                 transition=2)
+
+
+class BrightenLightOnPause(AppBase):
+    def initialize(self) -> None:
+        super().initialize()
+
+        self.listen_event(self.button_pressed, 'roku_command')
+
+    def button_pressed(self, event_name: str, data: dict, **kwargs: dict):
+        keypress = data['key']
+        if keypress == 'Pause':
+            pass
+        elif keypress == 'Play':
+            pass

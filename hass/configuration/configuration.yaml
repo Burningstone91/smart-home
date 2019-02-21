@@ -1,0 +1,36 @@
+homeassistant: !include config/homeassistant.yaml
+
+# configurations for core
+frontend:
+  javascript_version: latest
+config:
+http: !include config/http.yaml
+updater:
+discovery:
+conversation:
+history:
+logbook:
+map:
+sun:
+lovelace:
+  mode: yaml
+
+
+# configuration for components
+automation: !include config/automations.yaml
+device_tracker: !include_dir_merge_list config/device_tracker
+group: !include_dir_merge_named config/group
+input_boolean: !include_dir_merge_named config/input_boolean
+influxdb: !include config/components/influxdb.yaml
+media_player: !include config/components/media_player.yaml
+mqtt: !include config/components/mqtt.yaml
+notify: !include config/components/notify.yaml
+script: !include config/shell_scripts/scripts.yaml
+tts: !include config/components/tts.yaml
+vacuum: !include config/components/roomba.yaml
+weather: !include config/components/darksky.yaml
+zwave: !include config/components/zwave.yaml
+
+# shell command that executes the git pull
+shell_command:
+  git_pull_restart_hass: bash /home/homeassistant/.homeassistant/config/shell_scripts/git_pull_restart_hass.sh

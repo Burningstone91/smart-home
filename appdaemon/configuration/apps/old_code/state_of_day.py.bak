@@ -1,0 +1,51 @@
+import datetime
+
+from appbase import AppBase
+from house_config import HOUSE
+
+
+###############################################################################
+# App to set the state of home based on time of day and day of week
+# runs every 30 minutes
+
+# args:
+# properties:
+#   morning_time: time of day when "morning" starts, default 06:00:00
+#   day_time: time of day when "day" starts, default 10:00:00
+#   night_time: time of day when "night" starts, default 22:00:00
+###############################################################################
+
+
+class DayStateAutomation(AppBase):
+
+    def initialize(self):
+        super().initialize()
+
+        time = datetime.datetime.now()
+        seconds_add = (round((time.minute * 60 + time.second) / 1800) + 1) * 1800
+        time = ((time.replace(minute=0, second=0, microsecond=0)) +
+                (datetime.timedelta(seconds=seconds_add)))
+
+        self.run_every(self.set_day_state, time, 1800)
+
+    def set_day_state(self, kwargs):
+        state_of_day = 'Tag Wochentag'
+        morning_time = self.properties.get('morning_time', '06:00:00')
+        day_time = self.properties.get('day_time', '10:00:00')
+        night_time = self.properties.get('night_time', '22:00:00')
+
+        if datetime.datetime.today().weekday() < 5:
+            week_state = 'Wochentag'
+        else:
+            week_state = 'Wochenende'
+
+        if self.now_is_between(morning_time, day_time):
+            state_of_day = 'Morgen ' + week_state
+        elif self.now_is_between(day_time, night_time):
+            state_of_day = 'Tag ' + week_state
+        elif self.now_is_between(night_time, morning_time):
+            state_of_day = 'Nacht ' + week_state
+
+        if not self.get_state(HOUSE['state_of_day']) == state_of_day:
+            self.select_option(HOUSE['state_of_day'], state_of_day)
+            self.log("Der Tagesstatus ist jetzt {}.".format(state_of_day))

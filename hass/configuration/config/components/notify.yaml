@@ -1,0 +1,4 @@
+- name: dimitri_handy
+  platform: html5
+  gcm_api_key: !secret dimitri_handy_gcm_key
+  gcm_sender_id: !secret dimitri_handy_gcm_sender_id

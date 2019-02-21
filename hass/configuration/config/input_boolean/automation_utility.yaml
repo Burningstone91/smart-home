@@ -1,0 +1,11 @@
+ongoing_call_dimitri:
+  name: Dimitri telefoniert
+  initial: False
+
+ongoing_call_sabrina:
+  name: Sabrina telefoniert
+  initial: False
+
+notification_bulb:
+  name: Benachrichtigungslampe
+  initial: False

@@ -1,0 +1,123 @@
+import appdaemon.plugins.hass.hassapi as hass
+
+######################################################################################
+# App to turn on light when motion is detected, then turn off after a delay
+# If one of the no_action_devices is on (PC, armed alarm system, AV Receiver, etc)
+# a trigger of the motion sensor has no effect
+# args:
+#
+# sensor: motion sensor to use as trigger
+# light_entities: light to turn on/off, multiple lights separated by comma
+# lux_sensor: when the lux of this sensor is above lux_threshold then light is not turned on
+# lux_threshold: value above which light will not be turned on, default 100 lux
+# timer_sec: time in seconds until light turns off when there's no motion, default 30 seconds
+# no_action_entities: devices which will lead to no action on motion if they are on/armed
+# day_state_entity: name of the input_select which shows time of day
+# brightness_level: brightness level in % for different periods of day, default 75%
+#   Morgen Wochentag: 30
+#   Tag Wochentag: 70
+#   Nacht Wochentag:
+#   Morgen Wochenende:
+#   Tag Wochenende:
+#   Nacht Wochenende:
+# light_color: color of light for different periods of day, e.g. orange, default white
+#   Morgen Wochentag: orange
+#   Tag Wochentag: white
+#   Nacht Wochentag:
+#   Morgen Wochenende:
+#   Tag Wochenende:
+#   Nacht Wochenende:
+######################################################################################
+
+
+class MotionLights(hass.Hass):
+
+    def initialize(self):
+        self.handle = None
+        self.brightness_map = self.args.get('brightness_level', {})
+        self.color_map = self.args.get('light_color', {})
+        self.delay = self.args.get('timer_sec', 30) # 30 sec default delay
+
+        if 'sensor' in self.args:
+            self.listen_state(self.motion, self.args['sensor'])
+        else:
+            self.log("Kein Bewegungssensor konfiguriert, keine Aktion!")
+
+    def motion(self, entity, attribute, old, new, kwargs):
+        if new == 'on':
+            self.log("Bewegung erkannt")
+            if not self.get_no_action_state():
+                if self.get_light_status():
+                    self.log("Licht ist bereits an, Timer neustarten")
+                    self.handle_timer()
+                elif self.get_lux_status():
+                    self.log("Lichtstärke ist genug hoch, keine Aktion")
+                else:
+                    self.turn_light_on()
+                    self.handle_timer()
+
+    def turn_light_on(self):
+        if 'light_entities' in self.args:
+            entities = self.args['light_entities'].split(',')
+            for entity in entities:
+                self.turn_on(entity, brightness=self.get_brightness(), color_name=self.get_light_color())
+            self.log("{} wurden eingeschaltet".format(self.args['light_entities']))
+            self.log("Helligkeit {} %, Lichtfarbe {}".format(self.get_brightness(), self.get_light_color()))
+
+    def handle_timer(self):
+        if self.handle is not None:
+            self.cancel_timer(self.handle)
+            self.log('Timer angehalten')
+        self.handle = self.run_in(self.light_off, self.delay)
+        self.log("Timer für {} Sekunden eingeschaltet".format(self.delay))
+
+    def get_no_action_state(self):
+        no_action_state = False
+        if 'no_action_entities' in self.args:
+            entities = self.args['no_action_entities'].split(',')
+            for entity in entities:
+                if self.get_state(entity) == 'armed':
+                    self.log("Einbrecher, keine Aktion um Alarmsystem nicht zu stören")
+                    no_action_state = True
+                elif self.get_state(entity) == 'on' or self.get_state(entity) == 'home':
+                    self.log("{} ist eingeschaltet, keine Aktion".format(entity))
+                    no_action_state = True
+        return no_action_state
+
+    def get_light_status(self):
+        light_on = False
+        if 'light_entities' in self.args:
+            entities = self.args['light_entities'].split(',')
+            for entity in entities:
+                if self.get_state(entity) == 'on':
+                    light_on = True
+        return light_on
+
+    def get_lux_status(self):
+        lux_above_threshold = False
+        lux_threshold = self.args.get('lux_threshold', 100)
+        if 'lux_sensor' in self.args:
+            if float(self.get_state(self.args['lux_sensor'])) > float(lux_threshold):
+                lux_above_threshold = True
+        return lux_above_threshold
+
+    def get_brightness(self):
+        state_of_day = self.get_state(self.args['day_state_entity'])
+        brightness_level = self.pcnt_to_brightness(self.brightness_map.get(state_of_day, 75))
+        return brightness_level
+
+    def pcnt_to_brightness(self, brightness_pcnt):
+        return 255 / 100 * int(brightness_pcnt)
+
+    def get_light_color(self):
+        state_of_day = self.get_state(self.args['day_state_entity'])
+        light_color = self.color_map.get(state_of_day, 'white')
+        return light_color
+
+    def light_off(self, kwargs):
+        if not self.get_no_action_state():
+            if 'light_entities' in self.args:
+                entities = self.args['light_entities'].split(',')
+                for entity in entities:
+                    self.turn_off(entity)
+                self.log("{} wurden durch Timer ausgeschaltet".format(self.args['light_entities']))

@@ -1,0 +1,25 @@
+
+
+Ankleidezimmer Bewegung:
+  module: motion_lights
+  class: MotionLights
+  sensor: binary_sensor.aeotec_zw100_multisensor_6_sensor_9
+  light_entities: light.ankleidezimmer
+  lux_sensor: sensor.aeotec_zw100_multisensor_6_luminance_9
+  lux_threshold: 200
+  timer_sec: 900
+  day_state_entity: input_select.state_of_day
+  brightness_level:
+    Morgen Wochentag: 30
+    Tag Wochentag: 80
+    Nacht Wochentag: 20
+    Morgen Wochenende: 30
+    Tag Wochenende: 80
+    Nacht Wochenende: 20
+  light_color:
+    Morgen Wochentag: orange
+    Tag Wochentag: white
+    Nacht Wochentag: orange
+    Morgen Wochenende: orange
+    Tag Wochenende: white
+    Nacht Wochenende: orange

@@ -1,0 +1,34 @@
+light:
+  - platform: group
+    name: buero
+    entities:
+      - light.decke_1_buero
+      - light.decke_2_buero
+      - light.decke_3_buero
+
+sensor:
+  - platform: template
+    sensors:
+      fenster_buero:
+        value_template: '{% if states.binary_sensor.fenster_buero %}
+          {% if states.binary_sensor.fenster_buero.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Fenster Büro'
+
+      tuer_buero:
+        value_template: '{% if states.binary_sensor.tuer_buero %}
+          {% if states.binary_sensor.tuer_buero.state == "on" %}
+            offen
+          {% else %}
+            geschlossen
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+        friendly_name: 'Tür Büro'

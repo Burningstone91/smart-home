@@ -1,0 +1,83 @@
+motion_light_office:
+  module: motion_light
+  class: MotionLightAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    day_lights: light.buero
+    evening_lights: light.buero
+    motion_sensor: binary_sensor.bewegung_buero
+    lux_sensor: sensor.lux_buero
+    no_action: device_tracker.sabrina_pc,device_tracker.dimitri_pc
+  properties:
+    lux_threshold: 200
+    timer_sec: 900
+    brightness_level:
+      Morgen Wochentag: 30
+      Tag Wochentag: 80
+      Nacht Wochentag: 20
+      Morgen Wochenende: 30
+      Tag Wochenende: 80
+      Nacht Wochenende: 20
+
+motion_light_dress_room:
+  module: motion_light
+  class: MotionLightAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation  
+  entities:
+    day_lights: light.ankleidezimmer
+    evening_lights: light.ankleidezimmer
+    motion_sensor: binary_sensor.bewegung_ankleidezimmer
+    lux_sensor: sensor.lux_ankleidezimmer
+  properties:
+    lux_threshold: 200
+    timer_sec: 900
+    brightness_level:
+      Morgen Wochentag: 30
+      Tag Wochentag: 80
+      Nacht Wochentag: 20
+      Morgen Wochenende: 30
+      Tag Wochenende: 80
+      Nacht Wochenende: 20
+    light_color:
+      Morgen Wochentag: orange
+      Tag Wochentag: white
+      Nacht Wochentag: orange
+      Morgen Wochenende: orange
+      Tag Wochenende: white
+      Nacht Wochenende: orange
+
+motion_light_bedroom:
+  module: motion_light
+  class: MotionLightAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    day_lights: light.decke_1_schlafzimmer,light.decke_2_schlafzimmer,light.decke_3_schlafzimmer
+    evening_lights: light.kugellampe_schlafzimmer
+    motion_sensor: binary_sensor.bewegung_schlafzimmer
+    lux_sensor: sensor.lux_schlafzimmer
+  properties:
+    lux_threshold: 200
+    timer_sec: 900
+    brightness_level:
+      Morgen Wochentag: 10
+      Tag Wochentag: 30
+      Nacht Wochentag: 10
+      Morgen Wochenende: 10
+      Tag Wochenende: 30
+      Nacht Wochenende: 10
+    light_color:
+      Morgen Wochentag: orange
+      Tag Wochentag: orange
+      Nacht Wochentag: orange
+      Morgen Wochenende: orange
+      Tag Wochenende: orange
+      Nacht Wochenende: orange

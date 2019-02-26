@@ -36,3 +36,9 @@ notify_on_alarm_change:
     - notification_app
   notifications:
     targets: Dimitri
+
+last_motion:
+  module: security
+  class: LastMotion
+  entities:
+    motion_sensors: binary_sensor.bewegung_ankleidezimmer,binary_sensor.bewegung_bad_klein,binary_sensor.bewegung_buero,binary_sensor.bewegung_schlafzimmer

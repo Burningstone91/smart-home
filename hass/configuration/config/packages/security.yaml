@@ -7,3 +7,11 @@ input_select:
       - Scharf mit Bewegung
       - Einbrecher
     initial: Ungesichert
+  last_motion:
+    name: Letzte Bewegung
+    options:
+      - Schlafzimer
+      - Bad_klein
+      - Buero
+      - Ankleidezimmer
+      - Bad_gross

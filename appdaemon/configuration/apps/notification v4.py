@@ -72,7 +72,7 @@ class NotificationAutomation(AppBase):
             self.first_briefing[person] = False
 
     def add_item_to_briefing(self, notification: Notification) -> None:
-        for target in notification.targets:
+        for target in notification.targets.split(','):
             item = notification.title
             self.briefing_list[target][item] = {'title': notification.title,
                                                 'message': notification.message,

@@ -59,7 +59,7 @@ class MotionLightAutomation(AppBase):
                 if light not in self.all_lights:
                     self.all_lights.append(light)
 
-        self.room_name = self.all_lights[0].split('.')[1].split('_')[-1].capitalize()
+        self.room_name = self.all_lights[0].split('.')[1].split('_', 1)[-1].capitalize()
 
         if 'motion_sensor' in self.entities:
             # take action when motion is detected

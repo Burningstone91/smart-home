@@ -175,3 +175,18 @@ class NotificationOnChange(AppBase):
                                     kwargs: dict) -> None:
         self.security_app.alarm_state = self.security_app.AlarmType.disarmed
         self.log("Fehlalarm, Alarmanlage wird ausgeschaltet!")
+
+
+class LastMotion(AppBase):
+    def initialize(self):
+        super().initialize()
+        self.motion_sensors = self.entities['motion_sensors']
+
+        # change last motion input boolean when motion is detected
+        for sensor in self.motion_sensors.split(','):
+            self.listen_state(self.motion, sensor, new='on')
+
+    def motion(self, entity: Union[str, dict], attribute: str,
+               old: str, new: str, kwargs: dict) -> None:
+        room_name = entity.split('.')[1].split('_', 1)[-1].capitalize()
+        self.select_option(HOUSE['last_motion'], room_name)

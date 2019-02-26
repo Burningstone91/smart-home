@@ -17,6 +17,7 @@ security:
   entities:
     - input_select.alarm_state
     - sensor.tuer_wohnung
+    - input_select.last_motion
 modes:
   name: Hausmodi
   entities:

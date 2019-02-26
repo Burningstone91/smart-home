@@ -2,8 +2,16 @@ ongoing_call_dimitri:
   name: Dimitri telefoniert
   initial: False
 
+charging_phone_dimitri:
+  name: Dimitri lädt Handy
+  initial: False
+
 ongoing_call_sabrina:
   name: Sabrina telefoniert
+  initial: False
+
+charging_phone_sabrina:
+  name: Sabrina lädt Handy
   initial: False
 
 notification_bulb:

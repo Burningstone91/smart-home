@@ -78,6 +78,7 @@ class RemoteAutomation(AppBase):
             device_id = kwargs['device']
         else:
             device_id = self.current_device_id
+        self.log(device_id)
 
         self.call_service('remote/send_command',
                           entity_id=self.remote,
@@ -123,51 +124,56 @@ class SceneLights(AppBase):
     def scene_name(self, scene: str) -> str:
         return scene.replace(' ', '_').lower()
 
+    def brighten_on_pause(self):
+        for light in self.lights:
+            self.turn_on(light,
+                         brightness=200,
+                         color_name='white',
+                         transition=2)
+
+    def dim_on_play(self):
+        current_activity = self.remote_app.current_activity_name
+
+        for light in self.lights:
+            self.turn_on(light,
+                         brightness=self.brightness(current_activity),
+                         color_name=self.light_color(current_activity),
+                         transition=2)
+
 
 class PhoneCall(AppBase):
     def initialize(self) -> None:
         super().initialize()
-        self.device_id = self.properties['roku_id']
-
+        self.device_id = self.properties['device_id']
         for person, attribute in PERSONS.items():
             self.listen_state(self.phone_call_changed,
-                              attribute['phone_call_bool'])
+                              attribute['phone_call_bool'],
+                              person=person)
 
     def phone_call_changed(self, entity: Union[str, dict], attribute: str,
                            old: str, new: str, kwargs: dict) -> None:
-        if not self.remote_app.remote_is_off:
+        if (not self.remote_app.remote_is_off and
+                kwargs['person'] in self.presence_app.persons_home):
             if new == 'on':
-                self.remote_app.send_command('Pause', device=self.device_id)
                 self.remote_app.send_command('Pause')
+                self.scene_lights_app.brighten_on_pause()
             else:
-                self.remote_app.send_command('Play', device=self.device_id)
                 self.remote_app.send_command('Play')
+                self.scene_lights_app.dim_on_play()
 
 
 class BrightenLightOnPause(AppBase):
     def initialize(self) -> None:
         super().initialize()
-        self.lights = self.scene_lights_app.lights
 
         # brighten/dim when pause/play is pressed
         self.listen_event(self.button_pressed, 'roku_command')
 
-    def button_pressed(self, event_name: str, data: dict, **kwargs: dict):
-        self.log('event triggered')
+    def button_pressed(self, event_name: str, data: dict, kwargs: dict) -> None:
         key = data['key']
-        if key == 'Pause':
-            for light in self.lights:
-                self.turn_on(light,
-                             brightnesss=70,
-                             color_name='white',
-                             transition=2)
+        self.log(key)
+        if key == 'Home':
+            self.scene_lights_app.brighten_on_pause()
         elif key == 'Play':
-            current_activity = self.remote_app.current_activity_name
-            brightness = self.scene_lights_app.brightness(current_activity)
-            color_name = self.scene_lights_app.light_color(current_activity)
+            self.scene_lights_app.dim_on_play()
 
-            for light in self.lights:
-                self.turn_on(light,
-                             brightnesss=brightness,
-                             color_name=color_name,
-                             transition=2)

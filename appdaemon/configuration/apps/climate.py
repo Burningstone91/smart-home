@@ -55,7 +55,7 @@ class ClimateAutomation(AppBase):
         ]
 
     def room_name(self, room: str) -> str:
-        return room.split('.')[1].split('_')[-1].capitalize()
+        return room.split('.')[1].split('_', 1)[-1].capitalize()
 
 
 class NotifyOnHighHumidity(AppBase):

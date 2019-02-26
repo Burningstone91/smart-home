@@ -22,4 +22,3 @@ input_select:
       - Jemand ist zu Hause
       - Niemand ist zu Hause
     initial: Jemand ist zu Hause
-

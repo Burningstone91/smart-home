@@ -1,0 +1,57 @@
+- platform: bayesian
+  prior: 0.5
+  name: 'Bayesian im Bett'
+  probability_threshold: 0.85
+  observations:
+      - entity_id: 'input_boolean.charging_phone_dimitri'
+        prob_given_true: 0.95
+        prob_given_false: 0.3
+        platform: 'state'
+        to_state: 'on'
+      - entity_id: 'input_boolean.charging_phone_sabrina'
+        prob_given_true: 0.95
+        prob_given_false: 0.6
+        platform: 'state'
+        to_state: 'on'
+      - entity_id: 'input_select.house_presence'
+        prob_given_true: 0.99
+        prob_given_false: 0.5
+        platform: 'state'
+        to_state: 'Alle sind zu Hause'
+      - entity_id: 'remote.wohnzimmer'
+        prob_given_true: 0.99
+        prob_given_false: 0.6
+        platform: 'state'
+        to_state: 'off'
+      - entity_id: 'group.all_lights'
+        prob_given_true: 0.90
+        prob_given_false: 0.4
+        platform: 'state'
+        to_state: 'off'
+
+
+      - entity_id: 'sensor.sun'
+        prob_given_true: 0.9
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'below_horizon'
+      - entity_id: 'group.all_lights'
+        prob_given_true: 0.9
+        prob_given_false: 0.4
+        platform: 'state'
+        to_state: 'off'
+      - entity_id: 'sensor.coffeemaker'
+        prob_given_true: 0.8
+        prob_given_false: 0.4
+        platform: 'state'
+        to_state: 'Ready'
+      - entity_id: 'variable.last_motion'
+        prob_given_true: 0.9
+        prob_given_false: 0.3
+        platform: 'state'
+        to_state: 'Bathroom Motion'
+      - entity_id: 'binary_sensor.brad_phone_pluggedin'
+        prob_given_true: 0.95
+        prob_given_false: 0.5
+        platform: 'state'
+        to_state: 'on'

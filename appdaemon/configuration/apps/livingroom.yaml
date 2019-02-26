@@ -7,7 +7,7 @@ remote_app:
     activities:
       fernsehen: 47893654
       nintendo_switch: 50967913
-      filme/serien: 28640579
+      filme/serien: 61608406
       poweroff: -1
 
 scene_lights_app:
@@ -39,12 +39,21 @@ dimmer_switch_wohnzimmer:
     dimmer_switch: dimmschalter_wohnzimmer
     lights: light.wohnzimmer
 
-#phone_call:
-#  module: home_cinema
-#  class: PhoneCall
-#  dependencies:
-#    - presence_app
-#    - remote_app
-#  disabled_states: noone,vacation
-#  properties:
-#    roku_id: 60477263
+phone_call:
+  module: home_cinema_test
+  class: PhoneCall
+  dependencies:
+    - presence_app
+    - scene_lights_app
+    - remote_app
+  disabled_states: noone,vacation
+  properties:
+    device_id: 61608406
+
+brighten_light_pause:
+  module: home_cinema
+  class: BrightenLightOnPause
+  dependencies:
+    - scene_lights_app
+    - remote_app
+  

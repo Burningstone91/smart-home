@@ -16,6 +16,7 @@ living_room_automations:
     - input_boolean.remote_app
     - input_boolean.scene_lights_app
     - input_boolean.phone_call
+    - input_boolean.brighten_light_pause
 
 office_automations:
   name: Büroautomatisierungen
@@ -34,6 +35,7 @@ bedroom_automations:
     - input_boolean.sleep_app
     - input_boolean.turn_on_sleep_mode_forgot
     - input_boolean.turn_off_sleep_mode_forgot
+    - input_boolean.turn_on_dehumidifier_forgot
 
 security_automations:
   name: Sicherheit Automatisierungen
@@ -42,6 +44,7 @@ security_automations:
     - input_boolean.disarm_when_someone_home
     - input_boolean.arm_disarm_when_cleaning
     - input_boolean.notify_on_alarm_change
+    - input_boolean.last_motion
 
 climate_automations:
   name: Klima Automatisierungen

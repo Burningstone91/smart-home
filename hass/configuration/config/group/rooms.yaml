@@ -39,6 +39,7 @@ bedroom:
     - sensor.lux_schlafzimmer
     - sensor.tuer_schlafzimmer
     - sensor.fenster_schlafzimmer
+    - switch.schalter_entfeuchter
 livingroom:
   name: Wohnzimmer
   entities:

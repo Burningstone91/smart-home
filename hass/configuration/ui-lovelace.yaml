@@ -59,7 +59,20 @@
               entity: weather.dark_sky
 
 
-
+  - title: System
+    icon: mdi:home-assistant
+    panel: true
+    cards:
+      - type: entities
+        title: Batterien
+        show_header_toggle: false
+        entities:
+          - sensor.bad_klein_multisensor_battery
+          - sensor.dimmschalter_ankleidezimmer_battery_level
+          - sensor.dimmschalter_buero_battery_level
+          - sensor.dimmschalter_schlafzimmer_battery_level
+          - sensor.dimmschalter_schlafzimmer_master_battery_level
+          - sensor.dimmschalter_wohnzimmer_battery_level
 
 
   - title: Floorplan

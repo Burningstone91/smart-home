@@ -33,3 +33,8 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Fenster Schlafzimmer'
+
+switch:
+  - platform: mystrom
+    host: !secret switch_dehumidifier_ip
+    name: Schalter Entfeuchter

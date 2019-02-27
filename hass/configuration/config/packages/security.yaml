@@ -10,7 +10,7 @@ input_select:
   last_motion:
     name: Letzte Bewegung
     options:
-      - Schlafzimer
+      - Schlafzimmer
       - Bad_klein
       - Buero
       - Ankleidezimmer

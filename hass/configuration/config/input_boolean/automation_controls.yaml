@@ -12,6 +12,10 @@ phone_call:
   name: Pause/Play bei Telefonat
   initial: True
 
+brighten_light_pause:
+  name: Licht hell/dunkel bei Pause/Play im Wohnzimmer
+  initial: True
+
 ################################## Bedroom ###################################
 
 motion_light_bedroom:
@@ -28,6 +32,10 @@ turn_on_sleep_mode_forgot:
 
 turn_off_sleep_mode_forgot:
   name: Schlafmodus ausschalten wenn es vergessen wurde
+  initial: True
+
+turn_on_dehumidifier_forgot:
+  name: Entfeuchter einschalten wenn es vergessen wurde
   initial: True
 
 ################################# Dress room #################################
@@ -58,6 +66,10 @@ arm_disarm_when_cleaning:
 
 notify_on_alarm_change:
   name: Benachrichtige wenn sich der Alarm Status ändert
+  initial: True
+
+last_motion:
+  name: Letzte Bewegung
   initial: True
 
 ################################## Climate ###################################

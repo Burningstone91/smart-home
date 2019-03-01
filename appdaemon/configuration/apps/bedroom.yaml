@@ -47,7 +47,7 @@ sleep_app:
     dimmer_switch: dimmschalter_schlafzimmer_master
     media_player: media_player.spotify
     wakeup_light: light.kugellampe_schlafzimmer
-    turn_off_entities: group.all_lights,remote.wohnzimmer
+    turn_off_entities: group.all_lights,remote.wohnzimmer,switch.schalter_entfeuchter
   properties:
     delay: 1200
     shutdown_time: "03:00:00"

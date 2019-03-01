@@ -31,7 +31,14 @@ from house_config import PERSONS
 #         fernsehen: blue
 #       scene_brightness: brightness for different scenes, in %
 #         fernsehen: 50
-
+#
+# BrightenLightOnPause
+#   - requires dependency to scene_lights_app
+#   - when home cinema is paused (detected through button press on emulated
+#     roku) the lights turn on white and bright
+#   - when home cinema is resumed the lights turn back according to current
+#     activity and the config in the scene_lights_app
+#
 # ****************************Under Construction******************************
 # PhoneCall
 #   - requires dependency to remote_app
@@ -41,12 +48,6 @@ from house_config import PERSONS
 #     properties:
 #       roku_id: entity if of emulated roku id which is needed to workaround
 #                the fact that harmony commands sent cant be detected
-# BrightenLightOnPause
-#   - requires dependency to scene_lights_app
-#   - when home cinema is paused (detected through button press on emulated
-#     roku) the lights turn on white and bright
-#   - when home cinema is resumed the lights turn back according to current
-#     activity and the config in the scene_lights_app
 ##############################################################################
 
 

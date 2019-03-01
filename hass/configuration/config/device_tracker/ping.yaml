@@ -1,15 +1,13 @@
 - platform: ping
   hosts:
-    sabrina_pc: !secret sabrina_pc_ip
-
-- platform: ping
-  hosts:
-    dimitri_pc: !secret dimitri_pc_ip
-
-- platform: ping
-  hosts:
     sabrina_phone: !secret sabrina_handy_ip
-
-- platform: ping
-  hosts:
     dimitri_phone: !secret dimitri_handy_ip
+    sabrina_pc: !secret sabrina_pc_ip
+    dimitri_pc: !secret dimitri_pc_ip
+    pi_schlafzimmer: !secret pi_schlafzimmer_ip
+    pi_kleiderzimmer: !secret pi_kleiderzimmer_ip
+    pi_wohnzimmer: !secret pi_wohnzimmer_ip
+    pi_buero: !secret pi_buero_ip
+    roomba: !secret roomba_ip
+    harmony_hub: !secret harmony_ip
+    dehumidifier: !secret switch_dehumidifier_ip

@@ -45,7 +45,6 @@
                 - input_select.alarm_state
                 - sensor.tuer_wohnung
                 - input_select.house_presence
-                - input_select.state_of_day
               show_name: false
               columns: 1
           - type: weather-forecast
@@ -63,16 +62,56 @@
     icon: mdi:home-assistant
     panel: true
     cards:
-      - type: entities
-        title: Batterien
-        show_header_toggle: false
-        entities:
-          - sensor.bad_klein_multisensor_battery
-          - sensor.dimmschalter_ankleidezimmer_battery_level
-          - sensor.dimmschalter_buero_battery_level
-          - sensor.dimmschalter_schlafzimmer_battery_level
-          - sensor.dimmschalter_schlafzimmer_master_battery_level
-          - sensor.dimmschalter_wohnzimmer_battery_level
+      - type: horizontal-stack
+        cards:
+        - type: entities
+          title: Batterien
+          show_header_toggle: false
+          entities:
+            - sensor.bad_klein_multisensor_battery
+            - sensor.dimmschalter_ankleidezimmer_battery_level
+            - sensor.dimmschalter_buero_battery_level
+            - sensor.dimmschalter_schlafzimmer_battery_level
+            - sensor.dimmschalter_schlafzimmer_master_battery_level
+            - sensor.dimmschalter_wohnzimmer_battery_level
+        - type: entities
+          title: Presece Raspberry Pi
+          show_header_toggle: false
+          entities:
+            - device_tracker.pi_schlafzimmer
+            - device_tracker.pi_kleiderzimmer
+            - device_tracker.pi_wohnzimmer
+            - device_tracker.pi_buero
+        - type: entities
+          title: Smart Home Devices
+          show_header_toggle: false
+          entities:
+            - device_tracker.roomba
+            - device_tracker.harmony_hub
+            - device_tracker.dehumidifier
+        - type: entities
+          title: Docker
+          show_header_toggle: false
+          entities:
+            - switch.appdaemon
+            - switch.grafana
+            - switch.ha_dockermon
+            - switch.home_assistant
+            - switch.influxdb
+            - switch.mqtt_broker
+            - switch.deconz
+            - switch.letsencrypt
+            - switch.glances
+        - type: entities
+          title: NAS
+          show_header_toggle: false
+          entities:
+            - switch.appdaemon
+        - type: entities
+          title: HASS Host
+          show_header_toggle: false
+          entities:
+            - switch.appdaemon
 
 
   - title: Floorplan

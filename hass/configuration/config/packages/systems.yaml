@@ -1,3 +1,26 @@
+sensor:
+  - platform: synologydsm
+    host: !secret nas_ip
+    username: !secret nas_username
+    password: !secret nas_password
+    monitored_conditions:
+      - cpu_total_load
+      - memory_total_real
+      - memory_real_usage
+      - disk_status
+      - network_up
+      
+  - platform: glances
+    host: !secret host_ip
+    resources:
+      - 'processor_load'
+      - 'docker_cpu_use'
+      - 'cpu_temp'
+      - 'disk_use'
+      - 'disk_use_percent'
+      - 'memory_use'
+      - 'memory_use_percent'
+
 switch:
   - platform: rest
     username: !secret ha-dockermon_user

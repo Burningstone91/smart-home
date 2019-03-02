@@ -61,8 +61,9 @@ class ToggleOnArrival(SwitchBase):
 
     def someone_arrived(self, entity: Union[str, dict], attribute: str,
                         old: str, new: str, kwargs: dict) -> None:
-        if new in (self.presence_app.HouseState.someone.value,
-                   self.presence_app.HouseState.everyone.value):
+        someone_home_states = [self.presence_app.HouseState.someone.value,
+                               self.presence_app.HouseState.everyone.value]
+        if (new in someone_home_states) and (old not in someone_home_states):
             if self.person is not None:
                 persons_home = self.presence_app.persons_home
                 if self.person in persons_home and len(persons_home) == 1:

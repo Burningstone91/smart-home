@@ -89,7 +89,7 @@ turn_on_dehumidifier_forgot:
   class: ToggleAtTime
   dependencies:
     - presence_app
-  disables_states:
+  disabled_states:
     presence: someone,everyone,vacation
     days: Saturday,Sunday
   entities:

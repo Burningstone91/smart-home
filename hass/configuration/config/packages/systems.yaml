@@ -8,14 +8,16 @@ sensor:
       - memory_total_real
       - memory_real_usage
       - disk_status
-      - network_up
+      - disk_temp
+      - volume_size_used
+      - volume_percentage_used
       
   - platform: glances
+    name: NUC
     host: !secret host_ip
+    version: 3
     resources:
       - 'processor_load'
-      - 'docker_cpu_use'
-      - 'cpu_temp'
       - 'disk_use'
       - 'disk_use_percent'
       - 'memory_use'

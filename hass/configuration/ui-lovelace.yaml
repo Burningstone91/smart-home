@@ -59,7 +59,7 @@
 
 
   - title: System
-    icon: mdi:home-assistant
+    icon: mdi:server-network
     panel: true
     cards:
       - type: horizontal-stack
@@ -106,12 +106,23 @@
           title: NAS
           show_header_toggle: false
           entities:
-            - switch.appdaemon
+            - sensor.cpu_load_total
+            - sensor.memory_usage_real
+            - sensor.used_space_volume_1
+            - sensor.volume_used_volume_1
+            - sensor.status_sda
+            - sensor.temperature_sda
+            - sensor.status_sdb
+            - sensor.temperature_sdb
         - type: entities
           title: HASS Host
           show_header_toggle: false
           entities:
-            - switch.appdaemon
+            - sensor.nuc_cpu_load
+            - sensor.nuc_ram_used_2
+            - sensor.nuc_ram_used
+            - sensor.nuc_disk_used_2
+            - sensor.nuc_disk_used
 
 
   - title: Floorplan
@@ -284,8 +295,6 @@
               style:
                 top: 62.5%
                 left: 50.3%
-                --iron-icon-height: 60px
-                --iron-icon-width: 60px
 
             - type: state-icon
               entity: light.schlafzimmer
@@ -294,8 +303,6 @@
               style:
                 top: 14.2%
                 left: 55.8%
-                --iron-icon-height: 60px
-                --iron-icon-width: 60px
 
             - type: state-icon
               entity: light.ankleidezimmer
@@ -304,8 +311,6 @@
               style:
                 top: 57.8%
                 left: 73.5%
-                --iron-icon-height: 60px
-                --iron-icon-width: 60px
 
             - type: state-icon
               entity: light.buero
@@ -314,8 +319,6 @@
               style:
                 top: 57.8%
                 left: 89.1%
-                --iron-icon-height: 60px
-                --iron-icon-width: 60px
 
             ######################## Sensoren ################################
             - type: state-label
@@ -324,7 +327,6 @@
               style:
                 top: 41.5%
                 left: 90.5%
-                font-size: 140%
 
             - type: state-label
               entity: sensor.luftfeuchtigkeit_buero
@@ -332,4 +334,20 @@
               style:
                 top: 44%
                 left: 90.4%
-                font-size: 140%
+
+            ###################### Dehumidifier ##############################
+            - type: image
+              entity: switch.schalter_entfeuchter
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/fan_on.gif
+                "off": /local/fan.png
+              style:
+                top: 6.5%
+                left: 64.55%
+                width: 3.65%  
+            
+            ###################### Home Cinema ###############################
+            
+                

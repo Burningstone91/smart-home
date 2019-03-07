@@ -1,0 +1,31 @@
+FROM alpine:3.6
+
+ARG version
+
+RUN apk update \
+    && apk add --update \
+      bash \
+      build-base \
+      ca-certificates \
+      coreutils \
+      linux-headers \
+      python3 \
+      python3-dev \
+      tzdata \
+    && pip3 install --upgrade \
+      pip \
+      glances==${version} \
+      bottle==0.12.13 \
+      docker==2.4.2 \
+    && rm -rf /var/cache/apk/*
+
+# Setup Timezone:
+ENV TZ=Europe/Zurich
+RUN ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime \
+    && echo "$TZ" > /etc/timezone
+
+# Define Working Directory:
+WORKDIR /glances
+
+# Define default command.
+CMD glances -w

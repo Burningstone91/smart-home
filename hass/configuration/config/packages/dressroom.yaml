@@ -1,11 +1,3 @@
-light:
-  - platform: group
-    name: ankleidezimmer
-    entities:
-      - light.decke_1_ankleidezimmer
-      - light.decke_2_ankleidezimmer
-      - light.decke_3_ankleidezimmer
-
 sensor:
   - platform: template
     sensors:

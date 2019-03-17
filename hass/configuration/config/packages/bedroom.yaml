@@ -1,12 +1,3 @@
-light:
-  - platform: group
-    name: schlafzimmer
-    entities:
-      - light.decke_1_schlafzimmer
-      - light.decke_2_schlafzimmer
-      - light.decke_3_schlafzimmer
-      - light.kugellampe_schlafzimmer
-
 sensor:
   - platform: template
     sensors:

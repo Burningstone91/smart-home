@@ -1,4 +1,0 @@
--  platform: roomba
-   host: !secret roomba_ip
-   username: !secret roomba_user
-   password: !secret roomba_key

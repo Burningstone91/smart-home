@@ -22,3 +22,8 @@ input_select:
       - Jemand ist zu Hause
       - Niemand ist zu Hause
     initial: Jemand ist zu Hause
+
+media_player:
+  -  platform: spotify
+     client_id: !secret spotify_client_id
+     client_secret: !secret spotify_api_key

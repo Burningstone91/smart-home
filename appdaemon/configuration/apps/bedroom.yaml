@@ -10,7 +10,7 @@ motion_light_bedroom:
     lux_sensor: sensor.lux_schlafzimmer
     lights:
       morning: light.kugellampe_schlafzimmer
-      day: light.decke_1_schlafzimmer,light.decke_2_schlafzimmer,light.decke_3_schlafzimmer
+      day: light.schlafzimmer_decke
       night: light.kugellampe_schlafzimmer
   properties:
     lux_threshold: 200

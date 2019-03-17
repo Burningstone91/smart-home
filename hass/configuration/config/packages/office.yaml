@@ -1,11 +1,3 @@
-light:
-  - platform: group
-    name: buero
-    entities:
-      - light.decke_1_buero
-      - light.decke_2_buero
-      - light.decke_3_buero
-
 sensor:
   - platform: template
     sensors:
@@ -32,3 +24,7 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Tür Büro'
+
+media_player:
+  - platform: yamaha_musiccast
+    host: !secret yamaha_ip

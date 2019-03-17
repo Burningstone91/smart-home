@@ -10,21 +10,17 @@ media_player:
      password: !secret kodi_password
 
 emulated_roku:
-  host_ip: !secret host_ip
-  listen_ports:
-    - 8060:8060
-    
+  servers:
+    - name: Roku Emu
+      listen_port: 8060
+      host_ip: !secret host_ip
+#      advertise_ip: !secret host_main_ip
+#      advertise_port: 8060
+
 remote:
   - platform: harmony
     name: Wohnzimmer
     host: !secret harmony_ip
-
-light:
-  - platform: group
-    name: Wohnzimmer
-    entities:
-      - light.stehlampe_wohnzimmer_vorne
-      - light.stehlampe_wohnzimmer_hinten
 
 sensor:
   - platform: template
@@ -61,3 +57,9 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Tür Wohnzimmer Balkon'
+
+vacuum:
+  -  platform: roomba
+     host: !secret roomba_ip
+     username: !secret roomba_user
+     password: !secret roomba_key

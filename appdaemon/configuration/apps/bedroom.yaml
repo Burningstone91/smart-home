@@ -10,7 +10,7 @@ motion_light_bedroom:
     lux_sensor: sensor.lux_schlafzimmer
     lights:
       morning: light.kugellampe_schlafzimmer
-      day: light.schlafzimmer_decke
+      day: light.decke_schlafzimmer
       night: light.kugellampe_schlafzimmer
   properties:
     lux_threshold: 200
@@ -33,7 +33,7 @@ dimmer_switch_schlafzimmer:
   class: DimmerSwitch
   entities:
     dimmer_switch: dimmschalter_schlafzimmer
-    lights: light.schlafzimmer
+    lights: light.decke_schlafzimmer,light.kugellampe_schlafzimmer
 
 sleep_app:
   module: sleep

@@ -288,52 +288,53 @@
                 width: 7.65%
 
             ########################### Lichter ##############################
-            - type: state-icon
+            - type: image
               entity: light.wohnzimmer
               tap_action:
                 action: toggle
+              state_image:
+                "on": /local/light_on_furniture.png
+                "off": /local/light_off_furniture.png
               style:
-                top: 62.5%
-                left: 50.3%
+                top: 63.6%
+                left: 50.9%
+                width: 3.5%
 
-            - type: state-icon
+            - type: image
               entity: light.schlafzimmer
               tap_action:
                 action: toggle
+              state_image:
+                "on": /local/light_on_furniture.png
+                "off": /local/light_off_furniture.png
               style:
                 top: 14.2%
                 left: 55.8%
+                width: 3.5%
 
-            - type: state-icon
+            - type: image
               entity: light.ankleidezimmer
               tap_action:
                 action: toggle
+              state_image:
+                "on": /local/light_on.png
+                "off": /local/light_off.png
               style:
                 top: 57.8%
-                left: 73.5%
+                left: 74.0%
+                width: 3.5%
 
-            - type: state-icon
+            - type: image
               entity: light.buero
               tap_action:
                 action: toggle
+              state_image:
+                "on": /local/light_on.png
+                "off": /local/light_off.png
               style:
                 top: 57.8%
                 left: 89.1%
-
-            ######################## Sensoren ################################
-            - type: state-label
-              entity: sensor.temperatur_buero
-              icon: mdi:celsius
-              style:
-                top: 41.5%
-                left: 90.5%
-
-            - type: state-label
-              entity: sensor.luftfeuchtigkeit_buero
-              icon: mdi:percent
-              style:
-                top: 44%
-                left: 90.4%
+                width: 3.5%
 
             ###################### Dehumidifier ##############################
             - type: image
@@ -347,7 +348,94 @@
                 top: 6.5%
                 left: 64.55%
                 width: 3.65%  
+
+            ####################### Vacuum ###################################
+            - type: image
+              entity: vacuum.roomba
+              image: /local/roomba.png
+              filter: brightness(40%)
+              state_filter:
+                "on": brightness(100%)
+              style:
+                top: 41%
+                left: 64%
+                width: 3%
             
             ###################### Home Cinema ###############################
-            
-                
+            - type: image
+              entity: sensor.harmony_activity
+              tap_action:
+                action: call-service
+                service: remote.turn_on
+                service_data:
+                  entity_id: remote.wohnzimmer
+                  activity: "Fernsehen"
+              image: /local/tv.png
+              filter: brightness(40%)
+              state_filter:
+                "Fernsehen": brightness(100%)
+              style:
+                top: 86%
+                left: 57.5%
+                width: 3%
+
+            - type: image
+              entity: sensor.harmony_activity
+              tap_action:
+                action: call-service
+                service: remote.turn_on
+                service_data:
+                  entity_id: remote.wohnzimmer
+                  activity: "Filme/Serien"
+              image: /local/cinema.png
+              filter: brightness(40%)
+              state_filter:
+                "Filme/Serien": brightness(100%)
+              style:
+                top: 86%
+                left: 61.5%
+                width: 3%
+
+            - type: image
+              entity: sensor.harmony_activity
+              tap_action:
+                action: call-service
+                service: remote.turn_on
+                service_data:
+                  entity_id: remote.wohnzimmer
+                  activity: "Nintendo Switch"
+              image: /local/nintendo_switch.png
+              filter: brightness(40%)
+              state_filter:
+                "Nintendo Switch": brightness(100%)
+              style:
+                top: 86%
+                left: 65.5%
+                width: 3%
+
+            ######################## Dashboard ###############################
+            - type: state-icon
+              entity: sensor.dimitri_home
+              style:
+                top: 5%
+                left: 8%
+                width: 1%
+            - type: state-icon
+              entity: sensor.sabrina_home
+              style:
+                top: 5%
+                left: 4% 
+                width: 1%
+
+            ########################## Sound Office ##########################
+            - type: image
+              entity: media_player.buero_musik_main
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker.gif
+                "off": /local/fan.png
+              style:
+                top: 71.7%
+                left: 85%
+                width: 3.5%  

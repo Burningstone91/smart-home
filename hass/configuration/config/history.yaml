@@ -1,0 +1,13 @@
+include:
+  entities:
+    - input_select.dimitri_presence
+    - input_select.sabrina_presence
+    - input_select.house_presence
+    - input_boolean.charging_phone_sabrina
+    - input_boolean.charging_phone_dimitri
+    - remote.wohnzimmer
+    - group.all_lights
+    - device_tracker.dimitri_pc
+    - device_tracker.sabrina_pc
+    - input_select.last_motion
+    - input_boolean.sleep_mode

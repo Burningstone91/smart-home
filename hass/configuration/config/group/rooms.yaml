@@ -32,7 +32,8 @@ dressroom:
 bedroom:
   name: Schlafzimmer
   entities:
-    - light.schlafzimmer
+    - light.decke_schlafzimmer
+    - light.kugellampe_schlafzimmer
     - binary_sensor.bewegung_schlafzimmer
     - sensor.luftfeuchtigkeit_schlafzimmer
     - sensor.temperatur_schlafzimmer

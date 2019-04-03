@@ -1,0 +1,13 @@
+
+dimmer_switch_schlafzimmer:
+  module: dimmer_switchv2s
+  class: DimmerSwitch
+  dimmer_switch: dimmschalter_schlafzimmer
+  button_config:
+    1002:
+      entity: media_player.roku
+      action: turn_on
+      parameters:
+        channel: YouTube
+    2002:
+      entity: scene.training

@@ -1,4 +1,5 @@
 - name: dimitri_handy
   platform: html5
-  gcm_api_key: !secret dimitri_handy_gcm_key
-  gcm_sender_id: !secret dimitri_handy_gcm_sender_id
+  vapid_pub_key: !secret dimitri_firebase_public_key
+  vapid_prv_key: !secret dimitri_firebase_private_key 
+  vapid_email: !secret dimitri_mail_address 

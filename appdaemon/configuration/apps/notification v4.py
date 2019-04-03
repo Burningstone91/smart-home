@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from enum import Enum
 from typing import Callable, Union
 
@@ -63,25 +63,45 @@ class NotificationAutomation(AppBase):
                               constrain_app_enabled=1,
                               person=person)
 
+        # send briefing when sleep mode is deactivated
+        self.listen_state(self.sleep_mode_deactivated,
+                          MODES['sleep_mode'],
+                          new='on',
+                          constrain_app_enabled=1)
+
+        #listen state if sleep deactivated send breifing to persons home
+
     def someone_arrived(self, entity: Union[str, dict], attribute: str,
                         old: str, new: str, kwargs: dict) -> None:
         person = kwargs['person']
-        if (person in self.presence_app.persons_home and
-                self.first_briefing[person]):
+        if self.target_available(person):
             self.send_briefing(person)
-            self.first_briefing[person] = False
+
+    def sleep_mode_deactivated(self, entity: Union[str, dict], attribute: str,
+                               old: str, new: str, kwargs: dict) -> None:
+        for person in self.briefing_list.keys():
+            if self.target_available(person):
+                self.send_briefing(person)
 
     def add_item_to_briefing(self, notification: Notification) -> None:
+        item = notification.title
         for target in notification.targets.split(','):
-            item = notification.title
             self.briefing_list[target][item] = {'title': notification.title,
                                                 'message': notification.message,
                                                 'data': notification.data}
 
-    def remove_item_from_briefing(self, name: str) -> None:
-        for target, item in self.briefing_list.items():
-            if item == name:
-                del self.briefing_list[target][name]
+    def remove_person_from_briefing(self, person: str) -> None:
+        if person in self.briefing_list.keys():
+            del self.briefing_list[person]
+
+    def send_briefing(self, person: str) -> None:
+        for item, attribute in self.briefing_list[person].items():
+            self.call_service(f"notify/"
+                              f"{PERSONS[person]['notifier'].split('.')[1]}",
+                              title=attribute['title'],
+                              message=attribute['message'],
+                              data=attribute['data'])
+        self.remove_person_from_briefing(person)
 
     def notify(self, kind: str, level: str, title: str, message: str,
                targets: str, **kwargs: dict) -> Callable:
@@ -91,21 +111,28 @@ class NotificationAutomation(AppBase):
                               interval=kwargs.get('interval', 3600)))
 
     def send_notification(self, notification: Notification) -> Callable:
-        time = datetime.datetime.now() + datetime.timedelta(seconds=10)
-        if notification.level == self.NotificationLevel.home.value:
-            self.add_item_to_briefing(notification)
+        one_target_available = False
+
+        if notification.level == self.NotificationType.home.value:
+            for target in notification.targets.split(','):
+                if self.target_available(target):
+                    one_target_available = True
+                    break
+            if not one_target_available:
+                self.add_item_to_briefing(notification)
+                    
         if notification.kind == self.NotificationType.single.value:
-            handle = self.run_at(self.send, time, notification=notification)
+            handle = self.run_in(self.send, 1, notification=notification)
         else:
             handle = self.run_every(
                 self.send,
-                time,
+                datetime.now(),
                 notification.interval,
                 notification=notification)
 
         def cancel(delete: bool = True) -> None:
             self.cancel_timer(handle)
-            self.remove_item_from_briefing(notification.title)
+            self.notification_app.remove_item_from_briefing(notification.title)
 
         notification.cancel = cancel
 
@@ -120,13 +147,11 @@ class NotificationAutomation(AppBase):
                               data=notification.data)
             self.log(f"Nachricht '{notification.title}' an "
                      f"{target.split('.')[1].split('_')[0].capitalize()}")
+            self.remove_person_from_briefing(target)
 
     def get_targets(self, targets: str, level: str) -> list:
         targets_split = targets.split(',')
         targets_list = []
-        persons_home = self.presence_app.who_in_state(
-            self.presence_app.PresenceState.home,
-            self.presence_app.PresenceState.just_arrived)
 
         if level == self.NotificationLevel.emergency.value:
             if 'everyone' in targets_split:
@@ -139,19 +164,21 @@ class NotificationAutomation(AppBase):
                 for person, attribute in PERSONS.items():
                     if person in targets_split:
                         targets_list.append(attribute['notifier'])
-                        
-        elif not self.get_state(MODES['sleep_mode']):
+        else:
             if 'everyone' in targets_split:
                 targets_list.append(HOUSE['notifier'])
                 for person, attribute in PERSONS.items():
-                    if person in persons_home:
+                    if self.target_available(person):
                         targets_list.append(attribute['notifier'])
             else:
                 if 'home' in targets_split:
                     targets_list.append(HOUSE['notifier'])
                 for person, attribute in PERSONS.items():
-                    if person in targets_split:
-                        if person in persons_home:
-                            targets_list.append(attribute['notifier'])
+                    if person in targets_split and self.target_available(person):
+                        targets_list.append(attribute['notifier'])
 
         return targets_list
+
+    def target_available(self, target: str) -> bool:
+        return (target in self.presence_app.persons_home and
+                self.get_state(MODES['sleep_mode']) == 'off')

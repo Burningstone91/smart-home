@@ -12,6 +12,17 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Tür Wohnung'
+  - platform: template
+    sensors:
+      count_lights:
+        value_template: >
+          {% set entities = [
+            states.light.schlafzimmer,
+            states.light.wohnzimmer,
+            states.light.buero,
+            states.light.ankleidezimmer ] %}
+          {% set findstates = [ 'on', 'open' ] %}
+          {{ entities | selectattr('state','in',findstates) | list | length }}
 
 input_select:
   house_presence:

@@ -34,8 +34,8 @@ turn_off_sleep_mode_forgot:
   name: Schlafmodus ausschalten wenn es vergessen wurde
   initial: True
 
-turn_on_dehumidifier_forgot:
-  name: Entfeuchter einschalten wenn es vergessen wurde
+turn_on_dehumidifier_on_departure:
+  name: Entfeuchter einschalten wenn alle gegangen sind
   initial: True
 
 ################################# Dress room #################################

@@ -3,11 +3,3 @@ notification_app:
   class: NotificationAutomation
   dependencies:
     - presence_app
-  entities:
-    notification_bulb_bool: input_boolean.notification_bulb
-
-#briefing_app:
-#  module: notification
-#  class: BriefingAutomation
-#  dependencies:
-#    - notification_app

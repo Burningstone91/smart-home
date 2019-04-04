@@ -29,13 +29,13 @@ dress_room_automations:
     - input_boolean.motion_light_dress_room
 
 bedroom_automations:
-  name: Büro Automatisierungen
+  name: Schlafzimmerautomatisierungen
   entities:
     - input_boolean.motion_light_bedroom
     - input_boolean.sleep_app
     - input_boolean.turn_on_sleep_mode_forgot
     - input_boolean.turn_off_sleep_mode_forgot
-    - input_boolean.turn_on_dehumidifier_forgot
+    - input_boolean.turn_on_dehumidifier_on_departure
 
 security_automations:
   name: Sicherheit Automatisierungen

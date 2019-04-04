@@ -84,16 +84,12 @@ turn_off_sleep_mode_forgot:
     schedule_time: "13:30:00"
     state: "off"
 
-turn_on_dehumidifier_forgot:
+turn_on_dehumidifier_on_departure:
   module: switches
-  class: ToggleAtTime
+  class: ToggleOnDeparture
   dependencies:
     - presence_app
-  disabled_states:
-    presence: someone,everyone,vacation
-    days: Saturday,Sunday
   entities:
     switch: switch.schalter_entfeuchter
   properties:
-    schedule_time: "10:00:00"
     state: "on"

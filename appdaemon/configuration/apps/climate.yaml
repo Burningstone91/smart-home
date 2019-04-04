@@ -21,6 +21,8 @@ notify_on_high_humidity:
     modes: guest_mode
   notifications:
     targets: Dimitri
+  properties:
+    check_interval: 60
 
 notify_on_window_open:
   module: climate

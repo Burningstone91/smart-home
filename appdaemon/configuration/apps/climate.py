@@ -61,11 +61,11 @@ class ClimateAutomation(AppBase):
 class NotifyOnHighHumidity(AppBase):
     def initialize(self):
         super().initialize()
-
-        # check every 30 min if humidity threshold is reached, if yes -> send notification
+        interval = self.properties['check_interval']
+        # check every hour if humidity threshold is reached, if yes -> send notification
         self.run_every(self.send_notification,
                        datetime.datetime.now(),
-                       30 * 60,
+                       interval * 60,
                        constrain_app_enabled=1)
 
     def send_notification(self, kwargs: dict) -> None:

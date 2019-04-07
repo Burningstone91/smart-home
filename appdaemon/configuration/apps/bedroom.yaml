@@ -129,3 +129,19 @@ turn_on_dehumidifier_on_departure:
   properties:
     action_type: toggle
     state: "on"
+
+tester:
+  module: switches
+  class: ToggleOnDeparture
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
+  entities:
+    switch: light.schlafzimmer
+  properties:
+    action_type: service_call
+    state: "turn_on"
+    parameters:
+      brightness: 250
+      color_name: white

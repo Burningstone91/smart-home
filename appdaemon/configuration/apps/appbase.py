@@ -1,3 +1,4 @@
+"""Define base automation object and constraints."""
 import datetime
 from typing import Callable, Dict, Union
 
@@ -70,7 +71,7 @@ APP_SCHEMA = vol.Schema({
 
 
 class AppBase(Hass):
-    """Define a base for an automation object."""
+    """Define a base automation object."""
 
     APP_SCHEMA = APP_SCHEMA
     

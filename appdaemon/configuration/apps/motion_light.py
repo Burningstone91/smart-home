@@ -85,9 +85,11 @@ class MotionLightAutomation(AppBase):
 
     def turn_light_on(self) -> None:
         for entity in self.lights:
-            self.turn_on(entity,
-                         brightness=self.brightness,
-                         color_name=self.light_color)
+            self.turn_on(
+                entity,
+                brightness=self.brightness,
+                color_name=self.light_color
+            )
 
         self.log(f"Das Licht im {self.room_name} "
                  f"wurde durch Bewegung eingeschaltet. "
@@ -113,13 +115,17 @@ class MotionLightAutomation(AppBase):
     @property
     def no_action_entities_on(self) -> list:
         on_states = ['on', 'home']
-        return [entity for entity in self.no_action_entities
-                if self.get_state(entity) in on_states]
+        return [
+            entity for entity in self.no_action_entities
+            if self.get_state(entity) in on_states
+        ]
 
     @property
     def lights_on(self) -> list:
-        return [entity for entity in self.all_lights
-                if self.get_state(entity) == 'on']
+        return [
+            entity for entity in self.all_lights
+            if self.get_state(entity) == 'on'
+        ]
 
     @property
     def lux_high(self) -> bool:
@@ -131,11 +137,15 @@ class MotionLightAutomation(AppBase):
 
     @property
     def day_state(self) -> str:
-        if self.now_is_between(self.day_state_map['morning'],
-                               self.day_state_map['day']):
+        if self.now_is_between(
+                self.day_state_map['morning'],
+                self.day_state_map['day']
+        ):
             return 'morning'
-        elif self.now_is_between(self.day_state_map['day'],
-                                 self.day_state_map['night']):
+        elif self.now_is_between(
+                self.day_state_map['day'],
+                self.day_state_map['night']
+        ):
             return 'day'
         else:
             return 'night'

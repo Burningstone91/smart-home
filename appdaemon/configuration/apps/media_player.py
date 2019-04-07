@@ -33,11 +33,13 @@ class MediaPlayerAutomation(AppBase):
 
     def play_media(self, media_player: str, playlist: str, source: str,
                    **kwargs: Union[None, dict]) -> None:
-        mediaitem = self.MediaItem(media_player,
-                                   playlist,
-                                   source,
-                                   volume=kwargs.get('volume'),
-                                   shuffle=kwargs.get('shuffle'))
+        mediaitem = self.MediaItem(
+            media_player,
+            playlist,
+            source,
+            volume=kwargs.get('volume'),
+            shuffle=kwargs.get('shuffle')
+        )
 
         self.set_source(mediaitem.media_player, mediaitem.source)
         self.set_volume(mediaitem.media_player, mediaitem.volume)
@@ -50,24 +52,28 @@ class MediaPlayerAutomation(AppBase):
         self.call_service(
             'media_player/select_source',
             entity_id=media_player,
-            source=source)
+            source=source
+        )
 
     def set_volume(self, media_player: str, volume: float) -> None:
         self.call_service(
             'media_player/volume_set',
             entity_id=media_player,
-            volume_level=volume / 100)
+            volume_level=volume / 100
+        )
 
     def start_playlist(self, media_player: str, playlist: str) -> None:
         self.call_service(
             'media_player/play_media',
             entity_id=media_player,
             media_content_type='playlist',
-            media_content_id=playlist)
+            media_content_id=playlist
+        )
 
     def stop(self, media_player: str, **kwargs: Union[None, dict]) -> None:
         self.call_service(
-            'media_player/media_pause', entity_id=media_player)
+            'media_player/media_pause', entity_id=media_player
+        )
         if 'source_entity' in kwargs:
             self.turn_off(kwargs['source_entity'])
 
@@ -75,15 +81,18 @@ class MediaPlayerAutomation(AppBase):
         self.call_service(
             'media_player/shuffle_set', 
             entity_id=media_player, 
-            shuffle='true')
+            shuffle='true'
+        )
 
     def next_track(self, media_player: str) -> None:
         self.call_service(
-            'media_player/media_next_track', entity_id=media_player)
+            'media_player/media_next_track', entity_id=media_player
+        )
 
     def previous_track(self, media_player: str) -> None:
         self.call_service(
-            'media_player/media_previous_track', entity_id=media_player)
+            'media_player/media_previous_track', entity_id=media_player
+        )
 
     def volume_up(self, media_player: str) -> None:
         self.call_service('media_player/volume_up', entity_id=media_player)

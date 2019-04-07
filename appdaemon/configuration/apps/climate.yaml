@@ -18,7 +18,8 @@ notify_on_high_humidity:
     - presence_app
   disabled_states:
     presence: noone,vacation
-    modes: guest_mode
+    modes:
+      guest_mode: 'on'
   notifications:
     targets: Dimitri
   properties:
@@ -33,7 +34,8 @@ notify_on_window_open:
     - presence_app
   disabled_states:
     presence: noone,vacation
-    modes: guest_mode
+    modes:
+      guest_mode: 'on'
   entities:
     notification_lights: light.buero,light.ankleidezimmer
   notifications:

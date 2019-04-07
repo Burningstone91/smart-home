@@ -343,7 +343,7 @@
                 action: toggle
               state_image:
                 "on": /local/fan_on.gif
-                "off": /local/fan.png
+                "off": /local/fan_stop.png
               style:
                 top: 6.5%
                 left: 64.55%
@@ -362,6 +362,21 @@
                 width: 3%
             
             ###################### Home Cinema ###############################
+            - type: image
+              entity: remote.wohnzimmer
+              tap_action:
+                action: call-service
+                service: remote.turn_off
+                service_data:
+                  entity_id: remote.wohnzimmer
+              state_image:
+                "on": /local/projector_on.png
+                "off": /local/projector_off.png
+              style:
+                top: 62.6%
+                left: 43.9%
+                width: 3.5%
+
             - type: image
               entity: sensor.harmony_activity
               tap_action:
@@ -439,3 +454,19 @@
                 top: 71.7%
                 left: 85%
                 width: 3.5%  
+
+            ####################### Temperatur ###############################
+            - type: state-icon
+              entity: sensor.temperatur_buero
+              style:
+                top: 41.5%
+                left: 89.5% 
+            - type: state-label
+              icon: mdi:celsius
+              entity: sensor.temperatur_buero
+              style:
+                top: 41.3%
+                left: 92.5% 
+                font-size: 80%
+                font-weight: bold
+                color: SteelBlue

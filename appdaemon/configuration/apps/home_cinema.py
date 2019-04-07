@@ -81,10 +81,12 @@ class RemoteAutomation(AppBase):
             device_id = self.current_device_id
         self.log(device_id)
 
-        self.call_service('remote/send_command',
-                          entity_id=self.remote,
-                          device=device_id,
-                          command=command)
+        self.call_service(
+            'remote/send_command',
+            entity_id=self.remote,
+            device=device_id,
+            command=command
+        )
 
 
 class SceneLights(AppBase):
@@ -98,10 +100,12 @@ class SceneLights(AppBase):
         self.scene_brightness_map = self.properties['scene_brightness']
 
         # change color on scene change
-        self.listen_state(self.scene_changed,
-                          self.remote_app.remote,
-                          attribute='current_activity',
-                          constrain_app_enabled=1)
+        self.listen_state(
+            self.scene_changed,
+            self.remote_app.remote,
+            attribute='current_activity',
+            constrain_app_enabled=1
+        )
 
     def scene_changed(self, entity: Union[str, dict], attribute: str,
                       old: str, new: str, kwargs: dict) -> None:
@@ -110,10 +114,12 @@ class SceneLights(AppBase):
                 self.turn_off(light, transition=self.transition_off)
         else:
             for light in self.lights:
-                self.turn_on(light,
-                             brightness=self.brightness(new),
-                             color_name=self.light_color(new),
-                             transition=self.transition_on)
+                self.turn_on(
+                    light,
+                    brightness=self.brightness(new),
+                    color_name=self.light_color(new),
+                    transition=self.transition_on
+                )
 
     def brightness(self, scene: str) -> float:
         brightness_pct = self.scene_brightness_map.get(self.scene_name(scene), 75)
@@ -127,19 +133,23 @@ class SceneLights(AppBase):
 
     def brighten_on_pause(self):
         for light in self.lights:
-            self.turn_on(light,
-                         brightness=200,
-                         color_name='white',
-                         transition=2)
+            self.turn_on(
+                light,
+                brightness=200,
+                color_name='white',
+                transition=2
+            )
 
     def dim_on_play(self):
         current_activity = self.remote_app.current_activity_name
 
         for light in self.lights:
-            self.turn_on(light,
-                         brightness=self.brightness(current_activity),
-                         color_name=self.light_color(current_activity),
-                         transition=2)
+            self.turn_on(
+                light,
+                brightness=self.brightness(current_activity),
+                color_name=self.light_color(current_activity),
+                transition=2
+            )
 
 
 class PhoneCall(AppBase):
@@ -147,9 +157,11 @@ class PhoneCall(AppBase):
         super().initialize()
         self.device_id = self.properties['device_id']
         for person, attribute in PERSONS.items():
-            self.listen_state(self.phone_call_changed,
-                              attribute['phone_call_bool'],
-                              person=person)
+            self.listen_state(
+                self.phone_call_changed,
+                attribute['phone_call_bool'],
+                person=person
+            )
 
     def phone_call_changed(self, entity: Union[str, dict], attribute: str,
                            old: str, new: str, kwargs: dict) -> None:

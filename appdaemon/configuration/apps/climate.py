@@ -27,8 +27,8 @@ from appbase import AppBase
 class ClimateAutomation(AppBase):
     def initialize(self):
         super().initialize()
-        self.window_sensors = self.entities.get('window_sensors', '').split(',')
 
+        self.window_sensors = self.entities.get('window_sensors', '').split(',')
         self.humidity_sensors = self.entities.get('humidity_sensors', '').split(',')
         self.humidity_room_threshold = float(self.args['thresholds']['humidity_room'])
 
@@ -61,12 +61,16 @@ class ClimateAutomation(AppBase):
 class NotifyOnHighHumidity(AppBase):
     def initialize(self):
         super().initialize()
+
         interval = self.properties['check_interval']
+
         # check every hour if humidity threshold is reached, if yes -> send notification
-        self.run_every(self.send_notification,
-                       datetime.datetime.now(),
-                       interval * 60,
-                       constrain_app_enabled=1)
+        self.run_every(
+            self.send_notification,
+            datetime.datetime.now(),
+            interval * 60,
+            constrain_app_enabled=1
+        )
 
     def send_notification(self, kwargs: dict) -> None:
         if self.climate_app.humidity_in_room_high:
@@ -76,28 +80,34 @@ class NotifyOnHighHumidity(AppBase):
                 title="Hohe Luftfeuchtigkeit!",
                 message=f"Im {', '.join(self.climate_app.which_room_high_humidity)} "
                         f"herrscht eine hohe Luftfeuchtigkeit",
-                targets=self.notifications['targets'])
+                targets=self.notifications['targets']
+            )
 
 
 class NotifyOnWindowOpen(AppBase):
     def initialize(self):
         super().initialize()
+
         self.notification_lights = self.entities['notification_lights']
         self.notification_sent = False
 
         for entity in self.climate_app.window_sensors:
             # send notification if a window is open for more than 10 minutes
-            self.listen_state(self.send_notification,
-                              entity,
-                              new='offen',
-                              duration=10 * 60,
-                              constrain_app_enabled=1)
+            self.listen_state(
+                self.send_notification,
+                entity,
+                new='offen',
+                duration=10 * 60,
+                constrain_app_enabled=1
+            )
 
             # turn off notification bulb if all windows are closed
-            self.listen_state(self.turn_off_notification_bulb,
-                              entity,
-                              new='geschlossen',
-                              constrain_app_enabled=1)
+            self.listen_state(
+                self.turn_off_notification_bulb,
+                entity,
+                new='geschlossen',
+                constrain_app_enabled=1
+            )
 
     def send_notification(self, entity: Union[str, dict], attribute: str,
                           old: str, new: str, kwargs: dict) -> None:
@@ -109,7 +119,8 @@ class NotifyOnWindowOpen(AppBase):
                 message=f"Das Fenster im "
                         f"{entity.split('.')[1].split('_')[-1].capitalize()} "
                         f"ist länger als 10 Minuten offen.",
-                targets=self.notifications['targets'])
+                targets=self.notifications['targets']
+            )
 
             self.notification_sent = True
 

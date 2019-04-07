@@ -121,6 +121,9 @@ turn_on_dehumidifier_on_departure:
   class: ToggleOnDeparture
   dependencies:
     - presence_app
+  disabled_states:
+    modes:
+      sleep_mode: 'on'
   entities:
     switch: switch.schalter_entfeuchter
   properties:

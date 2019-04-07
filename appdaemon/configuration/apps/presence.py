@@ -31,11 +31,13 @@ class PresenceAutomation(AppBase):
             if self.get_state(attribute['keys']) == 'not_home':
                 self.select_option(
                     attribute['presence_state'],
-                    self.PresenceState.away.value)
+                    self.PresenceState.away.value
+                )
             else:
                 self.select_option(
                     attribute['presence_state'],
-                    self.PresenceState.home.value)
+                    self.PresenceState.home.value
+                )
 
             # away/extented away to just arrived
             self.listen_state(
@@ -44,7 +46,8 @@ class PresenceAutomation(AppBase):
                 old='not_home',
                 input_select=attribute['presence_state'],
                 person=person,
-                target_state=self.PresenceState.just_arrived.value)
+                target_state=self.PresenceState.just_arrived.value
+            )
 
             # home to just left
             self.listen_state(
@@ -53,7 +56,8 @@ class PresenceAutomation(AppBase):
                 new='not_home',
                 input_select=attribute['presence_state'],
                 person=person,
-                target_state=self.PresenceState.just_left.value)
+                target_state=self.PresenceState.just_left.value
+            )
 
             # just arrived to home
             self.listen_state(
@@ -63,7 +67,8 @@ class PresenceAutomation(AppBase):
                 duration=60 * 5,
                 input_select=attribute['presence_state'],
                 person=person,
-                target_state=self.PresenceState.home.value)
+                target_state=self.PresenceState.home.value
+            )
 
             # just left to just arrived = home
             self.listen_state(
@@ -73,7 +78,8 @@ class PresenceAutomation(AppBase):
                 new=self.PresenceState.just_arrived.value,
                 input_select=attribute['presence_state'],
                 person=person,
-                target_state=self.PresenceState.home.value)
+                target_state=self.PresenceState.home.value
+            )
 
             # just left to away
             self.listen_state(
@@ -83,7 +89,8 @@ class PresenceAutomation(AppBase):
                 duration=60 * 5,
                 input_select=attribute['presence_state'],
                 person=person,
-                target_state=self.PresenceState.away.value)
+                target_state=self.PresenceState.away.value
+            )
 
             # away to extended away
             self.listen_state(
@@ -93,11 +100,13 @@ class PresenceAutomation(AppBase):
                 duration=60 * 60 * 24,
                 input_select=attribute['presence_state'],
                 person=person,
-                target_state=self.PresenceState.extended_away.value)
+                target_state=self.PresenceState.extended_away.value
+            )
 
             # listen state to trigger house state change
             self.listen_state(
-                self.set_presence_house, attribute['presence_state'])
+                self.set_presence_house, attribute['presence_state']
+            )
 
     def set_presence_person(self, entity: Union[str, dict], attribute: str,
                             old: str, new: str, kwargs: dict) -> None:
@@ -105,7 +114,8 @@ class PresenceAutomation(AppBase):
         self.select_option(kwargs['input_select'], kwargs['target_state'])
         self.log(
             "{} war {}, ist jetzt {} ".format(
-                kwargs['person'], old_state, kwargs['target_state']))
+                kwargs['person'], old_state, kwargs['target_state'])
+        )
 
     def set_presence_house(self, entity: Union[str, dict], attribute: str,
                            old: str, new: str, kwargs: dict) -> None:
@@ -140,10 +150,14 @@ class PresenceAutomation(AppBase):
 
     @property
     def noone_home(self) -> bool:
-        return not self.who_in_state(self.PresenceState.home,
-                                     self.PresenceState.just_arrived)
+        return not self.who_in_state(
+            self.PresenceState.home,
+            self.PresenceState.just_arrived
+        )
 
     @property
     def persons_home(self) -> list:
-        return self.who_in_state(self.PresenceState.home,
-                                 self.PresenceState.just_arrived)
+        return self.who_in_state(
+            self.PresenceState.home,
+            self.PresenceState.just_arrived
+        )

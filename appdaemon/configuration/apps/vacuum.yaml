@@ -5,7 +5,8 @@ vacuum_app:
     - presence_app
   disabled_states:
     presence: someone,everyone,vacation
-    modes: guest_mode
+    modes:
+      guest_mode: 'on'
     days: Tuesday,Thursday,Saturday,Sunday
   entities:
     vacuum: vacuum.roomba

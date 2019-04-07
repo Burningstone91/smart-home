@@ -17,7 +17,7 @@ scene_lights_app:
     - presence_app
     - remote_app
   disabled_states:
-    - presence: noone,vacation
+    presence: noone,vacation
   entities:
     lights: light.wohnzimmer
   properties:

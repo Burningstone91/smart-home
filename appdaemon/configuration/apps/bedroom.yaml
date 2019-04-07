@@ -29,11 +29,41 @@ motion_light_bedroom:
       night: orange
 
 dimmer_switch_schlafzimmer:
-  module: dimmer_switch
-  class: DimmerSwitch
+  module: switches
+  class: HueDimmerSwitch
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
   entities:
-    dimmer_switch: dimmschalter_schlafzimmer
-    lights: light.decke_schlafzimmer,light.kugellampe_schlafzimmer
+    switch: dimmschalter_schlafzimmer
+  properties:
+    button_config:
+      short_press_on:
+        action_type: service_call
+        action: turn_on
+        entity: light.schlafzimmer
+        parameters:
+          brightness: 255
+          color_name: white
+      long_press_on:
+        action_type: toggle
+        action: 'on'
+        entity: switch.schalter_entfeuchter
+      short_press_up:
+        action_type: brighten
+        entity: light.schlafzimmer
+      short_press_down:
+        action_type: dim
+        entity: light.schlafzimmer
+      short_press_off:
+        action_type: toggle
+        action: 'off'
+        entity: light.schlafzimmer
+      long_press_off:
+        action_type: toggle
+        action: 'off'
+        entity: switch.schalter_entfeuchter
 
 sleep_app:
   module: sleep
@@ -68,7 +98,8 @@ turn_on_sleep_mode_forgot:
   entities:
     switch: input_boolean.sleep_mode
   properties:
-    schedule_time: "03:00:00"
+    action_type: toggle
+    schedule_time: "13:30:00"
     state: "on"
 
 turn_off_sleep_mode_forgot:
@@ -81,6 +112,7 @@ turn_off_sleep_mode_forgot:
   entities:
     switch: input_boolean.sleep_mode
   properties:
+    action_type: toggle
     schedule_time: "13:30:00"
     state: "off"
 
@@ -92,4 +124,5 @@ turn_on_dehumidifier_on_departure:
   entities:
     switch: switch.schalter_entfeuchter
   properties:
+    action_type: toggle
     state: "on"

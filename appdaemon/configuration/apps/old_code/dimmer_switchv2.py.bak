@@ -16,25 +16,33 @@ from appbase import AppBase
 ##############################################################################
 
 
-class DimmerSwitch(AppBase):
+class DimmerSwitch(SwitchBase):
     def initialize(self) -> None:
         super().initialize()
-        self.button_config = self.args['button_config']
+        self.button_config = self.properties['button_config']
 
-        if 'dimmer_switch' in self.args:
+        self.button_map = {
+            1002: 'short_press_on', 1003: 'long_press_on',
+            2002: 'short_press_up', 2003: 'long_press_up',
+            3002: 'short_press_down', 3003: 'long_press_down',
+            4002: 'short_press_off', 4003: 'long_press_off'
+        }
+
+        if 'dimmer_switch' in self.entities:
             # take action when button is pressed on dimmer switch
             self.listen_event(self.button_pressed,
                               "deconz_event",
-                              id=self.args['dimmer_switch'])
+                              id=self.entities['dimmer_switch'])
 
     def button_pressed(self, event_name: str, data: dict,
                        kwargs: dict) -> None:
-        button_event = data['event']
+        button_code = data['event']
+        button_name = self.button_map[button_code]
         # 10xx: on, 20xx: brighten, 30xx: dim, 40xx: off
         # xx03: long press release, xx02: short press release
 
-        if button_event in self.button_config:
-            service_conf = self.button_config[button_event]
+        if button_name in self.button_config:
+            service_conf = self.button_config[button_name]
             service = service_conf['entity'].split(',')[0]
 
             if service == 'scene':
@@ -46,4 +54,5 @@ class DimmerSwitch(AppBase):
                     **service_conf['parameters']
                 )
         else:
-            self.log("Button not configured")
+            self.log("Taste nicht konfiguriert")
+

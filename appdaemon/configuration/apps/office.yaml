@@ -30,8 +30,34 @@ motion_light_office:
       night: white
 
 dimmer_switch_buero:
-  module: dimmer_switch
-  class: DimmerSwitch
+  module: switches
+  class: HueDimmerSwitch
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
   entities:
-    dimmer_switch: dimmschalter_buero
-    lights: light.buero
+    switch: dimmschalter_buero
+  properties:
+    button_config:
+      short_press_on:
+        action_type: service_call
+        action: turn_on
+        entity: light.buero
+        parameters:
+          brightness: 255
+          color_name: white
+      short_press_up:
+        action_type: brighten
+        entity: light.buero
+      short_press_down:
+        action_type: dim
+        entity: light.buero
+      short_press_off:
+        action_type: toggle
+        action: 'off'
+        entity: light.buero
+      long_press_off:
+        action_type: toggle
+        action: 'off'
+        entity: media_player.buero_musik_main

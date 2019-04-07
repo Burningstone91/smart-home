@@ -75,7 +75,7 @@ class NotificationAutomation(AppBase):
 
     def sleep_mode_deactivated(self, entity: Union[str, dict], attribute: str,
                                old: str, new: str, kwargs: dict) -> None:
-        for person in self.briefing_list.keys():
+        for person in list(self.briefing_list.keys()):
             self.send_briefing(person)
 
     def add_item_to_briefing(self, notification: Notification) -> None:

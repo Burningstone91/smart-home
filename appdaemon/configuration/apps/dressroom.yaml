@@ -29,8 +29,30 @@ motion_light_dress_room:
       night: orange
 
 dimmer_switch_ankleidezimmer:
-  module: dimmer_switch
-  class: DimmerSwitch
+  module: switches
+  class: HueDimmerSwitch
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
   entities:
-    dimmer_switch: dimmschalter_ankleidezimmer
-    lights: light.ankleidezimmer
+    switch: dimmschalter_ankleidezimmer
+  properties:
+    button_config:
+      short_press_on:
+        action_type: service_call
+        action: turn_on
+        entity: light.ankleidezimmer
+        parameters:
+          brightness: 255
+          color_name: white
+      short_press_up:
+        action_type: brighten
+        entity: light.ankleidezimmer
+      short_press_down:
+        action_type: dim
+        entity: light.ankleidezimmer
+      short_press_off:
+        action_type: toggle
+        action: 'off'
+        entity: light.ankleidezimmer

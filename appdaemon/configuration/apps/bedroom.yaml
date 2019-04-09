@@ -42,28 +42,28 @@ dimmer_switch_schlafzimmer:
       short_press_on:
         action_type: service_call
         action: turn_on
-        entity: light.schlafzimmer
+        action_entity: light.schlafzimmer
         parameters:
           brightness: 255
           color_name: white
       long_press_on:
         action_type: toggle
         action: 'on'
-        entity: switch.schalter_entfeuchter
+        action_entity: switch.schalter_entfeuchter
       short_press_up:
         action_type: brighten
-        entity: light.schlafzimmer
+        action_entity: light.schlafzimmer
       short_press_down:
         action_type: dim
-        entity: light.schlafzimmer
+        action_entity: light.schlafzimmer
       short_press_off:
         action_type: toggle
         action: 'off'
-        entity: light.schlafzimmer
+        action_entity: light.schlafzimmer
       long_press_off:
         action_type: toggle
         action: 'off'
-        entity: switch.schalter_entfeuchter
+        action_entity: switch.schalter_entfeuchter
 
 sleep_app:
   module: sleep
@@ -122,26 +122,10 @@ turn_on_dehumidifier_on_departure:
   dependencies:
     - presence_app
   disabled_states:
-    modes:
-      sleep_mode: 'on'
+    presence: vacation
   entities:
     switch: switch.schalter_entfeuchter
   properties:
     action_type: toggle
     state: "on"
 
-tester:
-  module: switches
-  class: ToggleOnDeparture
-  dependencies:
-    - presence_app
-  disabled_states:
-    presence: vacation
-  entities:
-    switch: light.schlafzimmer
-  properties:
-    action_type: service_call
-    state: "turn_on"
-    parameters:
-      brightness: 250
-      color_name: white

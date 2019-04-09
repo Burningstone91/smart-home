@@ -46,20 +46,20 @@ dimmer_switch_wohnzimmer:
       short_press_on:
         action_type: service_call
         action: turn_on
-        entity: light.wohnzimmer
+        action_entity: light.wohnzimmer
         parameters:
           brightness: 255
           color_name: white
       short_press_up:
         action_type: brighten
-        entity: light.wohnzimmer
+        action_entity: light.wohnzimmer
       short_press_down:
         action_type: dim
-        entity: light.wohnzimmer
+        action_entity: light.wohnzimmer
       short_press_off:
         action_type: toggle
         action: 'off'
-        entity: light.wohnzimmer
+        action_entity: light.wohnzimmer
 
 phone_call:
   module: home_cinema_test

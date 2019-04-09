@@ -42,17 +42,17 @@ dimmer_switch_ankleidezimmer:
       short_press_on:
         action_type: service_call
         action: turn_on
-        entity: light.ankleidezimmer
+        action_entity: light.ankleidezimmer
         parameters:
           brightness: 255
           color_name: white
       short_press_up:
         action_type: brighten
-        entity: light.ankleidezimmer
+        action_entity: light.ankleidezimmer
       short_press_down:
         action_type: dim
-        entity: light.ankleidezimmer
+        action_entity: light.ankleidezimmer
       short_press_off:
         action_type: toggle
         action: 'off'
-        entity: light.ankleidezimmer
+        action_entity: light.ankleidezimmer

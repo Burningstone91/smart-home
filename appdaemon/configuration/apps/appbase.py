@@ -1,12 +1,12 @@
 """Define base automation object and constraints."""
 import datetime
-from typing import Callable, Dict, Union
 
 import voluptuous as vol
 from appdaemon.plugins.hass.hassapi import Hass
 
 from house_config import HOUSE, MODES
 import voloptuous_helper as vol_help
+
 
 CONF_CLASS = 'class'
 CONF_MODULE = 'module'
@@ -99,6 +99,10 @@ class AppBase(Hass):
         for app in self.args.get('dependencies', {}):
             if not getattr(self, app, None):
                 setattr(self, app, self.get_app(app))
+
+        # Run the app configuration if specified
+        if hasattr(self, 'configure'):
+            self.configure()
 
         # Define the input boolean to enable/disable app
         if 'enable' in self.properties:

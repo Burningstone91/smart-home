@@ -43,21 +43,21 @@ dimmer_switch_buero:
       short_press_on:
         action_type: service_call
         action: turn_on
-        entity: light.buero
+        action_entity: light.buero
         parameters:
           brightness: 255
           color_name: white
       short_press_up:
         action_type: brighten
-        entity: light.buero
+        action_entity: light.buero
       short_press_down:
         action_type: dim
-        entity: light.buero
+        action_entity: light.buero
       short_press_off:
         action_type: toggle
         action: 'off'
-        entity: light.buero
+        action_entity: light.buero
       long_press_off:
         action_type: toggle
         action: 'off'
-        entity: media_player.buero_musik_main
+        action_entity: media_player.buero_musik_main

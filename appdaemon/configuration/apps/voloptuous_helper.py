@@ -16,4 +16,12 @@ def entity_id(value: Any) -> str:
     if '.' in value:
         return value
 
-    raise vol.Invalid(f"Ungültige Entitäts-ID: {value}")
+    raise vol.Invalid(f"Invalide Entity-ID: {value}")
+
+
+def entity_id_list(value: Any) -> str:
+    value = str(value).lower()
+    for item in value.split(','):
+        if '.' not in item:
+            raise vol.Invalid(f"Invalide Entity-Liste: {value}")
+    return value

@@ -2,7 +2,6 @@
 
 from typing import Union
 
-
 import voluptuous as vol
 
 import voloptuous_helper as vol_help
@@ -43,14 +42,6 @@ CONF_TARGET_STATE = 'target_state'
 
 class SwitchBase(AppBase):
     """Define a base feature to take action for switches."""
-
-    def configure(self) -> None:
-        """Configure."""
-        self.switch = self.entities[CONF_SWITCH]
-        self.action_type = self.properties.get(CONF_ACTION_TYPE)
-        self.delay = self.properties.get(CONF_DELAY)
-        self.state = self.properties.get(CONF_STATE)
-        self.parameters = self.properties.get(CONF_PARAMETERS, {})
 
     def action(self, action_type: str, state: str,
                action_entity: str, **kwargs: dict) -> None:

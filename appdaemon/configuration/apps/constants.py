@@ -23,5 +23,9 @@ TOGGLE_STATES = ('on', 'off', 'open', 'closed')
 
 # Notification config keys
 CONF_NOTIFICATIONS = 'notifications'
-CONF_NOTIFICATION_TARGETS = 'notification_targets'
-CONF_NOTIFICATION_INTERVAL = 'notification_interval'
+CONF_TARGETS = 'targets'
+CONF_INTERVAL = 'interval'
+SINGLE = 'single'
+REPEAT = 'repeat'
+EMERGENCY = 'emergency'
+HOME = 'home'

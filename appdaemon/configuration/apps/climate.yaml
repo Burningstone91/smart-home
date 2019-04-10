@@ -6,7 +6,7 @@ climate_app:
     temperature_senors: sensor.temperatur_schlafzimmer,sensor.temperatur_buero,sensor.temperatur_ankleidezimmer
     average_temperature_sensor: sensor.averagetemperature
     window_sensors: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche
-  thresholds:
+  properties:
     humidity_room: 60
 
 notify_on_high_humidity:
@@ -37,6 +37,8 @@ notify_on_window_open:
     modes:
       guest_mode: 'on'
   entities:
-    notification_lights: light.buero,light.ankleidezimmer
+    window_sensors: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche
+  properties:
+    window_open_threshold: 10
   notifications:
     targets: Dimitri

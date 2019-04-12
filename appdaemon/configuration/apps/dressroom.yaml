@@ -14,7 +14,7 @@ motion_light_dress_room:
       night: light.ankleidezimmer
   properties:
     lux_threshold: 200
-    timer_sec: 900
+    delay: 15
     day_state_time:
       morning: "05:30:00"
       day: "10:30:00"

@@ -8,14 +8,14 @@ motion_light_office:
   entities:
     motion_sensor: binary_sensor.bewegung_buero
     lux_sensor: sensor.lux_buero
-    no_action: device_tracker.sabrina_pc,device_tracker.dimitri_pc
+    no_action_entities: device_tracker.sabrina_pc,device_tracker.dimitri_pc,media_player.buero_musik_main
     lights:
       morning: light.buero
       day: light.buero
       night: light.buero
   properties:
     lux_threshold: 200
-    timer_sec: 900
+    delay: 15
     day_state_time:
       morning: "05:30:00"
       day: "10:30:00"

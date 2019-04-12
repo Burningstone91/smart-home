@@ -16,10 +16,18 @@ CONF_PRESENCE_STATE = 'presence_state'
 
 # Person config keys
 CONF_SPECIFIC_PERSON = 'specific_person'
+PERSON = 'person'
 
 # State config keys
 CONF_STATE = 'state'
 TOGGLE_STATES = ('on', 'off', 'open', 'closed')
+ON = 'on'
+OFF = 'off'
+
+# Light config keys
+CONF_LIGHTS = 'lights'
+CONF_LIGHT_COLOR = 'light_color'
+CONF_BRIGHTNESS_LEVEL = 'brightness_level'
 
 # Notification config keys
 CONF_NOTIFICATIONS = 'notifications'

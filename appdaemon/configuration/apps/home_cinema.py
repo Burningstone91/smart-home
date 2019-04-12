@@ -1,6 +1,12 @@
+"""Define automations for the home cinema"""
+
 from typing import Union
 
-from appbase import AppBase
+import voluptuous as vol
+
+import voloptuous_helper as vol_help
+from appbase import AppBase, APP_SCHEMA
+from constants import CONF_ENTITIES, CONF_PROPERTIES, ON, PERSON
 from house_config import PERSONS
 
 
@@ -51,32 +57,69 @@ from house_config import PERSONS
 ##############################################################################
 
 
+CONF_HARMONY_REMOTE = 'harmony_remote'
+CONF_ACTIVITIES = 'activities'
+CONF_DEVICE = 'device'
+CURRENT_ACTIVITY = 'current_activity'
+
+CONF_LIGHTS = 'lights'
+CONF_TRANSITION_ON = 'transition_on'
+CONF_TRANSITION_OFF = 'transition_off'
+CONF_SCENE_COLOR = 'scene_color'
+CONF_SCENE_BRIGHTNESS = 'scene_brightness'
+POWER_OFF = 'poweroff'
+
+HOME = 'Home'
+PLAY = 'Play'
+PAUSE = 'Pause'
+KEY = 'key'
+ROKU_COMMAND = 'roku_command'
+
+CONF_DEVICE_ID = 'device_id'
+PHONE_CALL_BOOL = 'phone_call_bool'
+
+
 class RemoteAutomation(AppBase):
-    def initialize(self) -> None:
-        super().initialize()
-        self.remote = self.entities['harmony_remote']
-        self.activities = self.properties['activities']
+    """Define a base feature for remote automations."""
+
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_ENTITIES: vol.Schema({
+            vol.Required(CONF_HARMONY_REMOTE): vol_help.entity_id,
+        }, extra=vol.ALLOW_EXTRA),
+        CONF_PROPERTIES: vol.Schema({
+            vol.Required(CONF_ACTIVITIES): dict,
+        }, extra=vol.ALLOW_EXTRA)
+    })
+
+    def configure(self) -> None:
+        """Configure."""
+        self.remote = self.entities[CONF_HARMONY_REMOTE]
+        self.activities = self.properties[CONF_ACTIVITIES]
 
     @property
     def current_device_id(self) -> Union[int, None]:
-        activity_name = self.get_state(self.remote,
-                                       attribute='current_activity')
+        """Get device id of current activity."""
         try:
-            return self.activities[activity_name.replace(' ', '_').lower()]
+            return self.activities[
+                self.current_activity_name.replace(' ', '_').lower()
+            ]
         except KeyError:
             return None
 
     @property
     def current_activity_name(self) -> Union[str, None]:
-        return self.get_state(self.remote, attribute='current_activity')
+        """Get the name of the current activity."""
+        return self.get_state(self.remote, attribute=CURRENT_ACTIVITY)
 
     @property
     def remote_is_off(self) -> bool:
+        """Return the power state of the remote control."""
         return self.current_device_id == -1
 
     def send_command(self, command: str, **kwargs: dict) -> None:
-        if 'device' in kwargs:
-            device_id = kwargs['device']
+        """Send a command to the remote."""
+        if CONF_DEVICE in kwargs:
+            device_id = kwargs[CONF_DEVICE]
         else:
             device_id = self.current_device_id
         self.log(device_id)
@@ -85,31 +128,42 @@ class RemoteAutomation(AppBase):
             'remote/send_command',
             entity_id=self.remote,
             device=device_id,
-            command=command
-        )
+            command=command)
 
 
 class SceneLights(AppBase):
-    def initialize(self) -> None:
-        super().initialize()
+    """Define a feature to change light based on the current activity."""
 
-        self.lights = self.entities['lights'].split(',')
-        self.transition_on = self.properties.get('transition_on', 2)
-        self.transition_off = self.properties.get('transition_off', 60)
-        self.scene_color_map = self.properties['scene_color']
-        self.scene_brightness_map = self.properties['scene_brightness']
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_ENTITIES: vol.Schema({
+            vol.Required(CONF_LIGHTS): vol_help.entity_id_list,
+        }, extra=vol.ALLOW_EXTRA),
+        CONF_PROPERTIES: vol.Schema({
+            vol.Required(CONF_SCENE_COLOR): str,
+            vol.Required(CONF_SCENE_BRIGHTNESS): str,
+            vol.Optional(CONF_SCENE_COLOR): dict,
+            vol.Optional(CONF_SCENE_BRIGHTNESS): dict,
+        }, extra=vol.ALLOW_EXTRA)
+    })
 
-        # change color on scene change
+    def configure(self) -> None:
+        """Configure."""
+        self.lights = self.entities[CONF_LIGHTS].split(',')
+        self.scene_color_map = self.properties[CONF_SCENE_COLOR]
+        self.scene_brightness_map = self.properties[CONF_SCENE_BRIGHTNESS]
+        self.transition_on = self.properties.get(CONF_TRANSITION_ON, 2)
+        self.transition_off = self.properties.get(CONF_TRANSITION_OFF, 60)
+
         self.listen_state(
             self.scene_changed,
             self.remote_app.remote,
-            attribute='current_activity',
-            constrain_app_enabled=1
-        )
+            attribute=CURRENT_ACTIVITY,
+            constrain_app_enabled=1)
 
     def scene_changed(self, entity: Union[str, dict], attribute: str,
                       old: str, new: str, kwargs: dict) -> None:
-        if self.scene_name(new) == 'poweroff':
+        """Change the light when the acitivity changed."""
+        if self.scene_name(new) == POWER_OFF:
             for light in self.lights:
                 self.turn_off(light, transition=self.transition_off)
         else:
@@ -118,29 +172,32 @@ class SceneLights(AppBase):
                     light,
                     brightness=self.brightness(new),
                     color_name=self.light_color(new),
-                    transition=self.transition_on
-                )
+                    transition=self.transition_on)
 
     def brightness(self, scene: str) -> float:
+        """Get the specified brightness for the given scene."""
         brightness_pct = self.scene_brightness_map.get(self.scene_name(scene), 75)
         return 255 / 100 * int(brightness_pct)
 
     def light_color(self, scene: str) -> str:
+        """Get the specified light color for the given scene."""
         return self.scene_color_map.get(self.scene_name(scene), 'white')
 
     def scene_name(self, scene: str) -> str:
+        """Convert the scene name to the correct format."""
         return scene.replace(' ', '_').lower()
 
-    def brighten_on_pause(self):
+    def brighten_lights(self):
+        """Brighten lights."""
         for light in self.lights:
             self.turn_on(
                 light,
                 brightness=200,
                 color_name='white',
-                transition=2
-            )
+                transition=2)
 
-    def dim_on_play(self):
+    def dim_lights(self):
+        """Dim lights."""
         current_activity = self.remote_app.current_activity_name
 
         for light in self.lights:
@@ -148,45 +205,47 @@ class SceneLights(AppBase):
                 light,
                 brightness=self.brightness(current_activity),
                 color_name=self.light_color(current_activity),
-                transition=2
-            )
+                transition=2)
 
 
 class PhoneCall(AppBase):
-    def initialize(self) -> None:
-        super().initialize()
-        self.device_id = self.properties['device_id']
+    """Define a feature to pause current activity on phone call."""
+
+    def configure(self) -> None:
+        """Configure."""
         for person, attribute in PERSONS.items():
             self.listen_state(
                 self.phone_call_changed,
-                attribute['phone_call_bool'],
-                person=person
-            )
+                attribute[PHONE_CALL_BOOL],
+                person=person)
 
     def phone_call_changed(self, entity: Union[str, dict], attribute: str,
                            old: str, new: str, kwargs: dict) -> None:
+        """Pause/play and brighten/dim when phone call is ongoing/ended."""
         if (not self.remote_app.remote_is_off and
-                kwargs['person'] in self.presence_app.persons_home):
-            if new == 'on':
-                self.remote_app.send_command('Pause')
-                self.scene_lights_app.brighten_on_pause()
+                kwargs[PERSON] in self.presence_app.persons_home):
+            if new == ON:
+                self.remote_app.send_command(PAUSE)
+                self.scene_lights_app.brighten_lights()
             else:
-                self.remote_app.send_command('Play')
-                self.scene_lights_app.dim_on_play()
+                self.remote_app.send_command(PLAY)
+                self.scene_lights_app.dim_lights()
 
 
 class BrightenLightOnPause(AppBase):
-    def initialize(self) -> None:
-        super().initialize()
+    """Define a feature to dim/brighten light on play/pause."""
 
-        # brighten/dim when pause/play is pressed
-        self.listen_event(self.button_pressed, 'roku_command')
+    def configure(self) -> None:
+        """Configure."""
+        self.listen_event(self.button_pressed, ROKU_COMMAND)
 
-    def button_pressed(self, event_name: str, data: dict, kwargs: dict) -> None:
-        key = data['key']
+    def button_pressed(self, event_name: str,
+                       data: dict, kwargs: dict) -> None:
+        """Dim/brighten on button press."""
+        key = data[KEY]
         self.log(key)
-        if key == 'Home':
-            self.scene_lights_app.brighten_on_pause()
-        elif key == 'Play':
-            self.scene_lights_app.dim_on_play()
+        if key == HOME:  # Home = Pause
+            self.scene_lights_app.brighten_lights()
+        elif key == PLAY:
+            self.scene_lights_app.dim_lights()
 

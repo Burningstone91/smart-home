@@ -1,0 +1,90 @@
+notifiy_on_device_offline:
+  module: system_monitor
+  class: NotifyOnDeviceOffline
+  dependencies:
+    - notification_app
+  entities:
+    tracking_devices:
+      - switch.appdaemon
+      - switch.grafana
+      - switch.ha_dockermon
+      - switch.home_assistant
+      - switch.influxdb
+      - switch.mqtt_broker
+      - switch.deconz
+      - switch.letsencrypt
+      - switch.glances
+      - device_tracker.pi_schlafzimmer
+      - device_tracker.pi_kleiderzimmer
+      - device_tracker.pi_wohnzimmer
+      - device_tracker.pi_buero
+      - device_tracker.roomba
+      - device_tracker.harmony_hub
+      - device_tracker.dehumidifier
+      - device_tracker.sound_office
+      - device_tracker.sound_livingroom
+      - device_tracker.sound_bedroom
+      - zwave.aeotec_zw090_zstick_gen5_eu
+      - zwave.aeotec_zw100_multisensor_6
+      - zwave.aeotec_zw100_multisensor_6_10
+      - zwave.aeotec_zw100_multisensor_6_11
+      - zwave.aeotec_zw100_multisensor_6_4
+      - sensor.fenster_wohnzimmer
+      - sensor.tuer_wohnzimmer_balkon
+      - sensor.fenster_buero
+      - sensor.fenster_bad_gross
+      - sensor.fenster_ankleidezimmer
+      - sensor.fenster_schlafzimmer
+      - sensor.tuer_kueche_balkon
+      - sensor.fenster_kueche
+      - sensor.tuer_wohnung
+      - sensor.tuer_buero
+      - sensor.tuer_ankleidezimmer
+      - sensor.tuer_bad_gross
+      - sensor.tuer_bad_klein
+      - sensor.tuer_schlafzimmer
+      - sensor.tuer_reduit
+  notifications:
+    targets: Dimitri
+
+notify_on_appdaemon_log_error:
+  module: system_monitor
+  class: NotifyOnAppdaemonLogError
+  dependencies:
+    - notification_app
+  notifications:
+    targets: Dimitri
+
+notify_on_low_battery:
+  module: system_monitor
+  class: NotifyOnLowBattery
+  dependencies:
+    - notification_app
+  entities:
+    tracking_devices:
+      - sensor.bad_klein_multisensor_battery
+      - sensor.dimmschalter_ankleidezimmer_battery_level
+      - sensor.dimmschalter_buero_battery_level
+      - sensor.dimmschalter_schlafzimmer_battery_level
+      - sensor.dimmschalter_schlafzimmer_master_battery_level
+      - sensor.dimmschalter_wohnzimmer_battery_level
+  properties:
+    battery_low_threshold: 15
+  notifications:
+    targets: Dimitri
+
+check_appdaemon_version_installed:
+  module: system_monitor
+  class: CheckAppDaemonVersionInstalled
+
+notify_on_new_version:
+  module: system_monitor
+  class: NotifyOnNewVersion
+  dependencies:
+    - notification_app
+  entities:
+    available:
+      - sensor.appdaemon_available
+      - sensor.hass_available
+  notifications:
+    targets: Dimitri

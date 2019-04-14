@@ -1,13 +1,18 @@
   resources:
-    - url: /local/plan-coordinates.js
+    - url: /local/lovelace_plugins/plan-coordinates.js
       type: js
-    - url: /local/kiosk.js
+    - url: /local/lovelace_plugins/kiosk.js
       type: js
-    - url: /local/grid-layout.js?v=0
-      type: module    
+    - url: /local/lovelace_plugins/grid-layout.js?v=0
+      type: module
+    - url: /local/lovelace_plugins/auto-entities.js?v=1
+      type: js
+    - url: /local/lovelace_plugins/card-tools.js?v=1
+      type: js  
+
+##############################################################################
 
   views:
-
   - title: Home
     icon: mdi:home-assistant
     panel: true
@@ -17,22 +22,75 @@
         row_definitions: 1fr 10fr 10fr 1fr
         card_margin: 4
         cards:
+          - type: glance
+            column:
+              start: 2
+              width: 1
+            row:
+              start: 3
+              height: 1
+            config:
+              title: Modus
+              show_header_toggle: false
+              entities:
+                - input_boolean.guest_mode
+                - input_boolean.cleaning_mode
+                - input_boolean.sleep_mode
+              columns: 3
           - type: entities
             column:
               start: 4
               width: 1
             row:
               start: 2
-              end: 3
+              height: 1
             config:
+              title: Sabrina
+              show_header_toggle: false
               entities:
-                - sensor.dimitri_home
                 - sensor.sabrina_home
-                - device_tracker.dimitri_phone
-                - device_tracker.sabrina_phone
+                - entity: input_select.sabrina_presence
+                  icon: mdi:walk
+                - entity: device_tracker.sabrina_phone
+                  name: Handy
+                  icon: mdi:cellphone-iphone
+                - input_boolean.ongoing_call_sabrina
+                - input_boolean.charging_phone_sabrina
+                - entity: sensor.sabrina
+                  name: "Schlüssel"
+                  icon: mdi:key
               show_state: false
               show_name: false
-              columns: 2
+              columns: 1
+          - type: entities
+            column:
+              start: 4
+              width: 1
+            row:
+              start: 3
+              height: 1
+            config:
+              title: Dimitri
+              show_header_toggle: false
+              entities:
+                - sensor.dimitri_home
+                - entity: input_select.dimitri_presence
+                  icon: mdi:walk
+                - entity: device_tracker.dimitri_phone
+                  name: Handy
+                  icon: mdi:cellphone-iphone
+                - entity: sensor.dimitri
+                  name: "Schlüssel"
+                  icon: mdi:key
+                - entity: sensor.dimitri_wecker_uhrzeit
+                  name: Wecker
+                  icon: mdi:alarm
+                - input_boolean.ongoing_call_dimitri
+                - input_boolean.charging_phone_dimitri
+                
+              show_state: false
+              show_name: false
+              columns: 1
           - type: entities
             column:
               start: 3
@@ -41,22 +99,234 @@
               start: 2
               height: 1
             config:
+              title: Wohnung
+              show_header_toggle: false
               entities:
                 - input_select.alarm_state
                 - sensor.tuer_wohnung
                 - input_select.house_presence
               show_name: false
               columns: 1
-          - type: weather-forecast
+          - type: media-control
             column:
-              start: 2
+              start: 3
               width: 1
             row:
-              start: 2
+              start: 3
               height: 1
             config:
-              entity: weather.dark_sky
+              title: Spotify
+              show_header_toggle: false
+              entity: media_player.spotify
 
+##############################################################################
+
+  - title: Automatisierungen
+    icon: mdi:robot
+    panel: true
+    cards:
+      - type: horizontal-stack
+        cards: 
+        - type: vertical-stack
+          cards:
+          - type: entities
+            title: Basis Apps
+            show_header_toggle: false
+            entities:
+              - input_boolean.climate_app
+              - input_boolean.remote_app
+              - input_boolean.media_player_app
+              - input_boolean.notification_app
+              - input_boolean.presence_app
+              - input_boolean.security_app
+              - input_boolean.vacuum_app
+          - type: entities
+            title: Sicherheit Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.arm_when_everyone_gone
+              - input_boolean.disarm_when_someone_home
+              - input_boolean.arm_disarm_when_cleaning
+              - input_boolean.notify_on_alarm_change
+              - input_boolean.last_motion
+          - type: entities
+            title: System Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.notify_on_device_offline
+              - input_boolean.notify_on_appdaemon_log_error
+              - input_boolean.notify_on_low_battery
+              - input_boolean.check_appdaemon_version_installed
+              - input_boolean.notify_on_new_version
+        - type: vertical-stack
+          cards:
+          - type: entities
+            title: Staubsauger Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.notify_when_vacuum_bin_full
+          - type: entities
+            title: Klima Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.notify_on_high_humidity
+              - input_boolean.notify_on_window_open
+          - type: entities
+            title: Büroautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_office
+              - input_boolean.dimmer_switch_buero
+          - type: entities
+            title: Wohnzimmerautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.scene_light_app
+              - input_boolean.dimmer_switch_wohnzimmer
+              - input_boolean.phone_call
+              - input_boolean.brighten_light_pause
+        - type: vertical-stack
+          cards:  
+          - type: entities
+            title: Schlafzimmerautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_bedroom
+              - input_boolean.dimmer_switch_schlafzimmer
+              - input_boolean.sleep_app
+              - input_boolean.turn_on_sleep_mode_forgot
+              - input_boolean.turn_off_sleep_mode_forgot
+              - input_boolean.turn_on_dehumidifier_on_departure
+          - type: entities
+            title: Ankleidezimmer Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_dress_room
+              - input_boolean.dimmer_switch_ankleidezimmer
+        
+
+##############################################################################
+
+  - title: Räume
+    icon: mdi:home-assistant
+    panel: true
+    cards:
+      - type: vertical-stack
+        cards:
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Büro
+          filter:
+            include:
+              - area: "Büro"
+              - entity_id: device_tracker.pi_buero
+              - entity_id: device_tracker.dimitri_pc
+              - entity_id: device_tracker.sabrina_pc
+              - entity_id: media_player.buero_musik_main
+              - entity_id: light.buero
+            exclude:
+              - name: "*Alarm Level*"
+              - name: "*Alarm Type*"
+              - name: "*Burglar*"
+              - name: "*SourceNodeId*"
+              - name: "*Ultraviolet*"
+              - entity_id: light.decke_1_buero
+              - entity_id: light.decke_2_buero
+              - entity_id: light.decke_3_buero
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Wohnzimmer
+          filter:
+            include:
+              - area: "Wohnzimmer"
+              - entity_id: device_tracker.pi_wohnzimmer
+              - entity_id: vacuum.roomba
+              - entity_id: remote.wohnzimmer
+              - entity_id: media_player.denon_avr_wohnzimmer
+              - entity_id: media_player.kodi_wohnzimmer
+              - entity_id: light.wohnzimmer
+            exclude:
+              - name: "*Alarm Level*"
+              - name: "*Alarm Type*"
+              - name: "*Burglar*"
+              - name: "*SourceNodeId*"
+              - name: "*Ultraviolet*"
+              - entity_id:  light.stehlampe_wohnzimmer_hinten
+              - entity_id:  light.stehlampe_wohnzimmer_vorne
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Schlafzimmer
+          filter:
+            include:
+              - area: "Schlafzimmer"
+              - entity_id: switch.schalter_entfeuchter
+              - entity_id: light.decke_schlafzimmer
+              - entity_id: light.schlafzimmer
+            exclude:
+              - name: "*Alarm Level*"
+              - name: "*Alarm Type*"
+              - name: "*Burglar*"
+              - name: "*SourceNodeId*"
+              - name: "*Ultraviolet*"
+              - entity_id: light.decke_1_schlafzimmer
+              - entity_id: light.decke_2_schlafzimmer
+              - entity_id: light.decke_3_schlafzimmer
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Ankleidezimmer
+          filter:
+            include:
+              - area: "Ankleidezimmer"
+              - entity_id: light.ankleidezimmer
+            exclude:
+              - name: "*Alarm Level*"
+              - name: "*Alarm Type*"
+              - name: "*Burglar*"
+              - name: "*SourceNodeId*"
+              - name: "*Ultraviolet*"
+              - entity_id: light.decke_1_ankleidezimmer
+              - entity_id: light.decke_2_ankleidezimmer
+              - entity_id: light.decke_3_ankleidezimmer
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: kleines Bad
+          filter:
+            include:
+              - area: "Bad klein"
+            exclude:
+              - name: "*Alarm Level*"
+              - name: "*Alarm Type*"
+              - name: "*Burglar*"
+              - name: "*SourceNodeId*"
+              - name: "*Ultraviolet*"
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Grosses Bad
+          filter:
+            include:
+              - area: "Bad gross"
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Küche
+          filter:
+            include:
+              - area: "Küche"
+        - type: custom:auto-entities
+          card:
+            type: glance
+            title: Reduit
+          filter:
+            include:
+              - area: "Reduit"
+
+##############################################################################
 
   - title: System
     icon: mdi:server-network
@@ -64,66 +334,183 @@
     cards:
       - type: horizontal-stack
         cards:
-        - type: entities
-          title: Batterien
-          show_header_toggle: false
-          entities:
-            - sensor.bad_klein_multisensor_battery
-            - sensor.dimmschalter_ankleidezimmer_battery_level
-            - sensor.dimmschalter_buero_battery_level
-            - sensor.dimmschalter_schlafzimmer_battery_level
-            - sensor.dimmschalter_schlafzimmer_master_battery_level
-            - sensor.dimmschalter_wohnzimmer_battery_level
-        - type: entities
-          title: Presece Raspberry Pi
-          show_header_toggle: false
-          entities:
-            - device_tracker.pi_schlafzimmer
-            - device_tracker.pi_kleiderzimmer
-            - device_tracker.pi_wohnzimmer
-            - device_tracker.pi_buero
-        - type: entities
-          title: Smart Home Devices
-          show_header_toggle: false
-          entities:
-            - device_tracker.roomba
-            - device_tracker.harmony_hub
-            - device_tracker.dehumidifier
-        - type: entities
-          title: Docker
-          show_header_toggle: false
-          entities:
-            - switch.appdaemon
-            - switch.grafana
-            - switch.ha_dockermon
-            - switch.home_assistant
-            - switch.influxdb
-            - switch.mqtt_broker
-            - switch.deconz
-            - switch.letsencrypt
-            - switch.glances
-        - type: entities
-          title: NAS
-          show_header_toggle: false
-          entities:
-            - sensor.cpu_load_total
-            - sensor.memory_usage_real
-            - sensor.used_space_volume_1
-            - sensor.volume_used_volume_1
-            - sensor.status_sda
-            - sensor.temperature_sda
-            - sensor.status_sdb
-            - sensor.temperature_sdb
-        - type: entities
-          title: HASS Host
-          show_header_toggle: false
-          entities:
-            - sensor.nuc_cpu_load
-            - sensor.nuc_ram_used_2
-            - sensor.nuc_ram_used
-            - sensor.nuc_disk_used_2
-            - sensor.nuc_disk_used
-
+        - type: vertical-stack
+          cards:
+          - type: glance
+            title: Z-Wave
+            show_header_toggle: false
+            entities:
+              - zwave.aeotec_zw090_zstick_gen5_eu
+              - zwave.aeotec_zw100_multisensor_6
+              - zwave.aeotec_zw100_multisensor_6_10
+              - zwave.aeotec_zw100_multisensor_6_11
+              - zwave.aeotec_zw100_multisensor_6_4 
+          - type: glance
+            title: Presence Raspberry Pi
+            show_header_toggle: false
+            entities:
+              - entity: device_tracker.pi_schlafzimmer
+                name: Pi Schlafzimmer
+                state_image:
+                  "home": mdi:checkbox-marked-circle
+                  "not_home": mdi:alert-circle
+              - device_tracker.pi_kleiderzimmer
+              - device_tracker.pi_wohnzimmer
+              - device_tracker.pi_buero
+          - type: glance
+            title: Smart Home Devices
+            show_header_toggle: false
+            entities:
+              - device_tracker.roomba
+              - device_tracker.harmony_hub
+              - device_tracker.dehumidifier
+              - device_tracker.sound_office
+              - device_tracker.sound_livingroom
+              - device_tracker.sound_bedroom
+          - type: entities
+            title: Batterien
+            show_header_toggle: false
+            entities:
+              - entity: sensor.bad_klein_multisensor_battery
+                name: Bad klein Multisensor
+              - entity: sensor.dimmschalter_ankleidezimmer_battery_level
+                name: Hue Dimmer Ankleidezimmer
+              - entity: sensor.dimmschalter_buero_battery_level
+                name: Hue Dimmer Büro
+              - entity: sensor.dimmschalter_schlafzimmer_battery_level
+                name: Hue Dimmer Schlafzimmer
+              - entity: sensor.dimmschalter_schlafzimmer_master_battery_level
+                name: Hue Dimmer Schlafzimmer Master
+              - entity: sensor.dimmschalter_wohnzimmer_battery_level
+                name: Hue Dimmer Wohnzimmer
+        - type: vertical-stack
+          cards: 
+          - type: glance
+            title: NAS
+            show_header_toggle: false
+            entities:
+              - entity: sensor.used_space_volume_1
+                name: Used
+              - entity: sensor.status_sda
+                name: HDD 1
+              - entity: sensor.temperature_sda
+                name: Temp 1
+              - entity: sensor.status_sdb
+                name: HDD 2
+              - entity: sensor.temperature_sdb
+                name: Temp 2
+          - type: horizontal-stack
+            cards: 
+            - type: gauge
+              name: NAS CPU used
+              entity: sensor.cpu_load_total
+              severity:
+                  green: 0
+                  yellow: 40
+                  red: 80
+            - type: gauge
+              name: NAS RAM used
+              entity: sensor.memory_usage_real
+              severity:
+                  green: 0
+                  yellow: 40
+                  red: 80
+            - type: gauge
+              name: NAS Volume used
+              entity: sensor.volume_used_volume_1
+              severity:
+                  green: 0
+                  yellow: 40
+                  red: 80
+          - type: history-graph
+            entities:
+              - entity: sensor.cpu_load_total
+                name: CPU Load %
+              - entity: sensor.memory_usage_real
+                name: RAM Load %
+          - type: entities
+            title: Netzwerk
+            show_header_toggle: false
+            entities:
+              - entity: sensor.speedtest_download
+                name: Download Speed
+                icon: mdi:download-network
+              - entity: sensor.speedtest_upload
+                name: Upload Speed
+                icon: mdi:upload-network
+              - entity: sensor.speedtest_ping
+                name: Ping
+        - type: vertical-stack
+          cards:
+            - type: glance
+              title: Docker Host
+              show_header_toggle: false
+              entities:
+                - entity: sensor.hass_uptime
+                  name: HASS uptime
+                - entity: sensor.nuc_ram_used
+                  name: RAM used
+            - type: horizontal-stack
+              cards: 
+              - type: gauge
+                name: NUC CPU used
+                entity: sensor.nuc_cpu_load
+                min: 0
+                max: 1
+                unit: '%'
+                severity:
+                  green: 0
+                  yellow: 40
+                  red: 80
+              - type: gauge
+                name: NUC RAM used
+                entity: sensor.nuc_ram_used_2
+                severity:
+                  green: 0
+                  yellow: 40
+                  red: 80
+              - type: gauge
+                name: NUC volume used
+                entity: sensor.nuc_disk_used
+                severity:
+                  green: 0
+                  yellow: 40
+                  red: 80
+            - type: history-graph
+              entities:
+                - entity: sensor.nuc_cpu_load
+                  name: CPU Load %
+                - entity: sensor.nuc_ram_used_2
+                  name: RAM Load %
+        - type: vertical-stack
+          cards:
+            - type: glance
+              title: Docker Services
+              show_header_toggle: false
+              show_state: false
+              entities:
+                - switch.appdaemon
+                - switch.grafana
+                - switch.dockermon
+                - switch.hass
+                - switch.influxdb
+                - switch.mqtt
+                - switch.deconz
+                - switch.nginx
+                - switch.glances
+            - type: entities
+              show_header_toggle: false
+              show_icon: false
+              entities:
+                - entity: sensor.hass_available
+                  icon: mdi:home-assistant
+                - entity: sensor.hass_installed
+                  icon: mdi:home-assistant
+                - entity: sensor.appdaemon_available
+                  icon: mdi:language-python
+                - entity: sensor.appdaemon_installed
+                  icon: mdi:language-python
+##############################################################################
 
   - title: Floorplan
     icon: mdi:home-heart

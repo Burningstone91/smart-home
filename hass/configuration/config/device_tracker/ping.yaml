@@ -1,4 +1,5 @@
 - platform: ping
+  interval_seconds: 120
   hosts:
     sabrina_phone: !secret sabrina_handy_ip
     dimitri_phone: !secret dimitri_handy_ip
@@ -11,3 +12,6 @@
     roomba: !secret roomba_ip
     harmony_hub: !secret harmony_ip
     dehumidifier: !secret switch_dehumidifier_ip
+    sound_office: !secret yamaha_ip
+    sound_livingroom: !secret denon_living_room_ip
+    sound_bedroom: !secret heos_bedroom_ip

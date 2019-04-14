@@ -99,7 +99,7 @@ turn_on_sleep_mode_forgot:
     switch: input_boolean.sleep_mode
   properties:
     action_type: toggle
-    schedule_time: "13:30:00"
+    schedule_time: "03:00:00"
     state: "on"
 
 turn_off_sleep_mode_forgot:

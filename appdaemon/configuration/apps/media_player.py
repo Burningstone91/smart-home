@@ -47,8 +47,7 @@ class MediaPlayerAutomation(AppBase):
             playlist,
             source,
             volume=kwargs.get(VOLUME),
-            shuffle=kwargs.get(SHUFFLE)
-        )
+            shuffle=kwargs.get(SHUFFLE))
 
         self.set_source(media_item.media_player, media_item.source)
         self.set_volume(media_item.media_player, media_item.volume)

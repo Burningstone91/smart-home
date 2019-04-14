@@ -20,11 +20,11 @@ lovelace:
 # configuration for components
 automation: !include config/automations.yaml
 device_tracker: !include_dir_merge_list config/device_tracker
-group: !include_dir_merge_named config/group
 input_boolean: !include_dir_merge_named config/input_boolean
 influxdb: !include config/components/influxdb.yaml
 mqtt: !include config/components/mqtt.yaml
 notify: !include config/components/notify.yaml
+speedtestdotnet: !include config/components/speedtestdotnet.yaml
 tts: !include config/components/tts.yaml
 weather: !include config/components/darksky.yaml
 zwave: !include config/components/zwave.yaml

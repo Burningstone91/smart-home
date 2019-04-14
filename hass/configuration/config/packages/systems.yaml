@@ -23,6 +23,30 @@ sensor:
       - 'memory_use'
       - 'memory_use_percent'
 
+  - platform: uptime
+    name: HASS uptime
+    unit_of_measurement: hours
+    
+  # versions installed and available
+  - platform: version
+    name: HASS Available
+    source: docker
+    beta: true
+
+  - platform: version
+    name: HASS Installed
+
+  - platform: command_line
+    name: AppDaemon Available
+    command: >-
+      curl -L
+      -H "User-Agent: Home Assistant"
+      -H "Content-Type: application/json"
+      https://pypi.python.org/pypi/appdaemon/json
+    value_template: '{{ value_json.info.version }}'
+    scan_interval: 3600
+
+
 switch:
   - platform: rest
     username: !secret ha-dockermon_user
@@ -46,7 +70,7 @@ switch:
     username: !secret ha-dockermon_user
     password: !secret ha-dockermon_key
     resource: http://192.168.0.5:8126/container/ha-dockermon
-    name: ha-dockermon
+    name: Dockermon
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
     is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
@@ -55,7 +79,7 @@ switch:
     username: !secret ha-dockermon_user
     password: !secret ha-dockermon_key
     resource: http://192.168.0.5:8126/container/hass
-    name: Home Assistant
+    name: HASS
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
     is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
@@ -73,7 +97,7 @@ switch:
     username: !secret ha-dockermon_user
     password: !secret ha-dockermon_key
     resource: http://192.168.0.5:8126/container/mqtt
-    name: MQTT Broker
+    name: MQTT
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
     is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
@@ -91,7 +115,7 @@ switch:
     username: !secret ha-dockermon_user
     password: !secret ha-dockermon_key
     resource: http://192.168.0.5:8126/container/letsencrypt
-    name: Letsencrypt
+    name: NGINX
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
     is_on_template: '{{ value_json is not none and value_json.state == "running" }}' 

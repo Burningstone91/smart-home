@@ -20,3 +20,4 @@ letsencrypt/
 mqtt/
 appdaemon/configuration/logs/
 appdaemon/configuration/apps/__pycache__/
+shared/

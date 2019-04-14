@@ -13,6 +13,7 @@ CONF_SCHEDULE_TIME = 'schedule_time'
 
 # Presence config keys
 CONF_PRESENCE_STATE = 'presence_state'
+NOT_HOME = 'not_home'
 
 # Person config keys
 CONF_SPECIFIC_PERSON = 'specific_person'

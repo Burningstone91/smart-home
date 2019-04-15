@@ -7,12 +7,12 @@ notifiy_on_device_offline:
     tracking_devices:
       - switch.appdaemon
       - switch.grafana
-      - switch.ha_dockermon
-      - switch.home_assistant
+      - switch.dockermon
+      - switch.hass
       - switch.influxdb
-      - switch.mqtt_broker
+      - switch.mqtt
       - switch.deconz
-      - switch.letsencrypt
+      - switch.nginx
       - switch.glances
       - device_tracker.pi_schlafzimmer
       - device_tracker.pi_kleiderzimmer
@@ -29,21 +29,21 @@ notifiy_on_device_offline:
       - zwave.aeotec_zw100_multisensor_6_10
       - zwave.aeotec_zw100_multisensor_6_11
       - zwave.aeotec_zw100_multisensor_6_4
-      - sensor.fenster_wohnzimmer
-      - sensor.tuer_wohnzimmer_balkon
-      - sensor.fenster_buero
-      - sensor.fenster_bad_gross
-      - sensor.fenster_ankleidezimmer
-      - sensor.fenster_schlafzimmer
-      - sensor.tuer_kueche_balkon
-      - sensor.fenster_kueche
-      - sensor.tuer_wohnung
-      - sensor.tuer_buero
-      - sensor.tuer_ankleidezimmer
-      - sensor.tuer_bad_gross
-      - sensor.tuer_bad_klein
-      - sensor.tuer_schlafzimmer
-      - sensor.tuer_reduit
+      - binary_sensor.fenster_wohnzimmer
+      - binary_sensor.tuer_wohnzimmer_balkon
+      - binary_sensor.fenster_buero
+      - binary_sensor.fenster_bad_gross
+      - binary_sensor.fenster_ankleidezimmer
+      - binary_sensor.fenster_schlafzimmer
+      - binary_sensor.tuer_kueche_balkon
+      - binary_sensor.fenster_kueche
+      - binary_sensor.tuer_wohnung
+      - binary_sensor.tuer_buero
+      - binary_sensor.tuer_ankleidezimmer
+      - binary_sensor.tuer_bad_gross
+      - binary_sensor.tuer_bad_klein
+      - binary_sensor.tuer_schlafzimmer
+      - binary_sensor.tuer_reduit
   notifications:
     targets: Dimitri
 

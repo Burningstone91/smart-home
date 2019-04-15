@@ -109,9 +109,7 @@ class NotifyOnAppdaemonLogError(AppBase):
 
     def new_log(self, name: str, ts: str, level: str, message: str) -> None:
         """Send notification when Appdaemon log shows an error."""
-        self.log(level)
         if level in CRITICAL_LOG_STATES:
-            self.log(name)
             self.notification_app.notify(
                 kind='single',
                 level='emergency',

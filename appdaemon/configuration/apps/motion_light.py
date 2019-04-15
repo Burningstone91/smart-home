@@ -158,7 +158,7 @@ class MotionLightAutomation(AppBase):
             self.handles.pop(LIGHT_TIMER)
         self.handles[LIGHT_TIMER] = self.run_in(self.turn_light_off,
                                                 self.delay)
-        self.log(f"Ein Timer von {round(self.delay)} Minuten "
+        self.log(f"Ein Timer von {round(self.delay / 60)} Minuten "
                  f"wurde im {self.room_name} eingeschaltet.")
 
     @property

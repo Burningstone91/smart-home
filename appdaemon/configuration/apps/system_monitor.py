@@ -13,7 +13,6 @@ from constants import (
 )
 from house_config import PERSONS
 
-# notification for new version available hass, appdaemon, ha-dockermon
 
 CONF_TRACKING_DEVICES = 'tracking_devices'
 

@@ -24,6 +24,8 @@ CONF_STATE = 'state'
 TOGGLE_STATES = ('on', 'off', 'open', 'closed')
 ON = 'on'
 OFF = 'off'
+OPEN = 'offen'
+CLOSED = 'geschlossen'
 
 # Light config keys
 CONF_LIGHTS = 'lights'

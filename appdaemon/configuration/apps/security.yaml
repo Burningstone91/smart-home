@@ -2,9 +2,29 @@ security_app:
   module: security
   class: SecurityAutomation
   entities:
-    motion: binary_sensor.bewegung_buero,binary_sensor.bewegung_schlafzimmer,binary_sensor.bewegung_ankleidezimmer,binary_sensor.bewegung_bad_klein
-    other_security: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche,sensor.tuer_wohnung,sensor.tuer_buero,sensor.tuer_ankleidezimmer,sensor.tuer_bad_gross,sensor.tuer_bad_klein,sensor.tuer_schlafzimmer,sensor.tuer_reduit
-    alarm_lights: light.ankleidezimmer
+    motion_sensors:
+      - binary_sensor.bewegung_buero
+      - binary_sensor.bewegung_schlafzimmer
+      - binary_sensor.bewegung_ankleidezimmer
+      - binary_sensor.bewegung_bad_klein
+    door_sensors:
+      - sensor.fenster_wohnzimmer
+      - sensor.tuer_wohnzimmer_balkon
+      - sensor.fenster_buero
+      - sensor.fenster_bad_gross
+      - sensor.fenster_ankleidezimmer
+      - sensor.fenster_schlafzimmer
+      - sensor.tuer_kueche_balkon
+      - sensor.fenster_kueche
+      - sensor.tuer_wohnung
+      - sensor.tuer_buero
+      - sensor.tuer_ankleidezimmer
+      - sensor.tuer_bad_gross
+      - sensor.tuer_bad_klein
+      - sensor.tuer_schlafzimmer
+      - sensor.tuer_reduit
+    alarm_lights:
+      - light.ankleidezimmer
 
 arm_when_everyone_gone:
   module: security
@@ -37,8 +57,20 @@ notify_on_alarm_change:
   notifications:
     targets: Dimitri
 
+notify_on_bad_login_attempt:
+  module: security
+  class: NotifyOnBadLoginAttempt
+  dependencies:
+    - notification_app
+  notifications:
+    targets: Dimitri
+
 last_motion:
   module: security
   class: LastMotion
   entities:
-    motion_sensors: binary_sensor.bewegung_ankleidezimmer,binary_sensor.bewegung_bad_klein,binary_sensor.bewegung_buero,binary_sensor.bewegung_schlafzimmer
+    motion_sensors:
+      - binary_sensor.bewegung_ankleidezimmer
+      - binary_sensor.bewegung_bad_klein
+      - binary_sensor.bewegung_buero
+      - binary_sensor.bewegung_schlafzimmer

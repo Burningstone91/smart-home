@@ -1,10 +1,16 @@
+"""Define automations for the vacuum cleaner."""
+
 from enum import Enum
 from typing import Union
 
-from appbase import AppBase
-from house_config import HOUSE, MODES
+import voluptuous as vol
 
-BIN_FULL = 'bin_full'
+import voloptuous_helper as vol_help
+from appbase import AppBase, APP_SCHEMA
+from constants import (
+    CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_PROPERTIES, CONF_TARGETS
+)
+from house_config import HOUSE, MODES, PERSONS
 
 
 ##############################################################################
@@ -23,59 +29,82 @@ BIN_FULL = 'bin_full'
 ##############################################################################
 
 
+BIN_FULL = 'bin_full'
+CONF_CLEANING_TIME = 'cleaning_time'
+CLEANING_MODE = 'cleaning_mode'
+VACUUM = 'vacuum'
+STATUS = 'status'
+PRESENCE_STATE = 'presence_state'
+
+
 class VacuumAutomation(AppBase):
+    """Define a feature for scheduled cleaning cycle including
+       cancellation when someone arrives home."""
+
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_ENTITIES: vol.Schema({
+            vol.Required(VACUUM): vol_help.entity_id,
+        }, extra=vol.ALLOW_EXTRA),
+        CONF_PROPERTIES: vol.Schema({
+            vol.Optional(CONF_CLEANING_TIME): str,
+        }, extra=vol.ALLOW_EXTRA)
+    })
+
     class VacuumState(Enum):
+        """Define an enum for vacuum states."""
+
         charging = 'Charging'
         running = 'Running'
         returning = 'User Docking'
         stuck = 'Stuck'
 
-    def initialize(self) -> None:
-        super().initialize()
+    def configure(self) -> None:
+        """Configure."""
         self.started_by_app = False
         cleaning_time = self.parse_time(
-            self.properties.get('cleaning_time', '11:00:00'))
-        
-        if 'vacuum' in self.entities:
-            self.vacuum = self.entities['vacuum']
-            # scheduled clean cycle
-            self.run_daily(self.start_cleaning,
-                           cleaning_time,
-                           constrain_app_enabled=1)
+            self.properties.get(CONF_CLEANING_TIME, '11:00:00'))
 
-            # cycle finished
-            self.listen_state(self.cleaning_finished,
-                              self.vacuum,
-                              attribute='status',
-                              old=self.VacuumState.returning.value,
-                              new=self.VacuumState.charging.value)
+        self.vacuum = self.entities[VACUUM]
+        # scheduled clean cycle
+        self.run_daily(self.start_cleaning,
+                       cleaning_time,
+                       constrain_app_enabled=1)
 
-            # cancel cycle if someone arrives home
-            self.listen_state(self.cancel_cleaning, HOUSE['presence_state'])
+        # cycle finished
+        self.listen_state(self.cleaning_finished,
+                          self.vacuum,
+                          attribute=STATUS,
+                          old=self.VacuumState.returning.value,
+                          new=self.VacuumState.charging.value)
 
-            # turn on/off cleaning mode when cleaning/finished cleaning
-            self.listen_state(self.set_cleaning_mode_input_boolean,
-                              self.vacuum,
-                              attribute='status')
-        else:
-            self.log("Kein Staubsauger konfiguriert, keine Aktion!")
+        # cancel cycle if someone arrives home
+        self.listen_state(self.cancel_cleaning, HOUSE[PRESENCE_STATE])
+
+        # turn on/off cleaning mode when cleaning/finished cleaning
+        self.listen_state(self.set_cleaning_mode_input_boolean,
+                          self.vacuum,
+                          attribute=STATUS)
 
     @property
     def vacuum_state(self) -> VacuumState:
+        """Return the current state of the vacuum cleaner."""
         return self.get_state(self.vacuum, attribute='status')
 
     def start_cleaning(self, kwargs: dict) -> None:
+        """Start the scheduled cleaning cycle."""
         self.call_service('vacuum/start_pause', entity_id=self.vacuum)
         self.started_by_app = True
         self.log("Pedro startet die Reinigung!")
 
     def cleaning_finished(self, entity: Union[str, dict], attribute: str, 
                           old: str, new: str, kwargs: dict) -> None:
+        """Deactive input boolean when cleaning cycle finished."""
         self.started_by_app = False
         self.log("Pedro hat die Reinigung beendet")
 
     def cancel_cleaning(self, entity: Union[str, dict], attribute: str,
                         old: str, new: str, kwargs: dict) -> None:
+        """Cancel the cleaning cycle when someone arrives home."""
         if ((not self.presence_app.noone_home and self.started_by_app) and 
                 self.vacuum_state == self.VacuumState.running.value):
             self.call_service('vacuum/return_to_base', entity_id=self.vacuum)
@@ -83,37 +112,47 @@ class VacuumAutomation(AppBase):
             self.log("Jemand ist gerade angekommen, beende Reiningung!")
 
     def set_cleaning_mode_input_boolean(self, entity: Union[str, dict],
-                                        attribute: str, old: str, new: str,
-                                        kwargs: dict) -> None:
+                                        attribute: str, old: str,
+                                        new: str, kwargs: dict) -> None:
+        """Set the input boolean for the cleaning mode"""
         if 'cleaning_mode' in MODES and old != new:
             if new == self.VacuumState.running.value:
-                self.turn_on(MODES['cleaning_mode'])
+                self.turn_on(MODES[CLEANING_MODE])
             elif new == self.VacuumState.charging.value:
-                self.turn_off(MODES['cleaning_mode'])
+                self.turn_off(MODES[CLEANING_MODE])
     
 
 class NotifyWhenBinFull(AppBase):
-    def initialize(self) -> None:
-        super().initialize()
+    """Define a feature to send a notification when the bin is full."""
 
-        # notify when the bin is full
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_ENTITIES: vol.Schema({
+            vol.Required(VACUUM): vol_help.entity_id,
+        }, extra=vol.ALLOW_EXTRA),
+        CONF_NOTIFICATIONS: vol.Schema({
+            vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
+        }, extra=vol.ALLOW_EXTRA),
+    })
+    
+    def configure(self) -> None:
+        """Configure."""
         self.listen_state(self.notify_bin_full,
                           self.vacuum_app.vacuum,
-                          attribute='bin_full',
+                          attribute=BIN_FULL,
                           old=False,
                           new=True,
                           constrain_app_enabled=1)
 
-        # stop notification when bin has been emptied
         self.listen_state(self.bin_emptied,
                           self.vacuum_app.vacuum,
-                          attribute='bin_full',
+                          attribute=BIN_FULL,
                           old=True,
                           new=False,
                           constrain_app_enabled=1)
 
     def notify_bin_full(self, entity: Union[str, dict], attribute: str, 
                         old: str, new: str, kwargs: dict) -> None:
+        """Send repeating notification that bin should be emptied."""
         self.handles[BIN_FULL] = self.notification_app.notify(
             kind='repeat',
             level='home',
@@ -125,6 +164,7 @@ class NotifyWhenBinFull(AppBase):
 
     def bin_emptied(self, entity: Union[str, dict], attribute: str, 
                     old: str, new: str, kwargs: dict) -> None:
+        """Cancel the notification when bin has been emptied."""
         if BIN_FULL in self.handles:
             self.handles.pop(BIN_FULL)()
             self.log("Abfalleimer geleert! Schalte Benachrichtigung aus")

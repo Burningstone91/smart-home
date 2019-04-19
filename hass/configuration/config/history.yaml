@@ -11,3 +11,4 @@ include:
     - device_tracker.sabrina_pc
     - input_select.last_motion
     - input_boolean.sleep_mode
+    - binary_sensor.dimitri_schlaft

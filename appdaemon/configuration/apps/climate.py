@@ -9,7 +9,7 @@ import voloptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_PROPERTIES,
-    CONF_TARGETS, EMERGENCY, HOME, SINGLE
+    CONF_TARGETS, EMERGENCY, HOME, OPEN, SINGLE
 )
 
 
@@ -37,9 +37,6 @@ CONF_WINDOW_SENSORS = 'window_sensors'
 CONF_HUMIDITY_SENSORS = 'humidity_sensors'
 CONF_THRESHOLDS = 'thresholds'
 CONF_HUMIDITY_ROOM = 'humidity_room'
-
-OPEN = 'offen'
-CLOSED = 'geschlossen'
 
 CONF_CHECK_INTERVAL = 'check_interval'
 

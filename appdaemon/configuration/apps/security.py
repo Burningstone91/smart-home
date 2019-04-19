@@ -1,8 +1,16 @@
+"""Define automations for home security system."""
+
 from enum import Enum
 from typing import Union
 
-from appbase import AppBase
-from house_config import HOUSE, MODES
+import voluptuous as vol
+
+import voloptuous_helper as vol_help
+from appbase import AppBase, APP_SCHEMA
+from constants import (
+    CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_TARGETS, ON, OPEN
+)
+from house_config import HOUSE, MODES, PERSONS
 
 
 ##############################################################################
@@ -19,52 +27,83 @@ from house_config import HOUSE, MODES
 #
 ##############################################################################
 
+ALARM_STATE = 'alarm_state'
+
+CONF_ALARM_LIGHTS = 'alarm_lights'
+CONF_MOTION_SENSORS = 'motion_sensors'
+CONF_DOOR_SENSORS = 'door_sensors'
+
+PRESENCE_STATE = 'presence_state'
+
+CLEANING_MODE = 'cleaning_mode'
+
+WRONG_ALARM = 'wrong_alarm'
+
 
 class SecurityAutomation(AppBase):
+    """Define a base for security automations."""
+
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_ENTITIES: vol.Schema({
+            vol.Required(CONF_ALARM_LIGHTS): vol.Schema([
+                vol.Optional(vol_help.entity_id),
+            ]),
+            vol.Required(CONF_MOTION_SENSORS): vol.Schema([
+                vol.Optional(vol_help.entity_id),
+            ]),
+            vol.Required(CONF_DOOR_SENSORS): vol.Schema([
+                vol.Optional(vol_help.entity_id),
+            ]),
+        }, extra=vol.ALLOW_EXTRA),
+    })
+
     class AlarmType(Enum):
+        """Define an enum for Alarm types."""
+
         armed_no_motion = 'Scharf ohne Bewegung'
         armed_motion = 'Scharf mit Bewegung'
         disarmed = 'Ungesichert'
         alert = 'Einbrecher'
 
-    def initialize(self) -> None:
-        super().initialize()
+    def configure(self) -> None:
+        """Configure."""
+        self.alarm_lights = self.entities[CONF_ALARM_LIGHTS]
+        self.motion_sensors = self.entities[CONF_MOTION_SENSORS]
+        self.door_sensors = self.entities[CONF_DOOR_SENSORS]
 
-        self.alarm_lights = self.entities['alarm_lights'].split(',')
-        self.motion_entities = self.entities.get('motion', '').split(',')
-        self.other_security_entities = self.entities.get('other_security', '').split(',')
-
-        # take action when a motion sensor is triggered
-        for entity in self.motion_entities:
+        for entity in self.motion_sensors:
             self.listen_state(self.motion_triggered,
                               entity,
-                              new='on',
+                              new=ON,
                               constrain_app_enabled=1)
 
-        # take action when a non-motion sensor is triggered
-        for entity in self.other_security_entities:
-            self.listen_state(self.other_sensor_triggered,
+        for entity in self.door_sensors:
+            self.listen_state(self.door_opened,
                               entity,
-                              new='offen',
+                              new=OPEN,
                               constrain_app_enabled=1)
 
     @property
     def alarm_state(self) -> AlarmType:
-        return self.AlarmType(self.get_state(HOUSE['alarm_state']))
+        """Return the current state of the security system."""
+        return self.AlarmType(self.get_state(HOUSE[ALARM_STATE]))
 
     @alarm_state.setter
     def alarm_state(self, alarm_state: AlarmType) -> None:
-        self.select_option(HOUSE['alarm_state'], alarm_state.value)
+        """Set the the security system to given state."""
+        self.select_option(HOUSE[ALARM_STATE], alarm_state.value)
 
     def motion_triggered(self, entity: Union[str, dict], attribute: str,
                          old: str, new: str, kwargs: dict) -> None:
+        """Take action when motion sensor is triggered based on alarm state."""
         if self.alarm_state == self.AlarmType.armed_motion:
             self.alarm_state = self.AlarmType.alert
             self.log(f"Bewegung im "
                      f"{entity.split('.')[1].split('_')[1].capitalize()}!!!")
 
-    def other_sensor_triggered(self, entity: Union[str, dict], attribute: str,
-                               old: str, new: str, kwargs: dict) -> None:
+    def door_opened(self, entity: Union[str, dict], attribute: str,
+                    old: str, new: str, kwargs: dict) -> None:
+        """Take action when a door is opened based on alarm state."""
         if self.alarm_state in (self.AlarmType.armed_motion,
                                 self.AlarmType.armed_no_motion):
             self.alarm_state = self.AlarmType.alert
@@ -88,16 +127,17 @@ class SecurityAutomation(AppBase):
 
 
 class ArmOnDeparture(AppBase):
-    def initialize(self):
-        super().initialize()
+    """Define a feature to arm the security system when everyone left."""
 
-        # arm when everyone is gone
+    def configure(self):
+        """Configure."""
         self.listen_state(self.noone_home,
-                          HOUSE['presence_state'],
+                          HOUSE[PRESENCE_STATE],
                           constrain_app_enabled=1)
 
-    def noone_home(self, entity: Union[str, dict], attribute: str, old: str,
-                   new: str, kwargs: dict) -> None:
+    def noone_home(self, entity: Union[str, dict], attribute: str,
+                   old: str, new: str, kwargs: dict) -> None:
+        """Arm the security system when everyone left."""
         someone_home_states = [self.presence_app.HouseState.someone.value,
                                self.presence_app.HouseState.everyone.value]
         if (new not in someone_home_states) and (old in someone_home_states):
@@ -106,16 +146,17 @@ class ArmOnDeparture(AppBase):
 
 
 class DisarmOnArrival(AppBase):
-    def initialize(self):
-        super().initialize()
+    """Define a feature to disarm the security system when someone arrives."""
 
-        # disarm when someone arrives
+    def configure(self):
+        """Configure."""
         self.listen_state(self.someone_home,
-                          HOUSE['presence_state'],
+                          HOUSE[PRESENCE_STATE],
                           constrain_app_enabled=1)
 
     def someone_home(self, entity: Union[str, dict], attribute: str, 
                      old: str, new: str, kwargs: dict) -> None:
+        """Disarm the security system when someone arrives."""
         someone_home_states = [self.presence_app.HouseState.someone.value,
                                self.presence_app.HouseState.everyone.value]
         if (new in someone_home_states) and (old not in someone_home_states):
@@ -124,42 +165,48 @@ class DisarmOnArrival(AppBase):
 
 
 class ArmDisarmCleaning(AppBase):
-    def initialize(self):
-        super().initialize()
+    """Define a feature to disable the motion sensors when the vacuum runs."""
 
-        # disarm when someone arrives
+    def configure(self):
+        """Configure."""
         self.listen_state(self.cleaning_mode_changed,
-                          MODES['cleaning_mode'],
+                          MODES[CLEANING_MODE],
                           constrain_app_enabled=1)
 
     def cleaning_mode_changed(self, entity: Union[str, dict], attribute: str,
                               old: str, new: str, kwargs: dict) -> None:
+        """Set the security system based on the state of the vacuum cleaner."""
         if new == 'on' and self.presence_app.noone_home:
             self.security_app.alarm_state = self.security_app.AlarmType.armed_no_motion
             self.log("Pedro putzt jetzt. Schalte Bewegungssensoren aus!")
-        
-        if new == 'off' and self.presence_app.noone_home:
+        elif new == 'off' and self.presence_app.noone_home:
             self.security_app.alarm_state = self.security_app.AlarmType.armed_motion
             self.log("Pedro ist fertig. Schalte Bewegungssensoren wieder ein!")
 
     
 class NotificationOnChange(AppBase):
-    def initialize(self):
-        super().initialize()
+    """Define a feature to send a notification when the alarm state changed."""
 
-        # notify immediately when state of alarm system changes
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_NOTIFICATIONS: vol.Schema({
+            vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
+        }, extra=vol.ALLOW_EXTRA),
+    })
+    
+    def configure(self):
+        """Configure."""
         self.listen_state(self.alarm_state_changed,
-                          HOUSE['alarm_state'],
+                          HOUSE[ALARM_STATE],
                           constrain_app_enabled=1)
 
-        # deactivate alarm if respond 'wrong_alarm' is given by target
         self.listen_event(self.disarm_on_push_notification,
-                         'html5_notification.clicked',
-                         action='wrong_alarm',
-                         constrain_app_enabled=1)
+                          'html5_notification.clicked',
+                          action=WRONG_ALARM,
+                          constrain_app_enabled=1)
 
     def alarm_state_changed(self, entity: Union[str, dict], attribute: str,
-                            old: str, new: str, kwargs: dict) -> None:           
+                            old: str, new: str, kwargs: dict) -> None:
+        """Send notification when alarm state changed."""
         self.notification_app.notify(
             kind='single',
             level='emergency',
@@ -167,26 +214,64 @@ class NotificationOnChange(AppBase):
             message=f"Der neue Alarm Status ist {new}",
             targets=self.notifications['targets'],
             data={'actions': [{
-                'action': 'wrong_alarm',
+                'action': WRONG_ALARM,
                 'title': 'Fehlalarm'
                 }]})
 
-    def disarm_on_push_notification(self, event_name: str, data: dict, 
-                                    kwargs: dict) -> None:
+    def disarm_on_push_notification(self, event_name: str,
+                                    data: dict, kwargs: dict) -> None:
+        """Disarm when push notification got clicked."""
         self.security_app.alarm_state = self.security_app.AlarmType.disarmed
         self.log("Fehlalarm, Alarmanlage wird ausgeschaltet!")
 
 
+class NotifyOnBadLoginAttempt(AppBase):
+    """Define a feature to send a notification when bad login happened."""
+
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_NOTIFICATIONS: vol.Schema({
+            vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
+        }, extra=vol.ALLOW_EXTRA),
+    })
+
+    def configure(self):
+        """Configure."""
+        self.listen_state(self.bad_login_attempt,
+                          "persistent_notification.http_login",
+                          new='notifying')
+
+    def bad_login_attempt(self, entity: Union[str, dict], attribute: str,
+                            old: str, new: str, kwargs: dict) -> None:
+        """Send notification when bad login happened."""
+        msg = self.get_state("persistent_notification.http_login",
+                             attribute="message")
+        self.notification_app.notify(
+            kind='single',
+            level='emergency',
+            title="Falscher Loginversuch",
+            message=msg,
+            targets=self.notifications['targets'])
+
+
 class LastMotion(AppBase):
-    def initialize(self):
-        super().initialize()
-        self.motion_sensors = self.entities['motion_sensors']
+    """Define a feature to update a sensor with the
+       name of the room where last motion was detected"""
 
-        # change last motion input boolean when motion is detected
-        for sensor in self.motion_sensors.split(','):
-            self.listen_state(self.motion, sensor, new='on')
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_ENTITIES: vol.Schema({
+            vol.Required(CONF_MOTION_SENSORS): vol.Schema([
+                vol.Optional(vol_help.entity_id),
+            ]),
+        }, extra=vol.ALLOW_EXTRA),
+    })
 
-    def motion(self, entity: Union[str, dict], attribute: str,
-               old: str, new: str, kwargs: dict) -> None:
+    def configure(self):
+        """Configure."""
+        for sensor in self.entities[CONF_MOTION_SENSORS]:
+            self.listen_state(self.motion_detected, sensor, new='on')
+
+    def motion_detected(self, entity: Union[str, dict], attribute: str,
+                        old: str, new: str, kwargs: dict) -> None:
+        """Select the room input select based on the triggered entity."""
         room_name = entity.split('.')[1].split('_', 1)[-1].capitalize()
         self.select_option(HOUSE['last_motion'], room_name)

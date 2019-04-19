@@ -24,8 +24,55 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Fenster Schlafzimmer'
+  - platform: template
+    sensors:
+      nacht_sensor:
+        value_template: >-
+            {{ strptime("23:00", "%H%M")  < now().strftime("%H:%M")
+               or now().strftime("%H:%M") < strptime("05:15", "%H%M") }}
+               
+binary_sensor:
+  - platform: bayesian
+    prior: 0.25
+    name: 'Dimitri Schläft'
+    probability_threshold: 0.8
+    observations:
+        - entity_id: 'input_select.dimitri_presence'
+          prob_given_true: 1.0
+          prob_given_false: 0.56
+          platform: 'state'
+          to_state: 'Zu Hause'
+        - entity_id: 'input_select.house_presence'
+          prob_given_true: 0.0
+          platform: 'state'
+          to_state: 'Ferien'
+        - entity_id: 'group.all_lights'
+          prob_given_true: 1.0
+          prob_given_false: 0.4
+          platform: 'state'
+          to_state: 'off'
+        - entity_id: 'input_boolean.charging_phone_dimitri'
+          prob_given_true: 0.95
+          prob_given_false: 0.1
+          platform: 'state'
+          to_state: 'on'
+        - entity_id: 'remote.wohnzimmer'
+          prob_given_true: 1.0
+          prob_given_false: 0.2
+          platform: 'state'
+          to_state: 'off'
+        - entity_id: 'device_tracker.dimitri_pc'
+          prob_given_true: 0.05
+          prob_given_false: 0.18
+          platform: 'state'
+          to_state: 'home'
+        - entity_id: 'sensor.nacht_sensor'
+          prob_given_true: 0.7
+          platform: 'state'
+          to_state: 'on'
 
 switch:
   - platform: mystrom
     host: !secret switch_dehumidifier_ip
     name: Schalter Entfeuchter
+

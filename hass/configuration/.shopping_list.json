@@ -1,42 +1,142 @@
 [
     {
         "complete": false,
-        "id": "b70c19ff6c9e4adbb84d1ce86d7aef28",
-        "name": "Mango Schnitz"
-    },
-    {
-        "complete": false,
-        "id": "de8c89bbc0b9466d845f9f15d0f99296",
-        "name": "Himbeer Sirup"
-    },
-    {
-        "complete": false,
-        "id": "fd33763d84b04f7d90bff9db4269e664",
-        "name": "Butter"
-    },
-    {
-        "complete": false,
-        "id": "f0d8fb34bdda4deaa7a8898949baa223",
-        "name": "Geschirrsp\u00fclmittel"
-    },
-    {
-        "complete": false,
-        "id": "0510c43aa8dd450d9f7221d52a97ecff",
-        "name": "Confi"
-    },
-    {
-        "complete": false,
         "id": "aac3316186984794a6840caea3163879",
         "name": "Tumblert\u00fc\u00e4chli"
     },
     {
         "complete": false,
-        "id": "800ea73d064f4828aaedbebd4f87c249",
-        "name": "Alufolie"
+        "id": "694100bea20e4e2e96c4ea18934644d0",
+        "name": "Schw\u00e4mm"
     },
     {
         "complete": false,
-        "id": "97cbceff09334c21bbfd5585e97542f7",
-        "name": "Mayo"
+        "id": "edbfb533f41147f6a730d33409e04bf1",
+        "name": "Zucchini 2kg"
+    },
+    {
+        "complete": false,
+        "id": "fb3d0a48bed54cd4b643ba0705d2cdd9",
+        "name": "Weisskabis 2x"
+    },
+    {
+        "complete": false,
+        "id": "22fbf171392f46a3ab8ec33595bc0fab",
+        "name": "Karotten 6x"
+    },
+    {
+        "complete": false,
+        "id": "2a5eb942168743918f4bdbf781e65060",
+        "name": "Kartoffeln 1kg"
+    },
+    {
+        "complete": false,
+        "id": "81d905f3074247f79bbd9f0f8e54fe07",
+        "name": "Cherry Tomaten 2 Pack"
+    },
+    {
+        "complete": false,
+        "id": "7e1cdbcbf87143709f48dc55e3186823",
+        "name": "Mozzarella Kugeln 2 Pack"
+    },
+    {
+        "complete": false,
+        "id": "171d5e6d365f4436b6976a534755a64e",
+        "name": "Butter 1x"
+    },
+    {
+        "complete": false,
+        "id": "76446d66c4ce4f50b87ee6f6ebf6a53d",
+        "name": "Creme Fraiche mit Kr\u00e4uter 2x"
+    },
+    {
+        "complete": false,
+        "id": "a6f7d618a21c439abd579ce3f60bca1b",
+        "name": "Creme Fraiche ohne Kr\u00e4uter 2x "
+    },
+    {
+        "complete": false,
+        "id": "80e85326536f459abf12cb4588caaa8e",
+        "name": "Gruyere 400g"
+    },
+    {
+        "complete": false,
+        "id": "1177c0f2c79c4820943d6f129f3853e1",
+        "name": "Saurer Halbrahm 2 Becher"
+    },
+    {
+        "complete": false,
+        "id": "76d3bf70542a467ab4131048103e8dda",
+        "name": "Joghurt Nature 500g"
+    },
+    {
+        "complete": false,
+        "id": "bf6e0c3c3516417a980884ae0dd17418",
+        "name": "Mozzarela Block 2x"
+    },
+    {
+        "complete": false,
+        "id": "af60c412b3cd42ca8fe0b54754fa868a",
+        "name": "Speckw\u00fcrfel"
+    },
+    {
+        "complete": false,
+        "id": "e065fb6c51854e5698a4e8aaf9a9984b",
+        "name": "Zitronensaft 1x"
+    },
+    {
+        "complete": false,
+        "id": "5bc32f7c738b4072b59693048fc052af",
+        "name": "Honig 1x"
+    },
+    {
+        "complete": false,
+        "id": "210235ce4b734d5fb6e54fcc54030d26",
+        "name": "Senf 1x"
+    },
+    {
+        "complete": false,
+        "id": "5e18818550324e3a91056c8f96e4e612",
+        "name": "Ketchup 1x"
+    },
+    {
+        "complete": false,
+        "id": "7d015b7183244ee0b9acb6ec02150642",
+        "name": "Mayonnaise 3x"
+    },
+    {
+        "complete": false,
+        "id": "a8a0cc96403f43298de5627a00c80079",
+        "name": "Gem\u00fcsebouillon"
+    },
+    {
+        "complete": false,
+        "id": "fc1e2631792648f19c76e6aabf4487a5",
+        "name": "Paniermehl"
+    },
+    {
+        "complete": false,
+        "id": "f26b808c68514968a4fff2c2808e9b08",
+        "name": "Weissweinessig"
+    },
+    {
+        "complete": false,
+        "id": "4af043d37cd64caaaf568f603d6a25ae",
+        "name": "Chips und andere Snacks"
+    },
+    {
+        "complete": false,
+        "id": "76a4adbe134845f785e66f19557e2e47",
+        "name": "------------------------ FLEISCH -------------------------------------------"
+    },
+    {
+        "complete": false,
+        "id": "2107870a4eb6415eba6d7e8cc89bd8bd",
+        "name": "---------------------------------- Getr\u00e4nke inkl. Alk -----------------------------------"
+    },
+    {
+        "complete": false,
+        "id": "69023b06d8294166a608b6f549b5d66c",
+        "name": "------------------------------------- Gas ------------------------------------------------------"
     }
 ]

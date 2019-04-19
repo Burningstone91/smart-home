@@ -8,7 +8,7 @@
     - url: /local/lovelace_plugins/auto-entities.js?v=1
       type: js
     - url: /local/lovelace_plugins/card-tools.js?v=1
-      type: js  
+      type: js
 
 ##############################################################################
 
@@ -18,10 +18,11 @@
     panel: true
     cards:
       - type: custom:grid-layout
-        column_definitions: 1fr 15fr 9fr 9fr 1fr
-        row_definitions: 1fr 10fr 10fr 1fr
+        column_definitions: 1fr 30fr 18fr 18fr 1fr
+        row_definitions: 1fr 20fr 20fr 1fr
         card_margin: 4
         cards:
+
           - type: glance
             column:
               start: 2
@@ -36,7 +37,7 @@
                 - input_boolean.guest_mode
                 - input_boolean.cleaning_mode
                 - input_boolean.sleep_mode
-              columns: 3
+              columns: 5
           - type: entities
             column:
               start: 4
@@ -82,12 +83,14 @@
                 - entity: sensor.dimitri
                   name: "Schlüssel"
                   icon: mdi:key
+                - entity: binary_sensor.dimitri_schlaft
+                  name: Dimitri schläft
+                  icon: mdi:sleep
                 - entity: sensor.dimitri_wecker_uhrzeit
                   name: Wecker
                   icon: mdi:alarm
                 - input_boolean.ongoing_call_dimitri
                 - input_boolean.charging_phone_dimitri
-                
               show_state: false
               show_name: false
               columns: 1
@@ -104,6 +107,7 @@
               entities:
                 - input_select.alarm_state
                 - sensor.tuer_wohnung
+                - input_select.last_motion
                 - input_select.house_presence
               show_name: false
               columns: 1
@@ -1036,11 +1040,72 @@
               tap_action:
                 action: toggle
               state_image:
-                "on": /local/speaker.gif
-                "off": /local/fan.png
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
               style:
-                top: 71.7%
+                top: 75.7%
                 left: 85%
+                width: 3.5%
+
+            - type: image
+              entity: media_player.buero_musik_main
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 62.7%
+                left: 85%
+                width: 3.5%  
+
+            ########################## Sound Living Room ##########################
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 52.7%
+                left: 61.5%
+                width: 3.5%
+
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 74.%
+                left: 61.5%
+                width: 3.5%  
+
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 52.7%
+                left: 38%
+                width: 3.5%
+
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 74.6%
+                left: 38%
                 width: 3.5%  
 
             ####################### Temperatur ###############################

@@ -28,9 +28,11 @@ But first I will start with an explanation of the AppDaemon Core Apps and the se
 ## Lovelace
 I only recently started using lovelace so my setup is a huge work in progress. Below is a screenshot of some of my panels.
 
+### Automation Controls
 ![Alt text](/hass/configuration/lovelace_screenshots/automation_controls.png?raw=true "Automation Controls")
 Input booleans to turn on/off automations.
 
+### System Monitor
 ![Alt text](/hass/configuration/lovelace_screenshots/system_monitor.png?raw=true "System Monitor")
 System monitor shows: 
 * Status of my NAS 
@@ -38,6 +40,7 @@ System monitor shows:
 * Statistics about the network speed and ping
 * Switches to turn enable/disable docker services
 
+### Floorplan
 ![Alt text](/hass/configuration/lovelace_screenshots/floorplan.png?raw=true "Floorplan")
 Floorplan of the house. Features:
 * Shows open state of doors/windows, doors leading to outside show up red when opened
@@ -45,6 +48,10 @@ Floorplan of the house. Features:
 * Turn on/off speakers, membrane icon beating when music is playing
 * Turn on/off dehumifier, fan icon spinning when dehumidifier is on
 * Turn on/off projector
+* Turn on/off vacuum robot
+
+
+
 
 ## AppDaemon Core Apps
 ### AppBase [appbase.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/appbase.py)
@@ -93,6 +100,9 @@ This is the base for all kind of switches. The different kind of Switches are:
 * Toggle on arrival: toggles a switch or calls a service when someone or a specified person arrives at home
 * Toggle on departure: toggles a switch or calls a service when everyone left the house
 * Hue Dimmer Switch: toggles a switch or calls a service based on the specified button presses in the config
+
+
+
 
 ## Bedroom
 ### Configuration files

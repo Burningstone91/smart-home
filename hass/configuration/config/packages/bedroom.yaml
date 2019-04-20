@@ -28,8 +28,12 @@ sensor:
     sensors:
       nacht_sensor:
         value_template: >-
-            {{ strptime("23:00", "%H%M")  < now().strftime("%H:%M")
-               or now().strftime("%H:%M") < strptime("05:15", "%H%M") }}
+            {% if (strptime("23:00", "%H%M") < now().strftime("%H:%M"))
+               or (now().strftime("%H:%M") < strptime("05:15", "%H%M"))}
+              nacht
+            {% else %}
+              tag
+            {% endif %}
                
 binary_sensor:
   - platform: bayesian

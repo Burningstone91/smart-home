@@ -135,6 +135,11 @@ notify_on_alarm_change:
   initial: True
   icon: mdi:email
 
+notify_on_bad_login_attempt:
+  name: Benachrichtige wenn sich jemand mit einem falschen Passwort einloggen wollte
+  initial: True
+  icon: mdi:email
+
 last_motion:
   name: Letzte Bewegung
   initial: True

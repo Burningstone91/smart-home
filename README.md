@@ -26,7 +26,25 @@ this package and a list of automations with a short description on what the auto
 But first I will start with an explanation of the AppDaemon Core Apps and the setup. 
 
 ## Lovelace
--- Under Construction --
+I only recently started using lovelace so my setup is a huge work in progress. Below is a screenshot of some of my panels.
+
+![Alt text](/hass/configuration/lovelace_screenshots/automation_controls.png?raw=true "Automation Controls")
+Input booleans to turn on/off automations.
+
+![Alt text](/hass/configuration/lovelace_screenshots/system_monitor.png?raw=true "System Monitor")
+System monitor shows: 
+* Status of my NAS 
+* Status of Docker host
+* Statistics about the network speed and ping
+* Switches to turn enable/disable docker services
+
+![Alt text](/hass/configuration/lovelace_screenshots/floorplan.png?raw=true "Floorplan")
+Floorplan of the house. Features:
+* Shows open state of doors/windows, doors leading to outside show up red when opened
+* Control light
+* Turn on/off speakers, membrane icon beating when music is playing
+* Turn on/off dehumifier, fan icon spinning when dehumidifier is on
+* Turn on/off projector
 
 ## AppDaemon Core Apps
 ### AppBase [appbase.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/appbase.py)
@@ -316,9 +334,10 @@ Send a notification when there is a new version available for AppDaemon or HomeA
 * 1x Roomba 960 vacuum robot
 
 ### Automations
-**Notify on device going offline** [vacuum.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/vacuum.py)
+**Run scheduled cleaning cycle** [vacuum.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/vacuum.py)
 
-Send a notification when one of the specified devices goes offline. Offline state is determined 
+Starts the vacuum robot on specified day and time to clean the house. When someon arrives at home, 
+the vacuum robot returns to the base. 
 
 **Notify on device going offline** [vacuum.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/vacuum.py)
 

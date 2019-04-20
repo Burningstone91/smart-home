@@ -38,7 +38,9 @@ System monitor shows:
 * Status of my NAS 
 * Status of Docker host
 * Statistics about the network speed and ping
-* Switches to turn enable/disable docker services
+* Switches to enable/disable docker services
+* Version installed and available for AppDaemon and Home Assistant
+* Battery Level of Smart Home devices
 
 ### Floorplan
 ![Alt text](/hass/configuration/lovelace_screenshots/floorplan.png?raw=true "Floorplan")

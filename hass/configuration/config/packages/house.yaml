@@ -23,6 +23,11 @@ sensor:
             states.light.ankleidezimmer ] %}
           {% set findstates = [ 'on', 'open' ] %}
           {{ entities | selectattr('state','in',findstates) | list | length }}
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
 
 input_select:
   house_presence:

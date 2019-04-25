@@ -28,11 +28,10 @@ sensor:
     sensors:
       nacht_sensor:
         value_template: >-
-            {% if (strptime("23:00", "%H%M") < now().strftime("%H:%M"))
-               or (now().strftime("%H:%M") < strptime("05:15", "%H%M"))}
-              nacht
+            {% if strptime(states('sensor.time'), '%H:%M').hour<5 or strptime(states('sensor.time'), '%H:%M').hour>=23 %}
+            nacht
             {% else %}
-              tag
+            tag
             {% endif %}
                
 binary_sensor:
@@ -80,3 +79,7 @@ switch:
     host: !secret switch_dehumidifier_ip
     name: Schalter Entfeuchter
 
+media_player:
+  -  platform: heos
+     host: !secret heos_bedroom_ip
+     name: HEOS Schlafzimmer

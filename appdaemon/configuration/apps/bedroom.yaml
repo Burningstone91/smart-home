@@ -34,7 +34,7 @@ dimmer_switch_schlafzimmer:
   dependencies:
     - presence_app
   disabled_states:
-    presence: vacation
+    presence: noone,vacation
   entities:
     switch: dimmschalter_schlafzimmer
   properties:
@@ -61,32 +61,73 @@ dimmer_switch_schlafzimmer:
         action: 'off'
         action_entity: light.schlafzimmer
       long_press_off:
-        action_type: toggle
-        action: 'off'
-        action_entity: switch.schalter_entfeuchter
+        action_type: scene
+        action: 'on'
+        action_entity: scene.schlafzimmer_alles_aus
 
-sleep_app:
-  module: sleep
-  class: SleepAutomation
+dimmer_switch_schlafzimmer_master:
+  module: switches
+  class: HueDimmerSwitch
   dependencies:
-    - media_player_app
     - presence_app
   disabled_states:
     presence: noone,vacation
   entities:
-    dimmer_switch: dimmschalter_schlafzimmer_master
-    media_player: media_player.spotify
-    wakeup_light: light.kugellampe_schlafzimmer
-    turn_off_entities: group.all_lights,remote.wohnzimmer,switch.schalter_entfeuchter
+    switch: dimmschalter_schlafzimmer_master
   properties:
-    delay: 1200
-    shutdown_time: "03:00:00"
-    sleep_time_start: "19:00:00"
-    wakeup_time_start: "05:00:00"
-    sleep_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
-    wakeup_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
-    transition: 900
-    source: "HEOS 5"
+    button_config:
+      short_press_on:
+        action_type: scene
+        action: 'on'
+        action_entity: scene.gute_nacht
+      short_press_up:
+        action_type: service_call
+        action: volume_up
+        action_entity: media_player.spotify
+      long_press_up:
+        action_type: service_call
+        action: media_next_track
+        action_entity: media_player.spotify
+      short_press_down:
+        action_type: service_call
+        action: volume_down
+        action_entity: media_player.spotify
+      long_press_down:
+        action_type: service_call
+        action: media_previous_track
+        action_entity: media_player.spotify
+      short_press_off:
+        action_type: service_call
+        action: media_pause
+        action_entity: media_player.spotify
+      long_press_off:
+        action_type: service_call
+        action: media_pause
+        action_entity: media_player.spotify
+        delay: 20
+
+#sleep_app:
+#  module: sleep
+#  class: SleepAutomation
+#  dependencies:
+#    - media_player_app
+#    - presence_app
+#  disabled_states:
+#    presence: noone,vacation
+#  entities:
+#    dimmer_switch: dimmschalter_schlafzimmer_master
+#    media_player: media_player.spotify
+#    wakeup_light: light.kugellampe_schlafzimmer
+#    turn_off_entities: group.all_lights,remote.wohnzimmer,switch.schalter_entfeuchter
+#  properties:
+#    delay: 1200
+#    shutdown_time: "03:00:00"
+#    sleep_time_start: "19:00:00"
+#    wakeup_time_start: "05:00:00"
+#    sleep_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+#    wakeup_playlist: spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI
+#    transition: 900
+#    source: "HEOS 5"
 
 turn_on_sleep_mode_forgot:
   module: switches
@@ -115,17 +156,3 @@ turn_off_sleep_mode_forgot:
     action_type: toggle
     schedule_time: "13:30:00"
     state: "off"
-
-turn_on_dehumidifier_on_departure:
-  module: switches
-  class: ToggleOnDeparture
-  dependencies:
-    - presence_app
-  disabled_states:
-    presence: vacation
-  entities:
-    switch: switch.schalter_entfeuchter
-  properties:
-    action_type: toggle
-    state: "on"
-

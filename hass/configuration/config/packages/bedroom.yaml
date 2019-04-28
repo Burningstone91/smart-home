@@ -80,6 +80,53 @@ switch:
     name: Schalter Entfeuchter
 
 media_player:
-  -  platform: heos
-     host: !secret heos_bedroom_ip
-     name: HEOS Schlafzimmer
+  - platform: heos
+    host: !secret heos_bedroom_ip
+    name: HEOS Schlafzimmer
+
+scene:
+  - name: Gute Nacht
+    entities:
+      group.all_lights: 
+        state: false
+      switch.schalter_entfeuchter: 
+        state: false
+      remote.wohnzimmer: 
+        state: false
+      media_player.buero_musik_main: 
+        state: false
+      input_boolean.sleep_mode: 
+        state: true
+      script.play_good_night_list:
+        state: true
+  - name: Schlafzimmer alles aus
+    entities:
+      light.schlafzimmer: 
+        state: false
+      switch.schalter_entfeuchter:
+        state: false
+      media_player.heos_5:
+        state: paused
+script:
+  play_good_night_list:
+    sequence:
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.spotify
+          source: "HEOS 5"
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.07
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_id: 'spotify:user:spotify:playlist:37i9dQZF1DWSUFOo47GEsI'
+          media_content_type: 'playlist'
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: 'true'
+      - service: media_player.media_next_track
+        data:
+          entity_id: media_player.spotify

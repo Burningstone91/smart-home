@@ -8,7 +8,8 @@ import voluptuous as vol
 import voloptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
-    CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_PROPERTIES, CONF_TARGETS
+    CONF_ENTITIES, CONF_INTERVAL, CONF_NOTIFICATIONS,
+    CONF_PROPERTIES, CONF_TARGETS
 )
 from house_config import HOUSE, MODES, PERSONS
 
@@ -47,7 +48,10 @@ class VacuumAutomation(AppBase):
         }, extra=vol.ALLOW_EXTRA),
         CONF_PROPERTIES: vol.Schema({
             vol.Optional(CONF_CLEANING_TIME): str,
-        }, extra=vol.ALLOW_EXTRA)
+        }, extra=vol.ALLOW_EXTRA),
+        CONF_NOTIFICATIONS: vol.Schema({
+            vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
+        }, extra=vol.ALLOW_EXTRA),
     })
 
     class VacuumState(Enum):
@@ -61,10 +65,15 @@ class VacuumAutomation(AppBase):
     def configure(self) -> None:
         """Configure."""
         self.started_by_app = False
+        self.vacuum = self.entities[VACUUM]
         cleaning_time = self.parse_time(
             self.properties.get(CONF_CLEANING_TIME, '11:00:00'))
 
-        self.vacuum = self.entities[VACUUM]
+        # reminder in the morning of cleaning day
+        self.run_daily(self.notify_on_cleaning_day,
+                       self.parse_time('05:15:00'),
+                       constrain_app_enabled=1)
+
         # scheduled clean cycle
         self.run_daily(self.start_cleaning,
                        cleaning_time,
@@ -90,6 +99,15 @@ class VacuumAutomation(AppBase):
         """Return the current state of the vacuum cleaner."""
         return self.get_state(self.vacuum, attribute='status')
 
+    def notify_on_cleaning_day(self, kwargs: dict) -> None:
+        """Send notification in the morning to remind of cleaning day."""
+        self.notification_app.notify(
+            kind='single',
+            level='emergency',
+            title="Putztag",
+            message=f"Heute ist Putztag. Bitte Möbel richten!",
+            targets=self.notifications['targets'])
+
     def start_cleaning(self, kwargs: dict) -> None:
         """Start the scheduled cleaning cycle."""
         self.call_service('vacuum/start_pause', entity_id=self.vacuum)
@@ -114,7 +132,7 @@ class VacuumAutomation(AppBase):
     def set_cleaning_mode_input_boolean(self, entity: Union[str, dict],
                                         attribute: str, old: str,
                                         new: str, kwargs: dict) -> None:
-        """Set the input boolean for the cleaning mode"""
+        """Set the input boolean for the cleaning mode."""
         if 'cleaning_mode' in MODES and old != new:
             if new == self.VacuumState.running.value:
                 self.turn_on(MODES[CLEANING_MODE])
@@ -131,6 +149,7 @@ class NotifyWhenBinFull(AppBase):
         }, extra=vol.ALLOW_EXTRA),
         CONF_NOTIFICATIONS: vol.Schema({
             vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
+            vol.Optional(CONF_INTERVAL): int,
         }, extra=vol.ALLOW_EXTRA),
     })
     
@@ -159,7 +178,7 @@ class NotifyWhenBinFull(AppBase):
             title="Pedro voll!",
             message="Pedro muss geleert werden",
             targets=self.notifications['targets'],
-            interval=self.notifications['interval'])
+            interval=self.notifications['interval'] * 60)
         self.log("Abfalleimer voll! Benachrichtige zum Leeren.")
 
     def bin_emptied(self, entity: Union[str, dict], attribute: str, 

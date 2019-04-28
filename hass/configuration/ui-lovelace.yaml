@@ -154,15 +154,10 @@
               - input_boolean.security_app
               - input_boolean.vacuum_app
           - type: entities
-            title: Sicherheit Automatisierungen
+            title: Haus Automatisierungen
             show_header_toggle: false
             entities:
-              - input_boolean.arm_when_everyone_gone
-              - input_boolean.disarm_when_someone_home
-              - input_boolean.arm_disarm_when_cleaning
-              - input_boolean.notify_on_alarm_change
-              - input_boolean.notify_on_bad_login_attempt
-              - input_boolean.last_motion
+              - input_boolean.everyone_gone
           - type: entities
             title: System Automatisierungen
             show_header_toggle: false
@@ -175,6 +170,16 @@
         - type: vertical-stack
           cards:
           - type: entities
+            title: Sicherheit Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.arm_when_everyone_gone
+              - input_boolean.disarm_when_someone_home
+              - input_boolean.arm_disarm_when_cleaning
+              - input_boolean.notify_on_alarm_change
+              - input_boolean.notify_on_bad_login_attempt
+              - input_boolean.last_motion
+          - type: entities
             title: Staubsauger Automatisierungen
             show_header_toggle: false
             entities:
@@ -184,21 +189,7 @@
             show_header_toggle: false
             entities:
               - input_boolean.notify_on_high_humidity
-              - input_boolean.notify_on_window_open
-          - type: entities
-            title: Büroautomatisierungen
-            show_header_toggle: false
-            entities:
-              - input_boolean.motion_light_office
-              - input_boolean.dimmer_switch_buero
-          - type: entities
-            title: Wohnzimmerautomatisierungen
-            show_header_toggle: false
-            entities:
-              - input_boolean.scene_light_app
-              - input_boolean.dimmer_switch_wohnzimmer
-              - input_boolean.phone_call
-              - input_boolean.brighten_light_pause
+              - input_boolean.notify_on_window_open       
         - type: vertical-stack
           cards:  
           - type: entities
@@ -207,10 +198,25 @@
             entities:
               - input_boolean.motion_light_bedroom
               - input_boolean.dimmer_switch_schlafzimmer
+              - input_boolean.dimmer_switch_schlafzimmer_master
               - input_boolean.sleep_app
               - input_boolean.turn_on_sleep_mode_forgot
               - input_boolean.turn_off_sleep_mode_forgot
               - input_boolean.turn_on_dehumidifier_on_departure
+          - type: entities
+            title: Wohnzimmerautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.scene_light_app
+              - input_boolean.dimmer_switch_wohnzimmer
+              - input_boolean.phone_call
+              - input_boolean.brighten_light_pause
+          - type: entities
+            title: Büroautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_office
+              - input_boolean.dimmer_switch_buero
           - type: entities
             title: Ankleidezimmer Automatisierungen
             show_header_toggle: false
@@ -633,21 +639,21 @@
           - type: horizontal-stack
             cards: 
             - type: gauge
-              name: NAS CPU used
+              name: CPU used
               entity: sensor.cpu_load_total
               severity:
                   green: 0
                   yellow: 40
                   red: 80
             - type: gauge
-              name: NAS RAM used
+              name: RAM load
               entity: sensor.memory_usage_real
               severity:
                   green: 0
                   yellow: 40
                   red: 80
             - type: gauge
-              name: NAS Volume used
+              name: Volume used
               entity: sensor.volume_used_volume_1
               severity:
                   green: 0
@@ -679,12 +685,12 @@
               entities:
                 - entity: sensor.hass_uptime
                   name: HASS uptime
-                - entity: sensor.nuc_ram_used
+                - entity: sensor.nuc_ram_used_2
                   name: RAM used
             - type: horizontal-stack
               cards: 
               - type: gauge
-                name: NUC CPU used
+                name: CPU load
                 entity: sensor.nuc_cpu_load
                 min: 0
                 max: 1
@@ -694,14 +700,14 @@
                   yellow: 40
                   red: 80
               - type: gauge
-                name: NUC RAM used
-                entity: sensor.nuc_ram_used_2
+                name: RAM used
+                entity: sensor.nuc_ram_used
                 severity:
                   green: 0
                   yellow: 40
                   red: 80
               - type: gauge
-                name: NUC volume used
+                name: Volume used
                 entity: sensor.nuc_disk_used
                 severity:
                   green: 0
@@ -711,7 +717,7 @@
               entities:
                 - entity: sensor.nuc_cpu_load
                   name: CPU Load %
-                - entity: sensor.nuc_ram_used_2
+                - entity: sensor.nuc_ram_used
                   name: RAM Load %
         - type: vertical-stack
           cards:

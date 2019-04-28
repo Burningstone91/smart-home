@@ -34,7 +34,7 @@ dimmer_switch_ankleidezimmer:
   dependencies:
     - presence_app
   disabled_states:
-    presence: vacation
+    presence: noone,vacation
   entities:
     switch: dimmschalter_ankleidezimmer
   properties:

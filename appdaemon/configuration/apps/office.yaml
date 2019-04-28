@@ -35,7 +35,7 @@ dimmer_switch_buero:
   dependencies:
     - presence_app
   disabled_states:
-    presence: vacation
+    presence: noone,vacation
   entities:
     switch: dimmschalter_buero
   properties:
@@ -58,6 +58,6 @@ dimmer_switch_buero:
         action: 'off'
         action_entity: light.buero
       long_press_off:
-        action_type: toggle
-        action: 'off'
-        action_entity: media_player.buero_musik_main
+        action_type: scene
+        action: 'on'
+        action_entity: scene.buro_alles_aus

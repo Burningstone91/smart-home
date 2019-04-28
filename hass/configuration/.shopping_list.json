@@ -5,22 +5,22 @@
         "name": "Tumblert\u00fc\u00e4chli"
     },
     {
-        "complete": false,
+        "complete": true,
         "id": "e4c1d976e5924fef97bf9c9322bf50c1",
         "name": "Kinder \u00dcberraschungs Ei GROSS"
     },
     {
-        "complete": false,
+        "complete": true,
         "id": "5137f7ae398047b7b298f7f97ae49c74",
         "name": "Putzl\u00fcmpe"
     },
     {
-        "complete": false,
+        "complete": true,
         "id": "349ea0bf513e49f9ac3623712328194e",
         "name": "Curry Madras"
     },
     {
-        "complete": false,
+        "complete": true,
         "id": "c5075d30336f48f29ebe55e32ec3d8a1",
         "name": "Backpapuer"
     },
@@ -28,5 +28,10 @@
         "complete": false,
         "id": "c89490153acb49efa489cd0cb2c9fdb5",
         "name": "Lins\u00e4mitteli zum Reis\u00e4"
+    },
+    {
+        "complete": false,
+        "id": "4711f30964cf421894eb1c63ccf02491",
+        "name": "Essig Gurken"
     }
 ]

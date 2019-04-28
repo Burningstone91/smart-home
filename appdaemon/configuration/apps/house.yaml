@@ -1,0 +1,12 @@
+everyone_gone:
+  module: switches
+  class: ToggleOnDeparture
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
+  entities:
+    switch: scene.alle_weg
+  properties:
+    action_type: scene
+    state: "on"

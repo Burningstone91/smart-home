@@ -43,3 +43,15 @@ media_player:
   -  platform: spotify
      client_id: !secret spotify_client_id
      client_secret: !secret spotify_api_key
+
+scene:
+  - name: Alle Weg
+    entities:
+      group.all_lights: 
+        state: false
+      switch.schalter_entfeuchter: 
+        state: true
+      remote.wohnzimmer: 
+        state: false
+      media_player.buero_musik_main: 
+        state: false

@@ -69,6 +69,11 @@ dimmer_switch_schlafzimmer:
   initial: True
   icon: mdi:remote
 
+dimmer_switch_schlafzimmer_master:
+  name: Hue Dimmer Switch Schlafzimmer Master
+  initial: True
+  icon: mdi:remote
+
 sleep_app:
   name: Einschlafmodus
   initial: True
@@ -112,6 +117,13 @@ dimmer_switch_buero:
   name: Hue Dimmer Switch Büro
   initial: True
   icon: mdi:remote
+
+################################### House ###################################
+
+everyone_gone:
+  name: Schalte alle Geräte und Lichter aus wenn alle gegangen sind
+  initial: True
+  icon: mdi:walk
 
 ################################## Security ##################################
 

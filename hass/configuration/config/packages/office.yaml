@@ -28,3 +28,11 @@ sensor:
 media_player:
   - platform: yamaha_musiccast
     host: !secret yamaha_ip
+
+scene:
+  - name: Büro alles aus
+    entities:
+      light.buero: 
+        state: false
+      media_player.buero_musik_main: 
+        state: false

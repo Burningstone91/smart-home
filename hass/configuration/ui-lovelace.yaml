@@ -184,6 +184,7 @@
             show_header_toggle: false
             entities:
               - input_boolean.notify_when_vacuum_bin_full
+              - input_boolean.notify_on_cleaning_day
           - type: entities
             title: Klima Automatisierungen
             show_header_toggle: false
@@ -223,6 +224,14 @@
             entities:
               - input_boolean.motion_light_dress_room
               - input_boolean.dimmer_switch_ankleidezimmer
+        - type: vertical-stack
+          cards:  
+          - type: entities
+            title: Erinnerungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.remind_new_battery_key_dimitri
+              - input_boolean.remind_new_battery_key_sabrina
         
 
 ##############################################################################
@@ -1173,3 +1182,27 @@
                 font-size: 80%
                 font-weight: bold
                 color: SteelBlue
+
+
+  - title: Header
+    icon: 'mdi:home-outline'
+    panel: true
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: glance
+            entities:
+              - entity: light.playbar_links
+              - entity: light.playbar_rechts
+            title: Playbar's
+            show_name: true
+            show_icon: true
+            show_state: false      
+          - type: vertical-stack
+            cards:         
+              - type: entities
+                entities:
+                  - entity: light.dressoir_lamp
+              - type: entities
+                entities:
+                  - entity: light.staande_lamp

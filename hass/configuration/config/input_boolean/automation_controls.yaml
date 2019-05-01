@@ -176,6 +176,11 @@ notify_when_vacuum_bin_full:
   initial: True
   icon: mdi:email
 
+notify_on_cleaning_day:
+  name: Benachrichtige am Morgen des Putztages
+  initial: True
+  icon: mdi:broom  
+
 ############################### System Monitor ############################### 
 
 notify_on_device_offline:
@@ -202,3 +207,15 @@ notify_on_new_version:
   name: Benachrichtige wenn eine neue Version für eine App verfügbar ist
   initial: True
   icon: mdi:update
+
+############################### Reminders ############################### 
+
+remind_new_battery_key_dimitri:
+  name: Benachrichtige wenn die Batterie des Nut mini am Schlüssel gewechselt werden sollte
+  initial: True
+  icon: mdi:battery-alert
+
+remind_new_battery_key_sabrina:
+  name: Benachrichtige wenn die Batterie des Nut mini am Schlüssel gewechselt werden sollte
+  initial: True
+  icon: mdi:battery-alert

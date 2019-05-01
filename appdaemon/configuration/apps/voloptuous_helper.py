@@ -1,3 +1,4 @@
+import datetime
 from typing import Any, Sequence, TypeVar, Union
 
 import voluptuous as vol
@@ -25,3 +26,17 @@ def entity_id_list(value: Any) -> str:
         if '.' not in item:
             raise vol.Invalid(f"Invalide Entity-Liste: {value}")
     return value
+
+
+def valid_date(value: Any) -> datetime.date:
+    try:
+        return datetime.datetime.strptime(value, '%d.%m.%Y')
+    except ValueError:
+        raise vol.Invalid(f"Invalides Datum: {value}")
+
+
+def valid_time(value: Any) -> datetime.datetime:
+    try:
+        return datetime.datetime.strptime(value, '%H:%M:%S')
+    except ValueError:
+        raise vol.Invalid(f"Invalide Uhrzeit: {value}")

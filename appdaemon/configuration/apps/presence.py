@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Union
 
 from appbase import AppBase
-from constants import HOME, NOT_HOME, PERSON
+from constants import NOT_HOME, PERSON
 from house_config import HOUSE, PERSONS
 
 
@@ -129,10 +129,9 @@ class PresenceAutomation(AppBase):
     def set_presence_house(self, entity: Union[str, dict], attribute: str,
                            old: str, new: str, kwargs: dict) -> None:
         """Set the presence for the house."""
-        if self.persons_home == list(PERSONS.keys()):
+        if self.everyone_home:
             self.set_house_input_select(self.HouseState.everyone.value)
-        elif self.who_in_state(
-                self.PresenceState.extended_away) == list(PERSONS.keys()):
+        elif self.everyone_vacation:
             self.set_house_input_select(self.HouseState.vacation.value)
         elif self.noone_home:
             self.set_house_input_select(self.HouseState.noone.value)
@@ -141,7 +140,7 @@ class PresenceAutomation(AppBase):
 
     def set_house_input_select(self, new_state: str) -> None:
         """Set the presence input select for the house."""
-        old_state = self.get_state(HOUSE[PRESENCE_STATE])
+        old_state = self.house_presence_state
         if not old_state == new_state:
             self.select_option(HOUSE[PRESENCE_STATE], new_state)
             self.log("Vorher: {}, Jetzt: {}".format(old_state, new_state))
@@ -156,11 +155,29 @@ class PresenceAutomation(AppBase):
         ]
 
     @property
+    def house_presence_state(self):
+        return self.get_state(HOUSE[PRESENCE_STATE])
+
+    @property
+    def everyone_home(self) -> bool:
+        """Return true if everyone is home."""
+        return self.persons_home == list(PERSONS.keys())
+
+    @property
+    def someone_home(self) -> bool:
+        """Return true if someone is home."""
+        return not (not self.persons_home)
+
+    @property
     def noone_home(self) -> bool:
         """Return true if noone is home."""
-        return not self.who_in_state(
-            self.PresenceState.home,
-            self.PresenceState.just_arrived)
+        return not self.persons_home
+
+    @property
+    def everyone_vacation(self):
+        """Return true if everyone is on vacation."""
+        return self.who_in_state(
+            self.PresenceState.extended_away) == list(PERSONS.keys())
 
     @property
     def persons_home(self) -> list:

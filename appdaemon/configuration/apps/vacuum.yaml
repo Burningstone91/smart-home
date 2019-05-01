@@ -2,6 +2,7 @@ vacuum_app:
   module: vacuum
   class: VacuumAutomation
   dependencies:
+    - notification_app
     - presence_app
   disabled_states:
     presence: someone,everyone,vacation
@@ -26,3 +27,17 @@ notify_when_vacuum_bin_full:
   notifications:
     targets: Dimitri
     interval: 60
+
+notify_on_cleaning_day:
+  module: vacuum
+  class: NotifyOnCleaningDay
+  dependencies:
+  - notification_app
+  - presence_app
+  disabled_states:
+    presence: noone,vacation
+    days: Tuesday,Thursday,Saturday,Sunday
+  properties:
+    reminder_time: '05:15:00'
+  notifications:
+    targets: Dimitri

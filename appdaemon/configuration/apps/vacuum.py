@@ -36,6 +36,7 @@ CLEANING_MODE = 'cleaning_mode'
 VACUUM = 'vacuum'
 STATUS = 'status'
 PRESENCE_STATE = 'presence_state'
+CONF_REMINDER_TIME = 'reminder_time'
 
 
 class VacuumAutomation(AppBase):
@@ -69,11 +70,6 @@ class VacuumAutomation(AppBase):
         cleaning_time = self.parse_time(
             self.properties.get(CONF_CLEANING_TIME, '11:00:00'))
 
-        # reminder in the morning of cleaning day
-        self.run_daily(self.notify_on_cleaning_day,
-                       self.parse_time('05:15:00'),
-                       constrain_app_enabled=1)
-
         # scheduled clean cycle
         self.run_daily(self.start_cleaning,
                        cleaning_time,
@@ -98,15 +94,6 @@ class VacuumAutomation(AppBase):
     def vacuum_state(self) -> VacuumState:
         """Return the current state of the vacuum cleaner."""
         return self.get_state(self.vacuum, attribute='status')
-
-    def notify_on_cleaning_day(self, kwargs: dict) -> None:
-        """Send notification in the morning to remind of cleaning day."""
-        self.notification_app.notify(
-            kind='single',
-            level='emergency',
-            title="Putztag",
-            message=f"Heute ist Putztag. Bitte Möbel richten!",
-            targets=self.notifications['targets'])
 
     def start_cleaning(self, kwargs: dict) -> None:
         """Start the scheduled cleaning cycle."""
@@ -187,3 +174,30 @@ class NotifyWhenBinFull(AppBase):
         if BIN_FULL in self.handles:
             self.handles.pop(BIN_FULL)()
             self.log("Abfalleimer geleert! Schalte Benachrichtigung aus")
+
+
+class NotifyOnCleaningDay(AppBase):
+    """Define a feature to send a notification in morning of the cleaning day."""
+
+    APP_SCHEMA = APP_SCHEMA.extend({
+        CONF_PROPERTIES: vol.Schema({
+            vol.Optional(CONF_REMINDER_TIME): vol_help.valid_time,
+        }, extra=vol.ALLOW_EXTRA),
+        CONF_NOTIFICATIONS: vol.Schema({
+            vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
+        }, extra=vol.ALLOW_EXTRA),
+    })
+
+    def configure(self) -> None:
+        """Configure."""
+        self.run_daily(self.notify_on_cleaning_day,
+                       self.parse_time(self.properties[CONF_REMINDER_TIME]))
+
+    def notify_on_cleaning_day(self, kwargs: dict) -> None:
+        """Send notification in the morning to remind of cleaning day."""
+        self.notification_app.notify(
+            kind='single',
+            level='emergency',
+            title="Putztag",
+            message=f"Heute ist Putztag. Bitte Möbel richten!",
+            targets=self.notifications['targets'])

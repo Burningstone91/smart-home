@@ -1,0 +1,35 @@
+remind_new_battery_key_dimitri:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "Batterie wechseln"
+    message: "Batterien an Dimitri's Schlüssel wechseln!"
+    reminder_date: "30.03.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 5
+  notifications:
+    targets: Dimitri
+    interval: 60
+
+remind_new_battery_key_sabrina:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "Batterie wechseln"
+    message: "Batterien an Sabrina's Schlüssel wechseln!"
+    reminder_date: "01.05.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 5
+  notifications:
+    targets: Dimitri
+    interval: 60

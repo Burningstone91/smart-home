@@ -110,6 +110,12 @@ class NotificationAutomation(AppBase):
                         }
                 }
 
+    def remove_item_from_briefing(self, title: str) -> None:
+        """Remove items of the given person from the briefing list."""
+        for target, item in self.briefing_list.items():
+            if item == title:
+                del self.briefing_list[target][title]
+
     def remove_person_from_briefing(self, person: str) -> None:
         """Remove all items of the given person from the briefing list."""
         if person in self.briefing_list.keys():

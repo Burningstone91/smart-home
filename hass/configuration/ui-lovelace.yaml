@@ -1182,27 +1182,3 @@
                 font-size: 80%
                 font-weight: bold
                 color: SteelBlue
-
-
-  - title: Header
-    icon: 'mdi:home-outline'
-    panel: true
-    cards:
-      - type: horizontal-stack
-        cards:
-          - type: glance
-            entities:
-              - entity: light.playbar_links
-              - entity: light.playbar_rechts
-            title: Playbar's
-            show_name: true
-            show_icon: true
-            show_state: false      
-          - type: vertical-stack
-            cards:         
-              - type: entities
-                entities:
-                  - entity: light.dressoir_lamp
-              - type: entities
-                entities:
-                  - entity: light.staande_lamp

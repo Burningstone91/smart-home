@@ -75,7 +75,7 @@ class ReminderAutomation(AppBase):
         elif self.repeat_type == MONTHS:
             divisor = self.repeat_freq * 30
 
-        if not days_to_reminder_date // divisor == 0:
+        if days_to_reminder_date // divisor == 0:
             self.send_reminder()
             self.log("Erinnerungstag! Erinnerung gesendet.")
         

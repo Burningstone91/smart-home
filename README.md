@@ -273,6 +273,23 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 * Short press OFF button: Turn lights off
 * Long press OFF button: Turn Yamaha receiver off
 
+## Reminders
+### Configuration files
+* AppDaemon config: [reminders.yaml](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/reminders.yaml)
+
+### Automations
+Possible frequency types are 'days', 'weeks', 'months'. 
+E.g. frequency type 'days' and frequency '3' --> sends a reminder every third day after the specified date.
+
+**Remind new battery key Dimitri** [reminder.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/reminder.py)
+
+Sends a reminder every 5 months to change the battery of the nut mini.
+
+**Remind new battery key Sabrina** [reminder.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/reminder.py)
+
+Sends a reminder every 5 months to change the battery of the nut mini.
+
+
 ## Security
 ### Configuration files
 * Home-Assistant config: [security.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/security.yaml)

@@ -22,6 +22,9 @@ sensor:
       - 'disk_use_percent'
       - 'memory_use'
       - 'memory_use_percent'
+      - 'cpu_use_percent'
+      - 'cpu_temp'
+      - 'docker_cpu_use'
 
   - platform: uptime
     name: HASS uptime

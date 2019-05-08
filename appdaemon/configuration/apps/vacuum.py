@@ -191,7 +191,8 @@ class NotifyOnCleaningDay(AppBase):
     def configure(self) -> None:
         """Configure."""
         self.run_daily(self.notify_on_cleaning_day,
-                       self.parse_time(self.properties[CONF_REMINDER_TIME]))
+                       self.parse_time(self.properties[CONF_REMINDER_TIME]),
+                       constrain_app_enabled=1)
 
     def notify_on_cleaning_day(self, kwargs: dict) -> None:
         """Send notification in the morning to remind of cleaning day."""

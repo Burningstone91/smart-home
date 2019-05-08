@@ -41,14 +41,10 @@ binary_sensor:
     probability_threshold: 0.8
     observations:
         - entity_id: 'input_select.dimitri_presence'
-          prob_given_true: 1.0
-          prob_given_false: 0.56
+          prob_given_true: 0.61 #61% chance dimitri is sleeping if he is home
+          prob_given_false: 0.49 #49% chance dimitri is not sleeping if he is home
           platform: 'state'
-          to_state: 'Zu Hause'
-        - entity_id: 'input_select.house_presence'
-          prob_given_true: 0.0
-          platform: 'state'
-          to_state: 'Ferien'
+          to_state: 'zu Hause'
         - entity_id: 'group.all_lights'
           prob_given_true: 1.0
           prob_given_false: 0.4
@@ -60,7 +56,7 @@ binary_sensor:
           platform: 'state'
           to_state: 'on'
         - entity_id: 'remote.wohnzimmer'
-          prob_given_true: 1.0
+          prob_given_true: 0.38
           prob_given_false: 0.2
           platform: 'state'
           to_state: 'off'

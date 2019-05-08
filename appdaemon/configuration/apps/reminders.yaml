@@ -7,7 +7,7 @@ remind_new_battery_key_dimitri:
   properties:
     title: "Batterie wechseln"
     message: "Batterien an Dimitri's Schlüssel wechseln!"
-    reminder_date: "30.04.2019"
+    reminder_date: "01.05.2019"
     reminder_time: "18:50:00"
     repeat:
       type: months

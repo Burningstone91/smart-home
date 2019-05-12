@@ -2,12 +2,24 @@ climate_app:
   module: climate
   class: ClimateAutomation
   entities:
-    humidity_sensors: sensor.luftfeuchtigkeit_schlafzimmer,sensor.luftfeuchtigkeit_buero,sensor.luftfeuchtigkeit_ankleidezimmer,sensor.luftfeuchtigkeit_bad_klein
-    temperature_senors: sensor.temperatur_schlafzimmer,sensor.temperatur_buero,sensor.temperatur_ankleidezimmer
+    humidity_sensors:
+      schlafzimmer: sensor.luftfeuchtigkeit_schlafzimmer
+      buero: sensor.luftfeuchtigkeit_buero
+      ankleidezimmer: sensor.luftfeuchtigkeit_ankleidezimmer
+      bad_klein: sensor.luftfeuchtigkeit_bad_klein
+    temperature_sensors:
+      schlafzimmer: sensor.temperatur_schlafzimmer
+      buero: sensor.temperatur_buero
+      ankleidezimmer: sensor.temperatur_ankleidezimmer
+      bad_klein: sensor.temperatur_bad_klein
     average_temperature_sensor: sensor.averagetemperature
     window_sensors: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche
   properties:
-    humidity_room: 60
+    thresholds:
+      schlafzimmer: 60
+      buero: 60
+      ankleidezimmer: 60
+      bad_klein: 70
 
 notify_on_high_humidity:
   module: climate

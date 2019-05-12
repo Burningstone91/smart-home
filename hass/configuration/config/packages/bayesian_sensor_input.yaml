@@ -1,0 +1,137 @@
+binary_sensor:
+  - platform: template
+    sensors:
+      dimitri_home_not_sleeping:
+        friendly_name: "Dimitri home and not sleeping"
+        value_template: >-
+          {{ is_state('input_select.dimitri_presence', 'zu Hause')
+             and is_state('input_boolean.sleep_mode', 'off') }}
+
+      lights_off_sleeping:
+        friendly_name: "Lights off and Dimitri sleeping"
+        value_template: >-
+          {{ is_state('group.all_lights', 'off')
+             and is_state('input_boolean.sleep_mode', 'on') }}
+
+      lights_off_not_sleeping:
+        friendly_name: "Lights off and Dimitri not sleeping"
+        value_template: >-
+          {{ is_state('group.all_lights', 'off')
+             and is_state('input_boolean.sleep_mode', 'off') }}
+
+      dimitri_phone_charging_sleeping:
+        friendly_name: "Dimitri phone charging and sleeping"
+        value_template: >-
+          {{ is_state('input_boolean.charging_phone_dimitri', 'on')
+             and is_state('input_boolean.sleep_mode', 'on') }}
+
+      dimitri_phone_charging_not_sleeping:
+        friendly_name: "Dimitri phone charging and not sleeping"
+        value_template: >-
+          {{ is_state('input_boolean.charging_phone_dimitri', 'on')
+             and is_state('input_boolean.sleep_mode', 'off') }}
+
+      remote_off_sleeping:
+        friendly_name: "Dimitri phone charging and not sleeping"
+        value_template: >-
+          {{ is_state('remote.wohnzimmer', 'off')
+             and is_state('input_boolean.sleep_mode', 'on') }}
+
+      remote_off_not_sleeping:
+        friendly_name: "Remote off and Dimitri not sleeping"
+        value_template: >-
+          {{ is_state('remote.wohnzimmer', 'off')
+             and is_state('input_boolean.sleep_mode', 'off') }}
+
+      night_sleeping:
+        friendly_name: "Night and Dimitri sleeping"
+        value_template: >-
+          {{ is_state('sensor.nacht_sensor', 'nacht')
+             and is_state('input_boolean.sleep_mode', 'on') }}
+
+      night_not_sleeping:
+        friendly_name: "Night and Dimitri not sleeping"
+        value_template: >-
+          {{ is_state('sensor.nacht_sensor', 'nacht')
+             and is_state('input_boolean.sleep_mode', 'off') }}
+
+sensor:
+  - platform: history_stats
+    name: Time Dimitri sleeping
+    entity_id: input_boolean.sleep_mode
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time Dimitri home and not sleeping
+    entity_id: binary_sensor.dimitri_home_not_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time lights off and Dimitri sleeping
+    entity_id: binary_sensor.lights_off_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time lights off and Dimitri not sleeping
+    entity_id: binary_sensor.lights_off_not_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time Dimitri phone charging and sleeping
+    entity_id: binary_sensor.dimitri_phone_charging_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time Dimitri phone charging and not sleeping
+    entity_id: binary_sensor.dimitri_phone_charging_not_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time remote off and Dimitri sleeping
+    entity_id: binary_sensor.remote_off_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time remote off and Dimitri not sleeping
+    entity_id: binary_sensor.remote_off_not_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time night and Dimitri sleeping
+    entity_id: binary_sensor.night_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: Time night and Dimitri not sleeping
+    entity_id: binary_sensor.night_not_sleeping
+    state: 'on'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - 7 * 86400 }}'
+    end: '{{ now() }}'

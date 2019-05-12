@@ -12,6 +12,7 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Tür Wohnung'
+        
   - platform: template
     sensors:
       count_lights:
@@ -23,11 +24,47 @@ sensor:
             states.light.ankleidezimmer ] %}
           {% set findstates = [ 'on', 'open' ] %}
           {{ entities | selectattr('state','in',findstates) | list | length }}
+
   - platform: time_date
     display_options:
       - 'time'
       - 'date'
       - 'date_time'
+
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+    scan_interval:
+      minutes: 5
 
 input_select:
   house_presence:

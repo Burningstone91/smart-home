@@ -7,3 +7,12 @@ include:
     - device_tracker.dimitri_pc
     - sensor.nacht_sensor
     - input_boolean.sleep_mode
+    - binary_sensor.dimitri_home_not_sleeping
+    - binary_sensor.lights_off_sleeping
+    - binary_sensor.lights_off_not_sleeping
+    - binary_sensor.dimitri_phone_charging_sleeping
+    - binary_sensor.dimitri_phone_charging_not_sleeping
+    - binary_sensor.remote_off_sleeping
+    - binary_sensor.remote_off_not_sleeping
+    - binary_sensor.night_sleeping
+    - binary_sensor.night_not_sleeping

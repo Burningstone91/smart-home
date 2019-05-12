@@ -219,3 +219,28 @@ remind_new_battery_key_sabrina:
   name: Benachrichtige wenn die Batterie des Nut mini am Schlüssel gewechselt werden sollte
   initial: True
   icon: mdi:battery-alert
+
+remind_clean_oven:
+  name: Erinnerung an Backofen reinigen
+  initial: True
+  icon: mdi:broom
+
+remind_clean_dishwasher:
+  name: Erinnerung an Abwaschmaschine reinigen
+  initial: True
+  icon: mdi:broom
+
+remind_clean_wash_machine:
+  name: Erinnerung an Waschmaschine reinigen
+  initial: True
+  icon: mdi:broom
+
+remind_clean_air_filter:
+  name: Erinnerung an Luftfilter reinigen
+  initial: True
+  icon: mdi:broom
+
+remind_backup:
+  name: Erinnerung an Backup
+  initial: True
+  icon: mdi:broom

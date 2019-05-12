@@ -41,13 +41,13 @@ binary_sensor:
     probability_threshold: 0.8
     observations:
         - entity_id: 'input_select.dimitri_presence'
-          prob_given_true: 0.61 #61% chance dimitri is sleeping if he is home
-          prob_given_false: 0.49 #49% chance dimitri is not sleeping if he is home
+          prob_given_true: 0.95 #95% chance that Dimitri is home, if he is sleeping
+          prob_given_false: 0.49 #% chance Dimitri is home, if he is not sleeping
           platform: 'state'
           to_state: 'zu Hause'
         - entity_id: 'group.all_lights'
-          prob_given_true: 1.0
-          prob_given_false: 0.4
+          prob_given_true: 0.4
+          prob_given_false: 0.6
           platform: 'state'
           to_state: 'off'
         - entity_id: 'input_boolean.charging_phone_dimitri'
@@ -60,15 +60,10 @@ binary_sensor:
           prob_given_false: 0.2
           platform: 'state'
           to_state: 'off'
-        - entity_id: 'device_tracker.dimitri_pc'
-          prob_given_true: 0.05
-          prob_given_false: 0.18
-          platform: 'state'
-          to_state: 'home'
         - entity_id: 'sensor.nacht_sensor'
           prob_given_true: 0.7
           platform: 'state'
-          to_state: 'on'
+          to_state: 'nacht'
 
 switch:
   - platform: mystrom

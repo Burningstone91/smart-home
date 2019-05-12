@@ -3,8 +3,6 @@
       type: js
     - url: /local/lovelace_plugins/kiosk.js
       type: js
-    - url: /local/lovelace_plugins/grid-layout.js?v=0
-      type: module
     - url: /local/lovelace_plugins/auto-entities.js?v=1
       type: js
     - url: /local/lovelace_plugins/card-tools.js?v=1
@@ -17,7 +15,9 @@
       type: module
     - url: /local/lovelace_plugins/vertical-stack-in-card.js?v=0.1.2
       type: js
-    - url: /customcards/custom_ui/card-modder.js?
+    - url: /local/lovelace_plugins/card-modder.js?v=1
+      type: js
+    - url: /local/lovelace_plugins/dark-sky-weather-card.js?v=7.1
       type: module
 
 ##############################################################################
@@ -27,111 +27,113 @@
     icon: mdi:home-assistant
     panel: true
     cards:
-      - type: custom:grid-layout
-        column_definitions: 1fr 30fr 18fr 18fr 1fr
-        row_definitions: 1fr 20fr 20fr 1fr
-        card_margin: 4
+      - type: horizontal-stack
         cards:
-
-          - type: glance
-            column:
-              start: 2
-              width: 1
-            row:
-              start: 3
-              height: 1
-            config:
-              title: Modus
-              show_header_toggle: false
-              entities:
-                - input_boolean.guest_mode
-                - input_boolean.cleaning_mode
-                - input_boolean.sleep_mode
-              columns: 5
-          - type: entities
-            column:
-              start: 4
-              width: 1
-            row:
-              start: 2
-              height: 1
-            config:
-              title: Sabrina
-              show_header_toggle: false
-              entities:
-                - sensor.sabrina_home
-                - entity: input_select.sabrina_presence
-                  icon: mdi:walk
-                - entity: device_tracker.sabrina_phone
-                  name: Handy
-                  icon: mdi:cellphone-iphone
-                - input_boolean.ongoing_call_sabrina
-                - input_boolean.charging_phone_sabrina
-                - entity: sensor.sabrina
-                  name: "Schlüssel"
-                  icon: mdi:key
-              show_state: false
-              show_name: false
-              columns: 1
-          - type: entities
-            column:
-              start: 4
-              width: 1
-            row:
-              start: 3
-              height: 1
-            config:
-              title: Dimitri
-              show_header_toggle: false
-              entities:
-                - sensor.dimitri_home
-                - entity: input_select.dimitri_presence
-                  icon: mdi:walk
-                - entity: device_tracker.dimitri_phone
-                  name: Handy
-                  icon: mdi:cellphone-iphone
-                - entity: sensor.dimitri
-                  name: "Schlüssel"
-                  icon: mdi:key
-                - entity: binary_sensor.dimitri_schlaft
-                  name: Dimitri schläft
-                  icon: mdi:sleep
-                - entity: sensor.dimitri_wecker_uhrzeit
-                  name: Wecker
-                  icon: mdi:alarm
-                - input_boolean.ongoing_call_dimitri
-                - input_boolean.charging_phone_dimitri
-              show_state: false
-              show_name: false
-              columns: 1
-          - type: entities
-            column:
-              start: 3
-              width: 1
-            row:
-              start: 2
-              height: 1
-            config:
-              title: Wohnung
-              show_header_toggle: false
-              entities:
-                - input_select.alarm_state
-                - sensor.tuer_wohnung
-                - input_select.last_motion
-                - input_select.house_presence
-              show_name: false
-              columns: 1
-          - type: media-control
-            column:
-              start: 3
-              width: 1
-            row:
-              start: 3
-              height: 1
-            config:
-              title: Spotify
-              show_header_toggle: false
-              entity: media_player.spotify
+          - type: 'custom:dark-sky-weather-card'
+            entity_current_conditions: sensor.dark_sky_icon
+            entity_temperature: sensor.dark_sky_temperature
+            entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1d
+            entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2d
+            entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3d
+            entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4d
+            entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5d
+            entity_forecast_icon_1: sensor.dark_sky_icon_1d
+            entity_forecast_icon_2: sensor.dark_sky_icon_2d
+            entity_forecast_icon_3: sensor.dark_sky_icon_3d
+            entity_forecast_icon_4: sensor.dark_sky_icon_4d
+            entity_forecast_icon_5: sensor.dark_sky_icon_5d
+            entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0d
+            entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1d
+            entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2d
+            entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3d
+            entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4d
+            entity_summary_1: sensor.dark_sky_summary_1d
+            entity_summary_2: sensor.dark_sky_summary_2d
+            entity_summary_3: sensor.dark_sky_summary_3d
+            entity_summary_4: sensor.dark_sky_summary_4d
+            entity_summary_5: sensor.dark_sky_summary_5d
+            ## Optional Parameters ##
+            entity_sun: sun.sun
+            entity_visibility: sensor.dark_sky_visibility
+            entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0d
+            entity_wind_bearing: sensor.dark_sky_wind_bearing
+            entity_wind_speed: sensor.dark_sky_wind_speed
+            entity_humidity: sensor.dark_sky_humidity
+            entity_pressure: sensor.dark_sky_pressure
+            entity_apparent_temp: sensor.dark_sky_apparent_temperature
+            entity_daily_summary: sensor.dark_sky_daily_summary
+            entity_pop: sensor.dark_sky_precip_probability
+            entity_pop_intensity: sensor.dark_sky_precip_intensity
+            entity_pop_1: sensor.dark_sky_precip_probability_1d
+            entity_pop_2: sensor.dark_sky_precip_probability_2d
+            entity_pop_3: sensor.dark_sky_precip_probability_3d
+            entity_pop_4: sensor.dark_sky_precip_probability_4d
+            entity_pop_5: sensor.dark_sky_precip_probability_5d
+          - type: vertical-stack
+            cards:
+              - type: glance
+                title: Modus
+                show_header_toggle: false
+                entities:
+                  - input_boolean.guest_mode
+                  - input_boolean.cleaning_mode
+                  - input_boolean.sleep_mode
+              - type: entities
+                title: Sabrina
+                show_header_toggle: false
+                entities:
+                  - sensor.sabrina_home 
+                  - entity: input_select.sabrina_presence
+                    icon: mdi:walk
+                  - entity: device_tracker.sabrina_phone
+                    name: Handy
+                    icon: mdi:cellphone-iphone
+                  - input_boolean.ongoing_call_sabrina
+                  - input_boolean.charging_phone_sabrina
+                  - entity: sensor.sabrina
+                    name: "Schlüssel"
+                    icon: mdi:key
+                show_state: false
+                show_name: false
+              - type: entities
+                title: Dimitri
+                show_header_toggle: false
+                entities:
+                  - sensor.dimitri_home
+                  - entity: input_select.dimitri_presence
+                    icon: mdi:walk
+                  - entity: device_tracker.dimitri_phone
+                    name: Handy
+                    icon: mdi:cellphone-iphone
+                  - entity: sensor.dimitri
+                    name: "Schlüssel"
+                    icon: mdi:key
+                  - entity: binary_sensor.dimitri_schlaft
+                    name: Dimitri schläft
+                    icon: mdi:sleep
+                  - entity: sensor.dimitri_wecker_uhrzeit
+                    name: Wecker
+                    icon: mdi:alarm
+                  - input_boolean.ongoing_call_dimitri
+                  - input_boolean.charging_phone_dimitri
+                show_state: false
+                show_name: false
+          - type: vertical-stack
+            cards:
+              - type: entities
+                title: Wohnung
+                show_header_toggle: false
+                entities:
+                  - input_select.alarm_state
+                  - sensor.tuer_wohnung
+                  - input_select.last_motion
+                  - input_select.house_presence
+                show_name: false
+                columns: 1
+              - type: media-control
+                title: Spotify
+                show_header_toggle: false
+                entity: media_player.spotify
 
 ##############################################################################
 
@@ -242,6 +244,11 @@
             entities:
               - input_boolean.remind_new_battery_key_dimitri
               - input_boolean.remind_new_battery_key_sabrina
+              - input_boolean.remind_clean_oven
+              - input_boolean.remind_clean_dishwasher
+              - input_boolean.remind_clean_wash_machine
+              - input_boolean.remind_clean_air_filter
+              - input_boolean.remind_backup
         
 
 ##############################################################################
@@ -641,24 +648,24 @@
         cards:
         - type: vertical-stack
           cards: 
-            - type: custom:bar-card
-              title_position: inside
-              show_icon: true
-              align: split
-              padding: 4px
-              card_style: 
-                border-radius: 5px
-              columns: 1
-              max: 100
-              entities:
-                - entity: sensor.speedtest_ping
-                  severity:
-                  - value: 20
-                    color: '#1db954'
-                  - value: 30
-                    color: '#bf9540'
-                  - value: 50
-                    color: '#bf4040'
+            - type: custom:mini-graph-card
+              entities: 
+                - sensor.speedtest_ping
+              height: 50
+              line_width: 2
+              font_size: 70
+              hours_to_show: 168
+              points_per_hour: 1
+              show:
+                extrema: true
+                fill: true
+              color_thresholds:
+                - value: 20
+                  color: '#1db954'
+                - value: 30
+                  color: '#bf9540'
+                - value: 50
+                  color: '#bf4040'
                     
             - type: horizontal-stack
               cards:
@@ -694,132 +701,84 @@
                       color: "#FFFF00"
                     - value: 13
                       color: "#3498db"
-
-        - type: vertical-stack
-          cards:
-            - type: entities
-              show_header_toggle: off
-              entities:
-                - type: section
-                  label: HASS------------Intel NUC i3------------Docker
-                - type: custom:bar-card
-                  title_position: inside
-                  entity: sensor.hass_uptime
-                  title: HASS Uptime
-                  align: center
-                  padding: 5px
-                  max: 60
-                  card_style: 
-                    border-radius: 5px
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.nuc_cpu_used
-                      title: CPU
-                      severity:
-                        - value: 20
-                          color: '#1db954'
-                        - value: 50
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.nuc_ram_used
-                      title: RAM
-                      severity:
-                        - value: 50
-                          color: '#1db954'
-                        - value: 70
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                    - entity: sensor.nuc_ram_used_2
-                      title: RAM
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.nuc_disk_used
-                      title: Disk
-                      severity:
-                        - value: 50
-                          color: '#1db954'
-                        - value: 70
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                    - entity: sensor.nuc_disk_used_2
-                      title: Disk
-
             - type: entities
               show_header_toggle: off
               entities:
                 - type: section
                   label: NAS------------Synology DS-216j------------2x WD Red 6TB
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.volume_used_volume_1
-                      title: Disk
-                      icon: mdi:harddisk
-                      severity:
-                        - value: 50
-                          color: '#1db954'
-                        - value: 70
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                    - entity: sensor.used_space_volume_1
-                      title: Disk
-                      icon: mdi:harddisk
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.cpu_load_total
-                      title: CPU
-                      icon: mdi:memory
-                      severity:
-                        - value: 20
-                          color: '#1db954'
-                        - value: 50
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                    - entity: sensor.memory_usage_real
-                      title: RAM
-                      icon: mdi:memory
-                      severity:
-                        - value: 50
-                          color: '#1db954'
-                        - value: 70
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
+                - type: custom:vertical-stack-in-card
+                  cards:
+                    - type: horizontal-stack
+                      cards:
+                        - type: custom:card-modder
+                          card: 
+                            type: picture
+                            image: /local/devices/NAS.jpg
+                          style:                 
+                            border-radius: 5px
+                        - type: vertical-stack
+                          cards:
+                            - type: custom:bar-card
+                              align: split
+                              show_icon: true
+                              padding: 4px
+                              card_style: 
+                                border-radius: 5px
+                              entities:
+                                - entity: sensor.used_space_volume_1
+                                  title: Disk
+                                  icon: mdi:harddisk    
+                            - type: custom:bar-card
+                              align: split
+                              show_icon: true
+                              padding: 4px
+                              card_style: 
+                                border-radius: 5px
+                              entities:
+                                - entity: sensor.volume_used_volume_1
+                                  title: Disk %
+                                  icon: mdi:harddisk
+                                  severity:
+                                    - value: 50
+                                      color: '#1db954'
+                                    - value: 70
+                                      color: '#bf9540'
+                                    - value: 100
+                                      color: '#bf4040'
+                            - type: custom:bar-card
+                              align: split
+                              show_icon: true
+                              padding: 4px
+                              card_style: 
+                                border-radius: 5px
+                              entities:
+                                - entity: sensor.cpu_load_total
+                                  title: CPU
+                                  icon: mdi:memory
+                                  severity:
+                                    - value: 20
+                                      color: '#1db954'
+                                    - value: 50
+                                      color: '#bf9540'
+                                    - value: 100
+                                      color: '#bf4040'
+                            - type: custom:bar-card
+                              align: split
+                              show_icon: true
+                              padding: 4px
+                              card_style: 
+                                border-radius: 5px
+                              entities:
+                                - entity: sensor.memory_usage_real
+                                  title: RAM %
+                                  icon: mdi:memory
+                                  severity:
+                                    - value: 50
+                                      color: '#1db954'
+                                    - value: 70
+                                      color: '#bf9540'
+                                    - value: 100
+                                      color: '#bf4040'
                 - type: custom:bar-card
                   align: split
                   show_icon: true
@@ -847,37 +806,207 @@
                         - value: 60
                           color: '#bf9540'
                         - value: 80
-                          color: '#bf4040'
-
+                          color: '#bf4040'           
         - type: vertical-stack
           cards:
+            - type: entities
+              show_header_toggle: off
+              entities:
+                - type: section
+                  label: HASS------------Intel NUC i3------------Docker
+                - type: custom:vertical-stack-in-card
+                  cards:
+                    - type: horizontal-stack
+                      cards:
+                        - type: custom:card-modder
+                          card: 
+                            type: picture
+                            image: /local/devices/NUC.jpg
+                          style:                 
+                            border-radius: 5px
+                        - type: vertical-stack
+                          cards:
+                            - type: custom:bar-card
+                              title_position: inside
+                              entity: sensor.uptime_nuc
+                              title: NUC Uptime
+                              align: center
+                              padding: 5px
+                              max: 60
+                              card_style: 
+                                border-radius: 5px
+                            - type: custom:bar-card
+                              title_position: inside
+                              entity: sensor.uptime_hass
+                              title: HASS Uptime
+                              align: center
+                              padding: 5px
+                              max: 60
+                              card_style: 
+                                border-radius: 5px
+                            - type: custom:bar-card
+                              align: split
+                              show_icon: true
+                              padding: 4px
+                              card_style: 
+                                border-radius: 5px
+                              entities:
+                                - entity: sensor.nuc_cpu_used
+                                  title: CPU
+                                  severity:
+                                    - value: 20
+                                      color: '#1db954'
+                                    - value: 50
+                                      color: '#bf9540'
+                                    - value: 100
+                                      color: '#bf4040'
+                - type: custom:bar-card
+                  align: split
+                  show_icon: true
+                  padding: 4px
+                  columns: 2
+                  card_style: 
+                    border-radius: 5px
+                  entities:
+                    - entity: sensor.nuc_ram_used_2
+                      title: RAM %
+                      severity:
+                        - value: 50
+                          color: '#1db954'
+                        - value: 70
+                          color: '#bf9540'
+                        - value: 100
+                          color: '#bf4040'
+                    - entity: sensor.nuc_ram_used
+                      title: RAM                               
+                - type: custom:bar-card
+                  align: split
+                  show_icon: true
+                  padding: 4px
+                  columns: 2
+                  card_style: 
+                    border-radius: 5px
+                  entities:
+                    - entity: sensor.nuc_disk_used
+                      title: Disk % 
+                      severity:
+                        - value: 50
+                          color: '#1db954'
+                        - value: 70
+                          color: '#bf9540'
+                        - value: 100
+                          color: '#bf4040'
+                    - entity: sensor.nuc_disk_used_2
+                      title: Disk
+
             - type: glance
-              title: Docker Services
               show_header_toggle: false
               show_state: false
+              columns: 5
               entities:
-                - switch.appdaemon
-                - switch.grafana
-                - switch.dockermon
-                - switch.hass
-                - switch.influxdb
-                - switch.mqtt
-                - switch.deconz
-                - switch.nginx
-                - switch.glances
+                - entity: switch.hass
+                  name: HASS
+                  icon: mdi:home-assistant
+                - entity: switch.appdaemon
+                  name: AppDaemon
+                  icon: mdi:language-python
+                - entity: switch.nginx
+                  name: Nginx
+                  icon: mdi:shield-key
+                - entity: switch.dockermon
+                  name: Dockermon
+                  icon: mdi:docker
+                - entity: switch.glances
+                  name: Glances
+                  icon: mdi:chart-pie
+                - entity: switch.influxdb
+                  name: InfluxDB
+                  icon: mdi:database
+                - entity: switch.grafana
+                  name: Grafana
+                  icon: mdi:chart-areaspline
+                - entity: switch.mqtt
+                  name: MQTT
+                  icon: mdi:switch
+                - entity: switch.deconz
+                  name: Deconz
+                  icon: mdi:router-wireless
+
             - type: entities
               show_header_toggle: false
-              show_icon: false
               entities:
-                - entity: sensor.hass_available
-                  icon: mdi:home-assistant
-                - entity: sensor.hass_installed
-                  icon: mdi:home-assistant
-                - entity: sensor.appdaemon_available
-                  icon: mdi:language-python
-                - entity: sensor.appdaemon_installed
-                  name: AppDaemon installed
-                  icon: mdi:language-python
+                - type: section 
+                  label: Home Assistant
+                - type: custom:bar-card
+                  title_position: inside
+                  align: center
+                  padding: 4px
+                  card_style: 
+                    border-radius: 5px
+                  columns: 2
+                  entities:
+                    - entity: sensor.hass_installed
+                      title: Current
+                    - entity: sensor.hass_available
+                      title: Latest
+                - type: section 
+                  label: AppDaemon
+                - type: custom:bar-card
+                  title_position: inside
+                  align: center
+                  padding: 4px
+                  card_style: 
+                    border-radius: 5px
+                  columns: 2
+                  entities:
+                    - entity: sensor.appdaemon_installed
+                      title: Current
+                    - entity: sensor.appdaemon_available
+                      title: Latest
+                      
+        - type: vertical-stack
+          cards:          
+            - type: entities
+              show_header_toggle: off
+              entities:
+                - type: section
+                  label: BLE Presence------------Raspberry Pi------------Raspbian
+                - type: custom:vertical-stack-in-card
+                  cards:
+                    - type: horizontal-stack
+                      cards:
+                        - type: custom:card-modder
+                          card: 
+                            type: picture
+                            image: /local/devices/PI.jpg
+                          style:                 
+                            border-radius: 5px
+                        - type: vertical-stack
+                          cards:
+                            - type: custom:bar-card
+                              title_position: inside
+                              align: center
+                              padding: 4px
+                              card_style: 
+                                border-radius: 5px
+                              columns: 1
+                              entities:
+                                - entity: sensor.pi_bedroom
+                                  show_value: false
+                                - entity: sensor.pi_dressroom
+                                  show_value: false
+                                - entity: sensor.pi_livingroom
+                                  show_value: false
+                                - entity: sensor.pi_office
+                                  show_value: false
+                              severity:
+                                - value: 0
+                                  color: '#bf4040'
+                                - value: 50
+                                  color: '#bf4040'
+                                - value: 100
+                                  color: '#1db954'
+                    
             - type: entities
               title: Batterien
               show_header_toggle: false

@@ -13,6 +13,7 @@ known_devices.yaml
 pyozw.sqlite
 secrets.yaml
 *.xml
+*.html
 grafana/
 ha-dockermon/
 influxdb/
@@ -21,3 +22,4 @@ mqtt/
 appdaemon/configuration/logs/
 appdaemon/configuration/apps/__pycache__/
 shared/
+__pycache__/

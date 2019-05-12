@@ -35,7 +35,6 @@ from constants import (
 
 CONF_WINDOW_SENSORS = 'window_sensors'
 CONF_HUMIDITY_SENSORS = 'humidity_sensors'
-CONF_TEMPERATURE_SENSORS = 'temperature_sensors'
 CONF_THRESHOLDS = 'thresholds'
 CONF_HUMIDITY_ROOM = 'humidity_room'
 
@@ -49,26 +48,13 @@ class ClimateAutomation(AppBase):
 
     APP_SCHEMA = APP_SCHEMA.extend({
         CONF_ENTITIES: vol.Schema({
-            vol.Required(CONF_HUMIDITY_SENSORS): vol.Schema({
-                str: vol_help.entity_id,
-            }),
-            vol.Required(CONF_TEMPERATURE_SENSORS): vol.Schema({
-                str: vol_help.entity_id,
-            }),
+            vol.Required(CONF_HUMIDITY_SENSORS): vol_help.entity_id_list,
             vol.Required(CONF_WINDOW_SENSORS): vol_help.entity_id_list,
         }, extra=vol.ALLOW_EXTRA),
         CONF_PROPERTIES: vol.Schema({
-            CONF_THRESHOLDS: vol.Schema({
-                str: int,
-            }),
+            vol.Required(CONF_HUMIDITY_ROOM): int,
         }, extra=vol.ALLOW_EXTRA)
     })
-
-    def configure(self):
-        """Configure."""
-        self.humidity_sensors = self.entities[CONF_HUMIDITY_SENSORS]
-        self.temp_sensors = self.entities[CONF_TEMPERATURE_SENSORS]
-        self.thresholds = self.properties[CONF_THRESHOLDS]
 
     @property
     def window_is_open(self) -> bool:
@@ -88,13 +74,12 @@ class ClimateAutomation(AppBase):
     @property
     def which_room_high_humidity(self) -> list:
         return [
-            self.room_name(room) for room, sensor in self.humidity_sensors.items()
-            if float(self.get_state(sensor)) > float(self.thresholds[room])
+            self.room_name(room) for room in self.entities[CONF_HUMIDITY_SENSORS].split(',')
+            if float(self.get_state(room)) > float(self.properties[CONF_HUMIDITY_ROOM])
         ]
 
-    @staticmethod
-    def room_name(room: str) -> str:
-        return room.replace('_', ' ').capitalize()
+    def room_name(self, room: str) -> str:
+        return room.split('.')[1].split('_', 1)[-1].capitalize()
 
 
 class NotifyOnHighHumidity(AppBase):
@@ -153,7 +138,7 @@ class NotifyOnWindowOpen(AppBase):
                 self.send_notification,
                 entity,
                 new=OPEN,
-                duration=self.window_open_threshold * 60,
+                duration=self .window_open_threshold * 60,
                 constrain_app_enabled=1)
 
     def send_notification(self, entity: Union[str, dict], attribute: str,

@@ -33,3 +33,93 @@ remind_new_battery_key_sabrina:
   notifications:
     targets: Dimitri
     interval: 60
+
+remind_clean_oven:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "Backofen reinigen!"
+    message: "Zeit den Backofen zu reinigen!"
+    reminder_date: "01.05.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 1
+  notifications:
+    targets: Dimitri
+    interval: 60
+
+remind_clean_dishwasher:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "Abwaschmaschine reinigen!"
+    message: "Zeit die Abwaschmaschine zu reinigen!"
+    reminder_date: "08.05.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 1
+  notifications:
+    targets: Dimitri
+    interval: 60
+
+remind_clean_wash_machine:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "Waschmaschine reinigen!"
+    message: "Zeit die Waschmaschine zu reinigen!"
+    reminder_date: "15.05.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 1
+  notifications:
+    targets: Dimitri
+    interval: 60
+
+remind_clean_air_filter:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "Luftfilter reinigen!"
+    message: "Zeit die Luftfilter zu reinigen!"
+    reminder_date: "22.05.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 1
+  notifications:
+    targets: Dimitri
+    interval: 60
+
+remind_backup:
+  module: reminder
+  class: ReminderAutomation
+  dependencies:
+    - presence_app
+    - notification_app
+  properties:
+    title: "BAckups!"
+    message: "Zeit für die monatlichen Backups!"
+    reminder_date: "29.05.2019"
+    reminder_time: "18:50:00"
+    repeat:
+      type: months
+      frequency: 1
+  notifications:
+    targets: Dimitri
+    interval: 60

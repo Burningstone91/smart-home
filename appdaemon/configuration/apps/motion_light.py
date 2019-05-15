@@ -4,7 +4,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_BRIGHTNESS_LEVEL, CONF_DELAY, CONF_ENTITIES,
@@ -63,7 +63,7 @@ NIGHT = 'night'
 DAY_STATES = [MORNING, DAY, NIGHT]
 
 
-class MotionLightAutomation(AppBase):
+class MotionLightAutomation(AppBase):  # pylint: disable=too-many-instance-attributes
     """Define a base feature for motion based lights."""
 
     APP_SCHEMA = APP_SCHEMA.extend({
@@ -109,7 +109,7 @@ class MotionLightAutomation(AppBase):
         for lights in self.lights_map.values():
             for light in lights.split(','):
                 self.all_lights.add(light)
-        
+
         self.room_name = self.motion_sensor.split('.')[1].split('_', 1)[-1].capitalize()
 
         self.listen_state(
@@ -193,12 +193,11 @@ class MotionLightAutomation(AppBase):
                 self.day_state_map[MORNING],
                 self.day_state_map[DAY]):
             return MORNING
-        elif self.now_is_between(
+        if self.now_is_between(
                 self.day_state_map[DAY],
                 self.day_state_map[NIGHT]):
             return DAY
-        else:
-            return NIGHT
+        return NIGHT
 
     @property
     def lights(self) -> list:

@@ -5,7 +5,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_TARGETS, ON, OPEN
@@ -84,7 +84,7 @@ class SecurityAutomation(AppBase):
                               constrain_app_enabled=1)
 
     @property
-    def alarm_state(self) -> AlarmType:
+    def alarm_state(self) -> "AlarmType":
         """Return the current state of the security system."""
         return self.AlarmType(self.get_state(HOUSE[ALARM_STATE]))
 
@@ -112,15 +112,16 @@ class SecurityAutomation(AppBase):
                      f"{entity.split('.')[1].split('_')[1].capitalize()}"
                      f" wurde geöffnet!!!")
 
-#################test presence first############# if presence works, also change enabled presence for lights
-################# need a way to cancel flash lights ####################################
-        #if new == 'on' or new == 'offen':
-        #    self.log("Lichter werden jetzt blinken!")
-        #    for light in self.alarm_lights:
-        #        self.turn_on(light, brightness=255, color_name='white')
-        #        self.flash_lights(light)
+# test presence first
+# need a way to cancel flash lights
+        # if new == 'on' or new == 'offen':
+        #     self.log("Lichter werden jetzt blinken!")
+        #     for light in self.alarm_lights:
+        #         self.turn_on(light, brightness=255, color_name='white')
+        #         self.flash_lights(light)
 
     def flash_lights(self, light: str) -> None:
+        """Flash lights as long as alarm state is alert."""
         self.toggle(light)
         if self.self.alarm_state == self.AlarmType.alert:
             self.run_in(self.flash_lights(light), 1)
@@ -154,7 +155,7 @@ class DisarmOnArrival(AppBase):
                           HOUSE[PRESENCE_STATE],
                           constrain_app_enabled=1)
 
-    def someone_home(self, entity: Union[str, dict], attribute: str, 
+    def someone_home(self, entity: Union[str, dict], attribute: str,
                      old: str, new: str, kwargs: dict) -> None:
         """Disarm the security system when someone arrives."""
         someone_home_states = [self.presence_app.HouseState.someone.value,
@@ -183,7 +184,7 @@ class ArmDisarmCleaning(AppBase):
             self.security_app.alarm_state = self.security_app.AlarmType.armed_motion
             self.log("Pedro ist fertig. Schalte Bewegungssensoren wieder ein!")
 
-    
+
 class NotificationOnChange(AppBase):
     """Define a feature to send a notification when the alarm state changed."""
 
@@ -192,7 +193,7 @@ class NotificationOnChange(AppBase):
             vol.Required(CONF_TARGETS): vol.In(PERSONS.keys()),
         }, extra=vol.ALLOW_EXTRA),
     })
-    
+
     def configure(self):
         """Configure."""
         self.listen_state(self.alarm_state_changed,
@@ -241,7 +242,7 @@ class NotifyOnBadLoginAttempt(AppBase):
                           new='notifying')
 
     def bad_login_attempt(self, entity: Union[str, dict], attribute: str,
-                            old: str, new: str, kwargs: dict) -> None:
+                          old: str, new: str, kwargs: dict) -> None:
         """Send notification when bad login happened."""
         msg = self.get_state("persistent_notification.http_login",
                              attribute="message")

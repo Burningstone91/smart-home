@@ -24,3 +24,28 @@ sensor:
           n/a
           {% endif %}'
         friendly_name: 'Fenster Küche'
+
+################################# Abwaschmaschine Verbrauch #################################
+#  - platform: template
+#    sensors:
+#      dishwasher_power:
+#        friendly_name: "Verbrauch Abwaschmaschine"
+#        unit_of_measurement: "W"
+#        value_template: "{{ states.switch.schalter_abwaschmaschine.attributes.current_power_w }}"
+
+#switch:
+################################# Abwaschmaschine Switch #################################
+#  - platform: mystrom
+#    host: !secret switch_dishwasher_ip
+#    name: Schalter Abwaschmaschine
+
+#input_select:
+################################# Abwaschmaschine Status #################################
+#  dishwasher_status:
+#    name: Status Abwaschmaschine
+#    options:
+#      - Sauber
+#      - Dreckig
+#      - Läuft
+#      - Trocknung
+#    initial: Dreckig

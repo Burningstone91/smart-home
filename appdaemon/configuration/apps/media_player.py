@@ -26,7 +26,7 @@ SOURCE_ENTITY = 'source_entity'
 class MediaPlayerAutomation(AppBase):
     """Define a base feature for media player automations."""
 
-    class MediaItem:
+    class MediaItem:  # pylint: disable=too-few-public-methods
         """Define a Media item."""
 
         def __init__(self, media_player, playlist, source, **kwargs) -> None:
@@ -87,8 +87,8 @@ class MediaPlayerAutomation(AppBase):
     def shuffle(self, media_player: str) -> None:
         """Enables shuffle."""
         self.call_service(
-            'media_player/shuffle_set', 
-            entity_id=media_player, 
+            'media_player/shuffle_set',
+            entity_id=media_player,
             shuffle='true')
 
     def next_track(self, media_player: str) -> None:

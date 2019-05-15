@@ -5,7 +5,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_ENTITIES, CONF_INTERVAL, CONF_NOTIFICATIONS,
@@ -91,7 +91,7 @@ class VacuumAutomation(AppBase):
                           attribute=STATUS)
 
     @property
-    def vacuum_state(self) -> VacuumState:
+    def vacuum_state(self) -> "VacuumState":
         """Return the current state of the vacuum cleaner."""
         return self.get_state(self.vacuum, attribute='status')
 
@@ -101,7 +101,7 @@ class VacuumAutomation(AppBase):
         self.started_by_app = True
         self.log("Pedro startet die Reinigung!")
 
-    def cleaning_finished(self, entity: Union[str, dict], attribute: str, 
+    def cleaning_finished(self, entity: Union[str, dict], attribute: str,
                           old: str, new: str, kwargs: dict) -> None:
         """Deactive input boolean when cleaning cycle finished."""
         self.started_by_app = False
@@ -110,7 +110,7 @@ class VacuumAutomation(AppBase):
     def cancel_cleaning(self, entity: Union[str, dict], attribute: str,
                         old: str, new: str, kwargs: dict) -> None:
         """Cancel the cleaning cycle when someone arrives home."""
-        if ((not self.presence_app.noone_home and self.started_by_app) and 
+        if ((not self.presence_app.noone_home and self.started_by_app) and
                 self.vacuum_state == self.VacuumState.running.value):
             self.call_service('vacuum/return_to_base', entity_id=self.vacuum)
             self.started_by_app = False
@@ -125,7 +125,7 @@ class VacuumAutomation(AppBase):
                 self.turn_on(MODES[CLEANING_MODE])
             elif new == self.VacuumState.charging.value:
                 self.turn_off(MODES[CLEANING_MODE])
-    
+
 
 class NotifyWhenBinFull(AppBase):
     """Define a feature to send a notification when the bin is full."""
@@ -139,7 +139,7 @@ class NotifyWhenBinFull(AppBase):
             vol.Optional(CONF_INTERVAL): int,
         }, extra=vol.ALLOW_EXTRA),
     })
-    
+
     def configure(self) -> None:
         """Configure."""
         self.listen_state(self.notify_bin_full,
@@ -156,7 +156,7 @@ class NotifyWhenBinFull(AppBase):
                           new=False,
                           constrain_app_enabled=1)
 
-    def notify_bin_full(self, entity: Union[str, dict], attribute: str, 
+    def notify_bin_full(self, entity: Union[str, dict], attribute: str,
                         old: str, new: str, kwargs: dict) -> None:
         """Send repeating notification that bin should be emptied."""
         self.handles[BIN_FULL] = self.notification_app.notify(
@@ -168,7 +168,7 @@ class NotifyWhenBinFull(AppBase):
             interval=self.notifications['interval'] * 60)
         self.log("Abfalleimer voll! Benachrichtige zum Leeren.")
 
-    def bin_emptied(self, entity: Union[str, dict], attribute: str, 
+    def bin_emptied(self, entity: Union[str, dict], attribute: str,
                     old: str, new: str, kwargs: dict) -> None:
         """Cancel the notification when bin has been emptied."""
         if BIN_FULL in self.handles:

@@ -4,7 +4,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import APP_SCHEMA, AppBase
 from constants import (
     CONF_DELAY, CONF_ENTITIES, CONF_EVENT, CONF_PROPERTIES,
@@ -71,7 +71,7 @@ class SwitchBase(AppBase):
             kwargs[CONF_ACTION_ENTITY],
             **kwargs.get(CONF_PARAMETERS))
 
-        
+
 class ToggleOnStateChange(SwitchBase):
     """Define a feature to take action when an entity enters a state."""
 

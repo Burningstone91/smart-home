@@ -5,7 +5,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_PROPERTIES,
@@ -72,10 +72,12 @@ class ClimateAutomation(AppBase):
 
     @property
     def window_is_open(self) -> bool:
-        return not(not self.which_window_open)
+        """Return true if a window/door is open."""
+        return len(self.which_window_open) != 0
 
     @property
     def which_window_open(self) -> list:
+        """Return a list of open windows/doors."""
         return [
             window for window in self.entities[CONF_WINDOW_SENSORS].split(',')
             if self.get_state(window) == OPEN
@@ -83,10 +85,12 @@ class ClimateAutomation(AppBase):
 
     @property
     def humidity_in_room_high(self) -> bool:
-        return not(not self.which_room_high_humidity)
+        """Return true if humidity in a room is high."""
+        return len(self.which_room_high_humidity) != 0
 
     @property
     def which_room_high_humidity(self) -> list:
+        """Return a list of rooms with high humidity."""
         return [
             self.room_name(room) for room, sensor in self.humidity_sensors.items()
             if float(self.get_state(sensor)) > float(self.thresholds[room])
@@ -94,6 +98,7 @@ class ClimateAutomation(AppBase):
 
     @staticmethod
     def room_name(room: str) -> str:
+        """Return the friendly room name."""
         return room.replace('_', ' ').capitalize()
 
 

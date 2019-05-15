@@ -3,7 +3,7 @@ from datetime import datetime
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_INTERVAL, CONF_NOTIFICATIONS, CONF_PROPERTIES, CONF_TARGETS
@@ -78,7 +78,7 @@ class ReminderAutomation(AppBase):
         if days_to_reminder_date % divisor == 0:
             self.send_reminder()
             self.log("Erinnerungstag! Erinnerung gesendet.")
-        
+
     def send_reminder(self) -> None:
         """Send a repeating actionable push notification as a reminder."""
         self.handles[REMINDER] = self.notification_app.notify(
@@ -94,11 +94,8 @@ class ReminderAutomation(AppBase):
             }]})
 
     def disable_on_push_notification(self, event_name: str,
-                                    data: dict, kwargs: dict) -> None:
+                                     data: dict, kwargs: dict) -> None:
         """Disable reminder when 'done' got clicked on push notification."""
         if REMINDER in self.handles:
             self.handles.pop(REMINDER)()
             self.log("Aufgabe erledigt! Schalte Erinnerung aus.")
-
-
-

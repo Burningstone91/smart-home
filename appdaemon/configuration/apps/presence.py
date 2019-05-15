@@ -156,6 +156,7 @@ class PresenceAutomation(AppBase):
 
     @property
     def house_presence_state(self):
+        """Return current state of the house presence."""
         return self.get_state(HOUSE[PRESENCE_STATE])
 
     @property
@@ -166,7 +167,7 @@ class PresenceAutomation(AppBase):
     @property
     def someone_home(self) -> bool:
         """Return true if someone is home."""
-        return not (not self.persons_home)
+        return len(self.persons_home) != 0
 
     @property
     def noone_home(self) -> bool:

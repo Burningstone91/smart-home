@@ -5,12 +5,13 @@ import voluptuous as vol
 from appdaemon.plugins.hass.hassapi import Hass
 
 from house_config import HOUSE, MODES
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 
 
 CONF_CLASS = 'class'
 CONF_MODULE = 'module'
 CONF_DEPENDENCIES = 'dependencies'
+CONF_MANAGER = 'manager'
 
 CONF_DISABLED_STATES = 'disabled_states'
 CONF_PRESENCE = 'presence'
@@ -24,6 +25,7 @@ APP_SCHEMA = vol.Schema({
     vol.Required(CONF_MODULE): str,
     vol.Required(CONF_CLASS): str,
     vol.Optional(CONF_DEPENDENCIES): vol_help.ensure_list,
+    vol.Optional(CONF_MANAGER): str,
     vol.Optional(CONF_DISABLED_STATES): vol.Schema({
         vol.Optional(CONF_PRESENCE): str,
         vol.Optional(CONF_DAYS): str,
@@ -67,6 +69,8 @@ APP_SCHEMA = vol.Schema({
 #   - like this the app can use methods or variables from the dependent app
 #   - e.g. dependency 'presence_app' this means you can use methods/variables
 #     from the app 'presence_app.py' with self.presence_app.'method/variable'
+# Creates a reference to the manager app if defined
+# the app can then be used like self.manager.'method/variable'
 ##############################################################################
 
 
@@ -74,7 +78,7 @@ class AppBase(Hass):
     """Define a base automation object."""
 
     APP_SCHEMA = APP_SCHEMA
-    
+
     def initialize(self) -> None:
         """Initialize."""
 
@@ -99,6 +103,10 @@ class AppBase(Hass):
         for app in self.args.get('dependencies', {}):
             if not getattr(self, app, None):
                 setattr(self, app, self.get_app(app))
+
+        # Create a reference to the manager app
+        if self.args.get(CONF_MANAGER):
+            self.manager = getattr(self, self.args[CONF_MANAGER])
 
         # Run the app configuration if specified
         if hasattr(self, 'configure'):
@@ -136,5 +144,5 @@ class AppBase(Hass):
 
         if self.get_state(self.enable_input_boolean) == 'off':
             return False
-            
+
         return True

@@ -1,0 +1,24 @@
+dishwasher:
+  module: washer!!
+  class: WasherAutomation
+  entities:
+    power: sensor.dishwasher_power
+    status: input_select.dishwasher_status
+
+notify_dishwasher_done:
+  module: washer!!
+  class: NotifyWhenWasherDone
+  dependencies:
+    - notification_app
+    - presence_app
+    - dishwasher
+  manager: dishwasher
+  properties:
+    thresholds:
+      running: 10
+      drying: 2
+      clean: 0
+  notifications:
+    targets: Dimitri
+    message: "Abwaschmaschine ist fertig. Bitte leeren."
+    interval: 60

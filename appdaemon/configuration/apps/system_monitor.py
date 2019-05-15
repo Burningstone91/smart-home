@@ -5,7 +5,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
     CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_PROPERTIES,
@@ -106,7 +106,7 @@ class NotifyOnAppdaemonLogError(AppBase):
         """Configure."""
         self.listen_log(self.new_log)
 
-    def new_log(self, name: str, ts: str, level: str, message: str) -> None:
+    def new_log(self, name: str, timestamp: str, level: str, message: str) -> None:
         """Send notification when Appdaemon log shows an error."""
         if level in CRITICAL_LOG_STATES:
             self.notification_app.notify(
@@ -114,7 +114,7 @@ class NotifyOnAppdaemonLogError(AppBase):
                 level='emergency',
                 title="Appdaemon Fehler in Log!",
                 message=(f"Die App {name} hat den folgenden Fehler "
-                         f"um {ts} ausgelöst: {message}."),
+                         f"um {timestamp} ausgelöst: {message}."),
                 targets=self.notifications['targets'])
 
 

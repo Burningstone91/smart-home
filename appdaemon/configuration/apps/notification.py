@@ -14,7 +14,7 @@ from house_config import HOUSE, PERSONS, MODES
 #
 # ARGS:
 # yaml args:
-# 
+#
 # send method args:
 # notification_type: single, repeat (repeat every interval until cancelled
 # notification_level: emergency, home (emergency --> send immediately
@@ -58,9 +58,10 @@ class NotificationAutomation(AppBase):
         emergency = 'emergency'
         home = 'home'
 
+    # pylint: disable=too-few-public-methods,too-many-instance-attributes
     class Notification:
         """Define a notification object."""
-        
+
         def __init__(self, kind, level, title, message, targets, **kwargs):
             self.kind = kind
             self.level = level
@@ -124,7 +125,7 @@ class NotificationAutomation(AppBase):
     def send_briefing(self, person: str) -> None:
         """Send each notification on the briefing list for given person."""
         if person in self.briefing_list.keys():
-            for item, attribute in self.briefing_list[person].items():
+            for attribute in self.briefing_list[person].values():
                 self.call_service(f"notify/"
                                   f"{PERSONS[person][NOTIFIER].split('.')[1]}",
                                   title=attribute[TITLE],
@@ -153,7 +154,7 @@ class NotificationAutomation(AppBase):
                     break
             if not one_target_available:
                 self.add_item_to_briefing(notification)
-                    
+
         if notification.kind == self.NotificationType.single.value:
             handle = self.run_in(self.send, 1, notification=notification)
         else:

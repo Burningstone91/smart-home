@@ -4,7 +4,7 @@ from typing import Union
 
 import voluptuous as vol
 
-import voloptuous_helper as vol_help
+import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import CONF_ENTITIES, CONF_PROPERTIES, ON, PERSON
 from house_config import PERSONS
@@ -118,10 +118,7 @@ class RemoteAutomation(AppBase):
 
     def send_command(self, command: str, **kwargs: dict) -> None:
         """Send a command to the remote."""
-        if CONF_DEVICE in kwargs:
-            device_id = kwargs[CONF_DEVICE]
-        else:
-            device_id = self.current_device_id
+        device_id = kwargs.get(CONF_DEVICE, self.current_device_id)
         self.log(device_id)
 
         self.call_service(
@@ -183,7 +180,8 @@ class SceneLights(AppBase):
         """Get the specified light color for the given scene."""
         return self.scene_color_map.get(self.scene_name(scene), 'white')
 
-    def scene_name(self, scene: str) -> str:
+    @staticmethod
+    def scene_name(scene: str) -> str:
         """Convert the scene name to the correct format."""
         return scene.replace(' ', '_').lower()
 
@@ -248,4 +246,3 @@ class BrightenLightOnPause(AppBase):
             self.scene_lights_app.brighten_lights()
         elif key == PLAY:
             self.scene_lights_app.dim_lights()
-

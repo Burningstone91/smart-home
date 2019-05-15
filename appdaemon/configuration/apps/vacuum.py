@@ -85,15 +85,16 @@ class VacuumAutomation(AppBase):
         # cancel cycle if someone arrives home
         self.listen_state(self.cancel_cleaning, HOUSE[PRESENCE_STATE])
 
+        # notify when vacuum stuck
+        self.listen_state(self.vacuum_stuck,
+                          self.vacuum,
+                          attribute=STATUS,
+                          new=self.VacuumState.stuck.value)
+
         # turn on/off cleaning mode when cleaning/finished cleaning
         self.listen_state(self.set_cleaning_mode_input_boolean,
                           self.vacuum,
                           attribute=STATUS)
-
-    @property
-    def vacuum_state(self) -> "VacuumState":
-        """Return the current state of the vacuum cleaner."""
-        return self.get_state(self.vacuum, attribute='status')
 
     def start_cleaning(self, kwargs: dict) -> None:
         """Start the scheduled cleaning cycle."""
@@ -103,7 +104,7 @@ class VacuumAutomation(AppBase):
 
     def cleaning_finished(self, entity: Union[str, dict], attribute: str,
                           old: str, new: str, kwargs: dict) -> None:
-        """Deactive input boolean when cleaning cycle finished."""
+        """Deactivate input boolean when cleaning cycle finished."""
         self.started_by_app = False
         self.log("Pedro hat die Reinigung beendet")
 
@@ -116,6 +117,17 @@ class VacuumAutomation(AppBase):
             self.started_by_app = False
             self.log("Jemand ist gerade angekommen, beende Reiningung!")
 
+    def vacuum_stuck(self, entity: Union[str, dict], attribute: str,
+                     old: str, new: str, kwargs: dict) -> None:
+        """Notify that the vacuum is stuck."""
+        self.notification_app.notify(
+            kind='single',
+            level='emergency',
+            title="Pedro steckt fest!",
+            message="Pedro steckt fest und braucht Hilfe!",
+            targets=self.notifications['targets'])
+        self.log("Pedro steckt fest, sende Benachrichtigung.")
+
     def set_cleaning_mode_input_boolean(self, entity: Union[str, dict],
                                         attribute: str, old: str,
                                         new: str, kwargs: dict) -> None:
@@ -123,8 +135,14 @@ class VacuumAutomation(AppBase):
         if 'cleaning_mode' in MODES and old != new:
             if new == self.VacuumState.running.value:
                 self.turn_on(MODES[CLEANING_MODE])
-            elif new == self.VacuumState.charging.value:
+            elif new in (self.VacuumState.charging.value,
+                         self.VacuumState.stuck.value):
                 self.turn_off(MODES[CLEANING_MODE])
+
+    @property
+    def vacuum_state(self) -> "VacuumState":
+        """Return the current state of the vacuum cleaner."""
+        return self.get_state(self.vacuum, attribute='status')
 
 
 class NotifyWhenBinFull(AppBase):

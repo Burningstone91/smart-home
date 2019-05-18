@@ -198,11 +198,12 @@ class NotifyOnNewVersion(AppBase):
     def version_changed(self, entity: Union[str, dict], attribute: str,
                         old: str, new: str, kwargs: dict) -> None:
         """Send notification when new version is available."""
-        app = entity.split('.')[1].split('_')[0]
-        self.notification_app.notify(
-            kind='home',
-            level='repeat',
-            title=f"Neue Version für {app}!",
-            message=f"Die Version {self.get_state(entity)} "
-                    f"für {app} ist verfügbar.",
-            targets=self.notifications['targets'])
+        if new != old:
+            app = entity.split('.')[1].split('_')[0]
+            self.notification_app.notify(
+                kind='home',
+                level='repeat',
+                title=f"Neue Version für {app}!",
+                message=f"Die Version {self.get_state(entity)} "
+                        f"für {app} ist verfügbar.",
+                targets=self.notifications['targets'])

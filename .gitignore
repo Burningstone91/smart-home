@@ -14,6 +14,7 @@ pyozw.sqlite
 secrets.yaml
 *.xml
 *.html
+*.json
 grafana/
 ha-dockermon/
 influxdb/

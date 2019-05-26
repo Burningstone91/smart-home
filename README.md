@@ -138,7 +138,7 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 * Short press OFF button: Turn lights off
 * Long press OFF button: Turn dehumidifier off
 
-**Hue Dimmer Switch next to the bed** [sleep.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/sleep.py)
+**Hue Dimmer Switch next to the bed** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The Hue Dimmer Switch executes the following actions depending on the button pressed:
 * Short press ON button: Turn off all lights and devices in the house and start a
@@ -155,6 +155,10 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 The dehumidifier is turned on when everyone left the house. In the future the dehumidifier should be
 turned on/off based on a bayesian "in bed" sensor, which I'm currently testing. This sensor determines
 whether I'm in bed based on state of different entities, time of day etc. 
+
+**Turn on/off dehumidifier when window closes/opens** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+
+Turns off the dehumidifier when the bedroom window is opened. Turns it on when it closes, but only if it the sleep mode is not activated
 
 ## Climate
 ### Configuration files
@@ -200,6 +204,40 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 * Short press DOWN button: Decrease brightness by 10%
 * Short press OFF button: Turn lights off
 
+## House
+### Configuration files
+* Home-Assistant config: [house.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/house.yaml)
+* AppDaemon config: [house.yaml](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/house.yaml)
+
+### Hardware used
+* 1x Aqara Door/Window Sensor for the house door
+
+### Automations
+**Everyone left** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+
+Starts the scene "Alle weg", which:
+* Turns off all lights
+* Switches on the dehumidifier
+* Starts the Power Off action in the Harmony remote
+* Turns of the Stereo Receiver in the office
+
+## Kitchen
+### Configuration files
+* Home-Assistant config: [kitchen.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/kitchen.yaml)
+* AppDaemon config: [kitchen.yaml](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/kitchen.yaml)
+
+### Hardware used
+* 1x Hue Bulb Color for the lamp above the dining table
+* 1x myStrom Switch for the dishwasher
+* 1x Aqara Door/Window Sensor for the window to the garden
+* 1x Aqara Door/Window Sensor for the door to the balcony
+
+### Automations
+**IN PROGRESS - Notify on dishwaser done** [washer.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/washer.py)
+
+Sends an actionable notification when the dishwasher completed a cycle and sets the dishwasher to clean. 
+When someone presses "Erledigt" in response to the notification, the dishwasher is set to dirty.
+
 ## Livingroom
 ### Configuration files
 * Home-Assistant config: [livingroom.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/livingroom.yaml)
@@ -218,7 +256,6 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 * 1x Cable TV-Box
 
 ### Automations
-
 **Scene based lightning** [home_cinema.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/home_cinema.py)
 
 Turns the light on based on the currently active scene on the harmony remote.
@@ -241,7 +278,8 @@ depending on the state of the call.
 **Brighten light on pause** [home_cinema.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/home_cinema.py)
 
 Increases the brightness when the current activity on the harmony is paused and returns
-to the previous state if the activity is resumed.
+to the previous state if the activity is resumed. Using emulated Roku to send button presses
+from the Harmony Remote to Home Assistant. 
 
 ## Office
 ### Configuration files

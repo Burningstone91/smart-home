@@ -106,7 +106,7 @@ This is the base for all kind of switches. The different kind of Switches are:
 
 
 
-## Bedroom
+## Bedroom :sleeping:
 ### Configuration files
 * Home-Assistant config: [bedroom.yaml](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/bedroom.yaml)
 * AppDaemon config: [bedroom.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/bedroom.yaml)
@@ -124,7 +124,7 @@ This is the base for all kind of switches. The different kind of Switches are:
 * 1x USB-powered Aeotec Z-Wave Multisensor for motion, temperature and humidity
 
 ### Automations
-**Motion based lightning** [motion_light.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/motion_light.py)
+**Motion based lightning :running: :bulb:** [motion_light.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/motion_light.py)
 
 When motion is detected, the light turns on based on time of the day and turns off after a specified
 delay.
@@ -150,7 +150,7 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 * Short press OFF button: Stop music in bedroom and turn off all lights and devices in the house
 * Long press OFF button: Start a timer to stop music in 15 minutes
 
-**Dehumidifier** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+**Dehumidifier :sweat_drops:** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The dehumidifier is turned on when everyone left the house. In the future the dehumidifier should be
 turned on/off based on a bayesian "in bed" sensor, which I'm currently testing. This sensor determines
@@ -160,7 +160,7 @@ whether I'm in bed based on state of different entities, time of day etc.
 
 Turns off the dehumidifier when the bedroom window is opened. Turns it on when it closes, but only if it the sleep mode is not activated
 
-## Climate
+## Climate :partly_sunny:
 ### Configuration files
 * Home-Assistant config: [climate.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/climate.yaml)
 * AppDaemon config: [climate.yaml](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.yaml)
@@ -170,7 +170,7 @@ Turns off the dehumidifier when the bedroom window is opened. Turns it on when i
 * 8x Aqara Door/Window sensor for all windows/doors leading out of the house
 
 ### Automations
-**Notification on high humidity** [climate.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.py)
+**Notification on high humidity :sweat_drops:** [climate.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.py)
 
 Sends a notification on a specified interval with a list of all rooms with humidity above the defined threshold.
 
@@ -178,7 +178,7 @@ Sends a notification on a specified interval with a list of all rooms with humid
 
 Sends a notification when a door/window leading to the outside is left open longer than the specified threshold.
 
-## Dressroom
+## Dressroom :shirt:
 ### Configuration files
 * Home-Assistant config: [dressroom.yaml](https://github.com/Burningstone91/smart-home/blob/master/hass/configuration/config/packages/dressroom.yaml)
 * AppDaemon config: [dressroom.yaml](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/dressroom.yaml)
@@ -191,7 +191,7 @@ Sends a notification when a door/window leading to the outside is left open long
 * 1x USB-powered Aeotec Z-Wave Multisensor for motion, temperature and humidity
 
 ### Automations
-**Motion based lightning** [motion_light.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/motion_light.py)
+**Motion based lightning :running: :bulb:** [motion_light.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/motion_light.py)
 
 When motion is detected, the light turns on based on time of the day and turns off after a specified
 delay.
@@ -296,7 +296,7 @@ from the Harmony Remote to Home Assistant.
 * 1x Yamaha RN-602D Stereo receiver
 
 ### Automations
-**Motion based lightning** [motion_light.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/motion_light.py)
+**Motion based lightning :running: :bulb:** [motion_light.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/motion_light.py)
 
 When motion is detected, the light turns on based on time of the day and turns off after a specified
 delay. If one of the computers or the Yamaha receiver is running, motion will not trigger an

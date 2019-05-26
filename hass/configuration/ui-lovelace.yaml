@@ -212,10 +212,11 @@
               - input_boolean.motion_light_bedroom
               - input_boolean.dimmer_switch_schlafzimmer
               - input_boolean.dimmer_switch_schlafzimmer_master
-              - input_boolean.sleep_app
               - input_boolean.turn_on_sleep_mode_forgot
               - input_boolean.turn_off_sleep_mode_forgot
-              - input_boolean.turn_on_dehumidifier_on_departure
+              - input_boolean.turn_off_sleep_mode_forgot_weekend
+              - input_boolean.turn_off_dehumidifier_window_open
+              - input_boolean.turn_on_dehumidifier_window_close
           - type: entities
             title: Wohnzimmerautomatisierungen
             show_header_toggle: false

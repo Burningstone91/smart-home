@@ -74,11 +74,6 @@ dimmer_switch_schlafzimmer_master:
   initial: True
   icon: mdi:remote
 
-sleep_app:
-  name: Einschlafmodus
-  initial: True
-  icon: mdi:hotel
-
 turn_on_sleep_mode_forgot:
   name: Schlafmodus einschalten wenn es vergessen wurde
   initial: True
@@ -89,8 +84,18 @@ turn_off_sleep_mode_forgot:
   initial: True
   icon: mdi:sleep
 
-turn_on_dehumidifier_on_departure:
-  name: Entfeuchter einschalten wenn alle gegangen sind
+turn_off_sleep_mode_forgot_weekend:
+  name: Schlafmodus am Wochenende ausschalten wenn es vergessen wurde
+  initial: True
+  icon: mdi:sleep
+
+turn_off_dehumidifier_window_open:
+  name: Entfeuchter ausschalten wenn das Fenster im Schlafzimmer geöffnet wird
+  initial: True
+  icon: mdi:fan
+
+turn_on_dehumidifier_window_close:
+  name: Entfeuchter einschalten wenn das Fenster im Schlafzimmer geschlossen wird
   initial: True
   icon: mdi:fan
 

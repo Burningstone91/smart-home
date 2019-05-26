@@ -149,3 +149,35 @@ turn_off_sleep_mode_forgot_weekend:
     action_type: toggle
     schedule_time: "08:00:00"
     state: "off"
+
+turn_off_dehumidifier_window_open:
+  module: switches
+  class: ToggleOnStateChange
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
+  entities:
+    switch: switch.schalter_entfeuchter
+    target: sensor.fenster_schlafzimmer
+  properties:
+    action_type: toggle
+    state: "off"
+    target_state: "offen"
+
+turn_on_dehumidifier_window_close:
+  module: switches
+  class: ToggleOnStateChange
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: vacation
+    modes:
+      sleep_mode: "on"
+  entities:
+    switch: switch.schalter_entfeuchter
+    target: sensor.fenster_schlafzimmer
+  properties:
+    action_type: toggle
+    state: "on"
+    target_state: "geschlossen"

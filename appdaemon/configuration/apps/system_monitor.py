@@ -202,7 +202,7 @@ class NotifyOnNewVersion(AppBase):
             app = entity.split('.')[1].split('_')[0]
             self.notification_app.notify(
                 kind='home',
-                level='repeat',
+                level='single',
                 title=f"Neue Version für {app}!",
                 message=f"Die Version {self.get_state(entity)} "
                         f"für {app} ist verfügbar.",

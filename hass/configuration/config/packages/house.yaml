@@ -92,3 +92,5 @@ scene:
         state: false
       media_player.buero_musik_main: 
         state: false
+
+circadian_lighting:

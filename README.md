@@ -72,7 +72,7 @@ The AppBase creates a holding place for entities, handles, notifications ans pro
 
 The AppBase uses voluptuous to check the configuration files for bad input or syntax.
 
-### Notifications [notification.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/notification.py)
+### Notifications :email: [notification.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/notification.py)
 This is the base for all notifications. A notification has a level 'home' or 'emergency'
 and a type 'single' or 'repeat'.
 
@@ -129,7 +129,7 @@ This is the base for all kind of switches. The different kind of Switches are:
 When motion is detected, the light turns on based on time of the day and turns off after a specified
 delay.
 
-**Hue Dimmer Switch next to light switch** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+**Hue Dimmer Switch next to light switch :black_square_button: :bulb:** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The Hue Dimmer Switch executes the following actions depending on the button pressed:
 * Short press ON button: Turn light on 100% brightness
@@ -138,7 +138,7 @@ The Hue Dimmer Switch executes the following actions depending on the button pre
 * Short press OFF button: Turn lights off
 * Long press OFF button: Turn dehumidifier off
 
-**Hue Dimmer Switch next to the bed** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+**Hue Dimmer Switch next to the bed :black_square_button: :sleeping:** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The Hue Dimmer Switch executes the following actions depending on the button pressed:
 * Short press ON button: Turn off all lights and devices in the house and start a
@@ -170,11 +170,11 @@ Turns off the dehumidifier when the bedroom window is opened. Turns it on when i
 * 8x Aqara Door/Window sensor for all windows/doors leading out of the house
 
 ### Automations
-**Notification on high humidity :sweat_drops:** [climate.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.py)
+**Notification on high humidity :sweat_drops: :email: :sweat_drops:** [climate.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.py)
 
 Sends a notification on a specified interval with a list of all rooms with humidity above the defined threshold.
 
-**Notification on open window** [climate.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.py)
+**Notification on open window :email:** [climate.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/climate.py)
 
 Sends a notification when a door/window leading to the outside is left open longer than the specified threshold.
 
@@ -196,7 +196,7 @@ Sends a notification when a door/window leading to the outside is left open long
 When motion is detected, the light turns on based on time of the day and turns off after a specified
 delay.
 
-**Hue Dimmer Switch next to light switch** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+**Hue Dimmer Switch next to light switch :black_square_button: :bulb:** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The Hue Dimmer Switch executes the following actions depending on the button pressed:
 * Short press ON button: Turn light on 100% brightness
@@ -260,7 +260,7 @@ When someone presses "Erledigt" in response to the notification, the dishwasher 
 
 Turns the light on based on the currently active scene on the harmony remote.
 
-**Hue Dimmer Switch** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+**Hue Dimmer Switch :black_square_button: :bulb:** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The Hue Dimmer Switch executes the following actions depending on the button pressed:
 * Short press ON button: Turn light on 100% brightness
@@ -302,7 +302,7 @@ When motion is detected, the light turns on based on time of the day and turns o
 delay. If one of the computers or the Yamaha receiver is running, motion will not trigger an
 action.
 
-**Hue Dimmer Switch next to light switch** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
+**Hue Dimmer Switch next to light switch :black_square_button: :bulb:** [switches.py](https://github.com/Burningstone91/smart-home/blob/master/appdaemon/configuration/apps/switches.py)
 
 The Hue Dimmer Switch executes the following actions depending on the button pressed:
 * Short press ON button: Turn light on 100% brightness

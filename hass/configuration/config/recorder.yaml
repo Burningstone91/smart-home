@@ -1,0 +1,8 @@
+db_url: !secret mySQL_url
+exclude:
+  domains:
+    - zwave
+  entities:
+    - sun.sun
+purge_interval: 2
+purge_keep_days: 5

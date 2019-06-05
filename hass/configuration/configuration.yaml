@@ -11,6 +11,7 @@ conversation:
 history: !include config/history.yaml
 logbook:
 map:
+recorder: !include config/recorder.yaml
 sun:
 system_health:
 lovelace:

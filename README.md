@@ -18,6 +18,7 @@ A Docker Host inside an Ubuntu Server VM builds the core of the Smart Home.
 * InfluxDB - Database for the data from home-assistant
 * LetsEncrypt - To access my home from outside with an SSL-encrypted connection
 * Mosquitto - MQTT Server
+* MySQL - MySQL Database for Home Assistant
 
 All my automations are done with AppDaemon.
 My Home-Assistant and AppDaemon Configuration are organized with packages and my documentation 

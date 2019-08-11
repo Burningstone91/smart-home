@@ -52,7 +52,7 @@ class SwitchBase(AppBase):
                 self.log(f"{action_entity} wurde eingeschaltet.")
             elif self.get_state(action_entity) == 'on' and state == 'off':
                 self.turn_off(action_entity)
-                self.log(f"{action_entity} wurde eingeschaltet.")
+                self.log(f"{action_entity} wurde ausgeschaltet.")
         elif action_type == 'scene':
             self.turn_on(action_entity)
             self.log(f"{action_entity} wurde gestartet.")

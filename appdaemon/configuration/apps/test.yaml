@@ -1,3 +1,18 @@
-#test:
-#  module: test
-#  class: TestClass
+test:
+  module: test
+  class: EventChain
+  timeframe: 10
+  action:
+    entity_id: 'light.buero'
+    service: 'turn_on'
+    parameters:
+      brightness: 10
+  events:
+    hall_motion:
+      entity_id: 'binary_sensor.bewegung_buero'
+      target_state: "on"
+      rank: 2
+    door_motion:
+      entity_id: 'switch.schalter_entfeuchter'
+      target_state: "off"
+      rank: 1

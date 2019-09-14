@@ -1,5 +1,5 @@
 test:
-  module: test
+  module: tests
   class: EventChain
   timeframe: 10
   action:

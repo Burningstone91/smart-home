@@ -91,6 +91,18 @@ scene:
         state: true
       script.play_good_night_list:
         state: true
+  - name: Alles Aus
+    entities:
+      group.all_lights: 
+        state: false
+      switch.schalter_entfeuchter: 
+        state: false
+      remote.wohnzimmer: 
+        state: false
+      media_player.buero_musik_main: 
+        state: false
+      media_player.heos_5:
+        state: paused
   - name: Schlafzimmer alles aus
     entities:
       light.schlafzimmer: 

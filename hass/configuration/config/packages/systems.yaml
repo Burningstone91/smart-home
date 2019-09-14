@@ -176,7 +176,7 @@ sensor:
       https://pypi.python.org/pypi/appdaemon/json
     value_template: '{{ value_json.info.version }}'
     scan_interval: 3600
-
+    
 ################################# BLE Pi device status #################################
   - platform: template
     sensors:

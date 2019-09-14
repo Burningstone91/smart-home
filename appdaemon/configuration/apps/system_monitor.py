@@ -148,8 +148,8 @@ class NotifyOnLowBattery(AppBase):
         """Send notification when battery is below threshold."""
         if float(new) < float(self.properties[CONF_BATTERY_LOW_THRESHOLD]):
             self.notification_app.notify(
-                kind='home',
-                level='repeat',
+                kind='single',
+                level='home',
                 title="Batterie niedrig!",
                 message=f"Die Batterie für {entity} ist niedrig.",
                 targets=self.notifications['targets'])
@@ -203,8 +203,8 @@ class NotifyOnNewVersion(AppBase):
         if new != old:
             app = entity.split('.')[1].split('_')[0]
             self.notification_app.notify(
-                kind='home',
-                level='single',
+                kind='single',
+                level='home',
                 title=f"Neue Version für {app}!",
                 message=f"Die Version {self.get_state(entity)} "
                         f"für {app} ist verfügbar.",

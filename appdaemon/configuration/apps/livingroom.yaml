@@ -60,6 +60,10 @@ dimmer_switch_wohnzimmer:
         action_type: toggle
         action: 'off'
         action_entity: light.wohnzimmer
+      long_press_off:
+        action_type: toggle
+        action: 'off'
+        action_entity: media_player.denon_avr_wohnzimmer
 
 phone_call:
   module: home_cinema

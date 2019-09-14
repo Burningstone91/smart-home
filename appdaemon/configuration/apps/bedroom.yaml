@@ -65,6 +65,26 @@ dimmer_switch_schlafzimmer:
         action: 'on'
         action_entity: scene.schlafzimmer_alles_aus
 
+dimmer_switch_schlafzimmer_sabrina:
+  module: switches
+  class: HueDimmerSwitch
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    switch: dimmschalter_sabrina
+  properties:
+    button_config:
+      short_press_off:
+        action_type: scene
+        action: 'on'
+        action_entity: scene.schlafzimmer_alles_aus
+      long_press_off:
+        action_type: scene
+        action: 'on'
+        action_entity: scene.alles_aus
+
 dimmer_switch_schlafzimmer_master:
   module: switches
   class: HueDimmerSwitch
@@ -97,9 +117,9 @@ dimmer_switch_schlafzimmer_master:
         action: media_previous_track
         action_entity: media_player.spotify
       short_press_off:
-        action_type: service_call
-        action: media_pause
-        action_entity: media_player.spotify
+        action_type: scene
+        action: 'on'
+        action_entity: scene.schlafzimmer_alles_aus
       long_press_off:
         action_type: service_call
         action: media_pause

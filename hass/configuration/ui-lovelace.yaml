@@ -1022,6 +1022,8 @@
                   name: Hue Dimmer Schlafzimmer
                 - entity: sensor.dimmschalter_schlafzimmer_master_battery_level
                   name: Hue Dimmer Schlafzimmer Master
+                - entity: sensor.dimmschalter_sabrina_battery_level
+                  name: Hue Dimmer Schlafzimmer Sabrina
                 - entity: sensor.dimmschalter_wohnzimmer_battery_level
                   name: Hue Dimmer Wohnzimmer            
 

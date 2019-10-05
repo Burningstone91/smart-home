@@ -57,39 +57,42 @@ from house_config import PERSONS
 ##############################################################################
 
 
-CONF_HARMONY_REMOTE = 'harmony_remote'
-CONF_ACTIVITIES = 'activities'
-CONF_DEVICE = 'device'
-CURRENT_ACTIVITY = 'current_activity'
+CONF_HARMONY_REMOTE = "harmony_remote"
+CONF_ACTIVITIES = "activities"
+CONF_DEVICE = "device"
+CURRENT_ACTIVITY = "current_activity"
 
-CONF_LIGHTS = 'lights'
-CONF_TRANSITION_ON = 'transition_on'
-CONF_TRANSITION_OFF = 'transition_off'
-CONF_SCENE_COLOR = 'scene_color'
-CONF_SCENE_BRIGHTNESS = 'scene_brightness'
-POWER_OFF = 'poweroff'
+CONF_LIGHTS = "lights"
+CONF_TRANSITION_ON = "transition_on"
+CONF_TRANSITION_OFF = "transition_off"
+CONF_SCENE_COLOR = "scene_color"
+CONF_SCENE_BRIGHTNESS = "scene_brightness"
+POWER_OFF = "poweroff"
 
-HOME = 'Home'
-PLAY = 'Play'
-PAUSE = 'Pause'
-KEY = 'key'
-ROKU_COMMAND = 'roku_command'
+HOME = "Home"
+PLAY = "Play"
+PAUSE = "Pause"
+KEY = "key"
+ROKU_COMMAND = "roku_command"
 
-CONF_DEVICE_ID = 'device_id'
-PHONE_CALL_BOOL = 'phone_call_bool'
+CONF_DEVICE_ID = "device_id"
+PHONE_CALL_BOOL = "phone_call_bool"
 
 
 class RemoteAutomation(AppBase):
     """Define a base feature for remote automations."""
 
-    APP_SCHEMA = APP_SCHEMA.extend({
-        CONF_ENTITIES: vol.Schema({
-            vol.Required(CONF_HARMONY_REMOTE): vol_help.entity_id,
-        }, extra=vol.ALLOW_EXTRA),
-        CONF_PROPERTIES: vol.Schema({
-            vol.Required(CONF_ACTIVITIES): dict,
-        }, extra=vol.ALLOW_EXTRA)
-    })
+    APP_SCHEMA = APP_SCHEMA.extend(
+        {
+            CONF_ENTITIES: vol.Schema(
+                {vol.Required(CONF_HARMONY_REMOTE): vol_help.entity_id},
+                extra=vol.ALLOW_EXTRA,
+            ),
+            CONF_PROPERTIES: vol.Schema(
+                {vol.Required(CONF_ACTIVITIES): dict}, extra=vol.ALLOW_EXTRA
+            ),
+        }
+    )
 
     def configure(self) -> None:
         """Configure."""
@@ -100,9 +103,7 @@ class RemoteAutomation(AppBase):
     def current_device_id(self) -> Union[int, None]:
         """Get device id of current activity."""
         try:
-            return self.activities[
-                self.current_activity_name.replace(' ', '_').lower()
-            ]
+            return self.activities[self.current_activity_name.replace(" ", "_").lower()]
         except KeyError:
             return None
 
@@ -122,30 +123,37 @@ class RemoteAutomation(AppBase):
         self.log(device_id)
 
         self.call_service(
-            'remote/send_command',
+            "remote/send_command",
             entity_id=self.remote,
             device=device_id,
-            command=command)
+            command=command,
+        )
 
 
 class SceneLights(AppBase):
     """Define a feature to change light based on the current activity."""
 
-    APP_SCHEMA = APP_SCHEMA.extend({
-        CONF_ENTITIES: vol.Schema({
-            vol.Required(CONF_LIGHTS): vol_help.entity_id_list,
-        }, extra=vol.ALLOW_EXTRA),
-        CONF_PROPERTIES: vol.Schema({
-            vol.Required(CONF_SCENE_COLOR): str,
-            vol.Required(CONF_SCENE_BRIGHTNESS): str,
-            vol.Optional(CONF_SCENE_COLOR): dict,
-            vol.Optional(CONF_SCENE_BRIGHTNESS): dict,
-        }, extra=vol.ALLOW_EXTRA)
-    })
+    APP_SCHEMA = APP_SCHEMA.extend(
+        {
+            CONF_ENTITIES: vol.Schema(
+                {vol.Required(CONF_LIGHTS): vol_help.entity_id_list},
+                extra=vol.ALLOW_EXTRA,
+            ),
+            CONF_PROPERTIES: vol.Schema(
+                {
+                    vol.Required(CONF_SCENE_COLOR): str,
+                    vol.Required(CONF_SCENE_BRIGHTNESS): str,
+                    vol.Optional(CONF_SCENE_COLOR): dict,
+                    vol.Optional(CONF_SCENE_BRIGHTNESS): dict,
+                },
+                extra=vol.ALLOW_EXTRA,
+            ),
+        }
+    )
 
     def configure(self) -> None:
         """Configure."""
-        self.lights = self.entities[CONF_LIGHTS].split(',')
+        self.lights = self.entities[CONF_LIGHTS].split(",")
         self.scene_color_map = self.properties[CONF_SCENE_COLOR]
         self.scene_brightness_map = self.properties[CONF_SCENE_BRIGHTNESS]
         self.transition_on = self.properties.get(CONF_TRANSITION_ON, 2)
@@ -155,10 +163,12 @@ class SceneLights(AppBase):
             self.scene_changed,
             self.remote_app.remote,
             attribute=CURRENT_ACTIVITY,
-            constrain_app_enabled=1)
+            constrain_app_enabled=1,
+        )
 
-    def scene_changed(self, entity: Union[str, dict], attribute: str,
-                      old: str, new: str, kwargs: dict) -> None:
+    def scene_changed(
+        self, entity: Union[str, dict], attribute: str, old: str, new: str, kwargs: dict
+    ) -> None:
         """Change the light when the acitivity changed."""
         if self.scene_name(new) == POWER_OFF:
             for light in self.lights:
@@ -169,7 +179,8 @@ class SceneLights(AppBase):
                     light,
                     brightness=self.brightness(new),
                     color_name=self.light_color(new),
-                    transition=self.transition_on)
+                    transition=self.transition_on,
+                )
 
     def brightness(self, scene: str) -> float:
         """Get the specified brightness for the given scene."""
@@ -178,21 +189,17 @@ class SceneLights(AppBase):
 
     def light_color(self, scene: str) -> str:
         """Get the specified light color for the given scene."""
-        return self.scene_color_map.get(self.scene_name(scene), 'white')
+        return self.scene_color_map.get(self.scene_name(scene), "white")
 
     @staticmethod
     def scene_name(scene: str) -> str:
         """Convert the scene name to the correct format."""
-        return scene.replace(' ', '_').lower()
+        return scene.replace(" ", "_").lower()
 
     def brighten_lights(self):
         """Brighten lights."""
         for light in self.lights:
-            self.turn_on(
-                light,
-                brightness=200,
-                color_name='white',
-                transition=2)
+            self.turn_on(light, brightness=200, color_name="white", transition=2)
 
     def dim_lights(self):
         """Dim lights."""
@@ -203,7 +210,8 @@ class SceneLights(AppBase):
                 light,
                 brightness=self.brightness(current_activity),
                 color_name=self.light_color(current_activity),
-                transition=2)
+                transition=2,
+            )
 
 
 class PhoneCall(AppBase):
@@ -213,15 +221,17 @@ class PhoneCall(AppBase):
         """Configure."""
         for person, attribute in PERSONS.items():
             self.listen_state(
-                self.phone_call_changed,
-                attribute[PHONE_CALL_BOOL],
-                person=person)
+                self.phone_call_changed, attribute[PHONE_CALL_BOOL], person=person
+            )
 
-    def phone_call_changed(self, entity: Union[str, dict], attribute: str,
-                           old: str, new: str, kwargs: dict) -> None:
+    def phone_call_changed(
+        self, entity: Union[str, dict], attribute: str, old: str, new: str, kwargs: dict
+    ) -> None:
         """Pause/play and brighten/dim when phone call is ongoing/ended."""
-        if (not self.remote_app.remote_is_off and
-                kwargs[PERSON] in self.presence_app.persons_home):
+        if (
+            not self.remote_app.remote_is_off
+            and kwargs[PERSON] in self.presence_app.persons_home
+        ):
             if new == ON:
                 self.remote_app.send_command(PAUSE)
                 self.scene_lights_app.brighten_lights()
@@ -237,8 +247,7 @@ class BrightenLightOnPause(AppBase):
         """Configure."""
         self.listen_event(self.button_pressed, ROKU_COMMAND)
 
-    def button_pressed(self, event_name: str,
-                       data: dict, kwargs: dict) -> None:
+    def button_pressed(self, event_name: str, data: dict, kwargs: dict) -> None:
         """Dim/brighten on button press."""
         key = data[KEY]
         self.log(key)

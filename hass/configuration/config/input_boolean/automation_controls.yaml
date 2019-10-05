@@ -74,7 +74,7 @@ dimmer_switch_schlafzimmer_master:
   initial: True
   icon: mdi:remote
 
-dimmer_switch_sabrina:
+dimmer_switch_schlafzimmer_sabrina:
   name: Hue Dimmer Switch Sabrina
   initial: True
   icon: mdi:remote

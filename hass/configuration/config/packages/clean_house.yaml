@@ -1,0 +1,6 @@
+input_datetime:
+  matratze_wenden:
+    name: Matratze wenden
+    has_date: true
+    icon: mdi:bed-king
+  

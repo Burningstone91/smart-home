@@ -212,6 +212,7 @@
               - input_boolean.motion_light_bedroom
               - input_boolean.dimmer_switch_schlafzimmer
               - input_boolean.dimmer_switch_schlafzimmer_master
+              - input_boolean.dimmer_switch_schlafzimmer_sabrina
               - input_boolean.turn_on_sleep_mode_forgot
               - input_boolean.turn_off_sleep_mode_forgot
               - input_boolean.turn_off_sleep_mode_forgot_weekend
@@ -1026,6 +1027,18 @@
                   name: Hue Dimmer Schlafzimmer Sabrina
                 - entity: sensor.dimmschalter_wohnzimmer_battery_level
                   name: Hue Dimmer Wohnzimmer            
+
+##############################################################################
+
+  - title: Household Tasks
+    icon: mdi:broom
+    id: kiosk_floorplan
+    panel: true
+    cards:
+      - type: entities
+        entities:
+          - entity: input_datetime.matratze_wenden
+
 
 ##############################################################################
 

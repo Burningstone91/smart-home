@@ -7,8 +7,14 @@ import voluptuous as vol
 import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
 from constants import (
-    CONF_BRIGHTNESS_LEVEL, CONF_DELAY, CONF_ENTITIES,
-    CONF_LIGHT_COLOR, CONF_LIGHTS, CONF_PROPERTIES, ON, HOME
+    CONF_BRIGHTNESS_LEVEL,
+    CONF_DELAY,
+    CONF_ENTITIES,
+    CONF_LIGHT_COLOR,
+    CONF_LIGHTS,
+    CONF_PROPERTIES,
+    ON,
+    HOME,
 )
 
 
@@ -47,57 +53,69 @@ from constants import (
 ##############################################################################
 
 
-LIGHT_TIMER = 'light_timer'
+LIGHT_TIMER = "light_timer"
 
-CONF_MOTION_SENSOR = 'motion_sensor'
-CONF_LUX_SENSOR = 'lux_sensor'
-CONF_DAY_STATE_TIME = 'day_state_time'
-CONF_NO_ACTION_ENTITIES = 'no_action_entities'
-CONF_LUX_THRESHOLD = 'lux_threshold'
+CONF_MOTION_SENSOR = "motion_sensor"
+CONF_LUX_SENSOR = "lux_sensor"
+CONF_DAY_STATE_TIME = "day_state_time"
+CONF_NO_ACTION_ENTITIES = "no_action_entities"
+CONF_LUX_THRESHOLD = "lux_threshold"
 
 ON_STATES = [ON, HOME]
 
-MORNING = 'morning'
-DAY = 'day'
-NIGHT = 'night'
+MORNING = "morning"
+DAY = "day"
+NIGHT = "night"
 DAY_STATES = [MORNING, DAY, NIGHT]
 
 
 class MotionLightAutomation(AppBase):  # pylint: disable=too-many-instance-attributes
     """Define a base feature for motion based lights."""
 
-    APP_SCHEMA = APP_SCHEMA.extend({
-        CONF_ENTITIES: vol.Schema({
-            vol.Required(CONF_MOTION_SENSOR): vol_help.entity_id,
-            vol.Optional(CONF_LUX_SENSOR): vol_help.entity_id,
-            vol.Required(CONF_LIGHTS): vol.Schema({
-                vol.Required(MORNING): vol_help.entity_id_list,
-                vol.Required(DAY): vol_help.entity_id_list,
-                vol.Required(NIGHT): vol_help.entity_id_list,
-            }),
-        }, extra=vol.ALLOW_EXTRA),
-        CONF_PROPERTIES: vol.Schema({
-            vol.Optional(CONF_LUX_THRESHOLD): int,
-            vol.Optional(CONF_DELAY): int,
-            vol.Required(CONF_DAY_STATE_TIME): vol.Schema({
-                vol.Required(MORNING): str,
-                vol.Required(DAY): str,
-                vol.Required(NIGHT): str,
-            }),
-            vol.Optional(CONF_BRIGHTNESS_LEVEL): vol.Schema({
-                vol.Optional(vol.In(DAY_STATES)): int,
-            }),
-            vol.Optional(CONF_LIGHT_COLOR): vol.Schema({
-                vol.Optional(vol.In(DAY_STATES)): str,
-            }),
-        }, extra=vol.ALLOW_EXTRA),
-    })
+    APP_SCHEMA = APP_SCHEMA.extend(
+        {
+            CONF_ENTITIES: vol.Schema(
+                {
+                    vol.Required(CONF_MOTION_SENSOR): vol_help.entity_id,
+                    vol.Optional(CONF_LUX_SENSOR): vol_help.entity_id,
+                    vol.Required(CONF_LIGHTS): vol.Schema(
+                        {
+                            vol.Required(MORNING): vol_help.entity_id_list,
+                            vol.Required(DAY): vol_help.entity_id_list,
+                            vol.Required(NIGHT): vol_help.entity_id_list,
+                        }
+                    ),
+                },
+                extra=vol.ALLOW_EXTRA,
+            ),
+            CONF_PROPERTIES: vol.Schema(
+                {
+                    vol.Optional(CONF_LUX_THRESHOLD): int,
+                    vol.Optional(CONF_DELAY): int,
+                    vol.Required(CONF_DAY_STATE_TIME): vol.Schema(
+                        {
+                            vol.Required(MORNING): str,
+                            vol.Required(DAY): str,
+                            vol.Required(NIGHT): str,
+                        }
+                    ),
+                    vol.Optional(CONF_BRIGHTNESS_LEVEL): vol.Schema(
+                        {vol.Optional(vol.In(DAY_STATES)): int}
+                    ),
+                    vol.Optional(CONF_LIGHT_COLOR): vol.Schema(
+                        {vol.Optional(vol.In(DAY_STATES)): str}
+                    ),
+                },
+                extra=vol.ALLOW_EXTRA,
+            ),
+        }
+    )
 
     def configure(self) -> None:
         """Configure."""
         self.motion_sensor = self.entities[CONF_MOTION_SENSOR]
         self.delay = self.properties.get(CONF_DELAY, 5) * 60
-        self.no_action_entities = self.entities.get(CONF_NO_ACTION_ENTITIES, '')
+        self.no_action_entities = self.entities.get(CONF_NO_ACTION_ENTITIES, "")
 
         self.day_state_map = self.properties[CONF_DAY_STATE_TIME]
         self.brightness_map = self.properties.get(CONF_BRIGHTNESS_LEVEL, {})
@@ -107,19 +125,18 @@ class MotionLightAutomation(AppBase):  # pylint: disable=too-many-instance-attri
         # creates a list of a split of each element in self.lights_map
         self.all_lights = set()
         for lights in self.lights_map.values():
-            for light in lights.split(','):
+            for light in lights.split(","):
                 self.all_lights.add(light)
 
-        self.room_name = self.motion_sensor.split('.')[1].split('_', 1)[-1].capitalize()
+        self.room_name = self.motion_sensor.split(".")[1].split("_", 1)[-1].capitalize()
 
         self.listen_state(
-            self.motion,
-            self.motion_sensor,
-            new=ON,
-            constrain_app_enabled=1)
+            self.motion, self.motion_sensor, new=ON, constrain_app_enabled=1
+        )
 
-    def motion(self, entity: Union[str, dict], attribute: str,
-               old: str, new: str, kwargs: dict) -> None:
+    def motion(
+        self, entity: Union[str, dict], attribute: str, old: str, new: str, kwargs: dict
+    ) -> None:
         """Take action on motion."""
         self.log(f"Bewegung im {self.room_name} erkannt.")
         if not self.no_action_entities_on:
@@ -136,46 +153,47 @@ class MotionLightAutomation(AppBase):  # pylint: disable=too-many-instance-attri
         """Turn lights on based on state of day."""
         for entity in self.lights:
             self.turn_on(
-                entity,
-                brightness=self.brightness,
-                color_name=self.light_color)
+                entity, brightness=self.brightness, color_name=self.light_color
+            )
 
-        self.log(f"Das Licht im {self.room_name} "
-                 f"wurde durch Bewegung eingeschaltet.")
+        self.log(
+            f"Das Licht im {self.room_name} " f"wurde durch Bewegung eingeschaltet."
+        )
 
     def turn_light_off(self, *args: list) -> None:
         """Turn lights off if none of the no action entities is on."""
         if not self.no_action_entities_on:
             for entity in self.lights_on:
                 self.turn_off(entity)
-            self.log(f"Das Licht im {self.room_name} "
-                     f"wurde durch den Timer ausgeschaltet.")
+            self.log(
+                f"Das Licht im {self.room_name} "
+                f"wurde durch den Timer ausgeschaltet."
+            )
 
     def turn_off_delayed(self) -> None:
         """Set timer to turn light off after specified delay."""
         if LIGHT_TIMER in self.handles:
             self.cancel_timer(self.handles[LIGHT_TIMER])
             self.handles.pop(LIGHT_TIMER)
-        self.handles[LIGHT_TIMER] = self.run_in(self.turn_light_off,
-                                                self.delay)
-        self.log(f"Ein Timer von {round(self.delay / 60)} Minuten "
-                 f"wurde im {self.room_name} eingeschaltet.")
+        self.handles[LIGHT_TIMER] = self.run_in(self.turn_light_off, self.delay)
+        self.log(
+            f"Ein Timer von {round(self.delay / 60)} Minuten "
+            f"wurde im {self.room_name} eingeschaltet."
+        )
 
     @property
     def no_action_entities_on(self) -> list:
         """Return list of no action entities that are on"""
         return [
-            entity for entity in self.no_action_entities.split(',')
+            entity
+            for entity in self.no_action_entities.split(",")
             if self.get_state(entity) in ON_STATES
         ]
 
     @property
     def lights_on(self) -> list:
         """Return list of lights that are on."""
-        return [
-            entity for entity in self.all_lights
-            if self.get_state(entity) == ON
-        ]
+        return [entity for entity in self.all_lights if self.get_state(entity) == ON]
 
     @property
     def lux_high(self) -> bool:
@@ -189,22 +207,16 @@ class MotionLightAutomation(AppBase):  # pylint: disable=too-many-instance-attri
     @property
     def day_state(self) -> str:
         """Return the state of the day based on the current time."""
-        if self.now_is_between(
-                self.day_state_map[MORNING],
-                self.day_state_map[DAY]):
+        if self.now_is_between(self.day_state_map[MORNING], self.day_state_map[DAY]):
             return MORNING
-        if self.now_is_between(
-                self.day_state_map[DAY],
-                self.day_state_map[NIGHT]):
+        if self.now_is_between(self.day_state_map[DAY], self.day_state_map[NIGHT]):
             return DAY
         return NIGHT
 
     @property
     def lights(self) -> list:
         """Return list of lights to turn on based on state of day."""
-        return [
-            entity for entity in self.lights_map[self.day_state].split(',')
-        ]
+        return [entity for entity in self.lights_map[self.day_state].split(",")]
 
     @property
     def brightness(self) -> float:
@@ -215,4 +227,4 @@ class MotionLightAutomation(AppBase):  # pylint: disable=too-many-instance-attri
     @property
     def light_color(self) -> str:
         """Return light color to set light to based on state of day."""
-        return self.color_map.get(self.day_state, 'white')
+        return self.color_map.get(self.day_state, "white")

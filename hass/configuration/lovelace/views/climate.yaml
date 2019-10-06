@@ -1,0 +1,37 @@
+    title: Klima
+    icon: mdi:fan
+    panel: true
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.dark_sky
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.temperatur_schlafzimmer
+                name: Temperatur Schlafzimmer
+              - type: sensor
+                entity: sensor.temperatur_ankleidezimmer
+                name: Temperatur Ankleidezimmer
+              - type: sensor
+                entity: sensor.temperatur_bad_klein
+                name: Temperatur kleines Bad
+              - type: sensor
+                entity: sensor.temperatur_buero
+                name: Temperatur Büro
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.luftfeuchtigkeit_schlafzimmer
+                name: Luftfeuchtigkeit Schlafzimmer
+              - type: sensor
+                entity: sensor.luftfeuchtigkeit_ankleidezimmer
+                name: Luftfeuchtigkeit Ankleidezimmer
+              - type: sensor
+                entity: sensor.luftfeuchtigkeit_bad_klein
+                name: Luftfeuchtigkeit kleines Bad
+              - type: sensor
+                entity: sensor.luftfeuchtigkeit_buero
+                name: Luftfeuchtigkeit Büro
+          

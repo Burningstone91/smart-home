@@ -1,0 +1,8 @@
+    title: Household Tasks
+    icon: mdi:broom
+    id: kiosk_floorplan
+    panel: true
+    cards:
+      - type: entities
+        entities:
+          - entity: input_datetime.matratze_wenden

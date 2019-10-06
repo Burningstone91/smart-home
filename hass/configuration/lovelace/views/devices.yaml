@@ -1,0 +1,220 @@
+    title: Geräte
+    icon: mdi:puzzle
+    panel: true
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entity-filter
+                entities:
+                  - zwave.aeotec_zw090_zstick_gen5_eu
+                  - zwave.aeotec_zw100_multisensor_6
+                  - zwave.aeotec_zw100_multisensor_6_10
+                  - zwave.aeotec_zw100_multisensor_6_11
+                  - zwave.aeotec_zw100_multisensor_6_4
+                  - light.decke_1_ankleidezimmer
+                  - light.decke_2_ankleidezimmer
+                  - light.decke_3_ankleidezimmer
+                  - light.decke_1_buero
+                  - light.decke_2_buero
+                  - light.decke_3_buero
+                  - light.decke_1_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.kugellampe_schlafzimmer
+                  - light.stehlampe_wohnzimmer_vorne
+                  - light.stehlampe_wohnzimmer_hinten
+                  - binary_sensor.fenster_wohnzimmer
+                  - binary_sensor.tuer_wohnzimmer_balkon
+                  - binary_sensor.fenster_buero
+                  - binary_sensor.fenster_bad_gross
+                  - binary_sensor.fenster_ankleidezimmer
+                  - binary_sensor.fenster_schlafzimmer
+                  - binary_sensor.tuer_kueche_balkon
+                  - binary_sensor.fenster_kueche
+                  - binary_sensor.tuer_wohnung
+                  - binary_sensor.tuer_buero
+                  - binary_sensor.tuer_ankleidezimmer
+                  - binary_sensor.tuer_bad_gross
+                  - binary_sensor.tuer_bad_klein
+                  - binary_sensor.tuer_schlafzimmer
+                  - binary_sensor.tuer_reduit
+                  - device_tracker.pi_schlafzimmer
+                  - device_tracker.pi_kleiderzimmer
+                  - device_tracker.pi_wohnzimmer
+                  - device_tracker.pi_buero
+                  - device_tracker.roomba
+                  - device_tracker.harmony_hub
+                  - device_tracker.dehumidifier
+                  - device_tracker.sound_office
+                  - device_tracker.sound_livingroom
+                  - device_tracker.sound_bedroom
+                state_filter:
+                  - "unavailable"
+                  - "unknown"
+                  - "not_home"
+                card:
+                  type: glance
+                  title: Geräte Unerreichbar
+                  show_state: false  
+          - type: vertical-stack
+            cards:
+              - type: entity-filter
+                entities:
+                  - zwave.aeotec_zw090_zstick_gen5_eu
+                  - zwave.aeotec_zw100_multisensor_6
+                  - zwave.aeotec_zw100_multisensor_6_10
+                  - zwave.aeotec_zw100_multisensor_6_11
+                  - zwave.aeotec_zw100_multisensor_6_4
+                state_filter:
+                  - "ready"
+                card:
+                  type: glance
+                  title: Z-Wave Geräte Bereit
+                  show_state: false
+              - type: entity-filter
+                entities:
+                  - zwave.aeotec_zw090_zstick_gen5_eu
+                  - zwave.aeotec_zw100_multisensor_6
+                  - zwave.aeotec_zw100_multisensor_6_10
+                  - zwave.aeotec_zw100_multisensor_6_11
+                  - zwave.aeotec_zw100_multisensor_6_4
+                state_filter:
+                  - "sleeping"
+                card:
+                  type: glance
+                  title: Z-Wave Geräte Schlafend
+                  show_state: false
+          - type: vertical-stack
+            cards:
+              - type: entity-filter
+                entities:
+                  - light.decke_1_ankleidezimmer
+                  - light.decke_2_ankleidezimmer
+                  - light.decke_3_ankleidezimmer
+                  - light.decke_1_buero
+                  - light.decke_2_buero
+                  - light.decke_3_buero
+                  - light.decke_1_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.kugellampe_schlafzimmer
+                  - light.stehlampe_wohnzimmer_vorne
+                  - light.stehlampe_wohnzimmer_hinten
+                state_filter:
+                  - "on"
+                card:
+                  type: glance
+                  title: ZigBee Lichter An
+                  show_state: false
+              - type: entity-filter
+                entities:
+                  - light.decke_1_ankleidezimmer
+                  - light.decke_2_ankleidezimmer
+                  - light.decke_3_ankleidezimmer
+                  - light.decke_1_buero
+                  - light.decke_2_buero
+                  - light.decke_3_buero
+                  - light.decke_1_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.kugellampe_schlafzimmer
+                  - light.stehlampe_wohnzimmer_vorne
+                  - light.stehlampe_wohnzimmer_hinten
+                state_filter:
+                  - "off"
+                card:
+                  type: glance
+                  title: ZigBee Lichter Aus
+                  show_state: false
+          - type: vertical-stack
+            cards:
+              - type: entity-filter
+                entities:
+                  - binary_sensor.fenster_wohnzimmer
+                  - binary_sensor.tuer_wohnzimmer_balkon
+                  - binary_sensor.fenster_buero
+                  - binary_sensor.fenster_bad_gross
+                  - binary_sensor.fenster_ankleidezimmer
+                  - binary_sensor.fenster_schlafzimmer
+                  - binary_sensor.tuer_kueche_balkon
+                  - binary_sensor.fenster_kueche
+                  - binary_sensor.tuer_wohnung
+                  - binary_sensor.tuer_buero
+                  - binary_sensor.tuer_ankleidezimmer
+                  - binary_sensor.tuer_bad_gross
+                  - binary_sensor.tuer_bad_klein
+                  - binary_sensor.tuer_schlafzimmer
+                  - binary_sensor.tuer_reduit
+                state_filter:
+                  - "on"
+                card:
+                  type: glance
+                  title: ZigBee Tür-Fenstersensor Offen
+                  show_state: false
+              - type: entity-filter
+                entities:
+                  - binary_sensor.fenster_wohnzimmer
+                  - binary_sensor.tuer_wohnzimmer_balkon
+                  - binary_sensor.fenster_buero
+                  - binary_sensor.fenster_bad_gross
+                  - binary_sensor.fenster_ankleidezimmer
+                  - binary_sensor.fenster_schlafzimmer
+                  - binary_sensor.tuer_kueche_balkon
+                  - binary_sensor.fenster_kueche
+                  - binary_sensor.tuer_wohnung
+                  - binary_sensor.tuer_buero
+                  - binary_sensor.tuer_ankleidezimmer
+                  - binary_sensor.tuer_bad_gross
+                  - binary_sensor.tuer_bad_klein
+                  - binary_sensor.tuer_schlafzimmer
+                  - binary_sensor.tuer_reduit
+                state_filter:
+                  - "off"
+                card:
+                  type: glance
+                  title: ZigBee Tür-Fenstersensor Geschlossen
+                  show_state: false
+          - type: vertical-stack
+            cards:
+              - type: entity-filter
+                entities:
+                  - device_tracker.pi_schlafzimmer
+                  - device_tracker.pi_kleiderzimmer
+                  - device_tracker.pi_wohnzimmer
+                  - device_tracker.pi_buero
+                state_filter:
+                  - "home"
+                card:
+                  type: glance
+                  title: Room Presence Pi Bereit
+                  show_state: false
+          - type: vertical-stack
+            cards:
+              - type: entity-filter
+                entities:
+                  - vacuum.roomba
+                  - remote.wohnzimmer
+                  - switch.schalter_entfeuchter
+                  - media_player.buero_musik_main
+                  - media_player.denon_avr_wohnzimmer
+                state_filter:
+                  - "on"
+                card:
+                  type: glance
+                  title: Smart Home Geräte An
+                  show_state: false
+              - type: entity-filter
+                entities:
+                  - vacuum.roomba
+                  - remote.wohnzimmer
+                  - switch.schalter_entfeuchter
+                  - media_player.buero_musik_main
+                  - media_player.denon_avr_wohnzimmer
+                state_filter:
+                  - "off"
+                card:
+                  type: glance
+                  title: Smart Home Geräte Aus
+                  show_state: false

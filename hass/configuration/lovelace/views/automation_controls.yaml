@@ -1,0 +1,106 @@
+    title: Automatisierungen
+    icon: mdi:robot
+    panel: true
+    cards:
+      - type: horizontal-stack
+        cards: 
+        - type: vertical-stack
+          cards:
+          - type: entities
+            title: Basis Apps
+            show_header_toggle: false
+            entities:
+              - input_boolean.climate_app
+              - input_boolean.remote_app
+              - input_boolean.media_player_app
+              - input_boolean.notification_app
+              - input_boolean.presence_app
+              - input_boolean.security_app
+              - input_boolean.vacuum_app
+          - type: entities
+            title: Haus Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.everyone_gone
+          - type: entities
+            title: System Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.notify_on_device_offline
+              - input_boolean.notify_on_appdaemon_log_error
+              - input_boolean.notify_on_low_battery
+              - input_boolean.check_appdaemon_version_installed
+              - input_boolean.notify_on_new_version
+        - type: vertical-stack
+          cards:
+          - type: entities
+            title: Sicherheit Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.arm_when_everyone_gone
+              - input_boolean.disarm_when_someone_home
+              - input_boolean.arm_disarm_when_cleaning
+              - input_boolean.notify_on_alarm_change
+              - input_boolean.notify_on_bad_login_attempt
+              - input_boolean.last_motion
+          - type: entities
+            title: Staubsauger Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.notify_when_vacuum_bin_full
+              - input_boolean.notify_on_cleaning_day
+          - type: entities
+            title: Klima Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.notify_on_high_humidity
+              - input_boolean.notify_on_window_open       
+        - type: vertical-stack
+          cards:  
+          - type: entities
+            title: Schlafzimmerautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_bedroom
+              - input_boolean.dimmer_switch_schlafzimmer
+              - input_boolean.dimmer_switch_schlafzimmer_master
+              - input_boolean.dimmer_switch_schlafzimmer_sabrina
+              - input_boolean.turn_on_sleep_mode_forgot
+              - input_boolean.turn_off_sleep_mode_forgot
+              - input_boolean.turn_off_sleep_mode_forgot_weekend
+              - input_boolean.turn_off_dehumidifier_window_open
+              - input_boolean.turn_on_dehumidifier_window_close
+          - type: entities
+            title: Wohnzimmerautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.scene_light_app
+              - input_boolean.dimmer_switch_wohnzimmer
+              - input_boolean.phone_call
+              - input_boolean.brighten_light_pause
+          - type: entities
+            title: Büroautomatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_office
+              - input_boolean.dimmer_switch_buero
+          - type: entities
+            title: Ankleidezimmer Automatisierungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.motion_light_dress_room
+              - input_boolean.dimmer_switch_ankleidezimmer
+        - type: vertical-stack
+          cards:  
+          - type: entities
+            title: Erinnerungen
+            show_header_toggle: false
+            entities:
+              - input_boolean.remind_new_battery_key_dimitri
+              - input_boolean.remind_new_battery_key_sabrina
+              - input_boolean.remind_clean_oven
+              - input_boolean.remind_clean_dishwasher
+              - input_boolean.remind_clean_wash_machine
+              - input_boolean.remind_clean_air_filter
+              - input_boolean.remind_backup
+        

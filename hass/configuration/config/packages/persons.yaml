@@ -55,6 +55,40 @@ sensor:
             /local/presence/sabrina_away.jpg
           {% endif %}
 
+  - platform: swiss_public_transport
+    name: Dimitri Verbindungen zur Arbeit
+    from: "Näfels-Mollis"
+    to: "Zürich Oerlikon"
+
+  - platform: swiss_public_transport
+    name: Dimitri Verbindungen nach Hause
+    from: "Zürich Oerlikon"
+    to: "Näfels-Mollis"
+
+  - platform: template
+    sensors:
+      next_train_from_home_to_work:
+        friendly_name: "Nächster Zug zur Arbeit"
+        value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_zur_arbeit.attributes.next_departure)| timestamp_custom("%H:%M", True) }}'
+    
+  - platform: template
+    sensors:
+      next_but_one_train_from_home_to_work:
+        friendly_name: "Übernächster Zug zur Arbeit"
+        value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_zur_arbeit.attributes.next_on_departure)| timestamp_custom("%H:%M", True) }}'
+
+  - platform: template
+    sensors:
+      next_train_from_work_to_home:
+        friendly_name: "Nächster Zug nach Hause"
+        value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_nach_hause.attributes.next_departure)| timestamp_custom("%H:%M", True) }}'
+    
+  - platform: template
+    sensors:
+      next_but_one_train_from_work_to_home:
+        friendly_name: "Übernächster Zug nach Hause"
+        value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_nach_hause.attributes.next_on_departure)| timestamp_custom("%H:%M", True) }}'
+
 input_select:
   dimitri_presence:
     name: Dimitri

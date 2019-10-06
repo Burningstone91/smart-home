@@ -1,0 +1,406 @@
+    title: Floorplan
+    icon: mdi:home-heart
+    id: kiosk_floorplan
+    panel: true
+    cards:
+      - type: vertical-stack
+        cards:
+        - type: custom:plan-coordinates
+        - type: picture-elements
+          image: /local/Wohnung.svg
+          elements:
+            ####################### Türen + Fenster ##########################
+            - type: image
+              entity: sensor.tuer_schlafzimmer
+              state_image:
+                "offen": /local/tuer_schlafzimmer_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 25.8%
+                left: 60.8%
+                width: 4.3%
+
+            - type: image
+              entity: sensor.tuer_bad_klein
+              state_image:
+                "offen": /local/tuer_bad_klein_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 25.5%
+                left: 70.8%
+                width: 4.5%
+
+            - type: image
+              entity: sensor.tuer_bad_gross
+              state_image:
+                "offen": /local/tuer_bad_gross_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 25.6%
+                left: 84.9%
+                width: 4.5%
+
+            - type: image
+              entity: sensor.tuer_ankleidezimmer
+              state_image:
+                "offen": /local/tuer_ankleidezimmer_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 41.6%
+                left: 78.9%
+                width: 4.5%
+
+            - type: image
+              entity: sensor.tuer_buero
+              state_image:
+                "offen": /local/tuer_buero_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 41.6%
+                left: 85.6%
+                width: 4.5%
+
+            - type: image
+              entity: sensor.tuer_reduit
+              state_image:
+                "offen": /local/tuer_reduit_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 13.9%
+                left: 41.6%
+                width: 4%
+
+            - type: image
+              entity: sensor.fenster_kueche
+              state_image:
+                "offen": /local/fenster_kueche_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 33.85%
+                left: 20%
+                width: 5.5%
+
+            - type: image
+              entity: sensor.tuer_kueche_balkon
+              state_image:
+                "offen": /local/tuer_kueche_balkon_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 43.4%
+                left: 21.9%
+                width: 5%
+
+            - type: image
+              entity: sensor.tuer_wohnzimmer_balkon
+              state_image:
+                "offen": /local/tuer_wohnzimmer_balkon_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 74.8%
+                left: 34.8%
+                width: 4.1%
+
+            - type: image
+              entity: sensor.fenster_wohnzimmer
+              state_image:
+                "offen": /local/fenster_wohnzimmer_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 78.2%
+                left: 50.3%
+                width: 12%
+
+            - type: image
+              entity: sensor.fenster_ankleidezimmer
+              state_image:
+                "offen": /local/fenster_ankleidezimmer_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 78.6%
+                left: 73.8%
+                width: 7.45%
+
+            - type: image
+              entity: sensor.fenster_buero
+              state_image:
+                "offen": /local/fenster_buero_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 78.6%
+                left: 88.55%
+                width: 7.6%
+
+            - type: image
+              entity: sensor.tuer_wohnung
+              state_image:
+                "offen": /local/tuer_wohnung_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 34.1%
+                left: 96.9%
+                width: 5.7%
+
+            - type: image
+              entity: sensor.fenster_bad_gross
+              state_image:
+                "offen": /local/fenster_bad_gross_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 4.05%
+                left: 81.9%
+                width: 4.3%
+
+            - type: image
+              entity: sensor.fenster_schlafzimmer
+              state_image:
+                "offen": /local/fenster_schlafzimmer_offen.png
+                "geschlossen": /local/geschlossen.png
+              style:
+                top: 4.4%
+                left: 53.55%
+                width: 7.65%
+
+            ########################### Lichter ##############################
+            - type: image
+              entity: light.wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/light_on_furniture.png
+                "off": /local/light_off_furniture.png
+              style:
+                top: 63.6%
+                left: 50.9%
+                width: 3.5%
+
+            - type: image
+              entity: light.schlafzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/light_on_furniture.png
+                "off": /local/light_off_furniture.png
+              style:
+                top: 14.2%
+                left: 55.8%
+                width: 3.5%
+
+            - type: image
+              entity: light.ankleidezimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/light_on.png
+                "off": /local/light_off.png
+              style:
+                top: 57.8%
+                left: 74.0%
+                width: 3.5%
+
+            - type: image
+              entity: light.buero
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/light_on.png
+                "off": /local/light_off.png
+              style:
+                top: 57.8%
+                left: 89.1%
+                width: 3.5%
+
+            ###################### Dehumidifier ##############################
+            - type: image
+              entity: switch.schalter_entfeuchter
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/fan_on.gif
+                "off": /local/fan_stop.png
+              style:
+                top: 6.5%
+                left: 64.55%
+                width: 3.65%  
+
+            ####################### Vacuum ###################################
+            - type: image
+              entity: vacuum.roomba
+              image: /local/roomba.png
+              filter: brightness(40%)
+              state_filter:
+                "on": brightness(100%)
+              style:
+                top: 41%
+                left: 64%
+                width: 3%
+            
+            ###################### Home Cinema ###############################
+            - type: image
+              entity: remote.wohnzimmer
+              tap_action:
+                action: call-service
+                service: remote.turn_off
+                service_data:
+                  entity_id: remote.wohnzimmer
+              state_image:
+                "on": /local/projector_on.png
+                "off": /local/projector_off.png
+              style:
+                top: 62.6%
+                left: 43.9%
+                width: 3.5%
+
+            - type: image
+              entity: sensor.harmony_activity
+              tap_action:
+                action: call-service
+                service: remote.turn_on
+                service_data:
+                  entity_id: remote.wohnzimmer
+                  activity: "Fernsehen"
+              image: /local/tv.png
+              filter: brightness(40%)
+              state_filter:
+                "Fernsehen": brightness(100%)
+              style:
+                top: 86%
+                left: 57.5%
+                width: 3%
+
+            - type: image
+              entity: sensor.harmony_activity
+              tap_action:
+                action: call-service
+                service: remote.turn_on
+                service_data:
+                  entity_id: remote.wohnzimmer
+                  activity: "Filme/Serien"
+              image: /local/cinema.png
+              filter: brightness(40%)
+              state_filter:
+                "Filme/Serien": brightness(100%)
+              style:
+                top: 86%
+                left: 61.5%
+                width: 3%
+
+            - type: image
+              entity: sensor.harmony_activity
+              tap_action:
+                action: call-service
+                service: remote.turn_on
+                service_data:
+                  entity_id: remote.wohnzimmer
+                  activity: "Nintendo Switch"
+              image: /local/nintendo_switch.png
+              filter: brightness(40%)
+              state_filter:
+                "Nintendo Switch": brightness(100%)
+              style:
+                top: 86%
+                left: 65.5%
+                width: 3%
+
+            ######################## Dashboard ###############################
+            - type: state-icon
+              entity: sensor.dimitri_home
+              style:
+                top: 5%
+                left: 8%
+                width: 1%
+            - type: state-icon
+              entity: sensor.sabrina_home
+              style:
+                top: 5%
+                left: 4% 
+                width: 1%
+
+            ########################## Sound Office ##########################
+            - type: image
+              entity: media_player.buero_musik_main
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 75.7%
+                left: 85%
+                width: 3.5%
+
+            - type: image
+              entity: media_player.buero_musik_main
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 62.7%
+                left: 85%
+                width: 3.5%  
+
+            ########################## Sound Living Room ##########################
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 52.7%
+                left: 61.5%
+                width: 3.5%
+
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 74.%
+                left: 61.5%
+                width: 3.5%  
+
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 52.7%
+                left: 38%
+                width: 3.5%
+
+            - type: image
+              entity: media_player.denon_avr_wohnzimmer
+              tap_action:
+                action: toggle
+              state_image:
+                "on": /local/speaker-play.gif
+                "off": /local/speaker-still.png
+              style:
+                top: 74.6%
+                left: 38%
+                width: 3.5%  
+
+            ####################### Temperatur ###############################
+            - type: state-icon
+              entity: sensor.temperatur_buero
+              style:
+                top: 41.5%
+                left: 89.5% 
+            - type: state-label
+              icon: mdi:celsius
+              entity: sensor.temperatur_buero
+              style:
+                top: 41.3%
+                left: 92.5% 
+                font-size: 80%
+                font-weight: bold
+                color: SteelBlue

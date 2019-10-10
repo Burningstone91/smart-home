@@ -1,3 +1,4 @@
 broker: !secret host_ip
 username: !secret mqtt_user
 password: !secret mqtt_key
+discovery: true

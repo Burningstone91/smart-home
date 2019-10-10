@@ -3,6 +3,23 @@
     id: kiosk_floorplan
     panel: true
     cards:
-      - type: entities
-        entities:
-          - entity: input_datetime.matratze_wenden
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: input_datetime.matratze_wenden
+                        icon: hotel
+                  - type: custom:check-button-card
+                    title: "Matratze wenden"
+                    entity: sensor.matratze_gewendet
+                    severity:
+                      - value: 3 months
+                        hue: '120'
+                      - value: 6 months
+                        hue: '40'
+                      - value: 9 months
+                        hue: '0'

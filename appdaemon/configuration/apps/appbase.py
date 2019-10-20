@@ -3,6 +3,7 @@ import datetime
 
 import voluptuous as vol
 from appdaemon.plugins.hass.hassapi import Hass
+from appdaemon.plugins.mqtt.mqttapi import Mqtt
 
 from house_config import HOUSE, MODES
 import voluptuous_helper as vol_help
@@ -13,6 +14,7 @@ CONF_MODULE = "module"
 CONF_DEPENDENCIES = "dependencies"
 CONF_MANAGER = "manager"
 
+CONF_MQTT_API = 'mqtt_api'
 CONF_DISABLED_STATES = "disabled_states"
 CONF_PRESENCE = "presence"
 CONF_DAYS = "days"
@@ -55,6 +57,7 @@ APP_SCHEMA = vol.Schema(
 #   - handles: handles to use in the app
 #   - notifications: dict for configuration for notifications, target etc.
 #   - properties: dict for different properties to be used by the app
+#      - mqtt_api: enables or disables the MQTT API, enabled or disabled, defaults to disabled
 # Registers a constraint for disabled states:
 #   - The following argument must be added to each listener for the disabled
 #     states to trigger:
@@ -96,12 +99,19 @@ class AppBase(Hass):
             self.error(f"Ungültiges Format: {err}", level="ERROR")
             return
 
+        # Sets the default namespace, can be changed on app level to mqtt
+        self.set_namespace("hass")
+
         # Define holding place for various configurations
         self.disabled_states = self.args.get("disabled_states", {})
         self.entities = self.args.get("entities", {})
         self.handles = {}
         self.notifications = self.args.get("notifications", {})
         self.properties = self.args.get("properties", {})
+
+        # Creates a reference to the MQTT Base Object to use the MQTT Api, if mqtt_api: true
+        if self.properties.get(CONF_MQTT_API, "disabled") == "enabled":
+            self.mqtt = self.get_app('mqtt_base_object')
 
         # Register the constraint for the app to be enabled
         self.register_constraint("constrain_app_enabled")
@@ -153,3 +163,11 @@ class AppBase(Hass):
             return False
 
         return True
+
+
+class MqttBase(Mqtt):
+    """Define an MQTT class to use the MQTT API within apps."""
+    
+    def initialize(self):
+        """Initialize."""
+        self.set_namespace('mqtt')

@@ -6,5 +6,12 @@ appdaemon:
   plugins:
     HASS:
       type: hass
+      namespace: hass
       token: !secret appdaemon_token
       ha_url: !secret appdaemon_url
+    MQTT:
+      type: mqtt
+      namespace: mqtt
+      client_host: !secret client_host
+      client_user: !secret mqtt_user
+      client_password: !secret mqtt_password

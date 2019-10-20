@@ -34,7 +34,6 @@
           user: Dimitri Handy
         config:
           clock_format: 24
-          hide_tabs: 3,4,7
           swipe: true
       - conditions:
           user: Sabrina Handy

@@ -1,0 +1,4 @@
+mqtt_base_object:
+  module: appbase
+  class: MqttBase
+  priority: 10

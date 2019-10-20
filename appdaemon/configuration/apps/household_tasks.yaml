@@ -1,0 +1,16 @@
+household_tasks:
+  module: household_tasks
+  class: HouseHoldTasks
+  dependencies:
+    - notification_app
+  entities:
+    task_sensor: sensor.matratze_gewendet
+  properties:
+    mqtt_api: enabled
+    reminder_time: "18:30:00"
+    title: "Matratze wenden!"
+    message: "Zeit die Matratze zu wenden!"
+    expiry_in_days: 90 
+  notifications:
+    targets: Dimitri
+    interval: 1440

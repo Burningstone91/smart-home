@@ -1,0 +1,146 @@
+  title: Home
+  path: phone_home
+  icon: mdi:home-heart
+  id: kiosk_floorplan
+  panel: true
+  cards: 
+    - type: vertical-stack
+      cards:
+        - type: custom:simple-weather-card
+          style: |
+            ha-card {
+              border-radius: 0px;
+              box-shadow: none;
+              opacity: 0.8;
+              font-size: 12px;
+              font-family: Helvetica;
+            }
+          entity: weather.dark_sky
+          name: Eindhoven
+          backdrop:
+            fade: true
+            day: "var(--weather-color-day)"
+            night: "var(--weather-color-night)"
+            text: "var(--weather-color-text)"
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/weather
+
+        - type: horizontal-stack
+          cards:
+            # Picture Left Sabrina Away
+            - type: conditional
+              conditions:
+                - entity: sensor.sabrina_home
+                  state_not: "home"
+              card:
+                type: picture-elements
+                style: |
+                  ha-card {
+                    border-radius: 0px;
+                    box-shadow: none;
+                    overflow: hidden;
+                  }
+                image: /local/presence/sabrina_away.jpg
+                elements:
+                  - type: state-label
+                    entity: input_select.sabrina_presence
+                    style:
+                      left: 0
+                      bottom: 0
+                      pointer-events: none
+                      font-size: 16px
+                      line-height: 24px
+                      color: white
+                      background-color: rgba(0, 0, 0, 0.3)
+                      width: 100%
+                      transform: initial
+                      padding: 0 8px
+            # Picture Left Sabrina Home
+            - type: conditional
+              conditions:
+                - entity: sensor.sabrina_home
+                  state: "home"
+              card:
+                type: picture-elements
+                style: |
+                  ha-card {
+                    border-radius: 0px;
+                    box-shadow: none;
+                    overflow: hidden;
+                  }
+                image: /local/presence/sabrina_home.jpg
+                elements:
+                  - type: state-label
+                    entity: input_select.sabrina_presence
+                    style:
+                      left: 0
+                      bottom: 0
+                      pointer-events: none
+                      font-size: 16px
+                      line-height: 24px
+                      color: white
+                      background-color: rgba(0, 0, 0, 0.3)
+                      width: 100%
+                      transform: initial
+                      padding: 0 8px
+            # Picture Right Dimitri Away
+            - type: conditional
+              conditions:
+                - entity: sensor.dimitri_home
+                  state_not: "home"
+              card:
+                type: picture-elements
+                style: |
+                  ha-card {
+                    border-radius: 0px;
+                    box-shadow: none;
+                    overflow: hidden;
+                  }
+                image: /local/presence/dimitri_away.jpg
+                elements:
+                  - type: state-label
+                    entity: input_select.dimitri_presence
+                    style:
+                      left: 0
+                      bottom: 0
+                      pointer-events: none
+                      font-size: 16px
+                      line-height: 24px
+                      color: white
+                      background-color: rgba(0, 0, 0, 0.3)
+                      width: 100%
+                      transform: initial
+                      padding: 0 8px
+            # Picture Right Dimitri Home
+            - type: conditional
+              conditions:
+                - entity: sensor.dimitri_home
+                  state: "home"
+              card:
+                type: picture-elements
+                style: |
+                  ha-card {
+                    border-radius: 0px;
+                    box-shadow: none;
+                    overflow: hidden;
+                  }
+                image: /local/presence/dimitri_home.jpg
+                elements:
+                  - type: state-label
+                    entity: input_select.dimitri_presence
+                    style:
+                      left: 0
+                      bottom: 0
+                      pointer-events: none
+                      font-size: 16px
+                      line-height: 24px
+                      color: white
+                      background-color: rgba(0, 0, 0, 0.3)
+                      width: 100%
+                      transform: initial
+                      padding: 0 8px
+
+
+
+

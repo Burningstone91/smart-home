@@ -5,10 +5,6 @@
     cards:
       - type: horizontal-stack
         cards:
-          - type: entities
-            entities:
-              - entity: input_datetime.matratze_wenden
-                icon: mdi:hotel
           - type: custom:check-button-card
             title: "Matratze wenden"
             entity: sensor.matratze_gewendet

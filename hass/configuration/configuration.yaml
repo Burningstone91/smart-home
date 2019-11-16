@@ -2,6 +2,7 @@ homeassistant: !include config/homeassistant.yaml
 
 # configurations for core
 frontend:
+  themes: !include_dir_named config/themes/
   javascript_version: latest
 config:
 http: !include config/http.yaml
@@ -20,6 +21,7 @@ lovelace:
 
 # configuration for components
 automation: !include config/automations.yaml
+deconz: !include config/components/deconz.yaml
 input_boolean: !include_dir_merge_named config/input_boolean
 influxdb: !include config/components/influxdb.yaml
 mqtt: !include config/components/mqtt.yaml

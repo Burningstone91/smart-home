@@ -14,8 +14,8 @@ emulated_roku:
     - name: Roku Emu
       listen_port: 8060
       host_ip: !secret host_ip
-#      advertise_ip: !secret host_main_ip
-#      advertise_port: 8060
+      advertise_ip: !secret host_main_ip
+      advertise_port: 8060
 
 remote:
   - platform: harmony

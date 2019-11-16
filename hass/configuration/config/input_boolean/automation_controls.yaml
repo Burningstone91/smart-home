@@ -132,7 +132,7 @@ dimmer_switch_buero:
 
 everyone_gone:
   name: Schalte alle Geräte und Lichter aus wenn alle gegangen sind
-  initial: True
+  initial: False
   icon: mdi:walk
 
 ################################## Security ##################################

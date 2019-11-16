@@ -1,0 +1,2 @@
+host: !secret deconz_ip
+port: 8080

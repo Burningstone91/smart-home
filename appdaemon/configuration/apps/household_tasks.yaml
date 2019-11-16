@@ -7,10 +7,10 @@ household_tasks:
     task_sensor: sensor.matratze_gewendet
   properties:
     mqtt_api: enabled
-    reminder_time: "18:30:00"
+    reminder_time: "16:07:00"
     title: "Matratze wenden!"
     message: "Zeit die Matratze zu wenden!"
-    expiry_in_days: 90 
+    expiry_in_days: 0
   notifications:
     targets: Dimitri
     interval: 1440

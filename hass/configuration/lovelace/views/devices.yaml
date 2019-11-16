@@ -41,7 +41,7 @@
                   - binary_sensor.tuer_schlafzimmer
                   - binary_sensor.tuer_reduit
                   - device_tracker.pi_schlafzimmer
-                  - device_tracker.pi_kleiderzimmer
+                  - device_tracker.pi_ankleidezimmer
                   - device_tracker.pi_wohnzimmer
                   - device_tracker.pi_buero
                   - device_tracker.roomba
@@ -181,14 +181,14 @@
               - type: entity-filter
                 entities:
                   - device_tracker.pi_schlafzimmer
-                  - device_tracker.pi_kleiderzimmer
+                  - device_tracker.pi_ankleidezimmer
                   - device_tracker.pi_wohnzimmer
                   - device_tracker.pi_buero
                 state_filter:
                   - "home"
                 card:
                   type: glance
-                  title: Room Presence Pi Bereit
+                  title: Room Presence Pi
                   show_state: false
           - type: vertical-stack
             cards:

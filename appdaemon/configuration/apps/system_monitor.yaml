@@ -15,15 +15,22 @@ notifiy_on_device_offline:
       - switch.nginx
       - switch.glances
       - device_tracker.pi_schlafzimmer
-      - device_tracker.pi_kleiderzimmer
+      - device_tracker.pi_ankleidezimmer
       - device_tracker.pi_wohnzimmer
       - device_tracker.pi_buero
-      - device_tracker.roomba
-      - device_tracker.harmony_hub
-      - device_tracker.dehumidifier
-      - device_tracker.sound_office
-      - device_tracker.sound_livingroom
-      - device_tracker.sound_bedroom
+      - device_tracker.roomba_wohnzimmer
+      - device_tracker.nas
+      - device_tracker.harmonyhub
+      - device_tracker.switch_entfeuchter
+      - device_tracker.musik_buero
+      - device_tracker.minix_wohnzimmer
+      - device_tracker.musik_wohnzimmer
+      - device_tracker.musik_schlafzimmer
+      - device_tracker.raspberrypi
+      - device_tracker.ap_wohnzimmer
+      - device_tracker.switch_reduit
+      - device_tracker.switch_wohnzimmer
+      - device_tracker.usg_router
       - zwave.aeotec_zw090_zstick_gen5_eu
       - zwave.aeotec_zw100_multisensor_6
       - zwave.aeotec_zw100_multisensor_6_10
@@ -68,6 +75,22 @@ notify_on_low_battery:
       - sensor.dimmschalter_schlafzimmer_battery_level
       - sensor.dimmschalter_schlafzimmer_master_battery_level
       - sensor.dimmschalter_wohnzimmer_battery_level
+      - sensor.bad_klein_multisensor_battery
+      - sensor.fenster_ankleidezimmer_battery_level
+      - sensor.fenster_bad_gross_battery_level
+      - sensor.fenster_buero_battery_level
+      - sensor.fenster_kueche_battery_level
+      - sensor.fenster_schlafzimmer_battery_level
+      - sensor.fenster_wohnzimmer_battery_level
+      - sensor.tuer_ankleidezimmer_battery_level
+      - sensor.tuer_bad_gross_battery_level
+      - sensor.tuer_bad_klein_battery_level
+      - sensor.tuer_buero_battery_level
+      - sensor.tuer_kueche_balkon_battery_level
+      - sensor.tuer_reduit_battery_level
+      - sensor.tuer_schlafzimmer_battery_level
+      - sensor.tuer_wohnung_battery_level
+      - sensor.tuer_wohnzimmer_balkon_battery_level
   properties:
     battery_low_threshold: 15
   notifications:

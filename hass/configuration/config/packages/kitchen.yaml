@@ -1,29 +1,5 @@
 sensor:
-  - platform: template
-    sensors:
-      tuer_kueche_balkon:
-        value_template: '{% if states.binary_sensor.tuer_kueche_balkon %}
-          {% if states.binary_sensor.tuer_kueche_balkon.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Tür Küche Balkon'
 
-      fenster_kueche:
-        value_template: '{% if states.binary_sensor.fenster_kueche %}
-          {% if states.binary_sensor.fenster_kueche.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Fenster Küche'
 
 ################################# Abwaschmaschine Verbrauch #################################
 #  - platform: template

@@ -1,5 +1,6 @@
     title: Einkaufsliste
     icon: mdi:format-list-checks
+    path: shopping_list
     panel: true
     cards:
       - type: shopping-list

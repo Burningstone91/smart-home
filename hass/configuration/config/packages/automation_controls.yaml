@@ -1,0 +1,201 @@
+# Input Booleans to enable/disable automations
+input_boolean:
+################################# Base Apps #################################
+  climate_app:
+    name: Klima App
+    initial: True
+    icon: mdi:fan
+  remote_app:
+    name: Harmony Remote App
+    initial: True
+    icon: mdi:remote
+  media_player_app:
+    name: Media Player App
+    initial: True
+    icon: mdi:spotify
+  notification_app:
+    name: Nachrichten App
+    initial: True
+    icon: mdi:email
+  presence_app:
+    name: Anwesenheit App
+    initial: True
+    icon: mdi:human-male-female
+  security_app:
+    name: Sicherheit App
+    initial: True
+    icon: mdi:lock
+  vacuum_app:
+    name: Staubsauger App
+    initial: True
+    icon: mdi:broom
+################################ Living Room #################################
+  scene_light_app:
+    name: Lichterszenen Wohnzimmer
+    initial: True
+    icon: mdi:lightbulb-on
+  dimmer_switch_wohnzimmer:
+    name: Hue Dimmer Switch Wohnzimmer
+    initial: True
+    icon: mdi:remote
+  phone_call:
+    name: Pause/Play bei Telefonat
+    initial: True
+    icon: mdi:cellphone-iphone
+  brighten_light_pause:
+    name: Licht hell/dunkel bei Pause/Play im Wohnzimmer
+    initial: True
+    icon: mdi:pause
+################################## Bedroom ###################################
+  motion_light_bedroom:
+    name: Bewegung Schlafzimmer
+    initial: True
+    icon: mdi:walk
+  dimmer_switch_schlafzimmer:
+    name: Hue Dimmer Switch Schlafzimmer
+    initial: True
+    icon: mdi:remote
+  dimmer_switch_schlafzimmer_master:
+    name: Hue Dimmer Switch Schlafzimmer Master
+    initial: True
+    icon: mdi:remote
+  dimmer_switch_schlafzimmer_sabrina:
+    name: Hue Dimmer Switch Sabrina
+    initial: True
+    icon: mdi:remote
+  turn_on_sleep_mode_forgot:
+    name: Schlafmodus einschalten wenn es vergessen wurde
+    initial: True
+    icon: mdi:sleep
+  turn_off_sleep_mode_forgot:
+    name: Schlafmodus ausschalten wenn es vergessen wurde
+    initial: True
+    icon: mdi:sleep
+  turn_off_sleep_mode_forgot_weekend:
+    name: Schlafmodus am Wochenende ausschalten wenn es vergessen wurde
+    initial: True
+    icon: mdi:sleep
+  turn_off_dehumidifier_window_open:
+    name: Entfeuchter ausschalten wenn das Fenster im Schlafzimmer geöffnet wird
+    initial: True
+    icon: mdi:fan
+  turn_on_dehumidifier_window_close:
+    name: Entfeuchter einschalten wenn das Fenster im Schlafzimmer geschlossen wird
+    initial: True
+    icon: mdi:fan
+################################# Dress room #################################
+  motion_light_dress_room:
+    name: Bewegung Ankleidezimmer
+    initial: True
+    icon: mdi:walk
+  dimmer_switch_ankleidezimmer:
+    name: Hue Dimmer Switch Ankleidezimmer
+    initial: True
+    icon: mdi:remote
+################################### Office ###################################
+  motion_light_office:
+    name: Bewegung Büro
+    initial: True
+    icon: mdi:walk
+  dimmer_switch_buero:
+    name: Hue Dimmer Switch Büro
+    initial: True
+    icon: mdi:remote
+################################### House ###################################
+  everyone_gone:
+    name: Schalte alle Geräte und Lichter aus wenn alle gegangen sind
+    initial: False
+    icon: mdi:walk
+################################## Security ##################################
+  arm_when_everyone_gone:
+    name: Alarm scharf wenn alle gegangen sind
+    initial: True
+    icon: mdi:lock
+  disarm_when_someone_home:
+    name: Alarm ausschalten wenn jemand zu Hause ist
+    initial: True
+    icon: mdi:lock-open
+  arm_disarm_when_cleaning:
+    name: Bewegungssensoren ein/ausschalten wenn Pedro putzt/fertig ist
+    initial: True
+    icon: mdi:broom
+  notify_on_alarm_change:
+    name: Benachrichtige wenn sich der Alarm Status ändert
+    initial: True
+    icon: mdi:email
+  notify_on_bad_login_attempt:
+    name: Benachrichtige wenn sich jemand mit einem falschen Passwort einloggen wollte
+    initial: True
+    icon: mdi:email
+  last_motion:
+    name: Letzte Bewegung
+    initial: True
+    icon: mdi:walk
+################################## Climate ###################################
+  notify_on_high_humidity:
+    name: Benachrichtige wenn die Luftfeuchtigkeit in einem Zimmer zu hoch ist
+    initial: True
+    icon: mdi:water
+  notify_on_window_open:
+    name: Benachrichtige wenn ein Fenster länger als 10 Minuten offen ist
+    initial: True
+    icon: mdi:door
+################################## Vacuum ####################################
+  notify_when_vacuum_bin_full:
+    name: Benachrichtige wenn der Abfalleimer des Staubsaugers voll ist
+    initial: True
+    icon: mdi:email
+  notify_on_cleaning_day:
+    name: Benachrichtige am Morgen des Putztages
+    initial: True
+    icon: mdi:broom  
+############################### System Monitor ############################### 
+  notify_on_device_offline:
+    name: Benachrichtige wenn ein Gerät offline ist
+    initial: True
+    icon: mdi:close-circle
+  notify_on_appdaemon_log_error:
+    name: Benachrichtige wenn es einen Fehler im Appdaemon Log gibt
+    initial: True
+    icon: mdi:alert-circle
+  notify_on_low_battery:
+    name: Benachrichtige wenn eine Batterie bald leer ist
+    initial: True
+    icon: mdi:battery-alert
+  check_appdaemon_version_installed:
+    name: Prüfe täglich die neuste verfügbare AppDaemon Version
+    initial: True
+    icon: mdi:package-up
+  notify_on_new_version:
+    name: Benachrichtige wenn eine neue Version für eine App verfügbar ist
+    initial: True
+    icon: mdi:update
+############################### Reminders ############################### 
+  remind_new_battery_key_dimitri:
+    name: Benachrichtige wenn die Batterie des Nut mini am Schlüssel gewechselt werden sollte
+    initial: True
+    icon: mdi:battery-alert
+  remind_new_battery_key_sabrina:
+    name: Benachrichtige wenn die Batterie des Nut mini am Schlüssel gewechselt werden sollte
+    initial: True
+    icon: mdi:battery-alert
+  remind_clean_oven:
+    name: Erinnerung an Backofen reinigen
+    initial: True
+    icon: mdi:broom
+  remind_clean_dishwasher:
+    name: Erinnerung an Abwaschmaschine reinigen
+    initial: True
+    icon: mdi:broom
+  remind_clean_wash_machine:
+    name: Erinnerung an Waschmaschine reinigen
+    initial: True
+    icon: mdi:broom
+  remind_clean_air_filter:
+    name: Erinnerung an Luftfilter reinigen
+    initial: True
+    icon: mdi:broom
+  remind_backup:
+    name: Erinnerung an Backup
+    initial: True
+    icon: mdi:broom

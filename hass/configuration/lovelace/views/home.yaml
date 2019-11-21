@@ -1,6 +1,7 @@
   title: Home
   icon: mdi:home-assistant
   panel: true
+  path: home
   cards:
     - type: horizontal-stack
       cards:

@@ -70,3 +70,6 @@ google-green-500: '#39E949'
 weather-color-text: 'AliceBlue' 
 weather-color-day: '#646464'
 weather-color-night: '#464646'
+
+# Header
+header-color: 'white'

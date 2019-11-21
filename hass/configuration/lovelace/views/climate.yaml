@@ -1,5 +1,6 @@
     title: Klima
     icon: mdi:fan
+    path: climate
     panel: true
     cards:
       - type: vertical-stack

@@ -13,7 +13,15 @@ climate_app:
       ankleidezimmer: sensor.temperatur_ankleidezimmer
       bad_klein: sensor.temperatur_bad_klein
     average_temperature_sensor: sensor.averagetemperature
-    window_sensors: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche
+    window_sensors: 
+      - binary_sensor.fenster_wohnzimmer
+      - binary_sensor.tuer_wohnzimmer_balkon 
+      - binary_sensor.fenster_buero
+      - binary_sensor.fenster_bad_gross
+      - binary_sensor.fenster_ankleidezimmer
+      - binary_sensor.fenster_schlafzimmer
+      - binary_sensor.tuer_kueche_balkon
+      - binary_sensor.fenster_kueche
   properties:
     thresholds:
       schlafzimmer: 60
@@ -49,7 +57,15 @@ notify_on_window_open:
     modes:
       guest_mode: 'on'
   entities:
-    window_sensors: sensor.fenster_wohnzimmer,sensor.tuer_wohnzimmer_balkon,sensor.fenster_buero,sensor.fenster_bad_gross,sensor.fenster_ankleidezimmer,sensor.fenster_schlafzimmer,sensor.tuer_kueche_balkon,sensor.fenster_kueche
+    window_sensors: 
+      - binary_sensor.fenster_wohnzimmer
+      - binary_sensor.tuer_wohnzimmer_balkon
+      - binary_sensor.fenster_buero
+      - binary_sensor.fenster_bad_gross
+      - binary_sensor.fenster_ankleidezimmer
+      - binary_sensor.fenster_schlafzimmer
+      - binary_sensor.tuer_kueche_balkon
+      - binary_sensor.fenster_kueche
   properties:
     window_open_threshold: 10
   notifications:

@@ -14,7 +14,6 @@ from constants import (
     CONF_TARGETS,
     EMERGENCY,
     HOME,
-    OPEN,
     SINGLE,
 )
 
@@ -89,8 +88,8 @@ class ClimateAutomation(AppBase):
         """Return a list of open windows/doors."""
         return [
             window
-            for window in self.entities[CONF_WINDOW_SENSORS].split(",")
-            if self.get_state(window) == OPEN
+            for window in self.entities[CONF_WINDOW_SENSORS]
+            if self.get_state(window) == "on"
         ]
 
     @property
@@ -167,11 +166,11 @@ class NotifyOnWindowOpen(AppBase):
         """Configure."""
         self.window_open_threshold = self.properties[CONF_WINDOW_OPEN_THRESHOLD]
 
-        for entity in self.entities[CONF_WINDOW_SENSORS].split(","):
+        for entity in self.entities[CONF_WINDOW_SENSORS]:
             self.listen_state(
                 self.send_notification,
                 entity,
-                new=OPEN,
+                new="on",
                 duration=self.window_open_threshold * 60,
                 constrain_app_enabled=1,
             )

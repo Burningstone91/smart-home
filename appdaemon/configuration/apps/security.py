@@ -7,7 +7,7 @@ import voluptuous as vol
 
 import voluptuous_helper as vol_help
 from appbase import AppBase, APP_SCHEMA
-from constants import CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_TARGETS, ON, OPEN
+from constants import CONF_ENTITIES, CONF_NOTIFICATIONS, CONF_TARGETS, ON
 from house_config import HOUSE, MODES, PERSONS
 
 
@@ -81,7 +81,7 @@ class SecurityAutomation(AppBase):
 
         for entity in self.door_sensors:
             self.listen_state(
-                self.door_opened, entity, new=OPEN, constrain_app_enabled=1
+                self.door_opened, entity, new=ON, constrain_app_enabled=1
             )
 
     @property

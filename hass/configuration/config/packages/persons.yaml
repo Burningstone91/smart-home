@@ -59,7 +59,6 @@ sensor:
     name: Dimitri Verbindungen zur Arbeit
     from: "Näfels-Mollis"
     to: "Zürich Oerlikon"
-
   - platform: swiss_public_transport
     name: Dimitri Verbindungen nach Hause
     from: "Zürich Oerlikon"
@@ -70,19 +69,16 @@ sensor:
       next_train_from_home_to_work:
         friendly_name: "Nächster Zug zur Arbeit"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_zur_arbeit.attributes.next_departure)| timestamp_custom("%H:%M", True) }}'
-    
   - platform: template
     sensors:
       next_but_one_train_from_home_to_work:
         friendly_name: "Übernächster Zug zur Arbeit"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_zur_arbeit.attributes.next_on_departure)| timestamp_custom("%H:%M", True) }}'
-
   - platform: template
     sensors:
       next_train_from_work_to_home:
         friendly_name: "Nächster Zug nach Hause"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_nach_hause.attributes.next_departure)| timestamp_custom("%H:%M", True) }}'
-    
   - platform: template
     sensors:
       next_but_one_train_from_work_to_home:
@@ -99,7 +95,6 @@ input_select:
       - weg
       - lange weg
     initial: zu Hause
-
   sabrina_presence:
     name: Sabrina
     options:
@@ -109,3 +104,17 @@ input_select:
       - weg
       - lange weg
     initial: zu Hause
+
+input_boolean:
+  ongoing_call_dimitri:
+    name: Dimitri telefoniert
+    initial: False
+  charging_phone_dimitri:
+    name: Dimitri lädt Handy
+    initial: False
+  ongoing_call_sabrina:
+    name: Sabrina telefoniert
+    initial: False
+  charging_phone_sabrina:
+    name: Sabrina lädt Handy
+    initial: False

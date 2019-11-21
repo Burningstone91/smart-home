@@ -8,21 +8,21 @@ security_app:
       - binary_sensor.bewegung_ankleidezimmer
       - binary_sensor.bewegung_bad_klein
     door_sensors:
-      - sensor.fenster_wohnzimmer
-      - sensor.tuer_wohnzimmer_balkon
-      - sensor.fenster_buero
-      - sensor.fenster_bad_gross
-      - sensor.fenster_ankleidezimmer
-      - sensor.fenster_schlafzimmer
-      - sensor.tuer_kueche_balkon
-      - sensor.fenster_kueche
-      - sensor.tuer_wohnung
-      - sensor.tuer_buero
-      - sensor.tuer_ankleidezimmer
-      - sensor.tuer_bad_gross
-      - sensor.tuer_bad_klein
-      - sensor.tuer_schlafzimmer
-      - sensor.tuer_reduit
+      - binary_sensor.fenster_wohnzimmer
+      - binary_sensor.tuer_wohnzimmer_balkon
+      - binary_sensor.fenster_buero
+      - binary_sensor.fenster_bad_gross
+      - binary_sensor.fenster_ankleidezimmer
+      - binary_sensor.fenster_schlafzimmer
+      - binary_sensor.tuer_kueche_balkon
+      - binary_sensor.fenster_kueche
+      - binary_sensor.tuer_wohnung
+      - binary_sensor.tuer_buero
+      - binary_sensor.tuer_ankleidezimmer
+      - binary_sensor.tuer_bad_gross
+      - binary_sensor.tuer_bad_klein
+      - binary_sensor.tuer_schlafzimmer
+      - binary_sensor.tuer_reduit
     alarm_lights:
       - light.ankleidezimmer
 

@@ -1,16 +1,1 @@
-sensor:
-  - platform: template
-    sensors:
-      tuer_reduit:
-        value_template: '{% if states.binary_sensor.tuer_reduit %}
-          {% if states.binary_sensor.tuer_reduit.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: Tür Reduit
-
 ###### add washmashine and tumbler later (door sensor and energy consumption) ####

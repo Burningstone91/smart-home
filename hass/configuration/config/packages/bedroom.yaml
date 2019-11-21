@@ -1,31 +1,6 @@
 sensor:
   - platform: template
     sensors:
-      tuer_schlafzimmer:
-        value_template: '{% if states.binary_sensor.tuer_schlafzimmer %}
-          {% if states.binary_sensor.tuer_schlafzimmer.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Tür Schlafzimmer'
-
-      fenster_schlafzimmer:
-        value_template: '{% if states.binary_sensor.fenster_schlafzimmer %}
-          {% if states.binary_sensor.fenster_schlafzimmer.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Fenster Schlafzimmer'
-  - platform: template
-    sensors:
       nacht_sensor:
         value_template: >-
             {% if strptime(states('sensor.time'), '%H:%M').hour<5 or strptime(states('sensor.time'), '%H:%M').hour>=23 %}
@@ -91,18 +66,6 @@ scene:
         state: true
       script.play_good_night_list:
         state: true
-  - name: Alles Aus
-    entities:
-      group.all_lights: 
-        state: false
-      switch.schalter_entfeuchter: 
-        state: false
-      remote.wohnzimmer: 
-        state: false
-      media_player.buero_musik_main: 
-        state: false
-      media_player.heos_5:
-        state: paused
   - name: Schlafzimmer alles aus
     entities:
       light.schlafzimmer: 
@@ -111,6 +74,7 @@ scene:
         state: false
       media_player.heos_5:
         state: paused
+        
 script:
   play_good_night_list:
     sequence:

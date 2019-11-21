@@ -34,30 +34,6 @@ sensor:
           {% endif %}
         friendly_name: Harmony Wohnzimmer Status
 
-      fenster_wohnzimmer:
-        value_template: '{% if states.binary_sensor.fenster_wohnzimmer %}
-          {% if states.binary_sensor.fenster_wohnzimmer.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Fenster Wohnzimmer'
-
-      tuer_wohnzimmer_balkon:
-        value_template: '{% if states.binary_sensor.tuer_wohnzimmer_balkon %}
-          {% if states.binary_sensor.tuer_wohnzimmer_balkon.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Tür Wohnzimmer Balkon'
-
 vacuum:
   -  platform: roomba
      host: !secret roomba_ip

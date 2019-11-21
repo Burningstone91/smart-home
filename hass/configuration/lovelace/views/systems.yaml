@@ -1,6 +1,7 @@
     title: System
     icon: mdi:settings
     panel: true
+    path: systems
     cards:
       - type: horizontal-stack
         cards:
@@ -265,6 +266,9 @@
                 - entity: switch.hass
                   name: HASS
                   icon: mdi:home-assistant
+                - entity: switch.mysql
+                  name: MySQL
+                  icon: mdi:database
                 - entity: switch.appdaemon
                   name: AppDaemon
                   icon: mdi:language-python
@@ -283,7 +287,7 @@
                 - entity: switch.grafana
                   name: Grafana
                   icon: mdi:chart-areaspline
-                - entity: switch.mqtt
+                - entity: switch.mosquitto
                   name: MQTT
                   icon: mdi:switch
                 - entity: switch.deconz

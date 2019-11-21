@@ -1,24 +1,3 @@
-################################# Device Trackers #################################
-
-#device_tracker:
-#  - platform: ping
-#    interval_seconds: 120
-#    hosts:
-#      sabrina_phone: !secret sabrina_handy_ip
-#      dimitri_phone: !secret dimitri_handy_ip
-#      sabrina_pc: !secret sabrina_pc_ip
-#      dimitri_pc: !secret dimitri_pc_ip
-#      pi_schlafzimmer: !secret pi_schlafzimmer_ip
-#      pi_kleiderzimmer: !secret pi_kleiderzimmer_ip
-#      pi_wohnzimmer: !secret pi_wohnzimmer_ip
-#      pi_buero: !secret pi_buero_ip
-#      roomba: !secret roomba_ip
-#      harmony_hub: !secret harmony_ip
-#      dehumidifier: !secret switch_dehumidifier_ip
-#      sound_office: !secret yamaha_ip
-#      sound_livingroom: !secret denon_living_room_ip
-#      sound_bedroom: !secret heos_bedroom_ip
-
 sensor:
 ################################# NAS Status #################################
   - platform: synologydsm
@@ -194,9 +173,9 @@ sensor:
         friendly_name: Ankleidezimmer Pi
         entity_id: device_tracker.pi_kleiderzimmer
         value_template: >-
-          {% if is_state('device_tracker.pi_kleiderzimmer', 'home') %}
+          {% if is_state('device_tracker.pi_ankleidezimmer', 'home') %}
             100
-          {% elif is_state('device_tracker.pi_kleiderzimmer', 'not_home') %}
+          {% elif is_state('device_tracker.pi_ankleidezimmer', 'not_home') %}
             0
           {% endif %}
       pi_livingroom:
@@ -228,6 +207,24 @@ switch:
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
     is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
+
+  - platform: rest
+    username: !secret ha-dockermon_user
+    password: !secret ha-dockermon_key
+    resource: http://192.168.0.5:8126/container/deconz
+    name: Deconz
+    body_on: '{"state": "start"}'
+    body_off: '{"state": "stop"}'
+    is_on_template: '{{ value_json is not none and value_json.state == "running" }}' 
+
+  - platform: rest
+    username: !secret ha-dockermon_user
+    password: !secret ha-dockermon_key
+    resource: http://192.168.0.5:8126/container/glances
+    name: Glances
+    body_on: '{"state": "start"}'
+    body_off: '{"state": "stop"}'
+    is_on_template: '{{ value_json is not none and value_json.state == "running" }}' 
 
   - platform: rest
     username: !secret ha-dockermon_user
@@ -268,8 +265,17 @@ switch:
   - platform: rest
     username: !secret ha-dockermon_user
     password: !secret ha-dockermon_key
+    resource: http://192.168.0.5:8126/container/letsencrypt
+    name: NGINX
+    body_on: '{"state": "start"}'
+    body_off: '{"state": "stop"}'
+    is_on_template: '{{ value_json is not none and value_json.state == "running" }}' 
+    
+  - platform: rest
+    username: !secret ha-dockermon_user
+    password: !secret ha-dockermon_key
     resource: http://192.168.0.5:8126/container/mqtt
-    name: MQTT
+    name: Mosquitto
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
     is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
@@ -277,26 +283,8 @@ switch:
   - platform: rest
     username: !secret ha-dockermon_user
     password: !secret ha-dockermon_key
-    resource: http://192.168.0.5:8126/container/deconz
-    name: Deconz
+    resource: http://192.168.0.5:8126/container/mysql
+    name: MySQL
     body_on: '{"state": "start"}'
     body_off: '{"state": "stop"}'
-    is_on_template: '{{ value_json is not none and value_json.state == "running" }}'  
-
-  - platform: rest
-    username: !secret ha-dockermon_user
-    password: !secret ha-dockermon_key
-    resource: http://192.168.0.5:8126/container/letsencrypt
-    name: NGINX
-    body_on: '{"state": "start"}'
-    body_off: '{"state": "stop"}'
-    is_on_template: '{{ value_json is not none and value_json.state == "running" }}' 
-
-  - platform: rest
-    username: !secret ha-dockermon_user
-    password: !secret ha-dockermon_key
-    resource: http://192.168.0.5:8126/container/glances
-    name: Glances
-    body_on: '{"state": "start"}'
-    body_off: '{"state": "stop"}'
-    is_on_template: '{{ value_json is not none and value_json.state == "running" }}'     
+    is_on_template: '{{ value_json is not none and value_json.state == "running" }}'

@@ -107,7 +107,7 @@ class HueDimmerSwitch(AppBase):
             self.button_config["short_press_on"] = {
                 "action_type": "turn_on",
                 "entity": self.light,
-                "parameters": {},
+                "parameters": {"brightness": 255}
             }
         if "long_press_on" in self.properties:
             self.button_config["long_press_on"] = self.properties["long_press_on"]
@@ -122,8 +122,9 @@ class HueDimmerSwitch(AppBase):
         if "long_press_off" in self.properties:
             self.button_config["long_press_off"] = self.properties["long_press_off"]
 
+        self.log(self.button_config)
         # check if the light is a deconz group or not
-        if self.get_state(self.light, attribute="is_deconz_group") == "true":
+        if self.get_state(self.light, attribute="is_deconz_group"):
             self.deconz_field = "/action"
         else:
             self.deconz_field = "/state"
@@ -149,8 +150,6 @@ class HueDimmerSwitch(AppBase):
             self.stop_dim_light()
         elif button_name in self.button_config:
             self.action(self.button_config[button_name])
-        else:
-            self.log("Button not configured.")
 
     def dim_light(self, direction: str) -> None:
         """In-/decrease brightness of light through service call to deCONZ."""
@@ -163,7 +162,7 @@ class HueDimmerSwitch(AppBase):
             "deconz/configure",
             field=self.deconz_field,
             entity=self.light,
-            data={"bri_inc": bri_inc, "transitiontime": 50},
+            data={"bri_inc": bri_inc, "transitiontime": 50}
         )
 
     def stop_dim_light(self):
@@ -172,7 +171,7 @@ class HueDimmerSwitch(AppBase):
             "deconz/configure",
             field=self.deconz_field,
             entity=self.light,
-            data={"bri_inc": 0},
+            data={"bri_inc": 0}
         )
 
     def action(self, button_config: dict):

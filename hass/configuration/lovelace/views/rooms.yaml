@@ -1,6 +1,7 @@
     title: Räume
     icon: mdi:home-assistant
     panel: true
+    path: rooms
     cards:
       - type: vertical-stack
         cards:

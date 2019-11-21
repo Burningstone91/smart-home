@@ -179,11 +179,11 @@ turn_off_dehumidifier_window_open:
     presence: vacation
   entities:
     switch: switch.schalter_entfeuchter
-    target: sensor.fenster_schlafzimmer
+    target: binary_sensor.fenster_schlafzimmer
   properties:
     action_type: toggle
     state: "off"
-    target_state: "offen"
+    target_state: "on"
 
 turn_on_dehumidifier_window_close:
   module: switches
@@ -196,8 +196,8 @@ turn_on_dehumidifier_window_close:
       sleep_mode: "on"
   entities:
     switch: switch.schalter_entfeuchter
-    target: sensor.fenster_schlafzimmer
+    target: binary_sensor.fenster_schlafzimmer
   properties:
     action_type: toggle
     state: "on"
-    target_state: "geschlossen"
+    target_state: "off"

@@ -1,18 +1,5 @@
 sensor:
-  - platform: template
-    sensors:
-      tuer_bad_klein:
-        value_template: '{% if states.binary_sensor.tuer_bad_klein %}
-          {% if states.binary_sensor.tuer_bad_klein.state == "on" %}
-            offen
-          {% else %}
-            geschlossen
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
-        friendly_name: 'Tür Bad klein'
-
+  # Battery Level of Multisensor
   - platform: template
     sensors:
       bad_klein_multisensor_battery:

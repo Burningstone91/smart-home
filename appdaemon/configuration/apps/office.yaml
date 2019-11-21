@@ -8,7 +8,7 @@ motion_light_office:
   entities:
     motion_sensor: binary_sensor.bewegung_buero
     lux_sensor: sensor.lux_buero
-    no_action_entities: device_tracker.sabrina_pc,device_tracker.dimitri_pc,media_player.buero_musik_main
+    no_action_entities: device_tracker.pc_sabrina,device_tracker.pc_dimitri,media_player.musik_buero
     lights:
       morning: light.buero
       day: light.buero
@@ -61,3 +61,14 @@ dimmer_switch_buero:
         action_type: scene
         action: 'on'
         action_entity: scene.buro_alles_aus
+
+dimmer_test:
+  module: testing
+  class: HueDimmerSwitch!!!!
+  entities:
+    switch: dimmschalter_buero
+    light: light.buero
+  properties:
+    long_press_off:
+      action_type: turn_on
+      entity: scene.buro_alles_aus

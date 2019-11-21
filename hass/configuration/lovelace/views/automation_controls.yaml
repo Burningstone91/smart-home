@@ -1,5 +1,6 @@
     title: Automatisierungen
     icon: mdi:robot
+    path: automation_controls
     panel: true
     cards:
       - type: horizontal-stack

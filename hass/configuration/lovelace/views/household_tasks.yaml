@@ -1,6 +1,7 @@
     title: Household Tasks
     icon: mdi:broom
     id: kiosk_floorplan
+    path: household_tasks
     panel: true
     cards:
       - type: horizontal-stack

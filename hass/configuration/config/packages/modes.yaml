@@ -2,11 +2,9 @@ input_boolean:
   guest_mode:
     name: Gastmodus
     initial: False
-
   cleaning_mode:
     name: Reinigungsmodus
     initial: False
-
   sleep_mode:
     name: Schlafmodus
     initial: False

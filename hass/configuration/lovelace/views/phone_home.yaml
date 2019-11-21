@@ -6,6 +6,16 @@
   cards: 
     - type: vertical-stack
       cards:
+        - type: markdown
+          style: |
+            ha-card {
+              box-shadow: none;
+              height: 33px;
+              background: '#383C45';
+              padding: 0px 10px;
+              color: red;
+            }
+          content: "##### Overview"
         - type: custom:simple-weather-card
           style: |
             ha-card {
@@ -16,7 +26,7 @@
               font-family: Helvetica;
             }
           entity: weather.dark_sky
-          name: Eindhoven
+          name: Näfels
           backdrop:
             fade: true
             day: "var(--weather-color-day)"
@@ -140,7 +150,107 @@
                       width: 100%
                       transform: initial
                       padding: 0 8px
-
-
+        # buttons top row
+        - type: horizontal-stack
+          cards:
+            # Floorplan
+            - type: custom:button-card
+              icon: mdi:floor-plan
+              size: 70%
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/floorplan/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Shopping Liste
+            - type: custom:button-card
+              name: Einkauf
+              icon: mdi:cart
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/shopping_list/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Klima
+            - type: custom:button-card
+              name: Klima
+              icon: mdi:thermometer
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/climate/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Licht
+            - type: custom:button-card
+              name: Licht
+              icon: mdi:lightbulb-on
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/0/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+        # buttons second row
+        - type: horizontal-stack
+          cards:
+            # Haushaltstasks
+            - type: custom:button-card
+              name: Haushalt
+              icon: mdi:broom
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/household_tasks/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Staubsauger
+            - type: custom:button-card
+              name: Staubsauger
+              icon: mdi:robot-vacuum
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/0/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Räume
+            - type: custom:button-card
+              name: Räume
+              icon: mdi:home
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/0/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Security
+            - type: custom:button-card
+              name: Security
+              icon: mdi:cctv
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/0/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
 
 

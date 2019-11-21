@@ -15,8 +15,8 @@
       type: module
     - url: /local/lovelace_plugins/vertical-stack-in-card.js?v=0.1.2
       type: js
-    - url: /local/lovelace_plugins/card-modder.js?v=1
-      type: js
+    - url: /local/lovelace_plugins/card-mod.js?v=1
+      type: module
     - url: /local/lovelace_plugins/dark-sky-weather-card.js?v=7.1
       type: module
     - url: /local/lovelace_plugins/compact-custom-header.js?v=0.0.1
@@ -25,28 +25,36 @@
       type: module
     - url: /local/lovelace_plugins/simple-weather-card-bundle.js?v=0.5.0
       type: module
+    - url: /local/lovelace_plugins/button-card.js
+      type: module
 
 ##############################################################################
 
   cch:
-    voice: hide
+    voice: hide 
     clock_format: 24
     exceptions:
       - conditions:
           user: Dimitri Handy
         config:
+          # menu: hide
+          # options: hide
+          notifications: hide
+          #header: false
           clock_format: 24
+          hide_tabs: #'1 to 9'
           swipe: true
+          swipe_wrap: false
       - conditions:
           user: Sabrina Handy
         config:
           clock_format: 24
-          hide_tabs: 0,1,3,4,5,6,7,8
+          hide_tabs: home,shopping_list,rooms,climate,devices,systems,household_tasks,floorplan
           swipe: true
   
   views:
-    - !include /config/lovelace/views/home.yaml
     - !include /config/lovelace/views/phone_home.yaml
+    - !include /config/lovelace/views/home.yaml
     - !include /config/lovelace/views/shopping_list.yaml
     - !include /config/lovelace/views/automation_controls.yaml
     - !include /config/lovelace/views/rooms.yaml

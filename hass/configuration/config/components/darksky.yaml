@@ -1,2 +1,4 @@
 - platform: darksky
   api_key: !secret darksky_api_key
+  mode: daily
+  scan_interval: 900

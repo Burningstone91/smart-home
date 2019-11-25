@@ -13,21 +13,6 @@ sensor:
       - volume_size_used
       - volume_percentage_used
 
-################################# NUC status #################################      
-  - platform: glances
-    name: NUC
-    host: !secret host_ip
-    version: 3
-    resources:
-      - 'processor_load'
-      - 'disk_use'
-      - 'disk_use_percent'
-      - 'memory_use'
-      - 'memory_use_percent'
-      - 'cpu_use_percent'
-      - 'cpu_temp'
-      - 'docker_cpu_use'
-
 ################################# Systems Uptime #################################
   - platform: systemmonitor
     scan_interval: 60

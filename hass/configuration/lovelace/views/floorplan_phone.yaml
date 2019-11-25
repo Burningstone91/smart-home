@@ -1,0 +1,320 @@
+    title: Floorplan
+    icon: mdi:floor-plan
+    path: floorplan_phone
+    cards:
+    - type: vertical-stack
+      cards:
+        - type: custom:button-card
+          color_type: blank-card
+          styles:
+            card:
+              - width: 3px
+        - type: horizontal-stack
+          cards:
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+          - type: picture-elements
+            image: /local/Wohnung_Hochformat.svg
+            style: |
+              ha-card {
+                border-radius: 0px;
+              }
+            elements:
+              ####################### Türen + Fenster ##########################
+              # Schlafzimmer
+              - type: image
+                entity: binary_sensor.tuer_schlafzimmer
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_schlafzimmer_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 47.3%
+                  left: 30.9%
+                  width: 7.8%
+              - type: image
+                entity: binary_sensor.fenster_schlafzimmer
+                state_image:
+                  "on": /local/floorplan_images/phone/fenster_schlafzimmer_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 55.9%
+                  left: 5.5%
+                  width: 6.9%
+              - type: image
+                entity: light.schlafzimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/light_on_furniture.png
+                  "off": /local/floorplan_images/phone/light_off_furniture.png
+                style:
+                  top: 53.2%
+                  left: 18.8%
+                  width: 8.1%
+              - type: image
+                entity: switch.schalter_entfeuchter
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/fan_on.gif
+                  "off": /local/floorplan_images/phone/fan_off.png
+                style:
+                  top: 43.5%
+                  left: 7.8%
+                  width: 5.35%  
+              # Bad klein
+              - type: image
+                entity: binary_sensor.tuer_bad_klein
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_bad_klein_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 35.3%
+                  left: 30.6%
+                  width: 7.7%
+              # Bad gross
+              - type: image
+                entity: binary_sensor.tuer_bad_gross
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_bad_gross_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 18.3%
+                  left: 30.8%
+                  width: 7.5%
+              - type: image
+                entity: binary_sensor.fenster_bad_gross
+                state_image:
+                  "on": /local/floorplan_images/phone/fenster_bad_gross_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 21.8%
+                  left: 5.1%
+                  width: 6.7%
+              # Ankleidezimmer
+              - type: image
+                entity: binary_sensor.tuer_ankleidezimmer
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_ankleidezimmer_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 25.4%
+                  left: 50.2%
+                  width: 7.6%
+              - type: image
+                entity: binary_sensor.fenster_ankleidezimmer
+                state_image:
+                  "on": /local/floorplan_images/phone/fenster_ankleidezimmer_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 31.6%
+                  left: 94.5%
+                  width: 6.5%
+              - type: image
+                entity: light.ankleidezimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/light_on.png
+                  "off": /local/floorplan_images/phone/light_off.png
+                style:
+                  top: 30%
+                  left: 71.7%
+                  width: 8.1%
+              # Büro
+              - type: image
+                entity: binary_sensor.tuer_buero
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_buero_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 17.7%
+                  left: 50.3%
+                  width: 7.8%
+              - type: image
+                entity: binary_sensor.fenster_buero
+                state_image:
+                  "on": /local/floorplan_images/phone/fenster_buero_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 14.0%
+                  left: 94.5%
+                  width: 6.7%
+              - type: image
+                entity: light.buero
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/light_on.png
+                  "off": /local/floorplan_images/phone/light_off.png
+                style:
+                  top: 11.9%
+                  left: 71.7%
+                  width: 8.1%
+              - type: image
+                entity: media_player.buero_musik_main
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/speaker-on.gif
+                  "off": /local/floorplan_images/phone/speaker-off.png
+                style:
+                  top: 18.1%
+                  left: 76.1%
+                  width: 6.9%
+              - type: image
+                entity: media_player.buero_musik_main
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/speaker-on.gif
+                  "off": /local/floorplan_images/phone/speaker-off.png
+                style:
+                  top: 18.1%
+                  left: 90.9%
+                  width: 6.9%
+              # Reduit
+              - type: image
+                entity: binary_sensor.tuer_reduit
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_reduit_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 70.3%
+                  left: 16.7%
+                  width: 8.3%
+              # Küche
+              - type: image
+                entity: binary_sensor.fenster_kueche
+                state_image:
+                  "on": /local/floorplan_images/phone/fenster_kueche_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 96.1%
+                  left: 40.8%
+                  width: 20.5%
+              - type: image
+                entity: binary_sensor.tuer_kueche_balkon
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_kueche_balkon_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 93.9%
+                  left: 52.2%
+                  width: 6.6%
+              # Wohnzimmer
+              - type: image
+                entity: binary_sensor.tuer_wohnzimmer_balkon
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_wohnzimmer_balkon_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 78.7%
+                  left: 89.7%
+                  width: 8.9%
+              - type: image
+                entity: binary_sensor.fenster_wohnzimmer
+                state_image:
+                  "on": /local/floorplan_images/phone/fenster_wohnzimmer_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 59.9%
+                  left: 93.9%
+                  width: 10.5%
+              - type: image
+                entity: light.wohnzimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/light_on_furniture.png
+                  "off": /local/floorplan_images/phone/light_off_furniture.png
+                style:
+                  top: 58.8%
+                  left: 76.5%
+                  width: 8.1%
+              - type: image
+                entity: vacuum.roomba
+                image: /local/roomba.png
+                filter: brightness(40%)
+                state_filter:
+                  "on": brightness(100%)
+                style:
+                  top: 42.8%
+                  left: 50.9%
+                  width: 5.1%
+              - type: image
+                entity: remote.wohnzimmer
+                tap_action:
+                  action: call-service
+                  service: remote.turn_off
+                  service_data:
+                    entity_id: remote.wohnzimmer
+                state_image:
+                  "on": /local/floorplan_images/phone/projector_on.png
+                  "off": /local/floorplan_images/phone/projector_off.png
+                style:
+                  top: 67.3%
+                  left: 76.5%
+                  width: 7.6%
+              - type: image
+                entity: media_player.denon_avr_wohnzimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/speaker-on.gif
+                  "off": /local/floorplan_images/phone/speaker-off.png
+                style:
+                  top: 45.7%
+                  left: 62.8%
+                  width: 6.9%
+              - type: image
+                entity: media_player.denon_avr_wohnzimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/speaker-on.gif
+                  "off": /local/floorplan_images/phone/speaker-off.png
+                style:
+                  top: 45.7%
+                  left: 88.8%
+                  width: 6.9%  
+              - type: image
+                entity: media_player.denon_avr_wohnzimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/speaker-on.gif
+                  "off": /local/floorplan_images/phone/speaker-off.png
+                style:
+                  top: 74.6%
+                  left: 62.8%
+                  width: 6.9%
+              - type: image
+                entity: media_player.denon_avr_wohnzimmer
+                tap_action:
+                  action: toggle
+                state_image:
+                  "on": /local/floorplan_images/phone/speaker-on.gif
+                  "off": /local/floorplan_images/phone/speaker-off.png
+                style:
+                  top: 74.6%
+                  left: 88.8%
+                  width: 6.9%  
+              # Wohnung
+              - type: image
+                entity: binary_sensor.tuer_wohnung
+                state_image:
+                  "on": /local/floorplan_images/phone/tuer_wohnung_offen.png
+                  "off": /local/floorplan_images/phone/geschlossen.png
+                style:
+                  top: 3.8%
+                  left: 41.1%
+                  width: 10.2%
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px

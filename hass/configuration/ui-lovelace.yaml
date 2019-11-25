@@ -5,7 +5,7 @@
       type: js
     - url: /local/lovelace_plugins/auto-entities.js?v=1
       type: js
-    - url: /local/lovelace_plugins/card-tools.js?v=1
+    - url: /local/lovelace_plugins/card-tools.js?v=2
       type: js
     - url: /local/lovelace_plugins/bar-card.js?v=1.0.0
       type: js
@@ -15,11 +15,11 @@
       type: module
     - url: /local/lovelace_plugins/vertical-stack-in-card.js?v=0.1.2
       type: js
-    - url: /local/lovelace_plugins/card-mod.js?v=1
+    - url: /local/lovelace_plugins/card-mod.js?v=2
       type: module
     - url: /local/lovelace_plugins/dark-sky-weather-card.js?v=7.1
       type: module
-    - url: /local/lovelace_plugins/compact-custom-header.js?v=0.0.1
+    - url: /local/lovelace_plugins/compact-custom-header.js?v=1.4.9
       type: module
     - url: /local/lovelace_plugins/check-button-card.js?v=0.1.2
       type: module
@@ -27,7 +27,10 @@
       type: module
     - url: /local/lovelace_plugins/button-card.js
       type: module
-
+    - url: /local/lovelace_plugins/swipe-card.js
+      type: module
+    - url: /local/lovelace_plugins/decluttering-card.js
+      type: module
 ##############################################################################
 
   cch:
@@ -37,33 +40,50 @@
       - conditions:
           user: Dimitri Handy
         config:
-          # menu: hide
-          # options: hide
-          notifications: hide
+          menu: hide
+          #options: hide
+          #notifications: hide
           #header: false
           clock_format: 24
-          hide_tabs: #'1 to 9'
+          hide_tabs: #'1 to 15'
           swipe: true
           swipe_wrap: false
+          disable_sidebar: true
       - conditions:
           user: Sabrina Handy
         config:
+          menu: hide
+          options: hide
+          notifications: hide
+          header: false
+          disable_sidebar: true
           clock_format: 24
-          hide_tabs: home,shopping_list,rooms,climate,devices,systems,household_tasks,floorplan
+          hide_tabs: '1 to 15'
           swipe: true
   
+  decluttering_templates:
+    !include_dir_named /config/lovelace/templates
+
   views:
     - !include /config/lovelace/views/phone_home.yaml
-    - !include /config/lovelace/views/home.yaml
+    - !include /config/lovelace/views/weather.yaml
+    
+    - !include /config/lovelace/views/sabrina.yaml
+    - !include /config/lovelace/views/dimitri.yaml
+
+    - !include /config/lovelace/views/floorplan_phone.yaml
     - !include /config/lovelace/views/shopping_list.yaml
-    - !include /config/lovelace/views/automation_controls.yaml
-    - !include /config/lovelace/views/rooms.yaml
     - !include /config/lovelace/views/climate.yaml
+    - !include /config/lovelace/views/lights.yaml
+
+    - !include /config/lovelace/views/household_tasks.yaml
+  
+    - !include /config/lovelace/views/rooms.yaml
+    - !include /config/lovelace/views/security.yaml
+
+    - !include /config/lovelace/views/home.yaml 
     - !include /config/lovelace/views/devices.yaml
     - !include /config/lovelace/views/systems.yaml
-    - !include /config/lovelace/views/household_tasks.yaml
-    - !include /config/lovelace/views/floorplan.yaml
+    - !include /config/lovelace/views/automation_controls.yaml
+    - !include /config/lovelace/views/floorplan_tablet.yaml
 
-  
-
-  

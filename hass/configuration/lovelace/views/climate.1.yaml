@@ -1,6 +1,6 @@
-    title: Klima
+    title: Security
     icon: mdi:fan
-    path: climate
+    path: security
     panel: true
     cards:
       - type: vertical-stack
@@ -119,7 +119,7 @@
               ha-card {
                 box-shadow: none;
                 background: transparent;
-                font-size: 22px;
+                font-size: 18px;
               }
           - type: horizontal-stack
             cards:

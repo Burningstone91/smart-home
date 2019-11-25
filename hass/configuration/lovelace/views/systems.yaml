@@ -210,7 +210,7 @@
                               card_style: 
                                 border-radius: 5px
                               entities:
-                                - entity: sensor.nuc_containers_cpu_used
+                                - entity: sensor.glances_containers_cpu_used
                                   title: CPU
                                   severity:
                                     - value: 20
@@ -227,7 +227,7 @@
                   card_style: 
                     border-radius: 5px
                   entities:
-                    - entity: sensor.nuc_ram_used_percent
+                    - entity: sensor.glances_ram_used_percent
                       title: RAM %
                       severity:
                         - value: 50
@@ -236,7 +236,7 @@
                           color: '#bf9540'
                         - value: 100
                           color: '#bf4040'
-                    - entity: sensor.nuc_ram_used
+                    - entity: sensor.glances_ram_used
                       title: RAM                               
                 - type: custom:bar-card
                   align: split
@@ -246,7 +246,7 @@
                   card_style: 
                     border-radius: 5px
                   entities:
-                    - entity: sensor.nuc_disk_used_percent
+                    - entity: sensor.glances_disk_used_percent
                       title: Disk % 
                       severity:
                         - value: 50
@@ -255,7 +255,7 @@
                           color: '#bf9540'
                         - value: 100
                           color: '#bf4040'
-                    - entity: sensor.nuc_disk_used
+                    - entity: sensor.glances_disk_used
                       title: Disk
 
             - type: glance

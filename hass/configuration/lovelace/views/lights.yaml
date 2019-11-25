@@ -1,0 +1,140 @@
+title: Licht
+path: lights
+icon: mdi:lightbulb
+cards: 
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: "##### Licht"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 28px;
+          }
+      # Wohnzimmer
+      - type: markdown
+        content: "##### Wohnzimmer"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 22px;
+          }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+          - type: custom:decluttering-card
+            template: button
+            variables:
+              - name: Vorne
+              - icon: mdi:lightbulb-on
+              - entity: light.stehlampe_wohnzimmer_vorne
+              - label: !include ../includes/brightness_label.yaml
+          - type: custom:decluttering-card
+            template: button
+            variables:
+              - name: Hinten
+              - icon: mdi:lightbulb-on
+              - entity: light.stehlampe_wohnzimmer_hinten
+              - label: !include ../includes/brightness_label.yaml
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 118px
+      # Schlafzimmer
+      - type: markdown
+        content: "##### Schlafzimmer"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 22px;
+          }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+          - type: custom:decluttering-card
+            template: button
+            variables:
+              - name: Decke
+              - icon: mdi:lightbulb-on
+              - entity: light.decke_schlafzimmer
+              - label: !include ../includes/brightness_label.yaml
+          - type: custom:decluttering-card
+            template: button
+            variables:
+              - name: Kugel
+              - icon: mdi:lightbulb-on
+              - entity: light.kugellampe_schlafzimmer
+              - label: !include ../includes/brightness_label.yaml
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 118px
+      # Ankleidezimmer
+      - type: markdown
+        content: "##### Ankleidezimmer"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 22px;
+          }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+          - type: custom:decluttering-card
+            template: button
+            variables:
+              - name: Decke
+              - icon: mdi:lightbulb-on
+              - entity: light.ankleidezimmer
+              - label: !include ../includes/brightness_label.yaml
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+      # Büro
+      - type: markdown
+        content: "##### Büro"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 22px;
+          }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+          - type: custom:decluttering-card
+            template: button
+            variables:
+              - name: Decke
+              - icon: mdi:lightbulb-on
+              - entity: light.buero
+              - label: !include ../includes/brightness_label.yaml
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px

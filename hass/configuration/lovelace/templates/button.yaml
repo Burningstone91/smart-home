@@ -1,0 +1,101 @@
+default:
+  - label:
+  - icon:
+  - show_last_changed: false
+  - tap_action:
+      action: toggle
+  - hold_action:
+      action: more-info
+card:
+  type: custom:button-card
+  name: '[[name]]'
+  icon: '[[icon]]'
+  entity: '[[entity]]'
+  label: '[[label]]'
+  show_state: true
+  show_label: true
+  show_last_changed: '[[show_last_changed]]'
+  size: 30%
+  tap_action: '[[tap_action]]'
+  hold_action: '[[hold_action]]'
+  styles:
+    card:
+      - height: 110px
+      - width: 110px
+      - font-size: 11px
+      - font-weight: bold
+    grid: 
+      - grid-template-areas: '"i" "n" "s" "l"' 
+      - grid-template-columns: 1fr 
+      - grid-template-rows: 1fr min-content min-content
+    img_cell:
+      - align-self: start
+      - text-align: start
+      - margin-top: 0px
+      - margin-bottom: 0px
+      - margin-right: 60px
+      - margin-left: 0px
+    name:
+      - font-size: 11px
+      - font-weight: bold
+      - margin-top: 0px
+      - margin-right: 60px
+      - text-align: start
+      - margin-left: 0px
+      - justify-self: start
+      - padding-left: 15px
+    icon:
+      - width: 25%
+    label:
+      - font-size: 9px
+      - padding: 0px 10px
+      - color: var(--label-color-off)
+      - margin-left: 0px
+      - margin-right: 60px
+      - justify-self: start
+      - padding-left: 15px
+    state:
+      - font-size: 9px
+      - text-transform: capitalize
+      - justify-self: start
+      - padding-left: 15px
+      - text-align: start
+      - align-self: start
+      - font-weight: bold
+      - color: var(--state-color-off) 
+      - margin-left: 0px
+      - margin-right: 60px
+  state:
+    - value: "on"   
+      styles:
+        card:
+          - --ha-card-background: var(--card-color-on)
+          - opacity: 1
+          - box-shadow: none
+          - border-style: solid
+          - border-width: 1px
+          - border-color: black
+        name:
+          - color: var(--name-color-on)
+        state:
+          - color: var(--state-color-on)
+        lock:
+          - color: var(--lock-color-on) 
+        label:
+          - color: var(--label-color-on)
+    - value: "off"
+      styles:
+        card:
+          - opacity: 0.6
+        icon:
+          - color: var(--icon-color-off)
+        name:
+          - color: var(--name-color-off)
+        state:
+          - color: var(--state-color-off)
+        label:
+          - color: var(--label-color-off)
+          - font-size: 11px
+          - font-weight: normal
+        lock:
+          - color: var(--lock-color-off) 

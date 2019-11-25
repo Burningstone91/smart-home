@@ -1,0 +1,168 @@
+  title: Dimitri
+  path: dimitri
+  icon: mdi:account
+  cards: 
+    - type: vertical-stack
+      cards:
+        - type: markdown
+          content: "##### Dimitri"
+          style: |
+            ha-card {
+              box-shadow: none;
+              background: transparent;
+              font-size: 28px;
+            }
+        - type: custom:swipe-card
+          parameters:
+            effect: 'coverflow'
+            grabCursor: true
+          cards:
+            - type: vertical-stack
+              cards:
+                - type: markdown
+                  content: "##### Wetter Zürich"
+                  style: |
+                    ha-card {
+                      box-shadow: none;
+                      background: transparent;
+                      font-size: 22px;
+                    }
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: 'custom:dark-sky-weather-card'
+                      locale: de
+                      static_icons: false
+                      slot_l1: daytime_high
+                      slot_l2: pop
+                      slot_l3: remove
+                      slot_l4: remove
+                      slot_r1: humidity
+                      slot_r2: wind
+                      slot_r3: remove
+                      slot_r4: remove
+                      # Required Parameters
+                      entity_current_conditions: sensor.wetter_zurich_icon
+                      entity_temperature: sensor.wetter_zurich_temperature
+                      entity_forecast_high_temp_1: sensor.wetter_zurich_daytime_high_temperature_1d
+                      entity_forecast_high_temp_2: sensor.wetter_zurich_daytime_high_temperature_2d
+                      entity_forecast_high_temp_3: sensor.wetter_zurich_daytime_high_temperature_3d
+                      entity_forecast_high_temp_4: sensor.wetter_zurich_daytime_high_temperature_4d
+                      entity_forecast_high_temp_5: sensor.wetter_zurich_daytime_high_temperature_5d
+                      entity_forecast_icon_1: sensor.wetter_zurich_icon_1d
+                      entity_forecast_icon_2: sensor.wetter_zurich_icon_2d
+                      entity_forecast_icon_3: sensor.wetter_zurich_icon_3d
+                      entity_forecast_icon_4: sensor.wetter_zurich_icon_4d
+                      entity_forecast_icon_5: sensor.wetter_zurich_icon_5d
+                      entity_forecast_low_temp_1: sensor.wetter_zurich_overnight_low_temperature_0d
+                      entity_forecast_low_temp_2: sensor.wetter_zurich_overnight_low_temperature_1d
+                      entity_forecast_low_temp_3: sensor.wetter_zurich_overnight_low_temperature_2d
+                      entity_forecast_low_temp_4: sensor.wetter_zurich_overnight_low_temperature_3d
+                      entity_forecast_low_temp_5: sensor.wetter_zurich_overnight_low_temperature_4d
+                      entity_summary_1: sensor.wetter_zurich_summary_1d
+                      entity_summary_2: sensor.wetter_zurich_summary_2d
+                      entity_summary_3: sensor.wetter_zurich_summary_3d
+                      entity_summary_4: sensor.wetter_zurich_summary_4d
+                      entity_summary_5: sensor.wetter_zurich_summary_5d
+                      # Optional Parameters
+                      entity_sun: sun.sun
+                      entity_visibility: sensor.wetter_zurich_visibility
+                      entity_daytime_high: sensor.wetter_zurich_daytime_high_temperature_0d
+                      entity_wind_bearing: sensor.wetter_zurich_wind_bearing
+                      entity_wind_speed: sensor.wetter_zurich_wind_speed
+                      entity_humidity: sensor.wetter_zurich_humidity
+                      entity_pressure: sensor.wetter_zurich_pressure
+                      entity_apparent_temp: sensor.wetter_zurich_apparent_temperature
+                      entity_daily_summary: sensor.wetter_zurich_hourly_summary
+                      entity_pop: sensor.wetter_zurich_precip_probability
+                      entity_pop_intensity: sensor.wetter_zurich_precip_intensity
+                      entity_pop_1: sensor.wetter_zurich_precip_probability_1d
+                      entity_pop_2: sensor.wetter_zurich_precip_probability_2d
+                      entity_pop_3: sensor.wetter_zurich_precip_probability_3d
+                      entity_pop_4: sensor.wetter_zurich_precip_probability_4d
+                      entity_pop_5: sensor.wetter_zurich_precip_probability_5d
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+            - type: vertical-stack
+              cards:
+                - type: markdown
+                  content: "##### Zugverbindungen"
+                  style: |
+                    ha-card {
+                      box-shadow: none;
+                      background: transparent;
+                      font-size: 22px;
+                    }
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: entities
+                      title: Zur Arbeit
+                      show_header_toggle: false
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          border-radius: 0px;
+                          font-size: 12px;
+                        }
+                        .card-header {
+                          font-size: 16px;
+                          font-weight: bold;
+                        }
+                      entities:
+                        - entity: sensor.next_train_from_home_to_work
+                          name: Nächste Abfahrt
+                          icon: mdi:train
+                        - entity: sensor.next_but_one_train_from_home_to_work
+                          name: Übernächste Abfahrt
+                          icon: mdi:train
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: entities
+                      title: Nach Hause
+                      show_header_toggle: false
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          border-radius: 0px;
+                          font-size: 12px;
+                        }
+                        .card-header {
+                          font-size: 16px;
+                          font-weight: bold;
+                        }
+                      entities:
+                        - entity: sensor.next_train_from_work_to_home
+                          name: Nächste Abfahrt
+                          icon: mdi:train
+                        - entity: sensor.next_but_one_train_from_work_to_home
+                          name: Übernächste Abfahrt
+                          icon: mdi:train
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                        
+                          

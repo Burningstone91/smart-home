@@ -1,7 +1,5 @@
     title: Floorplan
-    icon: mdi:home-heart
-    id: kiosk_floorplan
-    panel: true
+    icon: mdi:floor-plan
     path: floorplan_tablet
     cards:
       - type: vertical-stack

@@ -28,3 +28,8 @@ speedtestdotnet: !include config/components/speedtestdotnet.yaml
 tts: !include config/components/tts.yaml
 weather: !include config/components/darksky.yaml
 zwave: !include config/components/zwave.yaml
+
+logger:
+  default: info
+  logs:
+    hoimeassistant.components.websocket_api: debug

@@ -1,3 +1,32 @@
+motion_light_living_room:
+  module: motion_light
+  class: MotionLightAutomation
+  dependencies:
+    - presence_app
+  disabled_states:
+    presence: noone,vacation
+  entities:
+    motion_sensor: binary_sensor.bewegung_wohnzimmer
+    no_action_entities: remote.wohnzimmer
+    lights:
+      morning: light.wohnzimmer
+      day: light.wohnzimmer
+      night: light.wohnzimmer
+  properties:
+    delay: 15
+    day_state_time:
+      morning: "05:30:00"
+      day: "10:30:00"
+      night: "22:00:00"
+    brightness_level:
+      morning: 50
+      day: 80
+      night: 30
+    light_color:
+      morning: orange
+      day: orange
+      night: orange
+
 remote_app:
   module: home_cinema
   class: RemoteAutomation

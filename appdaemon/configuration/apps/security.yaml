@@ -7,6 +7,7 @@ security_app:
       - binary_sensor.bewegung_schlafzimmer
       - binary_sensor.bewegung_ankleidezimmer
       - binary_sensor.bewegung_bad_klein
+      - binary_sensor.bewegung_wohnzimmer
     door_sensors:
       - binary_sensor.fenster_wohnzimmer
       - binary_sensor.tuer_wohnzimmer_balkon
@@ -74,3 +75,4 @@ last_motion:
       - binary_sensor.bewegung_bad_klein
       - binary_sensor.bewegung_buero
       - binary_sensor.bewegung_schlafzimmer
+      - binary_sensor.bewegung_wohnzimmer

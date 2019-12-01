@@ -5,7 +5,5 @@ media_player:
 scene:
   - name: Büro alles aus
     entities:
-      light.buero: 
-        state: false
-      media_player.buero_musik_main: 
-        state: false
+      light.buero: off
+      media_player.buero_musik_main: off

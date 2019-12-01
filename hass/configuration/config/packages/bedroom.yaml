@@ -52,32 +52,30 @@ media_player:
     name: HEOS Schlafzimmer
 
 scene:
-  - name: Gute Nacht
-    entities:
-      group.all_lights: 
-        state: false
-      switch.schalter_entfeuchter: 
-        state: false
-      remote.wohnzimmer: 
-        state: false
-      media_player.buero_musik_main: 
-        state: false
-      input_boolean.sleep_mode: 
-        state: true
-      script.play_good_night_list:
-        state: true
   - name: Schlafzimmer alles aus
     entities:
-      light.schlafzimmer: 
-        state: false
-      switch.schalter_entfeuchter:
-        state: false
-      media_player.heos_5:
-        state: paused
+      light.schlafzimmer: off
+      switch.schalter_entfeuchter: off
+      media_player.heos_5: paused
         
 script:
-  play_good_night_list:
+  gute_nacht:
     sequence:
+      - service: light.turn_off
+        data:
+          entity_id: group.all_lights
+      - service: switch.turn_off
+        data:
+          entity_id: switch.schalter_entfeuchter
+      - service: remote.turn_off
+        data:
+          entity_id: remote.wohnzimmer
+      - service: homeassistant.turn_off
+        data:
+          entity_id: media_player.buero_musik_main
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.sleep_mode  
       - service: media_player.select_source
         data:
           entity_id: media_player.spotify

@@ -75,6 +75,20 @@
                   - show_last_changed: true
                   - tap_action: 
                       action: more-info
+              - type: custom:decluttering-card
+                template: button
+                variables:
+                  - name: Wohnzimmer
+                  - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
+                  - entity: binary_sensor.bewegung_wohnzimmer
+                  - show_last_changed: true
+                  - tap_action: 
+                      action: more-info
+              - type: custom:button-card
+                color_type: blank-card
+                styles:
+                  card:
+                    - width: 118px
           - type: markdown
             content: "##### Türen/Fenster nach Aussen"
             style: |

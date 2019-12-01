@@ -91,6 +91,7 @@ notify_on_low_battery:
       - sensor.tuer_schlafzimmer_battery_level
       - sensor.tuer_wohnung_battery_level
       - sensor.tuer_wohnzimmer_balkon_battery_level
+      - sensor.bewegung_wohnzimmer_battery_level
   properties:
     battery_low_threshold: 15
   notifications:

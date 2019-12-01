@@ -153,25 +153,16 @@ media_player:
 scene:
   - name: Alle Weg
     entities:
-      group.all_lights: 
-        state: false
-      switch.schalter_entfeuchter: 
-        state: true
-      remote.wohnzimmer: 
-        state: false
-      media_player.buero_musik_main: 
-        state: false
+      group.all_lights: off
+      switch.schalter_entfeuchter: on
+      remote.wohnzimmer: off
+      media_player.buero_musik_main: off
   - name: Alles Aus
     entities:
-      group.all_lights: 
-        state: false
-      switch.schalter_entfeuchter: 
-        state: false
-      remote.wohnzimmer: 
-        state: false
-      media_player.buero_musik_main: 
-        state: false
-      media_player.heos_5:
-        state: paused
+      group.all_lights: off
+      switch.schalter_entfeuchter: off
+      remote.wohnzimmer: off
+      media_player.buero_musik_main: off
+      media_player.heos_5: paused
 
 circadian_lighting:

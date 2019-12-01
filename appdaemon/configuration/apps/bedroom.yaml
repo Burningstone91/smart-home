@@ -97,9 +97,9 @@ dimmer_switch_schlafzimmer_master:
   properties:
     button_config:
       short_press_on:
-        action_type: scene
-        action: 'on'
-        action_entity: scene.gute_nacht
+        action_type: service_call
+        action: turn_on
+        action_entity: script.gute_nacht
       short_press_up:
         action_type: service_call
         action: volume_up

@@ -132,7 +132,7 @@ cards:
                   }
               # Batterien Aeotec Multisensor
               - type: markdown
-                content: "##### Aeotec Multisensor Batterie CR123A"
+                content: "##### Aeotec Multisensor Batterie 2x CR123A"
                 style: |
                   ha-card {
                     box-shadow: none;
@@ -358,6 +358,32 @@ cards:
                     variables:
                       - name: Tür Wohnzimmer-Balkon
                       - entity: sensor.tuer_wohnzimmer_balkon_battery_level
+                  - type: custom:button-card
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 3px
+              # Philips Hue Motion Sensor
+              - type: markdown
+                content: "##### Hue Motion Sensor Batterie 2x AAA"
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                    background: transparent;
+                    font-size: 22px;
+                  }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:button-card
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 3px
+                  - type: custom:decluttering-card
+                    template: battery
+                    variables:
+                      - name: Wohnzimmer
+                      - entity: sensor.bewegung_wohnzimmer_battery_level
                   - type: custom:button-card
                     color_type: blank-card
                     styles:

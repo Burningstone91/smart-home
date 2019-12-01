@@ -26,6 +26,13 @@ here will be organized in the same way. Each package has a list of the hardware 
 this package and a list of automations with a short description on what the automation does. 
 But first I will start with an explanation of the AppDaemon Core Apps and the setup. 
 
+## Home Network Diagram
+
+Here's an overview of my "small" home network. I separated the network into multiple VLANs and have firewall rules setup to block access between VLANs and to the internet for certain devices (iRobot I'm looking at you :P).
+
+![Alt text](/hass/configuration/readme_pictures/network_diagram.png?raw=true "Network Diagram")
+
+
 ## Lovelace
 I only recently started using lovelace so my setup is a huge work in progress. Below is a screenshot of some of my panels.
 

@@ -78,7 +78,7 @@ header-color: 'white'
 # Card Theme Colors
 card-color-on: 'rgba(255, 255, 255, 1.0)'
 area-color-on: 'Gray'
-icon-color-on: 'Gray'
+icon-color-on: '#fdd835'
 label-color-on: 'Gray'
 lock-color-on: 'Gray'
 name-color-on: 'Black'

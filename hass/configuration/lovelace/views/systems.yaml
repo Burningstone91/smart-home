@@ -368,22 +368,4 @@
                                   color: '#bf4040'
                                 - value: 100
                                   color: '#1db954'
-                    
-            - type: entities
-              title: Batterien
-              show_header_toggle: false
-              entities:
-                - entity: sensor.bad_klein_multisensor_battery
-                  name: Bad klein Multisensor
-                - entity: sensor.dimmschalter_ankleidezimmer_battery_level
-                  name: Hue Dimmer Ankleidezimmer
-                - entity: sensor.dimmschalter_buero_battery_level
-                  name: Hue Dimmer Büro
-                - entity: sensor.dimmschalter_schlafzimmer_battery_level
-                  name: Hue Dimmer Schlafzimmer
-                - entity: sensor.dimmschalter_schlafzimmer_master_battery_level
-                  name: Hue Dimmer Schlafzimmer Master
-                - entity: sensor.dimmschalter_sabrina_battery_level
-                  name: Hue Dimmer Schlafzimmer Sabrina
-                - entity: sensor.dimmschalter_wohnzimmer_battery_level
-                  name: Hue Dimmer Wohnzimmer            
+          

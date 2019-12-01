@@ -41,14 +41,14 @@
           user: Dimitri Handy
         config:
           menu: hide
-          #options: hide
-          #notifications: hide
-          #header: false
+          options: hide
+          notifications: hide
+          header: false
           clock_format: 24
-          hide_tabs: #'1 to 15'
+          hide_tabs: '1 to 18'
           swipe: true
           swipe_wrap: false
-          disable_sidebar: true
+          #disable_sidebar: true
       - conditions:
           user: Sabrina Handy
         config:
@@ -58,32 +58,37 @@
           header: false
           disable_sidebar: true
           clock_format: 24
-          hide_tabs: '1 to 15'
+          hide_tabs: '1 to 18'
           swipe: true
   
   decluttering_templates:
     !include_dir_named /config/lovelace/templates
 
   views:
+    # Smartphone interface
+    # Home Page
     - !include /config/lovelace/views/phone_home.yaml
     - !include /config/lovelace/views/weather.yaml
-    
+    # Persons
     - !include /config/lovelace/views/sabrina.yaml
     - !include /config/lovelace/views/dimitri.yaml
-
+    # Main Buttons
     - !include /config/lovelace/views/floorplan_phone.yaml
     - !include /config/lovelace/views/shopping_list.yaml
     - !include /config/lovelace/views/climate.yaml
     - !include /config/lovelace/views/lights.yaml
-
     - !include /config/lovelace/views/household_tasks.yaml
-  
-    - !include /config/lovelace/views/rooms.yaml
-    - !include /config/lovelace/views/security.yaml
-
-    - !include /config/lovelace/views/home.yaml 
     - !include /config/lovelace/views/devices.yaml
+    - !include /config/lovelace/views/security.yaml
+    # Advanced
+    - !include /config/lovelace/views/advanced.yaml
+    # Tools
+    - !include /config/lovelace/views/rooms.yaml
     - !include /config/lovelace/views/systems.yaml
     - !include /config/lovelace/views/automation_controls.yaml
+
+    - !include /config/lovelace/views/home.yaml 
+    - !include /config/lovelace/views/devices2.yaml
+    # Tablet interface
     - !include /config/lovelace/views/floorplan_tablet.yaml
 

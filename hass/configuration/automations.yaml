@@ -1,0 +1,35 @@
+- id: '1574708287520'
+  alias: New Automation
+  description: ''
+  trigger:
+  - below: '50'
+    entity_id: sensor.lux_bad_klein
+    platform: numeric_state
+  condition: []
+  action:
+  - service: media_player.turn_on
+- id: '1574708707811'
+  alias: New Automation
+  description: ''
+  trigger:
+  - at: '20:06'
+    platform: time
+  condition:
+  - after: '20:00'
+    before: '20:10'
+    condition: time
+  action:
+  - data:
+      entity_id: light.buero
+    service: light.turn_off
+- id: '1574708782134'
+  alias: test auto
+  description: ''
+  trigger:
+  - at: '20:06'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: light.buero
+    service: light.turn_off

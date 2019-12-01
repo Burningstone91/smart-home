@@ -1,0 +1,64 @@
+title: Advanced
+icon: mdi:tools
+path: advanced
+cards:
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: "##### Advanced"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 28px;
+          }
+      - type: markdown
+        content: "##### Alle Elemente"
+        style: |
+          ha-card {
+            box-shadow: none;
+            background: transparent;
+            font-size: 22px;
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            color_type: blank-card
+            styles:
+              card:
+                - width: 3px
+          # Rooms
+          - type: custom:button-card
+            icon: mdi:floor-plan
+            size: 70%
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/rooms/
+            styles:
+              card:
+                - height: 80px
+                - font-size: 11px
+                - font-weight: bold
+          # Systems
+          - type: custom:button-card
+            name: Systeme
+            icon: mdi:settings
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/systems/
+            styles:
+              card:
+                - height: 80px
+                - font-size: 11px
+                - font-weight: bold
+          # Automation Controls
+          - type: custom:button-card
+            name: Automatisierungen
+            icon: mdi:robot
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/automation_controls/
+            styles:
+              card:
+                - height: 80px
+                - font-size: 11px
+                - font-weight: bold

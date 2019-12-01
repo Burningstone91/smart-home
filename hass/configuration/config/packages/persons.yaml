@@ -13,12 +13,6 @@ sensor:
     timeout: 5
     away_timeout: 300
 
-  - platform: mqtt
-    name: "Dimitri Wecker Uhrzeit"
-    value_template: '{{ value_json.RSSI }}'
-    state_topic: 'android_alarms'
-    json_attributes_topic: 'android_alarms'
-
   - platform: template
     sensors:
       dimitri_home:
@@ -105,6 +99,19 @@ input_select:
       - lange weg
     initial: zu Hause
 
+input_datetime:
+  dimitri_wecker:
+    name: Dimitri Wecker
+    has_date: true
+    has_time: true
+
+input_number:
+  dimitri_handy_akku:
+    name: Dimitri Handy Akku
+    min: 0
+    max: 100
+    unit_of_measurement: '%'
+    
 input_boolean:
   ongoing_call_dimitri:
     name: Dimitri telefoniert

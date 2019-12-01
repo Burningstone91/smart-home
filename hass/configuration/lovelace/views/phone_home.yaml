@@ -193,6 +193,26 @@
                       top: 50%
                       width: 100%
                       heigth: 100%
+                  - type: icon
+                    icon: mdi:cellphone-android
+                    style:
+                      top: 0
+                      left: 0
+                      pointer-events: none
+                      transform: scale(0.4)
+                      color: white
+                      line-height: 32px
+                      padding: 8px 10px
+                  - type: state-label
+                    entity: input_number.dimitri_handy_akku
+                    style:
+                      top: 0
+                      left: 20px
+                      pointer-events: none
+                      transform: initial
+                      font-size: 12px
+                      color: rgba(255,255,255,0.8)
+                      line-height: 32px
                   - type: state-label
                     entity: input_select.dimitri_presence
                     style:
@@ -292,25 +312,13 @@
                   - height: 80px
                   - font-size: 11px
                   - font-weight: bold
-            # Staubsauger
+            # Geräte
             - type: custom:button-card
-              name: Staubsauger
-              icon: mdi:robot-vacuum
+              name: Geräte
+              icon: mdi:power-plug
               tap_action:
                 action: navigate
-                navigation_path: /lovelace/0/
-              styles:
-                card:
-                  - height: 80px
-                  - font-size: 11px
-                  - font-weight: bold
-            # Räume
-            - type: custom:button-card
-              name: Räume
-              icon: mdi:home
-              tap_action:
-                action: navigate
-                navigation_path: /lovelace/rooms/
+                navigation_path: /lovelace/devices/
               styles:
                 card:
                   - height: 80px
@@ -323,6 +331,18 @@
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/security/
+              styles:
+                card:
+                  - height: 80px
+                  - font-size: 11px
+                  - font-weight: bold
+            # Advanced
+            - type: custom:button-card
+              name: Advanced
+              icon: mdi:tools
+              tap_action:
+                action: navigate
+                navigation_path: /lovelace/advanced/
               styles:
                 card:
                   - height: 80px

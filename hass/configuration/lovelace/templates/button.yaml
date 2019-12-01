@@ -2,6 +2,7 @@ default:
   - label:
   - icon:
   - show_last_changed: false
+  - show_state: true
   - tap_action:
       action: toggle
   - hold_action:
@@ -12,7 +13,7 @@ card:
   icon: '[[icon]]'
   entity: '[[entity]]'
   label: '[[label]]'
-  show_state: true
+  show_state: '[[show_state]]'
   show_label: true
   show_last_changed: '[[show_last_changed]]'
   size: 30%
@@ -40,6 +41,7 @@ card:
       - font-weight: bold
       - margin-top: 0px
       - margin-right: 60px
+      - white-space: normal
       - text-align: start
       - margin-left: 0px
       - justify-self: start
@@ -84,6 +86,41 @@ card:
         label:
           - color: var(--label-color-on)
     - value: "off"
+      styles:
+        card:
+          - opacity: 0.6
+        icon:
+          - color: var(--icon-color-off)
+        name:
+          - color: var(--name-color-off)
+        state:
+          - color: var(--state-color-off)
+        label:
+          - color: var(--label-color-off)
+          - font-size: 11px
+          - font-weight: normal
+        lock:
+          - color: var(--lock-color-off) 
+    - value: "home"   
+      styles:
+        card:
+          - --ha-card-background: var(--card-color-on)
+          - opacity: 1
+          - box-shadow: none
+          - border-style: solid
+          - border-width: 1px
+          - border-color: black
+        name:
+          - color: var(--name-color-on)
+        icon:
+          - color: var(--icon-color-on)
+        state:
+          - color: var(--state-color-on)
+        lock:
+          - color: var(--lock-color-on) 
+        label:
+          - color: var(--label-color-on)
+    - value: "not_home"
       styles:
         card:
           - opacity: 0.6

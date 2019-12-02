@@ -10,7 +10,7 @@ A Docker Host inside an Ubuntu Server VM builds the core of the Smart Home.
 ### Docker Host Services: 
 
 * AppDaemon - For Automations
-* Deconz - To control ZigBee devices through the ConBee Stick
+* DeCONZ - To control ZigBee devices through the ConBee Stick
 * Glances - To monitor the system status of the host
 * Grafana - To visualize sensor data of the house
 * Ha-Dockermon - To monitor and control the docker containers
@@ -25,6 +25,10 @@ My Home-Assistant and AppDaemon Configuration are organized with packages and my
 here will be organized in the same way. Each package has a list of the hardware involved in 
 this package and a list of automations with a short description on what the automation does. 
 But first I will start with an explanation of the AppDaemon Core Apps and the setup. 
+
+Below is a "simplified" overview of my smart home devices in connection with Home Assistant. ZigBee devices are connected to Home Assistant through the deconz integration and Z-Wave devices through the in-built integration. For the other devices the integration is stated in the overview.
+
+![Alt text](/hass/configuration/readme_pictures/smart_home_diagram.png?raw=true "Smart Home Diagram")
 
 ## Home Network Diagram
 

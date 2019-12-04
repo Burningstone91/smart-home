@@ -10,6 +10,7 @@ http: !include config/http.yaml
 history: !include config/history.yaml
 recorder: !include config/recorder.yaml
 logbook:
+mobile_app:
 updater:
 discovery:
 conversation:

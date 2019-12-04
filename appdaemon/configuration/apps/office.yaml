@@ -31,7 +31,7 @@ motion_light_office:
 
 dimmer_switch_buero:
   module: switches
-  class: HueDimmerSwitch
+  class: HueDimmerSwitch!
   dependencies:
     - presence_app
   disabled_states:
@@ -63,12 +63,12 @@ dimmer_switch_buero:
         action_entity: scene.buro_alles_aus
 
 dimmer_test:
-  module: testing
-  class: HueDimmerSwitch!!!!
+  module: hue_dimmer_switch
+  class: HueDimmerSwitch
   entities:
     switch: dimmschalter_buero
     light: light.buero
-  properties:
+  advanced:
     long_press_off:
       action_type: turn_on
       entity: scene.buro_alles_aus

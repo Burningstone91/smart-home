@@ -1,49 +1,32 @@
 """Define automations for Hue Dimmer switches"""
-
-from typing import Union
-
-import voluptuous as vol
-
-import voluptuous_helper as vol_help
-from appbase import APP_SCHEMA, AppBase
-from constants import (
-    CONF_DELAY,
-    CONF_ENTITIES,
-    CONF_EVENT,
-    CONF_PROPERTIES,
-    CONF_PRESENCE_STATE,
-    CONF_SCHEDULE_TIME,
-    CONF_SPECIFIC_PERSON,
-    CONF_STATE,
-)
-from house_config import HOUSE, PERSONS
-
-
 ##############################################################################
 # Hue Dimmer Switch Configuration
 #
 # With the basic configuration the behaviour is as follows:
-# Short press of ON button turns light on at 50%, long press at 100%.
+# Short press of ON button turns light on at 50%, long press at 100%. A short
+# press of the OFF button turns off the light.
 # As long as the "increase brightness" button is pressed, the brightness is
-# increased until the button gets released. The same principle applies to the
-# "decrease brightness" button. A short press of the OFF button turns of the
-# light.
+# increased. Once the button is released the dimming stops. The same 
+# principle applies to the "decrease brightness" button. 
 #
 # Basic configuration:
 #   entities:
 #     switch: dimmer_switch_bedroom (required)
 #     light: light.bedroom (required)
 #
-# The action for short/long press release of the ON and OFF button and short 
-# press release for the UP and DOWN button can be overwritten.
-# The available actions to overwrite the basic configuration are "turn_on",
-# "turn_off" and "service_call".
+# The button presses can be overwritten and other button presses can be added.
+# The available actions to assign to a button press are "turn_on", "turn_off"
+# and "service_call".
+# The configuration for a service call looks like this.
 #
-# Advanced configuration showing each action type:
+# button_press_name:
+#   action_type: turn_on | turn_off | service_call
+#   
+# example:
 #   entities:
 #     switch: dimmer_switch_bedroom (required)
 #     light: light.bedroom (required)
-#   properties:
+#   advanced:
 #     short_press_on_release: (optional)
 #       action_type: turn_on
 #       entity: scene.good_night
@@ -62,22 +45,27 @@ from house_config import HOUSE, PERSONS
 #       entity: group.bedroom
 #
 # Button Codes:
-# 1000: short press ON              1001: long press ON
-# 1002: short press release ON      1003: long press release ON
-# 2000: short press UP              2001: long press UP
-# 2002: short press release UP      2003: long press release UP
-# 3000: short press DOWN            3001: long press DOWN
-# 3002: short press release DOWN    3003: long press release DOWN
-# 4000: short press OFF             4001: long press OFF
-# 4002: short press release OFF     4003: long press release OFF
+# 1000: short_press_on              1001: long_press_on
+# 1002: short_press_on_release      1003: long_press_on_release
+# 2000: short_press_up              2001: long_press_up
+# 2002: short_press_up_release      2003: long_press_up_release
+# 3000: short_press_down            3001: long_press_down
+# 3002: short_press_down_release    3003: long_press_down_release
+# 4000: short_press_off             4001: long_press_off
+# 4002: short_press_off_release     4003: long_press_off_release
 ##############################################################################
 
 
-class HueDimmerSwitch(AppBase):
+from appdaemon.plugins.hass.hassapi import Hass
+
+
+class HueDimmerSwitch(Hass):
     """Define a Hue Dimmer Switch base feature"""
 
-    def configure(self) -> None:
+    def initialize(self) -> None:
         """Configure"""
+        self.set_namespace("hass")
+
         self.button_map = {
             1000: "short_press_on",
             1002: "short_press_on_release",
@@ -97,12 +85,12 @@ class HueDimmerSwitch(AppBase):
             4003: "long_press_off_release",
         }
         # configure entities
-        self.light = self.entities["light"]
-        self.switch = self.entities["switch"]
-        self.button_config = {}
+        entities = self.args["entities"]
+        self.light = entities["light"]
+        self.switch = entities["switch"]
 
-        # get the advanced button config or create default config
-        self.button_config = self.properties
+        # get the advanced button config
+        self.button_config = self.args.get("advanced", {})
 
         if "short_press_on_release" not in self.button_config:
             self.button_config["short_press_on_release"] = {
@@ -118,7 +106,6 @@ class HueDimmerSwitch(AppBase):
                 "parameters": {},
             }
 
-        self.log(self.button_config)
         # check if the light is a deconz group or single bulb
         if self.get_state(self.light, attribute="is_deconz_group"):
             self.deconz_field = "/action"
@@ -129,8 +116,7 @@ class HueDimmerSwitch(AppBase):
         self.listen_event(
             self.button_pressed_cb,
             "deconz_event",
-            id=self.switch,
-            constrain_app_enabled=1,
+            id=self.switch
         )
 
     def button_pressed_cb(self, event_name: str, data: dict, kwargs: dict) -> None:
@@ -161,7 +147,7 @@ class HueDimmerSwitch(AppBase):
             data={"bri_inc": bri_inc, "transitiontime": 50}
         )
 
-    def stop_dim_light(self):
+    def stop_dim_light(self) -> None:
         """Stop dimming of light through service call to deCONZ."""
         self.call_service(
             "deconz/configure",
@@ -170,7 +156,7 @@ class HueDimmerSwitch(AppBase):
             data={"bri_inc": 0}
         )
 
-    def action(self, button_config: dict):
+    def action(self, button_config: dict) -> None:
         """Call the respective service based on the passed button config."""
         action_type = button_config["action_type"]
         entity = button_config["entity"]
@@ -181,15 +167,3 @@ class HueDimmerSwitch(AppBase):
             entity_id=entity, 
             **parameters
         )
-
-    def test_callback(self, event_name: str, data: dict, kwargs: dict) -> None:
-        timestamp = json.loads(data["payload"])["timestamp"]
-        self.log(timestamp)
-        # self.mark_task_completed()
-
-        # self.mqtt.listen_event(
-        #    self.test_callback,
-        #    "MQTT_MESSAGE",
-        #    topic='homeassistant/sensor/matratze_gewendet/state',
-        #    namespace="mqtt"
-        # )

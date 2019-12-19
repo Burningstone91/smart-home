@@ -487,6 +487,7 @@ cards:
                       - name: NAS
                       - icon: mdi:nas
                       - entity: device_tracker.nas
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -495,6 +496,7 @@ cards:
                       - name: NUC
                       - icon: mdi:server-network
                       - entity: device_tracker.server_nuc
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -503,6 +505,7 @@ cards:
                       - name: Unifi Controller
                       - icon: mdi:fruit-grapes
                       - entity: device_tracker.raspberrypi
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info  
                   - type: custom:button-card
@@ -532,6 +535,7 @@ cards:
                       - name: Pi Ankleidezimmer
                       - icon: mdi:fruit-grapes
                       - entity: device_tracker.pi_ankleidezimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -540,6 +544,7 @@ cards:
                       - name: Pi Büro
                       - icon: mdi:fruit-grapes
                       - entity: device_tracker.pi_buero
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -548,6 +553,7 @@ cards:
                       - name: Pi Schlafzimmer
                       - icon: mdi:fruit-grapes
                       - entity: device_tracker.pi_schlafzimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:button-card
@@ -568,6 +574,7 @@ cards:
                       - name: Pi Wohnzimmer
                       - icon: mdi:fruit-grapes
                       - entity: device_tracker.pi_wohnzimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:button-card
@@ -597,6 +604,7 @@ cards:
                       - name: PC Sabrina
                       - icon: mdi:desktop-classic
                       - entity: device_tracker.pc_sabrina
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -605,6 +613,7 @@ cards:
                       - name: PC Dimitri
                       - icon: mdi:desktop-classic
                       - entity: device_tracker.pc_dimitri
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -613,6 +622,7 @@ cards:
                       - name: Laptop
                       - icon: mdi:laptop
                       - entity: device_tracker.desktop_7a2lv3k
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:button-card
@@ -642,6 +652,7 @@ cards:
                       - name: Handy Sabrina
                       - icon: mdi:cellphone-android
                       - entity: device_tracker.sabrina_phone
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -650,6 +661,7 @@ cards:
                       - name: Handy Dimitri
                       - icon: mdi:cellphone-android
                       - entity: device_tracker.dimitri_phone
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -687,6 +699,7 @@ cards:
                       - name: Harmony Hub
                       - icon: mdi:remote
                       - entity: device_tracker.harmonyhub
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -695,6 +708,7 @@ cards:
                       - name: Staubsauger
                       - icon: mdi:robot-vacuum
                       - entity: device_tracker.roomba_wohnzimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -703,6 +717,7 @@ cards:
                       - name: Plug Entfeucher
                       - icon: mdi:power-plug
                       - entity: device_tracker.switch_entfeuchter
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:button-card
@@ -723,6 +738,7 @@ cards:
                       - name: Kodi Wohnzimmer
                       - icon: mdi:play-network
                       - entity: device_tracker.minix_wohnzimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -731,6 +747,7 @@ cards:
                       - name: AVR Wohnzimmer
                       - icon: mdi:speaker
                       - entity: device_tracker.musik_wohnzimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:decluttering-card
@@ -739,6 +756,7 @@ cards:
                       - name: Sound Schlafzimmer
                       - icon: mdi:speaker
                       - entity: device_tracker.musik_schlafzimmer
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:button-card
@@ -759,6 +777,7 @@ cards:
                       - name: Receiver Büro
                       - icon: mdi:speaker
                       - entity: device_tracker.musik_buero
+                      - label: "[[[ return entity.attributes.ip ]]]"
                       - tap_action: 
                           action: more-info
                   - type: custom:button-card
@@ -766,3 +785,74 @@ cards:
                     styles:
                       card:
                         - width: 3px
+########################## Geräte Unerreichbar ###############################
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: "##### Geräte Unerreichbar"
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                    background: transparent;
+                    font-size: 28px;
+                  }
+              - type: entity-filter
+                entities:
+                  - zwave.aeotec_zw090_zstick_gen5_eu
+                  - zwave.aeotec_zw100_multisensor_6
+                  - zwave.aeotec_zw100_multisensor_6_10
+                  - zwave.aeotec_zw100_multisensor_6_11
+                  - zwave.aeotec_zw100_multisensor_6_4
+                  - light.decke_1_ankleidezimmer
+                  - light.decke_2_ankleidezimmer
+                  - light.decke_3_ankleidezimmer
+                  - light.decke_1_buero
+                  - light.decke_2_buero
+                  - light.decke_3_buero
+                  - light.decke_1_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.decke_3_schlafzimmer
+                  - light.kugellampe_schlafzimmer
+                  - light.stehlampe_wohnzimmer_vorne
+                  - light.stehlampe_wohnzimmer_hinten
+                  - binary_sensor.fenster_wohnzimmer
+                  - binary_sensor.tuer_wohnzimmer_balkon
+                  - binary_sensor.fenster_buero
+                  - binary_sensor.fenster_bad_gross
+                  - binary_sensor.fenster_ankleidezimmer
+                  - binary_sensor.fenster_schlafzimmer
+                  - binary_sensor.tuer_kueche_balkon
+                  - binary_sensor.fenster_kueche
+                  - binary_sensor.tuer_wohnung
+                  - binary_sensor.tuer_buero
+                  - binary_sensor.tuer_ankleidezimmer
+                  - binary_sensor.tuer_bad_gross
+                  - binary_sensor.tuer_bad_klein
+                  - binary_sensor.tuer_schlafzimmer
+                  - binary_sensor.tuer_reduit
+                  - device_tracker.usg_router
+                  - device_tracker.switch_wohnzimmer
+                  - device_tracker.switch_reduit
+                  - device_tracker.ap_wohnzimmer
+                  - device_tracker.harmonyhub
+                  - device_tracker.minix_wohnzimmer
+                  - device_tracker.musik_buero
+                  - device_tracker.musik_schlafzimmer
+                  - device_tracker.musik_wohnzimmer
+                  - device_tracker.nas
+                  - device_tracker.pi_schlafzimmer
+                  - device_tracker.pi_ankleidezimmer
+                  - device_tracker.pi_wohnzimmer
+                  - device_tracker.pi_buero
+                  - device_tracker.roomba
+                  - device_tracker.raspberrypi
+                  - device_tracker.switch_entfeuchter
+
+                state_filter:
+                  - "unavailable"
+                  - "unknown"
+                  - "not_home"
+                card:
+                  type: glance
+                  #title: Geräte Unerreichbar
+                  show_state: false  

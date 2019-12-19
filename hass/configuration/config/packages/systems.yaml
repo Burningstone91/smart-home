@@ -1,3 +1,19 @@
+################################# Proxmox NUC #################################
+#proxmoxve:
+#  - host: 10.10.40.6
+#    username: !secret proxmox_user
+#    password: !secret proxmox_pass
+#    verify_ssl: false
+#    realm :pam
+#    port: !secret proxmox_port
+#    nodes:
+#      - node: pve
+#        vms:
+#          - 101
+#          - 102
+#          - 103
+#          - 105
+
 sensor:
 ################################# NAS Status #################################
   - platform: synologydsm
@@ -6,13 +22,19 @@ sensor:
     password: !secret nas_password
     monitored_conditions:
       - cpu_total_load
+      - cpu_1min_load
+      - cpu_5min_load
       - memory_total_real
       - memory_real_usage
+      - memory_available_real
       - disk_status
       - disk_temp
       - volume_size_used
       - volume_percentage_used
-
+      - volume_size_total
+      - network_up
+      - network_down
+  
 ################################# Systems Uptime #################################
   - platform: systemmonitor
     scan_interval: 60
@@ -141,46 +163,6 @@ sensor:
       https://pypi.python.org/pypi/appdaemon/json
     value_template: '{{ value_json.info.version }}'
     scan_interval: 3600
-    
-################################# BLE Pi device status #################################
-  - platform: template
-    sensors:
-      pi_bedroom:
-        friendly_name: Schlafzimmer Pi
-        entity_id: device_tracker.pi_schlafzimmer
-        value_template: >-
-          {% if is_state('device_tracker.pi_schlafzimmer', 'home') %}
-            100
-          {% elif is_state('device_tracker.pi_schlafzimmer', 'not_home') %}
-            0
-          {% endif %}
-      pi_dressroom:
-        friendly_name: Ankleidezimmer Pi
-        entity_id: device_tracker.pi_kleiderzimmer
-        value_template: >-
-          {% if is_state('device_tracker.pi_ankleidezimmer', 'home') %}
-            100
-          {% elif is_state('device_tracker.pi_ankleidezimmer', 'not_home') %}
-            0
-          {% endif %}
-      pi_livingroom:
-        friendly_name: Wohnzimmer Pi
-        entity_id: device_tracker.pi_wohnzimmer
-        value_template: >-
-          {% if is_state('device_tracker.pi_wohnzimmer', 'home') %}
-            100
-          {% elif is_state('device_tracker.pi_wohnzimmer', 'not_home') %}
-            0
-          {% endif %}
-      pi_office:
-        friendly_name: Schlafzimmer Pi
-        entity_id: device_tracker.pi_buero
-        value_template: >-
-          {% if is_state('device_tracker.pi_buero', 'home') %}
-            100
-          {% elif is_state('device_tracker.pi_buero', 'not_home') %}
-            0
-          {% endif %}
 
 ################################# Docker switches #################################
 switch:

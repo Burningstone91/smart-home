@@ -18,14 +18,8 @@
               title: Sabrina
               show_header_toggle: false
               entities:
-                - sensor.sabrina_home 
                 - entity: input_select.sabrina_presence
                   icon: mdi:walk
-                - entity: device_tracker.sabrina_phone
-                  name: Handy
-                  icon: mdi:cellphone-iphone
-                - input_boolean.ongoing_call_sabrina
-                - input_boolean.charging_phone_sabrina
                 - entity: sensor.sabrina
                   name: "Schlüssel"
                   icon: mdi:key
@@ -35,12 +29,8 @@
               title: Dimitri
               show_header_toggle: false
               entities:
-                - sensor.dimitri_home
                 - entity: input_select.dimitri_presence
                   icon: mdi:walk
-                - entity: device_tracker.dimitri_phone
-                  name: Handy
-                  icon: mdi:cellphone-iphone
                 - entity: sensor.dimitri
                   name: "Schlüssel"
                   icon: mdi:key
@@ -60,8 +50,6 @@
               title: Wohnung
               show_header_toggle: false
               entities:
-                - input_select.alarm_state
-                - sensor.tuer_wohnung
                 - input_select.last_motion
                 - input_select.house_presence
               show_name: false

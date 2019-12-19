@@ -1,216 +1,233 @@
-    title: security
-    icon: mdi:cctv
-    path: security
-    cards:
-      - type: vertical-stack
-        cards:
-          - type: markdown
-            content: "##### Security"
-            style: |
-              ha-card {
-                box-shadow: none;
-                background: transparent;
-                font-size: 28px;
-              }
-          - type: markdown
-            content: "##### Bewegung"
-            style: |
-              ha-card {
-                box-shadow: none;
-                background: transparent;
-                font-size: 22px;
-              }
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Schlafzimmer
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
-                  - entity: binary_sensor.bewegung_schlafzimmer
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Ankleidezimmer
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
-                  - entity: binary_sensor.bewegung_ankleidezimmer
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Bad klein
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
-                  - entity: binary_sensor.bewegung_bad_klein
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Büro
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
-                  - entity: binary_sensor.bewegung_buero
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Wohnzimmer
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
-                  - entity: binary_sensor.bewegung_wohnzimmer
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 118px
-          - type: markdown
-            content: "##### Türen/Fenster nach Aussen"
-            style: |
-              ha-card {
-                box-shadow: none;
-                background: transparent;
-                font-size: 22px;
-              }
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Wohnung
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.tuer_wohnung
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Ankleidezimmer
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.fenster_ankleidezimmer
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Bad klein
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.fenster_bad_gross
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Küche
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.fenster_kueche
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Küche Balkon
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.tuer_kueche_balkon
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Balkon 2
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.tuer_wohnzimmer_balkon
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Wohnzimmer
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.fenster_wohnzimmer
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Büro
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.fenster_buero
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:decluttering-card
-                template: button
-                variables:
-                  - name: Schlafzimmer
-                  - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
-                  - entity: binary_sensor.fenster_schlafzimmer
-                  - show_last_changed: true
-                  - tap_action: 
-                      action: more-info
-              - type: custom:button-card
-                color_type: blank-card
-                styles:
-                  card:
-                    - width: 3px
+  title: security
+  icon: mdi:cctv
+  path: security
+  cards:
+    - type: vertical-stack
+      cards:
+        - type: markdown
+          content: "##### Security"
+          style: |
+            ha-card {
+              box-shadow: none;
+              background: transparent;
+              font-size: 28px;
+            }
+        - type: custom:swipe-card
+          parameters:
+            effect: 'coverflow'
+            grabCursor: true
+          cards:
+############################### Bewegung und Türen/Fenster ###################
+            - type: vertical-stack
+              cards:
+                - type: markdown
+                  content: "##### Bewegung"
+                  style: |
+                    ha-card {
+                      box-shadow: none;
+                      background: transparent;
+                      font-size: 22px;
+                    }
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Schlafzimmer
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
+                        - entity: binary_sensor.bewegung_schlafzimmer
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Ankleidezimmer
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
+                        - entity: binary_sensor.bewegung_ankleidezimmer
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Bad klein
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
+                        - entity: binary_sensor.bewegung_bad_klein
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Büro
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
+                        - entity: binary_sensor.bewegung_buero
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Wohnzimmer
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:motion-sensor'; else return 'mdi:walk'; ]]]"
+                        - entity: binary_sensor.bewegung_wohnzimmer
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 118px
+                - type: markdown
+                  content: "##### Türen/Fenster nach Aussen"
+                  style: |
+                    ha-card {
+                      box-shadow: none;
+                      background: transparent;
+                      font-size: 22px;
+                    }
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Wohnung
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.tuer_wohnung
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Ankleidezimmer
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.fenster_ankleidezimmer
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Bad klein
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.fenster_bad_gross
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Küche
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.fenster_kueche
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Küche Balkon
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.tuer_kueche_balkon
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Balkon 2
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.tuer_wohnzimmer_balkon
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Wohnzimmer
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.fenster_wohnzimmer
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Büro
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.fenster_buero
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:decluttering-card
+                      template: button
+                      variables:
+                        - name: Schlafzimmer
+                        - icon: "[[[ if (entity.state === 'on') return 'mdi:door-open'; else return 'mdi:door'; ]]]"
+                        - entity: binary_sensor.fenster_schlafzimmer
+                        - show_last_changed: true
+                        - tap_action: 
+                            action: more-info
+                    - type: custom:button-card
+                      color_type: blank-card
+                      styles:
+                        card:
+                          - width: 3px
+            - type: vertical-stack
+              cards:
+                - type: alarm-panel
+                  entity: alarm_control_panel.alarmanlage
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                    - entity: input_select.alarm_state
+                      icon: mdi:walk

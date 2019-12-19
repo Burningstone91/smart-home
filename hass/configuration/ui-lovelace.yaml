@@ -86,9 +86,9 @@
     - !include /config/lovelace/views/rooms.yaml
     - !include /config/lovelace/views/systems.yaml
     - !include /config/lovelace/views/automation_controls.yaml
+    - !include /config/lovelace/views/scenes.yaml
 
     - !include /config/lovelace/views/home.yaml 
-    - !include /config/lovelace/views/devices2.yaml
     # Tablet interface
     - !include /config/lovelace/views/floorplan_tablet.yaml
 

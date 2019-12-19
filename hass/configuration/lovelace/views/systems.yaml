@@ -3,369 +3,201 @@
     panel: true
     path: systems
     cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-        - type: vertical-stack
-          cards: 
-            - type: custom:mini-graph-card
-              entities: 
-                - sensor.speedtest_ping
-              height: 50
-              line_width: 2
-              font_size: 70
-              hours_to_show: 168
-              points_per_hour: 1
-              show:
-                extrema: true
-                fill: true
-              color_thresholds:
-                - value: 20
-                  color: '#1db954'
-                - value: 30
-                  color: '#bf9540'
-                - value: 50
-                  color: '#bf4040'
-                    
-            - type: horizontal-stack
-              cards:
-                - type: custom:mini-graph-card
-                  entities: 
-                    - sensor.speedtest_download
-                  height: 50
-                  line_width: 2
-                  font_size: 70
-                  hours_to_show: 168
-                  points_per_hour: 1
-                  show:
-                    extrema: true
-                    fill: true
-                  color_thresholds:
-                    - value: 0
-                      color: "#FFFF00"
-                    - value: 40
-                      color: "#3498db"     
-                - type: custom:mini-graph-card
-                  entities: 
-                    - sensor.speedtest_upload
-                  height: 50
-                  line_width: 2
-                  font_size: 70
-                  hours_to_show: 168
-                  points_per_hour: 1
-                  show:
-                    extrema: true
-                    fill: true
-                  color_thresholds:
-                    - value: 0
-                      color: "#FFFF00"
-                    - value: 13
-                      color: "#3498db"
-            - type: entities
-              show_header_toggle: off
-              entities:
-                - type: section
-                  label: NAS------------Synology DS-216j------------2x WD Red 6TB
-                - type: custom:vertical-stack-in-card
-                  cards:
-                    - type: horizontal-stack
-                      cards:
-                        - type: custom:card-modder
-                          card: 
-                            type: picture
+          - type: markdown
+            content: "##### Systeme"
+            style: |
+              ha-card {
+                box-shadow: none;
+                background: transparent;
+                font-size: 28px;
+              }
+          - type: custom:swipe-card
+            parameters:
+              effect: 'coverflow'
+              grabCursor: true
+            cards:
+################################## NAS #######################################
+              - type: vertical-stack
+                cards:
+                  - type: markdown
+                    content: "##### NAS - Synology DS-216j"
+                    style: |
+                      ha-card {
+                        box-shadow: none;
+                        background: transparent;
+                        font-size: 22px;
+                      }
+                  - type: custom:vertical-stack-in-card
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: picture
                             image: /local/devices/NAS.jpg
-                          style:                 
-                            border-radius: 5px
-                        - type: vertical-stack
-                          cards:
-                            - type: custom:bar-card
-                              align: split
-                              show_icon: true
-                              padding: 4px
-                              card_style: 
-                                border-radius: 5px
-                              entities:
-                                - entity: sensor.synology_dsm_used_space_volume_1
-                                  title: Disk
-                                  icon: mdi:harddisk    
-                            - type: custom:bar-card
-                              align: split
-                              show_icon: true
-                              padding: 4px
-                              card_style: 
-                                border-radius: 5px
-                              entities:
-                                - entity: sensor.synology_dsm_volume_used_volume_1
-                                  title: Disk %
-                                  icon: mdi:harddisk
-                                  severity:
-                                    - value: 50
-                                      color: '#1db954'
-                                    - value: 70
-                                      color: '#bf9540'
-                                    - value: 100
-                                      color: '#bf4040'
-                            - type: custom:bar-card
-                              align: split
-                              show_icon: true
-                              padding: 4px
-                              card_style: 
-                                border-radius: 5px
-                              entities:
-                                - entity: sensor.synology_dsm_cpu_load_total
-                                  title: CPU
-                                  icon: mdi:memory
-                                  severity:
-                                    - value: 20
-                                      color: '#1db954'
-                                    - value: 50
-                                      color: '#bf9540'
-                                    - value: 100
-                                      color: '#bf4040'
-                            - type: custom:bar-card
-                              align: split
-                              show_icon: true
-                              padding: 4px
-                              card_style: 
-                                border-radius: 5px
-                              entities:
-                                - entity: sensor.synology_dsm_memory_usage_real
-                                  title: RAM %
-                                  icon: mdi:memory
-                                  severity:
-                                    - value: 50
-                                      color: '#1db954'
-                                    - value: 70
-                                      color: '#bf9540'
-                                    - value: 100
-                                      color: '#bf4040'
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.synology_dsm_temperature_sda
-                      title: Disk 1
-                      icon: mdi:thermometer
-                      severity:
-                        - value: 40
-                          color: '#1db954'
-                        - value: 60
-                          color: '#bf9540'
-                        - value: 80
-                          color: '#bf4040'
-                    - entity: sensor.synology_dsm_temperature_sdb
-                      title: Disk 2
-                      icon: mdi:thermometer      
-                      severity:
-                        - value: 40
-                          color: '#1db954'
-                        - value: 60
-                          color: '#bf9540'
-                        - value: 80
-                          color: '#bf4040'           
-        - type: vertical-stack
-          cards:
-            - type: entities
-              show_header_toggle: off
-              entities:
-                - type: section
-                  label: HASS------------Intel NUC i3------------Docker
-                - type: custom:vertical-stack-in-card
-                  cards:
-                    - type: horizontal-stack
-                      cards:
-                        - type: custom:card-modder
-                          card: 
-                            type: picture
-                            image: /local/devices/NUC.jpg
-                          style:                 
-                            border-radius: 5px
-                        - type: vertical-stack
-                          cards:
-                            - type: custom:bar-card
-                              title_position: inside
-                              entity: sensor.uptime_nuc
-                              title: NUC Uptime
-                              align: center
-                              padding: 5px
-                              max: 60
-                              card_style: 
-                                border-radius: 5px
-                            - type: custom:bar-card
-                              title_position: inside
-                              entity: sensor.uptime_hass
-                              title: HASS Uptime
-                              align: center
-                              padding: 5px
-                              max: 60
-                              card_style: 
-                                border-radius: 5px
-                            - type: custom:bar-card
-                              align: split
-                              show_icon: true
-                              padding: 4px
-                              card_style: 
-                                border-radius: 5px
-                              entities:
-                                - entity: sensor.glances_containers_cpu_used
-                                  title: CPU
-                                  severity:
-                                    - value: 20
-                                      color: '#1db954'
-                                    - value: 50
-                                      color: '#bf9540'
-                                    - value: 100
-                                      color: '#bf4040'
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.glances_ram_used_percent
-                      title: RAM %
-                      severity:
-                        - value: 50
-                          color: '#1db954'
-                        - value: 70
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                    - entity: sensor.glances_ram_used
-                      title: RAM                               
-                - type: custom:bar-card
-                  align: split
-                  show_icon: true
-                  padding: 4px
-                  columns: 2
-                  card_style: 
-                    border-radius: 5px
-                  entities:
-                    - entity: sensor.glances_disk_used_percent
-                      title: Disk % 
-                      severity:
-                        - value: 50
-                          color: '#1db954'
-                        - value: 70
-                          color: '#bf9540'
-                        - value: 100
-                          color: '#bf4040'
-                    - entity: sensor.glances_disk_used
-                      title: Disk
-
-            - type: glance
-              show_header_toggle: false
-              show_state: false
-              columns: 5
-              entities:
-                - entity: switch.hass
-                  name: HASS
-                  icon: mdi:home-assistant
-                - entity: switch.mysql
-                  name: MySQL
-                  icon: mdi:database
-                - entity: switch.appdaemon
-                  name: AppDaemon
-                  icon: mdi:language-python
-                - entity: switch.nginx
-                  name: Nginx
-                  icon: mdi:shield-key
-                - entity: switch.dockermon
-                  name: Dockermon
-                  icon: mdi:docker
-                - entity: switch.glances
-                  name: Glances
-                  icon: mdi:chart-pie
-                - entity: switch.influxdb
-                  name: InfluxDB
-                  icon: mdi:database
-                - entity: switch.grafana
-                  name: Grafana
-                  icon: mdi:chart-areaspline
-                - entity: switch.mosquitto
-                  name: MQTT
-                  icon: mdi:switch
-                - entity: switch.deconz
-                  name: Deconz
-                  icon: mdi:router-wireless
-
-            - type: entities
-              show_header_toggle: false
-              entities:
-                - type: section 
-                  label: Home Assistant
-                - type: custom:bar-card
-                  title_position: inside
-                  align: center
-                  padding: 4px
-                  card_style: 
-                    border-radius: 5px
-                  columns: 2
-                  entities:
-                    - entity: sensor.hass_installed
-                      title: Current
-                    - entity: sensor.hass_available
-                      title: Latest
-                - type: section 
-                  label: AppDaemon
-                - type: custom:bar-card
-                  title_position: inside
-                  align: center
-                  padding: 4px
-                  card_style: 
-                    border-radius: 5px
-                  columns: 2
-                  entities:
-                    - entity: sensor.appdaemon_installed
-                      title: Current
-                    - entity: sensor.appdaemon_available
-                      title: Latest
-                      
-        - type: vertical-stack
-          cards:          
-            - type: entities
-              show_header_toggle: off
-              entities:
-                - type: section
-                  label: BLE Presence------------Raspberry Pi------------Raspbian
-                - type: custom:vertical-stack-in-card
-                  cards:
-                    - type: horizontal-stack
-                      cards:
-                        - type: custom:card-modder
-                          card: 
-                            type: picture
-                            image: /local/devices/PI.jpg
-                          style:                 
-                            border-radius: 5px
-                        - type: vertical-stack
-                          cards:
-                            - type: custom:bar-card
-                              title_position: inside
-                              align: center
-                              padding: 4px
-                              card_style: 
-                                border-radius: 5px
-                              columns: 1
-                              entities:
-                                - entity: sensor.pi_bedroom
-                                  show_value: false
-                                - entity: sensor.pi_dressroom
-                                  show_value: false
-                                - entity: sensor.pi_livingroom
-                                  show_value: false
-                                - entity: sensor.pi_office
-                                  show_value: false
-                              severity:
-                                - value: 0
-                                  color: '#bf4040'
-                                - value: 50
-                                  color: '#bf4040'
-                                - value: 100
-                                  color: '#1db954'
-          
+                            style: |
+                              ha-card {
+                                box-shadow: none;
+                                border-radius: 20px;
+                              }
+                          - type: vertical-stack
+                            cards:
+                              - type: custom:bar-card
+                                align: split
+                                show_icon: true
+                                padding: 4px
+                                max: 10.8
+                                card_style: 
+                                  border-radius: 5px
+                                entities:
+                                  - entity: sensor.synology_dsm_total_size_volume_1
+                                    title: Disk
+                                    icon: mdi:harddisk
+                                    severity:
+                                      - value: 5
+                                        color: '#1db954'
+                                      - value: 7
+                                        color: '#bf9540'
+                                      - value: 9
+                                        color: '#bf4040'    
+                              - type: custom:bar-card
+                                align: split
+                                show_icon: true
+                                padding: 4px
+                                card_style: 
+                                  border-radius: 5px
+                                entities:
+                                  - entity: sensor.synology_dsm_volume_used_volume_1
+                                    title: Disk %
+                                    icon: mdi:harddisk
+                                    severity:
+                                      - value: 50
+                                        color: '#1db954'
+                                      - value: 70
+                                        color: '#bf9540'
+                                      - value: 100
+                                        color: '#bf4040'
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px
+                          - type: custom:mini-graph-card
+                            entities: 
+                              - sensor.synology_dsm_cpu_load_1_min
+                            name: CPU Load 1 Min
+                            line_width: 3
+                            decimals: 1
+                            font_size: 100
+                            font_size_header: 13
+                            height: 90
+                            line_color: '#1ad97d'
+                            animate: true
+                            hours_to_show: 24
+                            points_per_hour: 2
+                            show:
+                              icon: false
+                              extrema: false
+                              fill: true
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px
+                          - type: custom:mini-graph-card
+                            entities: 
+                              - sensor.synology_dsm_cpu_load_1_min
+                            name: CPU Load 5 Min
+                            line_width: 3
+                            decimals: 1
+                            font_size: 100
+                            font_size_header: 13
+                            height: 90
+                            line_color: '#1ad97d'
+                            animate: true
+                            hours_to_show: 24
+                            points_per_hour: 2
+                            show:
+                              icon: false
+                              extrema: false
+                              fill: true
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px
+                          - type: custom:mini-graph-card
+                            entities: 
+                              - sensor.synology_dsm_cpu_load_total
+                            name: CPU %
+                            line_width: 3
+                            decimals: 1
+                            font_size: 100
+                            font_size_header: 13
+                            height: 90
+                            line_color: '#1ad97d'
+                            animate: true
+                            hours_to_show: 24
+                            points_per_hour: 2
+                            show:
+                              icon: false
+                              extrema: false
+                              fill: true
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px
+                          - type: custom:mini-graph-card
+                            entities: 
+                              -  sensor.synology_dsm_temperature_sda
+                            name: Temp HDD 1
+                            line_width: 3
+                            decimals: 1
+                            font_size: 100
+                            font_size_header: 13
+                            height: 90
+                            line_color: '#1ad97d'
+                            animate: true
+                            hours_to_show: 24
+                            points_per_hour: 2
+                            show:
+                              icon: false
+                              extrema: false
+                              fill: true
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px
+                          - type: custom:mini-graph-card
+                            entities: 
+                              -  sensor.synology_dsm_temperature_sdb
+                            name: Temp HDD 2
+                            line_width: 3
+                            decimals: 1
+                            font_size: 100
+                            font_size_header: 13
+                            height: 90
+                            line_color: '#1ad97d'
+                            animate: true
+                            hours_to_show: 24
+                            points_per_hour: 2
+                            show:
+                              icon: false
+                              extrema: false
+                              fill: true
+                          - type: custom:button-card
+                            color_type: blank-card
+                            styles:
+                              card:
+                                - width: 3px

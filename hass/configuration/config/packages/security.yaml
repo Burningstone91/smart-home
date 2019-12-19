@@ -16,3 +16,16 @@ input_select:
       - Ankleidezimmer
       - Bad_gross
       - Wohnzimmer
+
+alarm_control_panel:
+  - platform: manual
+    name: Alarmanlage
+    code: !secret alarm_panel_code
+    pending_time: 30
+    delay_time: 20
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0

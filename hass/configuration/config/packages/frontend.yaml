@@ -1,4 +1,0 @@
-input_boolean:
-  frontent_dummy:
-    name: Dummy Frontend
-    initial: True

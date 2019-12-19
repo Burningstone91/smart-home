@@ -8,3 +8,6 @@ input_boolean:
   sleep_mode:
     name: Schlafmodus
     initial: False
+  quiet_mode:
+    name: Ruhemodus
+    initial: False

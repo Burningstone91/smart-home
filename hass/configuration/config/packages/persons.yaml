@@ -104,13 +104,6 @@ input_datetime:
     name: Dimitri Wecker
     has_date: true
     has_time: true
-
-input_number:
-  dimitri_handy_akku:
-    name: Dimitri Handy Akku
-    min: 0
-    max: 100
-    unit_of_measurement: '%'
     
 input_boolean:
   ongoing_call_dimitri:

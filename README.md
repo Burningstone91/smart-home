@@ -7,6 +7,8 @@ A ConBee ZigBee Stick and an Aeotec Z-Wave Stick are attached to the NUC to cont
 the ZigBee and Z-Wave devices.
 A Docker Host inside an Ubuntu Server VM builds the core of the Smart Home.
 
+<a href="https://www.buymeacoffee.com/OJfxe78" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
 ### Docker Host Services: 
 
 * AppDaemon - For Automations

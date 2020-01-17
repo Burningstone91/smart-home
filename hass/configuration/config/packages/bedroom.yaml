@@ -51,14 +51,25 @@ media_player:
     host: !secret heos_bedroom_ip
     name: HEOS Schlafzimmer
 
-scene:
-  - name: Schlafzimmer alles aus
-    entities:
-      light.schlafzimmer: off
-      switch.schalter_entfeuchter: off
-      media_player.heos_5: paused
+# scene:
+#   - name: Schlafzimmer alles aus
+#     entities:
+#       light.schlafzimmer: off
+#       switch.schalter_entfeuchter: off
+#       media_player.heos_5: paused
         
 script:
+  schlafzimmer_alles_aus:
+    sequence:
+      - service: light.turn_off
+        data:
+          entity_id: light.schlafzimmer
+      - service: switch.turn_off
+        data:
+          entity_id: switch.schalter_entfeuchter
+      - service: media_player.media_pause
+        data:
+          entity_id: media_player.spotify
   gute_nacht:
     sequence:
       - service: light.turn_off

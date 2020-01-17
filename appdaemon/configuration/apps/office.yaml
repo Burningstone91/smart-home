@@ -8,7 +8,7 @@ motion_light_office:
   entities:
     motion_sensor: binary_sensor.bewegung_buero
     lux_sensor: sensor.lux_buero
-    no_action_entities: device_tracker.pc_sabrina,device_tracker.pc_dimitri,media_player.musik_buero
+    no_action_entities: device_tracker.pc_sabrina,device_tracker.pc_dimitri,media_player.buero_musik_main
     lights:
       morning: light.buero
       day: light.buero
@@ -62,13 +62,18 @@ dimmer_switch_buero:
         action: 'on'
         action_entity: scene.buro_alles_aus
 
-dimmer_test:
-  module: hue_dimmer_switch
-  class: HueDimmerSwitch!
-  entities:
-    switch: dimmschalter_buero
-    light: light.buero
-  advanced:
-    long_press_off:
-      action_type: turn_on
-      entity: scene.buro_alles_aus
+# dimmer_test:
+#   module: testing
+#   class: TradfriE1810
+#   entities:
+#     light: light.buero
+#     switch: remote_office #id of the ikea remote in the events
+#   advanced:
+#     short_press_right:
+#       action_type: turn_off
+#       entity: switch.office
+#     short_press_left:
+#       action_type: turn_on
+#       entity: light.office
+#       parameters:
+#         brightness: 255  

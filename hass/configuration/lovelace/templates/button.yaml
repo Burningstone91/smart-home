@@ -16,7 +16,7 @@ card:
   show_state: '[[show_state]]'
   show_label: true
   show_last_changed: '[[show_last_changed]]'
-  size: 30%
+  size: 25%
   tap_action: '[[tap_action]]'
   hold_action: '[[hold_action]]'
   styles:

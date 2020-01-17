@@ -6,7 +6,7 @@ everyone_gone:
   disabled_states:
     presence: vacation
   entities:
-    switch: scene.alle_weg
+    switch: script.alle_weg
   properties:
-    action_type: scene
+    action_type: toggle
     state: "on"

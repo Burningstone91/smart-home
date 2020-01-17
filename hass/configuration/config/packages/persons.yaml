@@ -31,6 +31,12 @@ sensor:
           {% elif is_state('input_select.dimitri_presence', 'gerade gegangen') or is_state('input_select.dimitri_presence', 'weg') or is_state('input_select.dimitri_presence', 'lange weg') %}
             /local/presence/dimitri_away.jpg
           {% endif %}
+      dimitri_phone_battery:
+        friendly_name: 'Dimitri Handy Akku'
+        unit_of_measurement: '%'
+        value_template: >
+          {{ state_attr('device_tracker.dimitri_phone_gps','battery_level') | int | round(0) }}
+        device_class: battery
 
       sabrina_home:
         friendly_name: "Sabrina Home Status"

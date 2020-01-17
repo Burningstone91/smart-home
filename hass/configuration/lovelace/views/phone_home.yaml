@@ -50,182 +50,71 @@
               styles:
                 card:
                   - width: 3px
-
         - type: horizontal-stack
           cards:
-            # Picture Left Sabrina Away
             - type: custom:button-card
               color_type: blank-card
               styles:
                 card:
                   - width: 3px
+            # Picture Left Sabrina Away
             - type: conditional
               conditions:
                 - entity: sensor.sabrina_home
                   state_not: "home"
               card:
-                type: picture-elements
-                style: |
-                  ha-card {
-                    box-shadow: none;
-                    overflow: hidden;
-                  }
-                image: /local/presence/sabrina_away.jpg
-                elements:
-                  - type: image
-                    image: /local/presence/sabrina_away.jpg
-                    tap_action:
+                type: custom:decluttering-card
+                template: person
+                variables:
+                  - image: /local/presence/sabrina_away.jpg
+                  - presence_input_select: input_select.sabrina_presence
+                  - tap_action: 
                       action: navigate
                       navigation_path: /lovelace/sabrina/
-                    style:
-                      left: 50%
-                      top: 50%
-                      width: 100%
-                      heigth: 100%
-                  - type: state-label
-                    entity: input_select.sabrina_presence
-                    style:
-                      left: 0
-                      bottom: 0
-                      pointer-events: none
-                      font-size: 16px
-                      line-height: 24px
-                      color: white
-                      background-color: rgba(0, 0, 0, 0.3)
-                      width: 100%
-                      transform: initial
-                      padding: 0 8px
             # Picture Left Sabrina Home
             - type: conditional
               conditions:
                 - entity: sensor.sabrina_home
                   state: "home"
               card:
-                type: picture-elements
-                style: |
-                  ha-card {
-                    box-shadow: none;
-                    overflow: hidden;
-                  }
-                image: /local/presence/sabrina_home.jpg
-                elements:
-                  - type: image
-                    image: /local/presence/sabrina_home.jpg
-                    tap_action:
+                type: custom:decluttering-card
+                template: person
+                variables:
+                  - image: /local/presence/sabrina_home.jpg
+                  - presence_input_select: input_select.sabrina_presence
+                  - tap_action: 
                       action: navigate
                       navigation_path: /lovelace/sabrina/
-                    style:
-                      left: 50%
-                      top: 50%
-                      width: 100%
-                      heigth: 100%
-                  - type: state-label
-                    entity: input_select.sabrina_presence
-                    style:
-                      left: 0
-                      bottom: 0
-                      pointer-events: none
-                      font-size: 16px
-                      line-height: 24px
-                      color: white
-                      background-color: rgba(0, 0, 0, 0.3)
-                      width: 100%
-                      transform: initial
-                      padding: 0 8px
             # Picture Right Dimitri Away
             - type: conditional
               conditions:
                 - entity: sensor.dimitri_home
                   state_not: "home"
               card:
-                type: picture-elements
-                style: |
-                  ha-card {
-                    box-shadow: none;
-                    overflow: hidden;
-                  }
-                image: /local/presence/dimitri_away.jpg
-                elements:
-                  - type: image
-                    image: /local/presence/dimitri_away.jpg
-                    tap_action:
+                type: custom:decluttering-card
+                template: person
+                variables:
+                  - image: /local/presence/dimitri_away.jpg
+                  #- battery: sensor.dimitri_phone_battery
+                  - presence_input_select: input_select.dimitri_presence
+                  - tap_action: 
                       action: navigate
                       navigation_path: /lovelace/dimitri/
-                    style:
-                      left: 50%
-                      top: 50%
-                      width: 100%
-                      heigth: 100%
-                  - type: state-label
-                    entity: input_select.dimitri_presence
-                    style:
-                      left: 0
-                      bottom: 0
-                      pointer-events: none
-                      font-size: 16px
-                      line-height: 24px
-                      color: white
-                      background-color: rgba(0, 0, 0, 0.3)
-                      width: 100%
-                      transform: initial
-                      padding: 0 8px
             # Picture Right Dimitri Home
             - type: conditional
               conditions:
                 - entity: sensor.dimitri_home
                   state: "home"
               card:
-                type: picture-elements
-                style: |
-                  ha-card {
-                    box-shadow: none;
-                    overflow: hidden;
-                  }
-                image: /local/presence/dimitri_home.jpg
-                elements:
-                  - type: image
-                    image: /local/presence/dimitri_home.jpg
-                    tap_action:
+                type: custom:decluttering-card
+                template: person
+                variables:
+                  - image: /local/presence/dimitri_home.jpg
+                  #- battery: sensor.dimitri_phone_battery
+                  - presence_input_select: input_select.dimitri_presence
+                  - tap_action: 
                       action: navigate
                       navigation_path: /lovelace/dimitri/
-                    style:
-                      left: 50%
-                      top: 50%
-                      width: 100%
-                      heigth: 100%
-                  - type: icon
-                    icon: mdi:cellphone-android
-                    style:
-                      top: 0
-                      left: 0
-                      pointer-events: none
-                      transform: scale(0.4)
-                      color: white
-                      line-height: 32px
-                      padding: 8px 10px
-                  - type: state-label
-                    entity: input_number.dimitri_handy_akku
-                    style:
-                      top: 0
-                      left: 20px
-                      pointer-events: none
-                      transform: initial
-                      font-size: 12px
-                      color: rgba(255,255,255,0.8)
-                      line-height: 32px
-                  - type: state-label
-                    entity: input_select.dimitri_presence
-                    style:
-                      left: 0
-                      bottom: 0
-                      pointer-events: none
-                      font-size: 16px
-                      line-height: 24px
-                      color: white
-                      background-color: rgba(0, 0, 0, 0.3)
-                      width: 100%
-                      transform: initial
-                      padding: 0 8px
             - type: custom:button-card
               color_type: blank-card
               styles:
@@ -251,7 +140,7 @@
                   - height: 80px
                   - font-size: 11px
                   - font-weight: bold
-            # Shopping Liste
+            #Shopping Liste
             - type: custom:button-card
               name: Einkauf
               icon: mdi:cart

@@ -27,7 +27,7 @@ input_boolean:
     icon: mdi:lock
   vacuum_app:
     name: Staubsauger App
-    initial: True
+    initial: False
     icon: mdi:broom
 ################################ Living Room #################################
   scene_light_app:
@@ -40,7 +40,7 @@ input_boolean:
     icon: mdi:remote
   phone_call:
     name: Pause/Play bei Telefonat
-    initial: True
+    initial: False
     icon: mdi:cellphone-iphone
   brighten_light_pause:
     name: Licht hell/dunkel bei Pause/Play im Wohnzimmer
@@ -104,7 +104,7 @@ input_boolean:
 ################################### House ###################################
   everyone_gone:
     name: Schalte alle Geräte und Lichter aus wenn alle gegangen sind
-    initial: False
+    initial: True
     icon: mdi:walk
 ################################## Security ##################################
   arm_when_everyone_gone:

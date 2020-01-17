@@ -14,7 +14,7 @@ motion_light_bedroom:
       night: light.kugellampe_schlafzimmer
   properties:
     lux_threshold: 200
-    delay: 5
+    delay: 10
     day_state_time:
       morning: "05:30:00"
       day: "13:30:00"
@@ -61,9 +61,9 @@ dimmer_switch_schlafzimmer:
         action: 'off'
         action_entity: light.schlafzimmer
       long_press_off:
-        action_type: scene
-        action: 'on'
-        action_entity: scene.schlafzimmer_alles_aus
+        action_type: service_call
+        action: turn_on
+        action_entity: script.schlafzimmer_alles_aus
 
 dimmer_switch_schlafzimmer_sabrina:
   module: switches
@@ -76,14 +76,21 @@ dimmer_switch_schlafzimmer_sabrina:
     switch: dimmschalter_sabrina
   properties:
     button_config:
+      short_press_on:
+        action_type: service_call
+        action: turn_on
+        action_entity: light.schlafzimmer
+        parameters:
+          brightness: 200
+          color_name: orange
       short_press_off:
-        action_type: scene
-        action: 'on'
-        action_entity: scene.schlafzimmer_alles_aus
+        action_type: service_call
+        action: turn_on
+        action_entity: script.schlafzimmer_alles_aus
       long_press_off:
-        action_type: scene
-        action: 'on'
-        action_entity: scene.alles_aus
+        action_type: service_call
+        action: turn_on
+        action_entity: script.alles_aus
 
 dimmer_switch_schlafzimmer_master:
   module: switches
@@ -117,9 +124,9 @@ dimmer_switch_schlafzimmer_master:
         action: media_previous_track
         action_entity: media_player.spotify
       short_press_off:
-        action_type: scene
-        action: 'on'
-        action_entity: scene.schlafzimmer_alles_aus
+        action_type: service_call
+        action: turn_on
+        action_entity: script.schlafzimmer_alles_aus
       long_press_off:
         action_type: service_call
         action: media_pause

@@ -1,0 +1,6 @@
+# binary_sensor.livingroom_door:
+#   friendly_name: Livingroom
+#   templates:
+#     icon: >
+#       if (state === 'on') return 'mdi:door-open';
+#       return 'mdi:door-closed';

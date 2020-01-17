@@ -150,19 +150,52 @@ media_player:
      client_id: !secret spotify_client_id
      client_secret: !secret spotify_api_key
 
-scene:
-  - name: Alle Weg
-    entities:
-      group.all_lights: off
-      switch.schalter_entfeuchter: on
-      remote.wohnzimmer: off
-      media_player.buero_musik_main: off
-  - name: Alles Aus
-    entities:
-      group.all_lights: off
-      switch.schalter_entfeuchter: off
-      remote.wohnzimmer: off
-      media_player.buero_musik_main: off
-      media_player.heos_5: paused
+# scene:
+#   - name: Alle Weg
+#     entities:
+#       group.all_lights: off
+#       switch.schalter_entfeuchter: on
+#       remote.wohnzimmer: off
+#       media_player.buero_musik_main: off
+#   - name: Alles Aus
+#     entities:
+#       group.all_lights: off
+#       switch.schalter_entfeuchter: off
+#       remote.wohnzimmer: off
+#       media_player.buero_musik_main: off
+#       media_player.heos_5: paused
+
+script:
+  alle_weg:
+    sequence:
+      - service: light.turn_off
+        data:
+          entity_id: group.all_lights
+      - service: switch.turn_on
+        data:
+          entity_id: switch.schalter_entfeuchter
+      - service: remote.turn_off
+        data:
+          entity_id: remote.wohnzimmer
+      - service: media_player.turn_off
+        data:
+          entity_id: media_player.buero_musik_main
+  alles_aus:
+    sequence:
+      - service: light.turn_off
+        data:
+          entity_id: group.all_lights
+      - service: switch.turn_on
+        data:
+          entity_id: switch.schalter_entfeuchter
+      - service: remote.turn_off
+        data:
+          entity_id: remote.wohnzimmer
+      - service: media_player.turn_off
+        data:
+          entity_id: media_player.buero_musik_main
+      - service: media_player.media_pause
+        data:
+          entity_id: media_player.heos_5
 
 circadian_lighting:

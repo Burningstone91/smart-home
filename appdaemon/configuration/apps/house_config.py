@@ -5,6 +5,7 @@ PERSONS = {
         "phone": "device_tracker.dimitri_phone",
         "phone_call_bool": "input_boolean.ongoing_call_dimitri",
         "keys": "sensor.dimitri",
+        "keys_topic": "location/dimitri_keys",
         "presence_state": "input_select.dimitri_presence",
         "notifier": "notify.dimitri_handy",
     },
@@ -12,6 +13,7 @@ PERSONS = {
         "phone": "device_tracker.sabrina_phone",
         "phone_call_bool": "input_boolean.ongoing_call_sabrina",
         "keys": "sensor.sabrina",
+        "keys_topic": "location/sabrina_keys",
         "presence_state": "input_select.sabrina_presence",
     },
 }

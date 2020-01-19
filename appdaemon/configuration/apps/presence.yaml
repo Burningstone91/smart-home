@@ -1,3 +1,5 @@
 presence_app:
   module: presence
   class: PresenceAutomation
+  properties:
+    mqtt_api: enabled

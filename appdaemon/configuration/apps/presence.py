@@ -44,6 +44,8 @@ class PresenceAutomation(AppBase):
     def configure(self) -> None:
         """Configure."""
         for person, attribute in PERSONS.items():
+            # get key topic for mqtt room device tracker
+            keys_topic = attribute.get("keys_topic")
             # set initial state
             if self.get_state(attribute[KEYS]) == NOT_HOME:
                 self.select_option(
@@ -61,6 +63,7 @@ class PresenceAutomation(AppBase):
                 old=NOT_HOME,
                 input_select=attribute[PRESENCE_STATE],
                 person=person,
+                key_topic=keys_topic,
                 target_state=self.PresenceState.just_arrived.value,
             )
 
@@ -71,6 +74,7 @@ class PresenceAutomation(AppBase):
                 new=NOT_HOME,
                 input_select=attribute[PRESENCE_STATE],
                 person=person,
+                keys_topic=keys_topic,
                 target_state=self.PresenceState.just_left.value,
             )
 
@@ -82,6 +86,7 @@ class PresenceAutomation(AppBase):
                 duration=60 * 5,
                 input_select=attribute[PRESENCE_STATE],
                 person=person,
+                keys_topic=keys_topic,
                 target_state=self.PresenceState.home.value,
             )
 
@@ -93,6 +98,7 @@ class PresenceAutomation(AppBase):
                 new=self.PresenceState.just_arrived.value,
                 input_select=attribute[PRESENCE_STATE],
                 person=person,
+                keys_topic=keys_topic,
                 target_state=self.PresenceState.home.value,
             )
 
@@ -104,6 +110,7 @@ class PresenceAutomation(AppBase):
                 duration=60 * 5,
                 input_select=attribute[PRESENCE_STATE],
                 person=person,
+                keys_topic=keys_topic,
                 target_state=self.PresenceState.away.value,
             )
 
@@ -115,6 +122,7 @@ class PresenceAutomation(AppBase):
                 duration=60 * 60 * 24,
                 input_select=attribute[PRESENCE_STATE],
                 person=person,
+                keys_topic=keys_topic,
                 target_state=self.PresenceState.extended_away.value,
             )
 
@@ -128,6 +136,16 @@ class PresenceAutomation(AppBase):
            specified person based on the given state"""
         old_state = self.get_state(kwargs[INPUT_SELECT])
         self.select_option(kwargs[INPUT_SELECT], kwargs[TARGET_STATE])
+        if kwargs["keys_topic"] is not None:
+            if kwargs["target_state"] in [self.PresenceState.just_arrived.value, self.PresenceState.home.value]:
+                payload = "home"
+            else:
+                payload = "not_home"
+            self.mqtt.mqtt_publish(
+                kwargs["keys_topic"],
+                payload,
+                namespace="mqtt",
+            )
         self.log(
             f"{kwargs[PERSON]} war {old_state}, " f"ist jetzt {kwargs[TARGET_STATE]}"
         )

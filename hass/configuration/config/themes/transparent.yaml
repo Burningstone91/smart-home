@@ -91,3 +91,5 @@ label-color-off: 'AliceBlue'
 lock-color-off: 'AliceBlue'
 name-color-off: 'AliceBlue'
 state-color-off: 'AliceBlue'
+
+card-background-color: "var(--paper-card-background-color)"

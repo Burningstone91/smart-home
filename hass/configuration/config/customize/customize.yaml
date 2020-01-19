@@ -1,6 +1,305 @@
-# binary_sensor.livingroom_door:
-#   friendly_name: Livingroom
-#   templates:
-#     icon: >
-#       if (state === 'on') return 'mdi:door-open';
-#       return 'mdi:door-closed';
+#################################################
+################ Binary Sensors #################
+#################################################
+
+#################################################
+# Door/Window sensors
+#################################################
+binary_sensor.tuer_wohnung:
+  friendly_name: Haustür
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_bad_gross:
+  friendly_name: Tür grosses Bad
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_bad_klein:
+  friendly_name: Tür kleines Bad
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_buero:
+  friendly_name: Tür Büro
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_kueche_balkon:
+  friendly_name: Tür Küche Balkon
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_reduit:
+  friendly_name: Tür Reduit
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_schlafzimmer:
+  friendly_name: Tür Schlafzimmer
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_ankleidezimmer:
+  friendly_name: Tür Ankleidezimmer
+  device_class: door
+  icon: mdi:door
+binary_sensor.tuer_wohnzimmer_balkon:
+  friendly_name: Tür Wohnzimmer Balkon
+  device_class: door
+  icon: mdi:door
+binary_sensor.fenster_ankleidezimmer:
+  friendly_name: Fenster Ankleidezimmer
+  device_class: window
+  icon: mdi:window-closed-variant
+binary_sensor.fenster_bad_gross:
+  friendly_name: Fenster grosses Bad
+  device_class: window
+  icon: mdi:window-closed-variant
+binary_sensor.fenster_buero:
+  friendly_name: Fenster Büro
+  device_class: window
+  icon: mdi:window-closed-variant
+binary_sensor.fenster_kueche:
+  friendly_name: Fenster Küche
+  device_class: window
+  icon: mdi:window-closed-variant
+binary_sensor.fenster_schlafzimmer:
+  friendly_name: Fenster Schlafzimmer
+  device_class: window
+  icon: mdi:window-closed-variant
+binary_sensor.fenster_wohnzimmer:
+  friendly_name: Fenster Wohnzimmer
+  device_class: window
+  icon: mdi:window-closed-variant
+#################################################
+# Motion sensors
+#################################################
+binary_sensor.bewegung_ankleidezimmer:
+  friendly_name: Bewegung Ankleidezimmer
+  device_class: motion
+  icon: mdi:walk
+binary_sensor.bewegung_bad_klein:
+  friendly_name: Bewegung kleines Bad
+  device_class: motion
+  icon: mdi:walk
+binary_sensor.bewegung_buero:
+  friendly_name: Bewegung Büro
+  device_class: motion
+  icon: mdi:walk
+binary_sensor.bewegung_schlafzimmer:
+  friendly_name: Bewegung Schlafzimmer
+  device_class: motion
+  icon: mdi:walk
+binary_sensor.bewegung_wohnzimmer:
+  friendly_name: Bewegung Wohnzimmer
+  device_class: motion
+  icon: mdi:walk
+
+#################################################
+################ Device Trackers ################
+#################################################
+
+#################################################
+# Unifi integration Availability
+#################################################
+device_tracker.ap_wohnzimmer:
+  friendly_name: AP Wohnzimmer
+  icon: mdi:router-wireless
+device_tracker.usg_router:
+  friendly_name: USG Router
+  icon: mdi:wan
+device_tracker.switch_wohnzimmer:
+  friendly_name: USW Wohnzimmer
+  icon: mdi:network-router
+device_tracker.switch_reduit:
+  friendly_name: USW Reduit
+  icon: mdi:network-router
+device_tracker.nas:
+  friendly_name: NAS
+  icon: mdi:nas
+device_tracker.server_nuc:
+  friendly_name: NUC
+  icon: mdi:server-network
+device_tracker.raspberrypi:
+  friendly_name: Unifi Controller
+  icon: mdi:fruit-grapes
+device_tracker.pi_ankleidezimmer:
+  friendly_name: Pi Ankleidezimmer
+  icon: mdi:fruit-grapes
+device_tracker.pi_buero:
+  friendly_name: Pi Büro
+  icon: mdi:fruit-grapes
+device_tracker.pi_wohnzimmer:
+  friendly_name: Pi Wohnzimmer
+  icon: mdi:fruit-grapes
+device_tracker.pi_schlafzimmer:
+  friendly_name: Pi Schlafzimmer
+  icon: mdi:fruit-grapes
+device_tracker.pc_sabrina:
+  friendly_name: PC Sabrina
+  icon: mdi:desktop-tower-monitor
+device_tracker.pc_dimitri:
+  friendly_name: PC Dimitri
+  icon: mdi:desktop-tower-monitor
+device_tracker.desktop_7a2lv3k:
+  friendly_name: Laptop
+  icon: mdi:laptop
+device_tracker.dimitri_phone:
+  friendly_name: Handy Dimitri
+  icon: mdi:cellphone-android
+device_tracker.sabrina_phone:
+  friendly_name: Handy Sabrina
+  icon: mdi:cellphone-android
+device_tracker.ipad:
+  friendly_name: iPad
+  icon: mdi:tablet
+device_tracker.harmonyhub:
+  friendly_name: Harmony Hub
+  icon: mdi:remote
+device_tracker.roomba_wohnzimmer:
+  friendly_name: Staubsauger
+  icon: mdi:robot-vacuum
+device_tracker.switch_entfeuchter:
+  friendly_name: Plug Entfeuchter
+  icon: mdi:power-plug
+device_tracker.minix_wohnzimmer:
+  friendly_name: Kodi Wohnzimmer
+  icon: mdi:play-network
+device_tracker.musik_wohnzimmer:
+  friendly_name: AVR Wohnzimmer
+  icon: mdi:speaker
+device_tracker.musik_schlafzimmer:
+  friendly_name: Sound Schlafzimmer
+  icon: mdi:speaker
+device_tracker.musik_buero:
+  friendly_name: Receiver Büro
+  icon: mdi:speaker
+#################################################
+# Android App integration
+#################################################
+device_tracker.dimitri_phone_gps:
+  friendly_name: Handy Dimitri GPS
+  icon: mdi:map-marker
+#################################################
+# MQTT integration
+#################################################
+device_tracker.dimitri_schluessel:
+  friendly_name: Schlüssel Dimitri
+  icon: mdi:key-wireless
+device_tracker.sabrina_schluessel:
+  friendly_name: Schlüssel Sabrina
+  icon: mdi:key-wireless
+
+#################################################
+################### Persons #####################
+#################################################
+person.dimitri:
+  friendly_name: Dimitri
+  entity_picture: /local/presence/dimitri_home.jpg
+person.sabrina:
+  friendly_name: Sabrina
+  entity_picture: /local/presence/sabrina_home.jpg
+
+#################################################
+################### Z-Wave ######################
+#################################################
+zwave.aeotec_zw090_zstick_gen5_eu:
+  friendly_name: Aeotec Z-Wave Stick
+  icon: mdi:z-wave
+zwave.aeotec_zw100_multisensor_6:
+  friendly_name: Aeotec Multi Ankleidezimmer
+  icon: mdi:z-wave
+zwave.aeotec_zw100_multisensor_6_10:
+  friendly_name: Aeotec Multi kleines Bad
+  icon: mdi:z-wave
+zwave.aeotec_zw100_multisensor_6_11:
+  friendly_name: Aeotec Multi Schlafzimmer
+  icon: mdi:z-wave
+zwave.aeotec_zw100_multisensor_6_4:
+  friendly_name: Aeotec Multi Büro
+  icon: mdi:z-wave
+
+#################################################
+################### Lights ######################
+#################################################
+light.ankleidezimmer:
+  friendly_name: Ankleidzeimmer
+  icon: mdi:ceiling-light
+light.buero:
+  friendly_name: Büro
+  icon: mdi:ceiling-light
+light.stehlampe_wohnzimmer_vorne:
+  friendly_name: Wohnzimmer Vorne
+  icon: mdi:floor-lamp
+light.stehlampe_wohnzimmer_hinten:
+  friendly_name: Wohnzimmer Hinten
+  icon: mdi:floor-lamp
+light.decke_schlafzimmer:
+  friendly_name: Decke Schlafzimmer
+  icon: mdi:ceiling-light
+light.kugellampe_schlafzimmer:
+  friendly_name: Kugel Schlafzimmer
+  icon: mdi:lamp
+
+#################################################
+################## Switches #####################
+#################################################
+switch.schalter_entfeuchter:
+  friendly_name: Entfeuchter
+  icon: mdi:power-plug
+
+#################################################
+###################  Sensors ####################
+#################################################
+
+#################################################
+# Temperature sensors
+#################################################
+sensor.temperatur_ankleidezimmer:
+  friendly_name: Ankleidezimmer
+  icon: mdi:thermometer
+sensor.temperatur_Schlafzimmer:
+  friendly_name: Schlafzimmer
+  icon: mdi:thermometer
+sensor.temperatur_buero:
+  friendly_name: Büro
+  icon: mdi:thermometer
+sensor.temperatur_wohnzimmer:
+  friendly_name: Wohnzimmer
+  icon: mdi:thermometer
+sensor.temperatur_bad_klein:
+  friendly_name: Kleines Bad
+  icon: mdi:thermometer
+sensor.synology_dsm_temperature_sda:
+  friendly_name: NAS HDD 1
+  icon: mdi:thermometer
+sensor.synology_dsm_temperature_sdb:
+  friendly_name: NAS HDD 2
+  icon: mdi:thermometer
+#################################################
+# Humidity sensors
+#################################################
+sensor.luftfeuchtigkeit_schlafzimmer:
+  friendly_name: Schlafzimmer
+  icon: mdi:water-percent
+sensor.luftfeuchtigkeit_bad_klein:
+  friendly_name: Kleines Bad
+  icon: mdi:water-percent
+sensor.luftfeuchtigkeit_buero:
+  friendly_name: Büro
+  icon: mdi:water-percent
+sensor.luftfeuchtigkeit_ankleidezimmer:
+  friendly_name: Ankleidezimmer
+  icon: mdi:water-percent
+#################################################
+# Lux sensors
+#################################################
+sensor.lux_schlafzimmer:
+  friendly_name: Schlafzimmer
+  icon: mdi:weather-sunny
+sensor.lux_bad_klein:
+  friendly_name: Kleines Bad
+  icon: mdi:weather-sunny
+sensor.lux_buero:
+  friendly_name: Büro
+  icon: mdi:weather-sunny
+sensor.lux_ankleidezimmer:
+  friendly_name: Ankleidezimmer
+  icon: mdi:weather-sunny
+sensor.lux_wohnzimmer:
+  friendly_name: Wohnzimmer
+  icon: mdi:weather-sunny

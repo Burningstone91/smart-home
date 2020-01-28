@@ -1,21 +1,15 @@
-    title: Floorplan
+  - title: Floorplan
     icon: mdi:floor-plan
     path: floorplan_phone
     cards:
     - type: vertical-stack
       cards:
-        - type: custom:button-card
-          color_type: blank-card
-          styles:
-            card:
-              - width: 3px
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Grundriss
+            name: "[[[ return `XY ${states['sensor.xy'].state}` ]]]"
         - type: horizontal-stack
           cards:
-          - type: custom:button-card
-            color_type: blank-card
-            styles:
-              card:
-                - width: 3px
           - type: picture-elements
             image: /local/Wohnung_Hochformat.svg
             style: |
@@ -313,8 +307,4 @@
                   top: 3.8%
                   left: 41.1%
                   width: 10.2%
-          - type: custom:button-card
-            color_type: blank-card
-            styles:
-              card:
-                - width: 3px
+        - !include ../includes/bottom-card.yaml 

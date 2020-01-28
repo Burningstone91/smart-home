@@ -9,37 +9,37 @@ sensor:
             tag
             {% endif %}
                
-binary_sensor:
-  - platform: bayesian
-    prior: 0.25
-    name: 'Dimitri Schläft'
-    probability_threshold: 0.8
-    observations:
-        - entity_id: 'input_select.dimitri_presence'
-          prob_given_true: 0.95 #95% chance that Dimitri is home, if he is sleeping
-          prob_given_false: 0.61 #% chance Dimitri is home, if he is not sleeping
-          platform: 'state'
-          to_state: 'zu Hause'
-        - entity_id: 'group.all_lights'
-          prob_given_true: 0.94
-          prob_given_false: 0.54
-          platform: 'state'
-          to_state: 'off'
-        - entity_id: 'input_boolean.charging_phone_dimitri'
-          prob_given_true: 0.70
-          prob_given_false: 0.02
-          platform: 'state'
-          to_state: 'on'
-        - entity_id: 'remote.wohnzimmer'
-          prob_given_true: 0.95
-          prob_given_false: 0.79
-          platform: 'state'
-          to_state: 'off'
-        - entity_id: 'sensor.nacht_sensor'
-          prob_given_true: 0.73
-          prob_given_false: 0.12
-          platform: 'state'
-          to_state: 'nacht'
+# binary_sensor:
+#   - platform: bayesian
+#     prior: 0.25
+#     name: 'Dimitri Schläft'
+#     probability_threshold: 0.8
+#     observations:
+#         - entity_id: 'input_select.dimitri_presence'
+#           prob_given_true: 0.95 #95% chance that Dimitri is home, if he is sleeping
+#           prob_given_false: 0.61 #% chance Dimitri is home, if he is not sleeping
+#           platform: 'state'
+#           to_state: 'zu Hause'
+#         - entity_id: 'group.all_lights'
+#           prob_given_true: 0.94
+#           prob_given_false: 0.54
+#           platform: 'state'
+#           to_state: 'off'
+#         - entity_id: 'input_boolean.charging_phone_dimitri'
+#           prob_given_true: 0.70
+#           prob_given_false: 0.02
+#           platform: 'state'
+#           to_state: 'on'
+#         - entity_id: 'remote.wohnzimmer'
+#           prob_given_true: 0.95
+#           prob_given_false: 0.79
+#           platform: 'state'
+#           to_state: 'off'
+#         - entity_id: 'sensor.nacht_sensor'
+#           prob_given_true: 0.73
+#           prob_given_false: 0.12
+#           platform: 'state'
+#           to_state: 'nacht'
 
 switch:
   - platform: mystrom
@@ -74,7 +74,11 @@ script:
     sequence:
       - service: light.turn_off
         data:
-          entity_id: group.all_lights
+          entity_id:
+           - light.wohnzimmer
+           - light.buero
+           - light.ankleidezimmer
+           - light.schlafzimmer
       - service: switch.turn_off
         data:
           entity_id: switch.schalter_entfeuchter

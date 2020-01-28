@@ -1,7 +1,6 @@
 include:
   entities:
     - input_select.dimitri_presence
-    - group.all_lights
     - input_boolean.charging_phone_dimitri
     - remote.wohnzimmer
     - device_tracker.dimitri_pc

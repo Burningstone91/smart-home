@@ -1,0 +1,203 @@
+- title: Automations
+  path: automations
+  icon: mdi:alpha-a-box
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Automation
+            icon: mdi:robot
+            name: Schalte Automatisierungen ein/aus
+        # Core apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Basis Apps"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.climate_app
+            - input_boolean.remote_app
+            - input_boolean.media_player_app
+            - input_boolean.notification_app
+            - input_boolean.presence_app
+            - input_boolean.security_app
+            - input_boolean.vacuum_app
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # House apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Haus Automatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.everyone_gone
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # System apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### System Automatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.notify_on_device_offline
+            - input_boolean.notify_on_appdaemon_log_error
+            - input_boolean.notify_on_low_battery
+            - input_boolean.check_appdaemon_version_installed
+            - input_boolean.notify_on_new_version
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Security apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Sicherheit Automatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.arm_when_everyone_gone
+            - input_boolean.disarm_when_someone_home
+            - input_boolean.arm_disarm_when_cleaning
+            - input_boolean.notify_on_alarm_change
+            - input_boolean.notify_on_bad_login_attempt
+            - input_boolean.last_motion
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Vacuum apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Staubsauger Automatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.notify_when_vacuum_bin_full
+            - input_boolean.notify_on_cleaning_day
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Climate apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Klima Automatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.notify_on_high_humidity
+            - input_boolean.notify_on_window_open 
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Bedroom apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Schlafzimmerautomatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.motion_light_bedroom
+            - input_boolean.dimmer_switch_schlafzimmer
+            - input_boolean.dimmer_switch_schlafzimmer_master
+            - input_boolean.dimmer_switch_schlafzimmer_sabrina
+            - input_boolean.turn_on_sleep_mode_forgot
+            - input_boolean.turn_off_sleep_mode_forgot
+            - input_boolean.turn_off_sleep_mode_forgot_weekend
+            - input_boolean.turn_off_dehumidifier_window_open
+            - input_boolean.turn_on_dehumidifier_window_close
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Living Room apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Wohnzimmerautomatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.scene_light_app
+            - input_boolean.dimmer_switch_wohnzimmer
+            - input_boolean.phone_call
+            - input_boolean.brighten_light_pause
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Office apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Büroautomatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.motion_light_office
+            - input_boolean.dimmer_switch_buero
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Dress Room apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Ankleidezimmer Automatisierungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.motion_light_dress_room
+            - input_boolean.dimmer_switch_ankleidezimmer 
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        # Reminder apps
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Erinnerungen"    
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - input_boolean.remind_new_battery_key_dimitri
+            - input_boolean.remind_new_battery_key_sabrina
+            - input_boolean.remind_clean_oven
+            - input_boolean.remind_clean_dishwasher
+            - input_boolean.remind_clean_wash_machine
+            - input_boolean.remind_clean_air_filter
+            - input_boolean.remind_backup
+          style: |
+            ha-card {
+              background: var(--card-color-off);
+              border-radius: {{ states('input_select.border_radius') }};
+              box-shadow: {{ states('input_select.box_shadow') }};
+            }
+        - !include ../includes/bottom-card.yaml
+        

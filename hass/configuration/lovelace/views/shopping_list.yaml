@@ -1,19 +1,13 @@
-    title: Einkaufsliste
+  - title: Einkaufsliste
     icon: mdi:format-list-checks
     path: shopping_list
     panel: true
     cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-          - type: custom:button-card
-            color_type: blank-card
-            styles:
-              card:
-                - width: 3px
+          - !include
+            - '../templates/system_header.yaml'
+            - content: Einkauf
+              icon: mdi:cart
+              name: Einkaufsliste
           - type: shopping-list
-            title: Einkaufsliste
-          - type: custom:button-card
-            color_type: blank-card
-            styles:
-              card:
-                - width: 3px

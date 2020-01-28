@@ -73,6 +73,7 @@ class SecurityAutomation(AppBase):
         self.alarm_lights = self.entities[CONF_ALARM_LIGHTS]
         self.motion_sensors = self.entities[CONF_MOTION_SENSORS]
         self.door_sensors = self.entities[CONF_DOOR_SENSORS]
+        self.code = self.args["code"]
 
         for entity in self.motion_sensors:
             self.listen_state(
@@ -93,6 +94,30 @@ class SecurityAutomation(AppBase):
     def alarm_state(self, alarm_state: AlarmType) -> None:
         """Set the the security system to given state."""
         self.select_option(HOUSE[ALARM_STATE], alarm_state.value)
+        if alarm_state == self.AlarmType.armed_motion:
+            self.call_service(
+                "alarm_control_panel/alarm_arm_away",
+                entity_id=HOUSE["alarm_panel"],
+                code=self.code
+            )
+        elif alarm_state == self.AlarmType.armed_no_motion:
+            self.call_service(
+                "alarm_control_panel/alarm_arm_home",
+                entity_id=HOUSE["alarm_panel"],
+                code=self.code
+            )
+        elif alarm_state == self.AlarmType.disarmed:
+            self.call_service(
+                "alarm_control_panel/alarm_disarm",
+                entity_id=HOUSE["alarm_panel"],
+                code=self.code
+            )
+        elif alarm_state == self.AlarmType.alert:
+            self.call_service(
+                "alarm_control_panel/alarm_trigger",
+                entity_id=HOUSE["alarm_panel"],
+                code=self.code
+            )
 
     def motion_triggered(
         self, entity: Union[str, dict], attribute: str, old: str, new: str, kwargs: dict

@@ -6,86 +6,86 @@
 # Door/Window sensors
 #################################################
 binary_sensor.tuer_wohnung:
-  friendly_name: Haustür
+  friendly_name: Wohnung
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_bad_gross:
-  friendly_name: Tür grosses Bad
+  friendly_name: Grosses Bad
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_bad_klein:
-  friendly_name: Tür kleines Bad
+  friendly_name: Kleines Bad
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_buero:
-  friendly_name: Tür Büro
+  friendly_name: Büro
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_kueche_balkon:
-  friendly_name: Tür Küche Balkon
+  friendly_name: Küche
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_reduit:
-  friendly_name: Tür Reduit
+  friendly_name: Reduit
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_schlafzimmer:
-  friendly_name: Tür Schlafzimmer
+  friendly_name: Schlafzimmer
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_ankleidezimmer:
-  friendly_name: Tür Ankleidezimmer
+  friendly_name: Ankleide
   device_class: door
   icon: mdi:door
 binary_sensor.tuer_wohnzimmer_balkon:
-  friendly_name: Tür Wohnzimmer Balkon
+  friendly_name: Wohnzimmer
   device_class: door
   icon: mdi:door
 binary_sensor.fenster_ankleidezimmer:
-  friendly_name: Fenster Ankleidezimmer
+  friendly_name: Ankleide
   device_class: window
   icon: mdi:window-closed-variant
 binary_sensor.fenster_bad_gross:
-  friendly_name: Fenster grosses Bad
+  friendly_name: Grosses Bad
   device_class: window
   icon: mdi:window-closed-variant
 binary_sensor.fenster_buero:
-  friendly_name: Fenster Büro
+  friendly_name: Büro
   device_class: window
   icon: mdi:window-closed-variant
 binary_sensor.fenster_kueche:
-  friendly_name: Fenster Küche
+  friendly_name: Küche
   device_class: window
   icon: mdi:window-closed-variant
 binary_sensor.fenster_schlafzimmer:
-  friendly_name: Fenster Schlafzimmer
+  friendly_name: Schlafzimmer
   device_class: window
   icon: mdi:window-closed-variant
 binary_sensor.fenster_wohnzimmer:
-  friendly_name: Fenster Wohnzimmer
+  friendly_name: Wohnzimmer
   device_class: window
   icon: mdi:window-closed-variant
 #################################################
 # Motion sensors
 #################################################
 binary_sensor.bewegung_ankleidezimmer:
-  friendly_name: Bewegung Ankleidezimmer
+  friendly_name: Ankleide
   device_class: motion
   icon: mdi:walk
 binary_sensor.bewegung_bad_klein:
-  friendly_name: Bewegung kleines Bad
+  friendly_name: Kleines Bad
   device_class: motion
   icon: mdi:walk
 binary_sensor.bewegung_buero:
-  friendly_name: Bewegung Büro
+  friendly_name: Büro
   device_class: motion
   icon: mdi:walk
 binary_sensor.bewegung_schlafzimmer:
-  friendly_name: Bewegung Schlafzimmer
+  friendly_name: Schlafzimmer
   device_class: motion
   icon: mdi:walk
 binary_sensor.bewegung_wohnzimmer:
-  friendly_name: Bewegung Wohnzimmer
+  friendly_name: Wohnzimmer
   device_class: motion
   icon: mdi:walk
 
@@ -97,7 +97,7 @@ binary_sensor.bewegung_wohnzimmer:
 # Unifi integration Availability
 #################################################
 device_tracker.ap_wohnzimmer:
-  friendly_name: AP Wohnzimmer
+  friendly_name: Access Point
   icon: mdi:router-wireless
 device_tracker.usg_router:
   friendly_name: USG Router
@@ -118,16 +118,16 @@ device_tracker.raspberrypi:
   friendly_name: Unifi Controller
   icon: mdi:fruit-grapes
 device_tracker.pi_ankleidezimmer:
-  friendly_name: Pi Ankleidezimmer
+  friendly_name: Ankleide
   icon: mdi:fruit-grapes
 device_tracker.pi_buero:
-  friendly_name: Pi Büro
+  friendly_name: Büro
   icon: mdi:fruit-grapes
 device_tracker.pi_wohnzimmer:
-  friendly_name: Pi Wohnzimmer
+  friendly_name: Wohnzimmer
   icon: mdi:fruit-grapes
 device_tracker.pi_schlafzimmer:
-  friendly_name: Pi Schlafzimmer
+  friendly_name: Schlafzimmer
   icon: mdi:fruit-grapes
 device_tracker.pc_sabrina:
   friendly_name: PC Sabrina
@@ -138,7 +138,7 @@ device_tracker.pc_dimitri:
 device_tracker.desktop_7a2lv3k:
   friendly_name: Laptop
   icon: mdi:laptop
-device_tracker.dimitri_phone:
+device_tracker.dimitri_phone_unifi:
   friendly_name: Handy Dimitri
   icon: mdi:cellphone-android
 device_tracker.sabrina_phone:
@@ -154,16 +154,16 @@ device_tracker.roomba_wohnzimmer:
   friendly_name: Staubsauger
   icon: mdi:robot-vacuum
 device_tracker.switch_entfeuchter:
-  friendly_name: Plug Entfeuchter
+  friendly_name: Entfeuchter
   icon: mdi:power-plug
 device_tracker.minix_wohnzimmer:
-  friendly_name: Kodi Wohnzimmer
+  friendly_name: Kodi
   icon: mdi:play-network
 device_tracker.musik_wohnzimmer:
-  friendly_name: AVR Wohnzimmer
+  friendly_name: Wohnzimmer
   icon: mdi:speaker
 device_tracker.musik_schlafzimmer:
-  friendly_name: Sound Schlafzimmer
+  friendly_name: Schlafzimmer
   icon: mdi:speaker
 device_tracker.musik_buero:
   friendly_name: Receiver Büro
@@ -171,8 +171,8 @@ device_tracker.musik_buero:
 #################################################
 # Android App integration
 #################################################
-device_tracker.dimitri_phone_gps:
-  friendly_name: Handy Dimitri GPS
+device_tracker.dimitri_phone_app:
+  friendly_name: Handy Dimitri App
   icon: mdi:map-marker
 #################################################
 # MQTT integration
@@ -201,7 +201,7 @@ zwave.aeotec_zw090_zstick_gen5_eu:
   friendly_name: Aeotec Z-Wave Stick
   icon: mdi:z-wave
 zwave.aeotec_zw100_multisensor_6:
-  friendly_name: Aeotec Multi Ankleidezimmer
+  friendly_name: Aeotec Multi Ankleide
   icon: mdi:z-wave
 zwave.aeotec_zw100_multisensor_6_10:
   friendly_name: Aeotec Multi kleines Bad
@@ -217,22 +217,22 @@ zwave.aeotec_zw100_multisensor_6_4:
 ################### Lights ######################
 #################################################
 light.ankleidezimmer:
-  friendly_name: Ankleidzeimmer
+  friendly_name: Deckenlampe
   icon: mdi:ceiling-light
 light.buero:
-  friendly_name: Büro
+  friendly_name: Deckenlampe
   icon: mdi:ceiling-light
 light.stehlampe_wohnzimmer_vorne:
-  friendly_name: Wohnzimmer Vorne
+  friendly_name: Vorne
   icon: mdi:floor-lamp
 light.stehlampe_wohnzimmer_hinten:
-  friendly_name: Wohnzimmer Hinten
+  friendly_name: Hinten
   icon: mdi:floor-lamp
 light.decke_schlafzimmer:
-  friendly_name: Decke Schlafzimmer
+  friendly_name: Deckenlampe
   icon: mdi:ceiling-light
 light.kugellampe_schlafzimmer:
-  friendly_name: Kugel Schlafzimmer
+  friendly_name: Kugellampe
   icon: mdi:lamp
 
 #################################################
@@ -240,7 +240,7 @@ light.kugellampe_schlafzimmer:
 #################################################
 switch.schalter_entfeuchter:
   friendly_name: Entfeuchter
-  icon: mdi:power-plug
+  icon: mdi:fan
 
 #################################################
 ###################  Sensors ####################
@@ -250,7 +250,7 @@ switch.schalter_entfeuchter:
 # Temperature sensors
 #################################################
 sensor.temperatur_ankleidezimmer:
-  friendly_name: Ankleidezimmer
+  friendly_name: Ankleide
   icon: mdi:thermometer
 sensor.temperatur_Schlafzimmer:
   friendly_name: Schlafzimmer
@@ -283,7 +283,7 @@ sensor.luftfeuchtigkeit_buero:
   friendly_name: Büro
   icon: mdi:water-percent
 sensor.luftfeuchtigkeit_ankleidezimmer:
-  friendly_name: Ankleidezimmer
+  friendly_name: Ankleide
   icon: mdi:water-percent
 #################################################
 # Lux sensors
@@ -298,8 +298,79 @@ sensor.lux_buero:
   friendly_name: Büro
   icon: mdi:weather-sunny
 sensor.lux_ankleidezimmer:
-  friendly_name: Ankleidezimmer
+  friendly_name: Ankleide
   icon: mdi:weather-sunny
 sensor.lux_wohnzimmer:
   friendly_name: Wohnzimmer
   icon: mdi:weather-sunny
+#################################################
+# Battery sensors
+#################################################
+sensor.bad_klein_multisensor_battery:
+  friendly_name: Kleines Bad
+
+sensor.dimmschalter_ankleidezimmer_battery_level:
+  friendly_name: Ankleide
+sensor.dimmschalter_buero_battery_level:
+  friendly_name: Büro
+sensor.dimmschalter_sabrina_battery_level:
+  friendly_name: Bett Sabrina
+sensor.dimmschalter_schlafzimmer_battery_level:
+  friendly_name: Schlafzimmer
+sensor.dimmschalter_schlafzimmer_master_battery_level:
+  friendly_name: Bett Dimitri
+sensor.dimmschalter_wohnzimmer_battery_level:
+  friendly_name: Wohnzimmer
+
+sensor.fenster_ankleidezimmer_battery_level:
+  friendly_name: Ankleide
+sensor.fenster_bad_gross_battery_level:
+  friendly_name: Grosses Bad
+sensor.fenster_buero_battery_level:
+  friendly_name: Büro
+sensor.fenster_kueche_battery_level:
+  friendly_name: Küche
+sensor.fenster_schlafzimmer_battery_level:
+  friendly_name: Schlafzimmer
+sensor.fenster_wohnzimmer_battery_level:
+  friendly_name: Wohnzimmer
+sensor.tuer_ankleidezimmer_battery_level:
+  friendly_name: Ankleide
+sensor.tuer_bad_gross_battery_level:
+  friendly_name: Grosses Bad
+sensor.tuer_bad_klein_battery_level:
+  friendly_name: Kleines Bad
+sensor.tuer_buero_battery_level:
+  friendly_name: Büro
+sensor.tuer_kueche_balkon_battery_level:
+  friendly_name: Küche Balkon
+sensor.tuer_reduit_battery_level:
+  friendly_name: Reduit
+sensor.tuer_schlafzimmer_battery_level:
+  friendly_name: Schlafzimmer
+sensor.tuer_wohnung_battery_level:
+  friendly_name: Wohnung
+sensor.tuer_wohnzimmer_balkon_battery_level:
+  friendly_name: Wohnzimmer
+
+sensor.bewegung_wohnzimmer_battery_level:
+  friendly_name: Wohnzimmer
+#################################################
+################  Media Player ##################
+#################################################
+
+#################################################
+# Temperature sensors
+#################################################
+media_player.buero_musik_main:
+  friendly_name: Yamaha Stereo
+  icon: mdi:speaker
+media_player.denon_avr_wohnzimmer:
+  friendly_name: Denon AVR
+  icon: mdi:speaker
+media_player.kodi_wohnzimmer:
+  friendly_name: Kodi
+  icon: mdi:play-network-outline
+media_player.heos_5:
+  friendly_name: Heos 5
+  icon: mdi:speaker

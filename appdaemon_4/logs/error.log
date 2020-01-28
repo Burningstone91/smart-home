@@ -1,0 +1,178 @@
+2020-01-19 17:22:32.070458 WARNING Error: ------------------------------------------------------------
+2020-01-19 17:22:32.070749 WARNING Error: Unexpected error loading module: /conf/apps/presence.py:
+2020-01-19 17:22:32.070947 WARNING Error: ------------------------------------------------------------
+2020-01-19 17:22:32.080152 WARNING Error: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 788, in check_app_updates
+    await utils.run_in_executor(self, self.read_app, mod["name"], mod["reload"])
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/utils.py", line 276, in run_in_executor
+    response = future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 580, in read_app
+    self.modules[module_name] = importlib.import_module(module_name)
+  File "/usr/local/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/conf/apps/presence.py", line 6, in <module>
+    from appbase import AppBase, APP_SCHEMA
+  File "/conf/apps/appbase.py", line 43, in <module>
+    from house_config import HOUSE, MODES
+ModuleNotFoundError: No module named 'house_config'
+
+2020-01-19 17:22:32.080403 WARNING Error: ------------------------------------------------------------
+2020-01-19 18:35:21.881755 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 18:35:21.882102 WARNING presence_app: Unexpected error initializing app: presence_app:
+2020-01-19 18:35:21.882364 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 18:35:21.883483 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 820, in check_app_updates
+    await self.init_object(app)
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 271, in init_object
+    modname = await utils.run_in_executor(self, __import__, app_args["module"])
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/utils.py", line 276, in run_in_executor
+    response = future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/conf/apps/presence.py", line 6, in <module>
+    from appbase import AppBase
+  File "/conf/apps/appbase.py", line 43, in <module>
+    from house_config import HOUSE, MODES
+ModuleNotFoundError: No module named 'house_config'
+
+2020-01-19 18:35:21.883944 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 18:36:12.748805 WARNING Error: ------------------------------------------------------------
+2020-01-19 18:36:12.749090 WARNING Error: Unexpected error loading module: /conf/apps/presence.py:
+2020-01-19 18:36:12.749294 WARNING Error: ------------------------------------------------------------
+2020-01-19 18:36:12.750757 WARNING Error: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 788, in check_app_updates
+    await utils.run_in_executor(self, self.read_app, mod["name"], mod["reload"])
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/utils.py", line 276, in run_in_executor
+    response = future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 580, in read_app
+    self.modules[module_name] = importlib.import_module(module_name)
+  File "/usr/local/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/conf/apps/presence.py", line 6, in <module>
+    from appbase import AppBase
+  File "/conf/apps/appbase.py", line 43, in <module>
+    from house_config import HOUSE, MODES
+ModuleNotFoundError: No module named 'house_config'
+
+2020-01-19 18:36:12.751225 WARNING Error: ------------------------------------------------------------
+2020-01-19 18:37:54.919031 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 18:37:54.919409 WARNING presence_app: Unexpected error running initialize() for presence_app
+2020-01-19 18:37:54.919717 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 18:37:54.921185 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 145, in initialize_app
+    await utils.run_in_executor(self, init)
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/utils.py", line 276, in run_in_executor
+    response = future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/conf/apps/appbase.py", line 98, in initialize
+    if "enable_input_boolean" in self.properties:
+AttributeError: 'PresenceAutomation' object has no attribute 'properties'
+
+2020-01-19 18:37:54.921609 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:45:00.454007 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:45:00.455798 WARNING presence_app: Unexpected error running initialize() for presence_app
+2020-01-19 20:45:00.456601 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:45:00.458126 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 145, in initialize_app
+    await utils.run_in_executor(self, init)
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/utils.py", line 276, in run_in_executor
+    response = future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/conf/apps/appbase.py", line 95, in initialize
+    self.configure()
+  File "/conf/apps/presence.py", line 44, in configure
+    self.log(person, attribute)
+AttributeError: 'PresenceAutomation' object has no attribute 'log'
+
+2020-01-19 20:45:00.458663 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:45.011147 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:45.011507 WARNING presence_app: Unexpected error in worker for App presence_app:
+2020-01-19 20:52:45.011928 WARNING presence_app: Worker Ags: {'id': '5dcd835e03074d058af904f9813b529d', 'name': 'presence_app', 'objectid': '64b22ca64782472f9a5c62e8e9d9926a', 'type': 'state', 'function': <bound method PresenceAutomation.set_presence of <presence.PresenceAutomation object at 0x7fa8e4fe7a00>>, 'attribute': 'state', 'entity': 'input_select.sabrina_presence', 'new_state': 'gerade angekommen', 'old_state': 'gerade gegangen', 'pin_app': True, 'pin_thread': 0, 'kwargs': {'__entity': 'input_select.sabrina_presence', '__attribute': 'state', '__old_state': 'gerade gegangen', '__new_state': 'gerade angekommen', 'new': 'gerade angekommen', 'duration': 300, 'input_select': 'input_select.sabrina_presence', 'person': 'Sabrina', 'target_state': 'zu Hause', '__thread_id': 'thread-0'}}
+2020-01-19 20:52:45.012271 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:45.012695 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/threading.py", line 777, in worker
+    funcref(entity, attr, old_state, new_state,
+  File "/conf/apps/presence.py", line 115, in set_presence
+    if "keys_topic" in PERSONS[person]:
+NameError: name 'person' is not defined
+
+2020-01-19 20:52:45.012976 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:48.005805 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:48.006165 WARNING presence_app: Unexpected error in worker for App presence_app:
+2020-01-19 20:52:48.006559 WARNING presence_app: Worker Ags: {'id': 'b9aafa0f8ceb42cc95041023f1d53d76', 'name': 'presence_app', 'objectid': '64b22ca64782472f9a5c62e8e9d9926a', 'type': 'state', 'function': <bound method PresenceAutomation.set_presence of <presence.PresenceAutomation object at 0x7fa8e4fe7a00>>, 'attribute': 'state', 'entity': 'input_select.dimitri_presence', 'new_state': 'gerade angekommen', 'old_state': 'gerade gegangen', 'pin_app': True, 'pin_thread': 0, 'kwargs': {'__entity': 'input_select.dimitri_presence', '__attribute': 'state', '__old_state': 'gerade gegangen', '__new_state': 'gerade angekommen', 'new': 'gerade angekommen', 'duration': 300, 'input_select': 'input_select.dimitri_presence', 'person': 'Dimitri', 'target_state': 'zu Hause', '__duration': 'e58c4f7983144d05955d1b323c1aa56d', '__thread_id': 'thread-0'}}
+2020-01-19 20:52:48.006931 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:48.007419 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/threading.py", line 777, in worker
+    funcref(entity, attr, old_state, new_state,
+  File "/conf/apps/presence.py", line 115, in set_presence
+    if "keys_topic" in PERSONS[person]:
+NameError: name 'person' is not defined
+
+2020-01-19 20:52:48.007718 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:52:53.427671 WARNING Error: ------------------------------------------------------------
+2020-01-19 20:52:53.428037 WARNING Error: Unexpected error loading module: /conf/apps/presence.py:
+2020-01-19 20:52:53.428260 WARNING Error: ------------------------------------------------------------
+2020-01-19 20:52:53.429257 WARNING Error: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 788, in check_app_updates
+    await utils.run_in_executor(self, self.read_app, mod["name"], mod["reload"])
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/utils.py", line 276, in run_in_executor
+    response = future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/app_management.py", line 566, in read_app
+    importlib.reload(self.modules[module_name])
+  File "/usr/local/lib/python3.8/importlib/__init__.py", line 169, in reload
+    _bootstrap._exec(spec, module)
+  File "<frozen importlib._bootstrap>", line 604, in _exec
+  File "<frozen importlib._bootstrap_external>", line 779, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 916, in get_code
+  File "<frozen importlib._bootstrap_external>", line 846, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/conf/apps/presence.py", line 123
+    )
+    ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '[' on line 121
+
+2020-01-19 20:52:53.429578 WARNING Error: ------------------------------------------------------------
+2020-01-19 20:56:01.020332 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:56:01.021094 WARNING presence_app: Unexpected error in worker for App presence_app:
+2020-01-19 20:56:01.021835 WARNING presence_app: Worker Ags: {'id': '8fe7ecb169414e2887653ce77cea4990', 'name': 'presence_app', 'objectid': '56b660d731514d3ab62f0e5c0bdc46fd', 'type': 'state', 'function': <bound method PresenceAutomation.set_presence of <presence.PresenceAutomation object at 0x7fa8e500b700>>, 'attribute': 'state', 'entity': 'input_select.sabrina_presence', 'new_state': 'gerade gegangen', 'old_state': 'zu Hause', 'pin_app': True, 'pin_thread': 0, 'kwargs': {'__entity': 'input_select.sabrina_presence', '__attribute': 'state', '__old_state': 'zu Hause', '__new_state': 'gerade gegangen', 'new': 'gerade gegangen', 'duration': 10, 'input_select': 'input_select.sabrina_presence', 'person': 'Sabrina', 'target_state': 'weg', '__thread_id': 'thread-0'}}
+2020-01-19 20:56:01.022203 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:56:01.022755 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/threading.py", line 777, in worker
+    funcref(entity, attr, old_state, new_state,
+  File "/conf/apps/presence.py", line 121, in set_presence
+    PERSONS[kwargs["person"]["keys_topic"]],
+TypeError: string indices must be integers
+
+2020-01-19 20:56:01.023077 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:58:08.028893 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:58:08.029203 WARNING presence_app: Unexpected error in worker for App presence_app:
+2020-01-19 20:58:08.029503 WARNING presence_app: Worker Ags: {'id': '063abfda33e34f299c6013c624f2ac14', 'name': 'presence_app', 'objectid': '86316c3176db4f51a9e147158890a402', 'type': 'state', 'function': <bound method PresenceAutomation.set_presence of <presence.PresenceAutomation object at 0x7fa8e4ffe2b0>>, 'attribute': 'state', 'entity': 'input_select.sabrina_presence', 'new_state': 'gerade gegangen', 'old_state': 'zu Hause', 'pin_app': True, 'pin_thread': 0, 'kwargs': {'__entity': 'input_select.sabrina_presence', '__attribute': 'state', '__old_state': 'zu Hause', '__new_state': 'gerade gegangen', 'new': 'gerade gegangen', 'duration': 10, 'input_select': 'input_select.sabrina_presence', 'person': 'Sabrina', 'target_state': 'weg', '__thread_id': 'thread-0'}}
+2020-01-19 20:58:08.029781 WARNING presence_app: ------------------------------------------------------------
+2020-01-19 20:58:08.030184 WARNING presence_app: Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/appdaemon/threading.py", line 777, in worker
+    funcref(entity, attr, old_state, new_state,
+  File "/conf/apps/presence.py", line 132, in set_presence
+    old_house_state = self.get_state(HOUSE["presence_state"])
+AttributeError: 'PresenceAutomation' object has no attribute 'get_state'
+
+2020-01-19 20:58:08.030474 WARNING presence_app: ------------------------------------------------------------

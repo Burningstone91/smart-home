@@ -1,0 +1,142 @@
+# lovelace_gen
+
+- title: Home
+  path: home
+  icon: mdi:home
+  cards: 
+    - type: vertical-stack
+      cards:
+        - !include '../templates/frontpage_header.yaml'
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              cards:
+                - !include
+                  - '../templates/weather_card.yaml'
+                  - city_name: {{ _global.frontpage[0] }}
+                    entity: {{ _global.frontpage[1] }}
+                - type: horizontal-stack
+                  cards:
+                      # Person 1 (Left Photo)
+                    - !include
+                      - '../templates/picture_elements_frontpage.yaml'
+                      - entity: {{ _global.frontpage[2] }}
+                        image: {{ _global.frontpage[3] }}
+                        alignment: left
+                        battery_entity: {{ _global.frontpage[4] }}
+                        navigation_path: /lovelace/person_1
+                        padding_mail: 35px 5px
+                      # Person 2 (Right Photo)
+                    - !include
+                      - '../templates/picture_elements_frontpage.yaml'
+                      - entity: {{ _global.frontpage[5] }}
+                        image: {{ _global.frontpage[6] }}
+                        alignment: right
+                        battery_entity: {{ _global.frontpage[7] }}
+                        navigation_path: /lovelace/person_2
+                        padding_phone: 7px 1px
+                - type: custom:state-switch
+                  entity: {{ _global.frontpage[8] }}
+                  default: default
+                  states:
+                    default:
+                      type: vertical-stack
+                      cards:
+                        - type: horizontal-stack
+                          cards:
+                            # Button Row 1 (These are the default buttons and stay preferably unchanged, if you do want to change them then please learn how to use the template that includes a badge or change the template to '../templates/button_nav.yaml)'
+                            - !include
+                              - '../templates/button_small_badge.yaml'
+                              - name: Klima
+                                label: Control
+                                icon: mdi:thermometer
+                                navigation_path: /lovelace/climate
+                            - !include
+                              - '../templates/button_small_badge.yaml'
+                              - name: Licht
+                                label: Control
+                                icon: mdi:floor-lamp
+                                navigation_path: /lovelace/lights
+                                entity_badge: group.all_lighting
+                                notification: "[[[ if (states['sensor.current_lights_on'].state > 0) return `${states['sensor.current_lights_on'].state}`; else return '&nbsp' ]]]" 
+                                background_color: "[[[ if (states['sensor.current_lights_on'].state == 0) return 'var(--card-color-off)'; else return 'var(--label-color-off)'; ]]]"
+                            - !include
+                              - '../templates/button_small_badge.yaml'
+                              - name: Geräte
+                                label: Control
+                                icon: mdi:power-plug
+                                navigation_path: /lovelace/devices
+                                entity_badge: group.all_device_switches
+                                notification: "[[[ if (states['sensor.current_devices_on'].state > 0) return `${states['sensor.current_devices_on'].state}`; else return '&nbsp' ]]]" 
+                                background_color: "[[[ if (states['sensor.current_devices_on'].state == 0) return 'var(--card-color-off)'; else return 'var(--label-color-off)'; ]]]"
+                            - !include
+                              - '../templates/button_small_badge.yaml'
+                              - name: Security
+                                label: Panel
+                                icon: mdi:cctv
+                                navigation_path: /lovelace/security
+                                entity_badge: group.all_binary_sensors
+                                notification: "[[[ if (states['sensor.current_binary_sensors_on'].state > 0) return `${states['sensor.current_binary_sensors_on'].state}`; else return '&nbsp' ]]]"
+                                background_color: "[[[ if (states['sensor.current_binary_sensors_on'].state == 0) return 'var(--card-color-off)'; else return 'var(--label-color-off)'; ]]]"
+                        - type: horizontal-stack
+                          cards:
+                            # Button Row 2 (This row can be changed at will, change name, label, icon and navigation_paths here)
+                            - !include
+                              - '../templates/button_nav.yaml'
+                              - name: Grundriss
+                                #label: Lists
+                                icon: mdi:floor-plan
+                                navigation_path: /lovelace/floorplan_phone
+                                margin_right: 40px
+                            - !include
+                              - '../templates/button_nav.yaml'
+                              - name: Einkauf
+                                label: Liste
+                                icon: mdi:cart
+                                navigation_path: /lovelace/shopping_list
+                                margin_right: 40px
+                            - !include
+                              - '../templates/button_nav.yaml'
+                              - name: Haushalt
+                                label: Tasks
+                                icon: mdi:broom
+                                navigation_path: /lovelace/cleaning
+                                margin_right: 40px
+                            - !include
+                              - '../templates/button_small_badge.yaml'
+                              - name: Remote
+                                label: Control
+                                icon: mdi:remote
+                                navigation_path: /lovelace/remote
+                    # armed_away:
+                    #   type: horizontal-stack
+                    #   cards:
+                    #     - type: picture-entity
+                    #       {% raw %}
+                    #       style: |
+                    #         ha-card {
+                    #           border-radius: {{ states('input_select.border_radius') }};
+                    #           box-shadow: {{ states('input_select.box_shadow') }};
+                    #           overflow: hidden;
+                    #         }
+                    #       {% endraw %}
+                    #       entity: {{ _global.frontpage[8] }} # enter your own camera entity_id here (preferably the camera you deem most important to look at while not at home)
+                    #       title: Camera's  
+                    #       aspect_ratio: 16x9
+                    # armed_home:
+                    #   type: horizontal-stack
+                    #   cards:
+                    #     - type: picture-entity
+                    #       {% raw %}
+                    #       style: |
+                    #         ha-card {
+                    #           border-radius: {{ states('input_select.border_radius') }};
+                    #           box-shadow: {{ states('input_select.box_shadow') }};
+                    #           overflow: hidden;
+                    #         }
+                    #       {% endraw %}
+                    #       entity: {{ _global.frontpage[8] }} # enter your own camera entity_id here (preferably the camera you deem most important to look at while not at home)
+                    #       title: Camera's  
+                    #       aspect_ratio: 16x9
+  
+                         

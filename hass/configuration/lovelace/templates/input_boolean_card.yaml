@@ -1,0 +1,19 @@
+# lovelace_gen
+
+type: vertical-stack
+cards:
+  - !include
+    - header_text.yaml
+    - content: "##### {{ content }}"
+  - type: custom:layout-card
+    cards:
+      - type: custom:layout-card
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities: {{ entities }}
+            styles:
+              card:
+                - border-radius: "[[[ return states['input_select.border_radius'].state ]]]"
+                - --ha-card-background: "var(--card-color-off)"
+                - box-shadow: "[[[ return states['input_select.box_shadow'].state ]]]"

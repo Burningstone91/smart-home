@@ -1,76 +1,87 @@
-  resources:
-    - url: /local/lovelace_plugins/plan-coordinates.js
-      type: js
-    - url: /local/lovelace_plugins/kiosk.js
-      type: js
-    - url: /local/lovelace_plugins/auto-entities.js?v=1
-      type: js
-    - url: /local/lovelace_plugins/card-tools.js?v=2
-      type: js
-    - url: /local/lovelace_plugins/bar-card.js?v=1.0.0
-      type: js
-    - url: /local/lovelace_plugins/mini-graph-card-bundle.js?v=0.3.3
-      type: module
-    - url: /local/lovelace_plugins/circle-sensor-card.js?v=0
-      type: module
-    - url: /local/lovelace_plugins/vertical-stack-in-card.js?v=0.1.2
-      type: js
-    - url: /local/lovelace_plugins/card-mod.js?v=2
-      type: module
-    - url: /local/lovelace_plugins/dark-sky-weather-card.js?v=7.1
-      type: module
-    - url: /local/lovelace_plugins/check-button-card.js?v=0.1.2
-      type: module
-    - url: /local/lovelace_plugins/simple-weather-card-bundle.js?v=0.5.0
-      type: module
-    - url: /local/lovelace_plugins/button-card.js
-      type: module
-    - url: /local/lovelace_plugins/swipe-card.js?v=0.0.1
-      type: module
-    - url: /local/lovelace_plugins/decluttering-card.js
-      type: module
-    - url: /local/lovelace_plugins/custom-header.js
-      type: module
-##############################################################################
-  custom_header:
-    exceptions:
-      - conditions:
-          user: Dimitri Handy
-        config:
-          hide_header: true
-      - conditions:
-          user: Sabrina Handy
-        config:
-          hide_header: true
+#   resources:
+#     - url: /local/lovelace_plugins/plan-coordinates.js
+#       type: js
+#     - url: /local/lovelace_plugins/kiosk.js
+#       type: js
+#     - url: /local/lovelace_plugins/auto-entities.js?v=1
+#       type: js
+#     - url: /local/lovelace_plugins/card-tools.js?v=2
+#       type: js
+#     - url: /local/lovelace_plugins/bar-card.js?v=1.0.0
+#       type: js
+#     - url: /local/lovelace_plugins/mini-graph-card-bundle.js?v=0.3.3
+#       type: module
+#     - url: /local/lovelace_plugins/circle-sensor-card.js?v=0
+#       type: module
+#     - url: /local/lovelace_plugins/vertical-stack-in-card.js?v=0.1.2
+#       type: js
+#     - url: /local/lovelace_plugins/card-mod.js?v=2
+#       type: module
+#     - url: /local/lovelace_plugins/dark-sky-weather-card.js?v=7.1
+#       type: module
+#     - url: /local/lovelace_plugins/check-button-card.js?v=0.1.2
+#       type: module
+#     - url: /local/lovelace_plugins/simple-weather-card-bundle.js?v=0.5.0
+#       type: module
+#     - url: /local/lovelace_plugins/button-card.js
+#       type: module
+#     - url: /local/lovelace_plugins/swipe-card.js?v=0.0.1
+#       type: module
+#     - url: /local/lovelace_plugins/decluttering-card.js
+#       type: module
+#     - url: /local/lovelace_plugins/custom-header.js
+#       type: module
+# ##############################################################################
+#   custom_header:
+#     exceptions:
+#       - conditions:
+#           user: Dimitri Handy
+#         config:
+#           hide_header: true
+#       - conditions:
+#           user: Sabrina Handy
+#         config:
+#           hide_header: true
   
-  decluttering_templates:
-    !include_dir_named /config/lovelace/templates
+#   decluttering_templates:
+#     !include_dir_named /config/lovelace/templates
 
-  views:
-    # Smartphone interface
-    # Home Page
-    - !include /config/lovelace/views/phone_home.yaml
-    - !include /config/lovelace/views/weather.yaml
-    # Persons
-    - !include /config/lovelace/views/sabrina.yaml
-    - !include /config/lovelace/views/dimitri.yaml
-    # Main Buttons
-    - !include /config/lovelace/views/floorplan_phone.yaml
-    - !include /config/lovelace/views/shopping_list.yaml
-    - !include /config/lovelace/views/climate.yaml
-    - !include /config/lovelace/views/lights.yaml
-    - !include /config/lovelace/views/household_tasks.yaml
-    - !include /config/lovelace/views/devices.yaml
-    - !include /config/lovelace/views/security.yaml
-    # Advanced
-    - !include /config/lovelace/views/advanced.yaml
-    # Tools
-    - !include /config/lovelace/views/rooms.yaml
-    - !include /config/lovelace/views/systems.yaml
-    - !include /config/lovelace/views/automation_controls.yaml
-    - !include /config/lovelace/views/scenes.yaml
+#   views:
+#     # Smartphone interface
+#     # Home Page
+#     - !include /config/lovelace/views/phone_home.yaml
+#     - !include /config/lovelace/views/weather.yaml
+#     # Persons
+#     - !include /config/lovelace/views/sabrina.yaml
+#     - !include /config/lovelace/views/dimitri.yaml
+#     # Main Buttons
+#     - !include /config/lovelace/views/floorplan_phone.yaml
+#     - !include /config/lovelace/views/shopping_list.yaml
+#     - !include /config/lovelace/views/climate.yaml
+#     - !include /config/lovelace/views/lights.yaml
+#     - !include /config/lovelace/views/household_tasks.yaml
+#     - !include /config/lovelace/views/devices.yaml
+#     - !include /config/lovelace/views/security.yaml
+#     # Advanced
+#     - !include /config/lovelace/views/advanced.yaml
+#     # Tools
+#     - !include /config/lovelace/views/rooms.yaml
+#     - !include /config/lovelace/views/systems.yaml
+#     - !include /config/lovelace/views/automation_controls.yaml
+#     - !include /config/lovelace/views/scenes.yaml
 
-    - !include /config/lovelace/views/home.yaml 
-    # Tablet interface
-    - !include /config/lovelace/views/floorplan_tablet.yaml
+#     - !include /config/lovelace/views/home.yaml 
+#     # Tablet interface
+#     - !include /config/lovelace/views/floorplan_tablet.yaml
 
+
+
+# Custom Card Resources
+resources: !include lovelace/resources/resources.yaml
+ 
+custom_header: !include lovelace/custom_header/custom_header.yaml
+
+title: Home
+background: var(--background-image)
+popup_cards: !include lovelace/templates/legacy_popup_cards.yaml
+views: !include_dir_merge_list lovelace/views/

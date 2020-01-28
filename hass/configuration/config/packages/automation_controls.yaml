@@ -104,7 +104,7 @@ input_boolean:
 ################################### House ###################################
   everyone_gone:
     name: Schalte alle Geräte und Lichter aus wenn alle gegangen sind
-    initial: True
+    initial: False
     icon: mdi:walk
 ################################## Security ##################################
   arm_when_everyone_gone:

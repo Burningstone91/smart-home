@@ -1,0 +1,149 @@
+- title: Person 1
+  path: person_1
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header_alternate.yaml'
+          - content: Sabrina
+            name: "[[[ return `${states['input_select.person_menu_1'].state}` ]]]"
+            font_weight: bold
+            entity: input_select.person_menu_1
+        - type: conditional
+          conditions:
+            - entity: input_select.person_menu_1
+              state: "Übersicht"
+          card:
+            type: custom:layout-card
+            cards:
+              - type: custom:layout-card
+                min_columns: 2
+                justify_content: start
+                layout: horizontal
+                column_width: [133, 517]
+                cards:
+                  - type: picture
+                    style: |
+                      ha-card {
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        overflow: hidden;
+                        height: 123px;
+                      }
+                    image: '/local/images/sabrina_home.jpg'
+                  - type: 'custom:dark-sky-weather-card'
+                    locale: de
+                    static_icons: false
+                    slot_l1: daytime_high
+                    slot_l2: pop
+                    slot_l3: remove
+                    slot_l4: remove
+                    slot_r1: humidity
+                    slot_r2: wind
+                    slot_r3: remove
+                    slot_r4: remove
+                    # Required Parameters
+                    entity_current_conditions: sensor.wetter_uznach_icon
+                    entity_temperature: sensor.wetter_uznach_temperature
+                    entity_forecast_high_temp_1: sensor.wetter_uznach_daytime_high_temperature_1d
+                    entity_forecast_high_temp_2: sensor.wetter_uznach_daytime_high_temperature_2d
+                    entity_forecast_high_temp_3: sensor.wetter_uznach_daytime_high_temperature_3d
+                    entity_forecast_high_temp_4: sensor.wetter_uznach_daytime_high_temperature_4d
+                    entity_forecast_high_temp_5: sensor.wetter_uznach_daytime_high_temperature_5d
+                    entity_forecast_icon_1: sensor.wetter_uznach_icon_1d
+                    entity_forecast_icon_2: sensor.wetter_uznach_icon_2d
+                    entity_forecast_icon_3: sensor.wetter_uznach_icon_3d
+                    entity_forecast_icon_4: sensor.wetter_uznach_icon_4d
+                    entity_forecast_icon_5: sensor.wetter_uznach_icon_5d
+                    entity_forecast_low_temp_1: sensor.wetter_uznach_overnight_low_temperature_0d
+                    entity_forecast_low_temp_2: sensor.wetter_uznach_overnight_low_temperature_1d
+                    entity_forecast_low_temp_3: sensor.wetter_uznach_overnight_low_temperature_2d
+                    entity_forecast_low_temp_4: sensor.wetter_uznach_overnight_low_temperature_3d
+                    entity_forecast_low_temp_5: sensor.wetter_uznach_overnight_low_temperature_4d
+                    entity_summary_1: sensor.wetter_uznach_summary_1d
+                    entity_summary_2: sensor.wetter_uznach_summary_2d
+                    entity_summary_3: sensor.wetter_uznach_summary_3d
+                    entity_summary_4: sensor.wetter_uznach_summary_4d
+                    entity_summary_5: sensor.wetter_uznach_summary_5d
+                    # Optional Parameters
+                    entity_sun: sun.sun
+                    entity_visibility: sensor.wetter_uznach_visibility
+                    entity_daytime_high: sensor.wetter_uznach_daytime_high_temperature_0d
+                    entity_wind_bearing: sensor.wetter_uznach_wind_bearing
+                    entity_wind_speed: sensor.wetter_uznach_wind_speed
+                    entity_humidity: sensor.wetter_uznach_humidity
+                    entity_pressure: sensor.wetter_uznach_pressure
+                    entity_apparent_temp: sensor.wetter_uznach_apparent_temperature
+                    entity_daily_summary: sensor.wetter_uznach_hourly_summary
+                    entity_pop: sensor.wetter_uznach_precip_probability
+                    entity_pop_intensity: sensor.wetter_uznach_precip_intensity
+                    entity_pop_1: sensor.wetter_uznach_precip_probability_1d
+                    entity_pop_2: sensor.wetter_uznach_precip_probability_2d
+                    entity_pop_3: sensor.wetter_uznach_precip_probability_3d
+                    entity_pop_4: sensor.wetter_uznach_precip_probability_4d
+                    entity_pop_5: sensor.wetter_uznach_precip_probability_5d
+              - !include ../includes/bottom-card.yaml
+        - type: conditional
+          conditions:
+            - entity: input_select.person_menu_1
+              state: "Auto"
+          card:
+            type: custom:layout-card
+            cards:
+              - type: custom:layout-card
+                cards:
+                  - type: markdown
+                    style: |
+                      ha-card {
+                        background-image: url('/local/devices/sabrina_car.jpg');
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        font-size: 13px;
+                        font-family: Helvetica;
+                        background-size: cover;
+                        background-position: 50% 50%;
+                        color: white;
+                        height: 140px;
+                        vertical-align: baseline;
+                        margin-bottom: 2px;
+                        overflow: hidden;
+                      }
+                    content: ""
+                  - type: 'custom:vertical-stack-in-card'
+                    cards:
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Öl
+                          entity: sensor.sabrina_auto_oel
+                          value_1: 1 months
+                          value_2: 6 weeks
+                          value_3: 2 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Service
+                          entity: sensor.sabrina_auto_service
+                          value_1: 11 months
+                          value_2: 1 year
+                          value_3: 13 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Kühlmittel
+                          entity: sensor.sabrina_auto_kuehlmittel
+                          value_1: 1 months
+                          value_2: 6 weeks
+                          value_3: 2 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Saugen
+                          entity: sensor.sabrina_auto_saugen
+                          value_1: 2 months
+                          value_2: 3 months
+                          value_3: 4 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Waschen
+                          entity: sensor.sabrina_auto_waschen
+                          value_1: 2 months
+                          value_2: 3 months
+                          value_3: 4 months
+              - !include ../includes/bottom-card.yaml  

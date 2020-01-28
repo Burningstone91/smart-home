@@ -1,10 +1,5 @@
 # configurations for core
 homeassistant: !include config/homeassistant.yaml
-frontend:
-  themes: !include_dir_named config/themes/
-  javascript_version: latest
-lovelace:
-  mode: yaml
 config:
 http: !include config/http.yaml
 history: !include config/history.yaml
@@ -19,7 +14,17 @@ person:
 conversation:
 map:
 sun:
+stream:
 system_health:
+
+#configuration for frontend
+frontend:
+  themes: !include_dir_named config/themes/
+  javascript_version: latest
+lovelace:
+  mode: yaml
+lovelace_gen: !include global_config.yaml
+browser_mod:
 
 # configuration for components
 automation: !include config/automations.yaml
@@ -27,6 +32,7 @@ deconz: !include config/components/deconz.yaml
 influxdb: !include config/components/influxdb.yaml
 mqtt: !include config/components/mqtt.yaml
 notify: !include config/components/notify.yaml
+#python_script:
 shopping_list:
 speedtestdotnet: !include config/components/speedtestdotnet.yaml
 tts: !include config/components/tts.yaml

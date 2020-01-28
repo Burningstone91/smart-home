@@ -1,0 +1,28 @@
+# lovelace_gen
+
+- title: Devices
+  path: devices
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Geräte
+            icon: mdi:power-plug
+            name: "[[[ if (states['sensor.current_devices_on'].state == 0) return `Alle Geräte sind aus`; if (states['sensor.current_devices_on'].state == 1) return `1 Gerät ist eingeschaltet`; else return `${states['sensor.current_devices_on'].state} Geräte sind eingeschaltet` ]]]"
+        - !include
+          - '../templates/auto_fill_devices_template.yaml'
+          - content: {{ _global.rooms[0] }}
+            group_fans: group.livingroom_fans
+            group_devices: group.livingroom_devices
+        - !include
+          - '../templates/auto_fill_devices_template.yaml'
+          - content: {{ _global.rooms[1] }} 
+            group_fans: group.bedroom_fans
+            group_devices: group.bedroom_devices
+        - !include
+          - '../templates/auto_fill_devices_template.yaml'
+          - content: {{ _global.rooms[2] }}
+            group_fans: group.office_fans
+            group_devices: group.office_devices
+        - !include ../includes/bottom-card.yaml  

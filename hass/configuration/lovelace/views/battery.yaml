@@ -1,0 +1,232 @@
+- title: Battery
+  path: battery
+  cards:    
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Batterien
+            icon: mdi:battery
+            name: Batterien Übersicht
+        # Aeotec Multisensor
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Aeotec Multisensor Batterie 2x CR123A" 
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.bad_klein_multisensor_battery
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - type: custom:button-card
+                  color_type: blank-card
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  color_type: blank-card
+                  aspect_ratio: 1/1
+        # Hue Dimmer Switch
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Hue Dimmer Batterie CR2450 3V" 
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.dimmschalter_ankleidezimmer_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.dimmschalter_buero_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.dimmschalter_sabrina_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.dimmschalter_schlafzimmer_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.dimmschalter_schlafzimmer_master_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.dimmschalter_wohnzimmer_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+        # Xiaomi Door/Window Sensor
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Xiaomi Fenstersensor Batterie CR1632" 
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.fenster_ankleidezimmer_battery_level
+                    show_last_changed: false
+                    label: Fenster
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.fenster_bad_gross_battery_level
+                    show_last_changed: false
+                    label: Fenster
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.fenster_buero_battery_level
+                    show_last_changed: false
+                    label: Fenster
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.fenster_kueche_battery_level
+                    show_last_changed: false
+                    label: Fenster
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.fenster_schlafzimmer_battery_level
+                    show_last_changed: false
+                    label: Fenster
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.fenster_wohnzimmer_battery_level
+                    show_last_changed: false
+                    label: Fenster
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_ankleidezimmer_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_bad_gross_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_bad_klein_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_buero_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_kueche_balkon_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_reduit_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_schlafzimmer_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_wohnung_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.tuer_wohnzimmer_balkon_battery_level
+                    show_last_changed: false
+                    label: Tür
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+        # Hue Motion Sensor
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Hue Bewegungsensor Batterie 2x AAA" 
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: sensor.bewegung_wohnzimmer_battery_level
+                    show_last_changed: false
+                    show_label: false
+                    template: more_info_popup.yaml
+                    icon: '!include ../includes/dynamic-battery-icon.yaml'
+                - type: custom:button-card
+                  color_type: blank-card
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  color_type: blank-card
+                  aspect_ratio: 1/1
+        - !include ../includes/bottom-card.yaml  

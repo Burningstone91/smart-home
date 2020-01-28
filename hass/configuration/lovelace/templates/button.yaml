@@ -1,138 +1,118 @@
-default:
-  - label:
-  - icon:
-  - show_last_changed: false
-  - show_state: true
-  - tap_action:
-      action: toggle
-  - hold_action:
-      action: more-info
-card:
-  type: custom:button-card
-  name: '[[name]]'
-  icon: '[[icon]]'
-  entity: '[[entity]]'
-  label: '[[label]]'
-  show_state: '[[show_state]]'
-  show_label: true
-  show_last_changed: '[[show_last_changed]]'
-  size: 25%
-  tap_action: '[[tap_action]]'
-  hold_action: '[[hold_action]]'
-  styles:
+# lovelace_gen
+
+# card
+type: custom:button-card
+name: {{ name }}
+icon: {{ icon }}
+color: {{ color|default('auto') }}
+size: {{ size|default('25%') }}
+lock:
+  enabled: {{ lock|default('false') }}
+  unlock: {{ lock_unlock|default('tap') }}
+  duration: {{ lock_duration|default('5') }}
+aspect_ratio: {{ aspect_ratio|default('1/1') }}
+entity: {{ entity }}
+label: {{ label|default('"&nbsp;"') }}
+show_name: {{ show_name|default('true') }}
+show_icon: {{ show_icon|default('true') }}
+show_state: {{ show_state|default('true') }}
+show_label: {{ show_label|default('true') }}
+show_last_changed: {{ show_last_changed|default('false') }}
+tap_action: 
+  action: {{ tap_action|default('toggle') }}
+  haptic: light
+hold_action:
+  action: {{ hold_action|default('call-service') }}
+  service: browser_mod.popup
+  service_data:
+    title: ' '
+    style:
+      background: rgba(0, 0, 0, 0.5)
+      "--iron-icon-fill-color": "#FFF"
+      "--iron-icon": "#FFF"
+      color: white !important
     card:
-      - height: 110px
-      - width: 110px
-      - font-size: 11px
-      - font-weight: bold
-    grid: 
-      - grid-template-areas: '"i" "n" "s" "l"' 
-      - grid-template-columns: 1fr 
-      - grid-template-rows: 1fr min-content min-content
-    img_cell:
-      - align-self: start
-      - text-align: start
-      - margin-top: 0px
-      - margin-bottom: 0px
-      - margin-right: 60px
-      - margin-left: 0px
-    name:
-      - font-size: 11px
-      - font-weight: bold
-      - margin-top: 0px
-      - margin-right: 60px
-      - white-space: normal
-      - text-align: start
-      - margin-left: 0px
-      - justify-self: start
-      - padding-left: 15px
-    icon:
-      - width: 25%
-    label:
-      - font-size: 9px
-      - padding: 0px 10px
-      - color: var(--label-color-off)
-      - margin-left: 0px
-      - margin-right: 60px
-      - justify-self: start
-      - padding-left: 15px
-    state:
-      - font-size: 9px
-      - text-transform: capitalize
-      - justify-self: start
-      - padding-left: 15px
-      - text-align: start
-      - align-self: start
-      - font-weight: bold
-      - color: var(--state-color-off) 
-      - margin-left: 0px
-      - margin-right: 60px
+      type: vertical-stack
+      cards:
+        - !include
+          - {{ template|default('switch_popup.yaml') }}
+          - entity: {{ entity }}
+    deviceID:
+      - this
+  haptic: heavy
+styles:
+  card:
+    - border-radius: "[[[ return states['input_select.border_radius'].state ]]]"
+    - --ha-card-background: "var(--card-color-off)"
+    - box-shadow: "[[[ return states['input_select.box_shadow'].state ]]]"
+  label:
+    - font-size: 11px
+    - font-family: Helvetica
+    - padding: 0px 10px
+    - justify-self: start
+    - color: var(--label-color-off) 
   state:
-    - value: "on"   
-      styles:
-        card:
-          - --ha-card-background: var(--card-color-on)
-          - opacity: 1
-          - box-shadow: none
-          - border-style: solid
-          - border-width: 1px
-          - border-color: black
-        name:
-          - color: var(--name-color-on)
-        state:
-          - color: var(--state-color-on)
-        lock:
-          - color: var(--lock-color-on) 
-        label:
-          - color: var(--label-color-on)
-    - value: "off"
-      styles:
-        card:
-          - opacity: 0.6
-        icon:
-          - color: var(--icon-color-off)
-        name:
-          - color: var(--name-color-off)
-        state:
-          - color: var(--state-color-off)
-        label:
-          - color: var(--label-color-off)
-          - font-size: 11px
-          - font-weight: normal
-        lock:
-          - color: var(--lock-color-off) 
-    - value: "home"   
-      styles:
-        card:
-          - --ha-card-background: var(--card-color-on)
-          - opacity: 1
-          - box-shadow: none
-          - border-style: solid
-          - border-width: 1px
-          - border-color: black
-        name:
-          - color: var(--name-color-on)
-        icon:
-          - color: var(--icon-color-on)
-        state:
-          - color: var(--state-color-on)
-        lock:
-          - color: var(--lock-color-on) 
-        label:
-          - color: var(--label-color-on)
-    - value: "not_home"
-      styles:
-        card:
-          - opacity: 0.6
-        icon:
-          - color: var(--icon-color-off)
-        name:
-          - color: var(--name-color-off)
-        state:
-          - color: var(--state-color-off)
-        label:
-          - color: var(--label-color-off)
-          - font-size: 11px
-          - font-weight: normal
-        lock:
-          - color: var(--lock-color-off) 
+    - font-size: 11px
+    - font-family: Helvetica
+    - padding: 0px 10px
+    - justify-self: start
+    - text-transform: capitalize
+    - font-weight: bold
+    - padding-left: 10px
+    - color: var(--state-color-off) 
+  grid: {{ grid }}
+  img_cell:
+    - align-self: start
+    - text-align: start
+    - margin-right: {{ margin_right|default('60px') }}
+  name:
+    - justify-self: start
+    - padding-left: 10px
+    - font-weight: bold
+    - font-family: Helvetica 
+    - font-size: 13px
+state:
+  - value: "on" 
+    spin: {{ spin_on|default('false') }} 
+    styles:
+      card:
+        - --ha-card-background: var(--card-color-on)
+        - opacity: 1.0
+        - box-shadow: none
+      name:
+        - color: var(--name-color-on)
+      state:
+        - color: var(--state-color-on)
+      lock:
+        - color: var(--lock-color-on) 
+      label:
+        - color: var(--label-color-on)
+  - value: "off"
+    spin: {{ spin_off|default('false') }}
+    styles:
+      card:
+        - opacity: {{ opacity_off|default('0.5') }}
+      icon:
+        - color: var(--icon-color-off)
+      name:
+        - color: var(--name-color-off)
+      state:
+        - color: var(--state-color-off)
+      label:
+        - color: var(--label-color-off)
+      lock:
+        - color: var(--lock-color-off)
+  - value: "unavailable"
+    styles:
+      card:
+        - opacity: 0.4
+      icon:
+        - color: var(--icon-color-off)
+      name:
+        - color: var(--name-color-off)
+      state:
+        - color: hsl(0, 100%, 50%)
+      label:
+        - color: var(--label-color-off)
+      lock:
+        - color: var(--lock-color-off)  

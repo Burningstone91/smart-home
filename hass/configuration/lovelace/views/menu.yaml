@@ -1,0 +1,126 @@
+- title: Menu
+  icon: mdi:menu
+  path: menu
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Haputmenü
+            entity: input_boolean.notification_current_lights
+            icon: mdi:information-outline
+            name: Alle Menüs
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Automation
+                    icon: mdi:auto-fix 
+                    navigation_path: /lovelace/automations
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Batterien
+                    icon: mdi:battery
+                    navigation_path: /lovelace/battery
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Haushalt
+                    label: Tasks
+                    icon: mdi:calendar-text
+                    navigation_path: /lovelace/cleaning
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Klima
+                    label: Control
+                    icon: mdi:thermostat
+                    navigation_path: /lovelace/climate
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Geräte
+                    label: Alle Geräte
+                    icon: mdi:power-plug
+                    navigation_path: /lovelace/devices
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Energie
+                    label: Konsum
+                    icon: mdi:chart-line
+                    navigation_path: /lovelace/energy
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Grundriss
+                    icon: mdi:floor-plan 
+                    navigation_path: /lovelace/floorplan_phone
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Wäsche
+                    label: Raum
+                    icon: mdi:washing-machine
+                    navigation_path: /lovelace/laundry
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Lichter
+                    label: Alle Lichter
+                    icon: mdi:floor-lamp 
+                    navigation_path: /lovelace/lights
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Standort
+                    label: Karte
+                    icon: mdi:map
+                    navigation_path: /lovelace/location
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Remote
+                    label: Control
+                    icon: mdi:remote
+                    navigation_path: /lovelace/remote
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Szenen
+                    label: Standard
+                    icon: mdi:arrange-send-backward
+                    navigation_path: /lovelace/scenes
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Security
+                    label: Kameras
+                    icon: mdi:cctv 
+                    navigation_path: /lovelace/security
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Themes
+                    label: Manager
+                    icon: mdi:palette-outline
+                    navigation_path: /lovelace/themes
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Upcoming
+                    label: Media
+                    icon: mdi:plex 
+                    navigation_path: /lovelace/media
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Staubsauger
+                    label: Control Center
+                    icon: mdi:robot-vacuum
+                    navigation_path: /lovelace/vacuum
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Wetter
+                    label: Information
+                    icon: mdi:weather-partly-cloudy
+                    navigation_path: /lovelace/weather
+                - !include
+                  - '../templates/button_nav.yaml'
+                  - name: Netwerk
+                    label: Verbindungen
+                    icon: mdi:lan
+                    navigation_path: /lovelace/network
+        - !include ../includes/bottom-card.yaml  

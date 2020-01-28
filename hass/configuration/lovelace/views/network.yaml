@@ -1,0 +1,230 @@
+- title: Network
+  icon: mdi:lan
+  path: network
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Netzwerk
+            icon: mdi:lan-connect
+            name: Verbindungen
+        # Network devices
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Netzwerk Geräte" 
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.usg_router
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.switch_reduit
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.switch_reduit
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.ap_wohnzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+        # Servers
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Servers"
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.nas
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.server_nuc
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.raspberrypi
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+        # BLE PI Presence
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### BLE Pi Presence"
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.pi_ankleidezimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.pi_buero
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.pi_schlafzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.pi_wohnzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+        # Computers
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Computer"
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.pc_dimitri
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.pc_sabrina
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.desktop_7a2lv3k
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+        # Phones and Tablets
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Smartphone und Tablets"
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.sabrina_phone
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.dimitri_phone_unifi
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.ipad
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+        # Smart Home Devices
+        - !include
+          - '../templates/header_text.yaml'
+          - content: "##### Smart Home Geräte"
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              min_columns: 3
+              max_columns: 3
+              justify_content: start
+              layout: horizontal
+              cards:
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.harmonyhub
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.roomba_wohnzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.switch_entfeuchter
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.minix_wohnzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.musik_wohnzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.musik_schlafzimmer
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+                - !include
+                  - '../templates/button_popup_only.yaml'
+                  - entity: device_tracker.musik_buero
+                    show_state: false
+                    template: more_info_popup.yaml
+                    label: '!include ../includes/ip-address.yaml'
+        - !include ../includes/bottom-card.yaml  
+
+#"[[[ return entity.attributes.ip ]]]"

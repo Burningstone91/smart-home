@@ -194,14 +194,6 @@ const W="adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.pro
         :host {
             background-color:#000!important;
         }
-        .popup-wrapper {
-            margin-top:64px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
         .popup-inner {
             height: 100%;
             width: 100%;
@@ -211,7 +203,7 @@ const W="adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.pro
             flex-direction: column;
         }
         .fullscreen {
-          margin-top:-64px;
+          margin-top:-50px;
         }
         .icon {
             text-align:center;
@@ -235,7 +227,7 @@ const W="adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.pro
             font-weight: 300;
             margin-bottom: 30px;
             text-align: center;
-            font-size:20px;
+            font-size:15px;
             margin-top:0;
             text-transform: capitalize;
         }

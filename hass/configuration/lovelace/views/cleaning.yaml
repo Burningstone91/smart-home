@@ -1,0 +1,195 @@
+# lovelace_gen
+
+- title: Cleaning
+  path: cleaning
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header.yaml'
+          - content: Haushalt
+            icon: mdi:spray-bottle
+            name: Haushalts Tasks
+        - type: custom:layout-card
+          cards:
+            - type: custom:layout-card
+              cards:
+                # Küche
+                - type: picture
+                  image: /local/images/kueche.png
+                  style: |
+                    ha-card {
+                      height: 140px;
+                    }
+                - type: 'custom:vertical-stack-in-card'
+                  cards:
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Kühlschrank
+                        entity: sensor.kuehlschrank_gereinigt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Geschirrspüler
+                        entity: sensor.geschirrspueler_gereinigt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Backofen
+                        entity: sensor.backofen_gereinigt
+                        value_1: 3 months
+                        value_2: 4 months
+                        value_3: 5 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Dampfabzug
+                        entity: sensor.dampfabzug_gereinigt
+                        value_1: 6 months
+                        value_2: 7 months
+                        value_3: 8 months 
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Tiefkühler
+                        entity: sensor.tiefkuehler_gereinigt
+                        value_1: 6 months
+                        value_2: 7 months
+                        value_3: 8 months
+                # Bad
+                - type: picture
+                  image: /local/images/bad.png
+                  style: |
+                    ha-card {
+                      height: 140px;
+                    }
+                - type: 'custom:vertical-stack-in-card'
+                  cards:
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: WC kleines Bad
+                        entity: sensor.wc_kleines_bad_gereingt
+                        value_1: 7 days
+                        value_2: 14 days
+                        value_3: 21 days
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: WC grosses Bad
+                        entity: sensor.wc_grosses_bad_gereingt
+                        value_1: 7 days
+                        value_2: 14 days
+                        value_3: 21 days
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: kleines Bad
+                        entity: sensor.kleines_bad_gereingt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 monhts
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: grosses Bad
+                        entity: sensor.grosses_bad_gereingt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                # Reduit
+                - type: picture
+                  image: /local/images/reduit.png
+                  style: |
+                    ha-card {
+                      height: 140px;
+                    }
+                - type: 'custom:vertical-stack-in-card'
+                  cards:
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Waschmaschine
+                        entity: sensor.waschmaschine_gereinigt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Tumbler
+                        entity: sensor.tumbler_gereinigt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                # Schlafzimmer
+                - type: picture
+                  image: /local/images/schlafzimmer.jpg
+                  style: |
+                    ha-card {
+                      height: 140px;
+                    }
+                - type: 'custom:vertical-stack-in-card'
+                  cards:
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Bettwäsche
+                        entity: sensor.bettwaesche_gewechselt
+                        value_1: 14 days
+                        value_2: 21 days
+                        value_3: 1 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Matratze
+                        entity: sensor.matratze_gewendet
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                # Wohnung
+                - type: picture
+                  image: /local/images/haus.jpg
+                  style: |
+                    ha-card {
+                      height: 140px;
+                    }
+                - type: 'custom:vertical-stack-in-card'
+                  cards:
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Staubsaugen
+                        entity: sensor.boden_gesaugt
+                        value_1: 3 days
+                        value_2: 7 days
+                        value_3: 14 days
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Abstauben
+                        entity: sensor.abgestaubt
+                        value_1: 14 days
+                        value_2: 21 days
+                        value_3: 1 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Luftfilter
+                        entity: sensor.luftfilter_gereinigt
+                        value_1: 1 months
+                        value_2: 2 months
+                        value_3: 3 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Boden feucht
+                        entity: sensor.boden_feucht_gereinigt
+                        value_1: 3 months
+                        value_2: 4 months
+                        value_3: 5 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Roomba
+                        entity: sensor.roomba_gereingt
+                        value_1: 3 months
+                        value_2: 4 months
+                        value_3: 5 months
+                    - !include
+                      - '../templates/check_button.yaml'
+                      - title: Fenster
+                        entity: sensor.fenster_gereinigt
+                        value_1: 6 months
+                        value_2: 7 months
+                        value_3: 8 months
+            - !include ../includes/bottom-card.yaml              

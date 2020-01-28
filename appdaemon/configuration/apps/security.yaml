@@ -1,6 +1,7 @@
 security_app:
   module: security
   class: SecurityAutomation
+  code: !secret alarm_panel_code
   entities:
     motion_sensors:
       - binary_sensor.bewegung_buero

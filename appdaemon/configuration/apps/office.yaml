@@ -62,18 +62,24 @@ dimmer_switch_buero:
         action: 'on'
         action_entity: scene.buro_alles_aus
 
-# dimmer_test:
-#   module: testing
-#   class: TradfriE1810
-#   entities:
-#     light: light.buero
-#     switch: remote_office #id of the ikea remote in the events
-#   advanced:
-#     short_press_right:
-#       action_type: turn_off
-#       entity: switch.office
-#     short_press_left:
-#       action_type: turn_on
-#       entity: light.office
-#       parameters:
-#         brightness: 255  
+dimmer_test:
+  module: testing
+  class: HueDimmerSwitch!!
+  entities:
+    lights: 
+      - light.decke_2_buero
+      - light.decke_1_buero
+    remote_event_id: dimmschalter_buero
+  button_config:
+    short_press_on_release:
+      action_type: light.turn_on
+      entity: 
+        - light.decke_1_buero
+        - light.decke_2_buero
+      parameters:
+        brightness: 150  
+    short_press_up_release:
+      action_type: light.turn_on
+      entity: light.buero
+      parameters:
+        brightness: 255  

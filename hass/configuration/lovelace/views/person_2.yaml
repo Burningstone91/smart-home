@@ -1,0 +1,181 @@
+- title: Person 2
+  path: person_2
+  cards:
+    - type: vertical-stack
+      cards:
+        - !include
+          - '../templates/system_header_alternate.yaml'
+          - content: Dimitri
+            name: "[[[ return `${states['input_select.person_menu_2'].state}` ]]]"
+            font_weight: bold
+            entity: input_select.person_menu_2
+        - type: conditional
+          conditions:
+            - entity: input_select.person_menu_2
+              state: "Übersicht"
+          card:
+            type: custom:layout-card
+            cards:
+              - type: custom:layout-card
+                min_columns: 2
+                justify_content: start
+                layout: horizontal
+                column_width: [133, 517]
+                cards:
+                  - type: picture
+                    style: |
+                      ha-card {
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        overflow: hidden;
+                        height: 123px;
+                      }
+                    image: '/local/images/dimitri_home.jpg'
+              - type: custom:layout-card
+                min_columns: 2
+                justify_content: start
+                layout: horizontal
+                cards:
+                  - type: markdown
+                    style: |
+                      ha-card {
+                        background: var(--card-color-off);
+                        --paper-item-icon-color: var(--icon-color-off);
+                        color: var(--name-color-off);
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        opacity: 0.8;
+                        overflow: hidden;
+                        height: 169px;
+                      }
+                    content: |
+                      <ha-icon icon="mdi:cellphone-iphone"></ha-icon> {{ states('sensor.dimitri_phone_battery') }} %
+                  - type: map
+                    style: |
+                      ha-card {
+                        background: var(--card-color-off);
+                        --paper-item-icon-color: var(--icon-color-off);
+                        color: var(--name-color-off);
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        opacity: 0.8;
+                        overflow: hidden;
+                        height: 169px;
+                      }
+                    default_zoom: 15
+                    entities:
+                      - person.dimitri
+              - !include ../includes/bottom-card.yaml
+        - type: conditional
+          conditions:
+            - entity: input_select.person_menu_2
+              state: "Zugverbindungen"
+          card:
+            type: custom:layout-card
+            cards:
+              - type: custom:layout-card
+                cards:
+                  - type: markdown
+                    style: |
+                      ha-card {
+                        background-image: url('/local/images/peugeot207.jpg');
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        font-size: 13px;
+                        font-family: Helvetica;
+                        background-size: cover;
+                        background-position: 50% 50%;
+                        color: white;
+                        height: 140px;
+                        vertical-align: baseline;
+                        margin-bottom: 2px;
+                        overflow: hidden;
+                      }
+                    content: >
+                      **APK:** {{ states('sensor.peugeot_207_expdate') }}
+            
+                      **Kenteken:** 21-XX-DL
+                      
+                      **Verzekerd:** {{ states('sensor.peugeot_207_insured') }}
+                  - type: 'custom:vertical-stack-in-card'
+                    cards:
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Olie
+                          entity: sensor.daihatsu_olie
+                          value_1: 3 months
+                          value_2: 6 months
+                          value_3: 9 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Banden
+                          entity: sensor.daihatsu_banden
+                          value_1: 3 months
+                          value_2: 6 months
+                          value_3: 9 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Wassen
+                          entity: sensor.daihatsu_clean
+                          value_1: 1 month
+                          value_2: 3 months
+                          value_3: 6 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Stofzuigen
+                          entity: sensor.daihatsu_stof
+                          value_1: 1 month
+                          value_2: 3 months
+                          value_3: 6 months
+                      - !include
+                        - '../templates/check_button.yaml'
+                        - title: Ruiten
+                          entity: sensor.daihatsu_window
+                          value_1: 1 month
+                          value_2: 3 months
+                          value_3: 6 months
+                  - type: entities
+                    style: |
+                      ha-card {
+                        background: var(--card-color-off);
+                        --paper-item-icon-color: var(--icon-color-off);
+                        color: var(--name-color-off);
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        opacity: 0.8;
+                      }
+              - !include ../includes/bottom-card.yaml  
+        - type: conditional
+          conditions:
+            - entity: input_select.person_menu_2
+              state: "Standort"
+          card:
+            type: custom:layout-card
+            cards:
+              - type: custom:layout-card
+                cards:
+                  - type: map
+                    style: |
+                      ha-card {
+                        background: var(--card-color-off);
+                        --paper-item-icon-color: var(--icon-color-off);
+                        color: var(--name-color-off);
+                        border-radius: {{ states('input_select.border_radius') }};
+                        box-shadow: {{ states('input_select.box_shadow') }};
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        opacity: 0.8;
+                        overflow: hidden;
+                      }
+                    aspect_ratio: 4x7
+                    default_zoom: 15
+                    entities:
+                      - person.dimitri
+
+

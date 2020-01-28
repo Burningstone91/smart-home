@@ -42,9 +42,8 @@ sensor:
         friendly_name: 'Dimitri Handy Akku'
         unit_of_measurement: '%'
         value_template: >
-          {{ state_attr('device_tracker.dimitri_phone_gps','battery_level') | int | round(0) }}
+          {{ state_attr('device_tracker.dimitri_phone_app','battery_level') | int | round(0) }}
         device_class: battery
-
       sabrina_home:
         friendly_name: "Sabrina Home Status"
         value_template: >-
@@ -61,6 +60,12 @@ sensor:
           {% elif is_state('input_select.sabrina_presence', 'gerade gegangen') or is_state('input_select.sabrina_presence', 'weg') or is_state('input_select.sabrina_presence', 'lange weg') %}
             /local/presence/sabrina_away.jpg
           {% endif %}
+      sabrina_phone_battery:
+        friendly_name: 'Sabrina Handy Akku'
+        unit_of_measurement: '%'
+        value_template: >
+          {{ state_attr('device_tracker.dimitri_phone_app','battery_level') | int | round(0) }}
+        device_class: battery
 
   - platform: swiss_public_transport
     name: Dimitri Verbindungen zur Arbeit
@@ -76,18 +81,12 @@ sensor:
       next_train_from_home_to_work:
         friendly_name: "Nächster Zug zur Arbeit"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_zur_arbeit.attributes.next_departure)| timestamp_custom("%H:%M", True) }}'
-  - platform: template
-    sensors:
       next_but_one_train_from_home_to_work:
         friendly_name: "Übernächster Zug zur Arbeit"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_zur_arbeit.attributes.next_on_departure)| timestamp_custom("%H:%M", True) }}'
-  - platform: template
-    sensors:
       next_train_from_work_to_home:
         friendly_name: "Nächster Zug nach Hause"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_nach_hause.attributes.next_departure)| timestamp_custom("%H:%M", True) }}'
-  - platform: template
-    sensors:
       next_but_one_train_from_work_to_home:
         friendly_name: "Übernächster Zug nach Hause"
         value_template: '{{ as_timestamp(states.sensor.dimitri_verbindungen_nach_hause.attributes.next_on_departure)| timestamp_custom("%H:%M", True) }}'

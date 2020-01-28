@@ -1,0 +1,56 @@
+# Please edit this file to your own need, I only provide this file as an
+# example on how to create this. In the first card (the All Clear card)
+# you should put in every entity that you want to show a notification with
+# as you only want that card to show if you have no notifications. Follow
+# the example below (srry the notifications are in Dutch so you will have
+# to use your own!) Do not make them too long as they might not fit in the
+# bar. Shorter notifications will probably look better!
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #
+
+# Card Config
+# All Clear
+- type: conditional
+  conditions:
+    - entity: alarm_control_panel.alarmanlage
+      state: disarmed
+  card:
+    !include
+    - '../templates/notification_template.yaml'
+    - icon: mdi:check-box-outline
+      name: Alles ist ruhig, keine Meldungen
+# Alarm Triggered
+- type: conditional
+  conditions:
+    - entity: alarm_control_panel.alarmanlage
+      state: "triggered"
+  card:
+    !include
+    - '../templates/notification_template.yaml'
+    - icon: mdi:alert
+      name: ALARM! ALARM! ALARM!
+# Alarm Armed
+- type: conditional
+  conditions:
+    - entity: alarm_control_panel.alarmanlage
+      state_not: disarmed
+    - entity: alarm_control_panel.alarmanlage
+      state_not: pending
+  card:
+    !include
+    - '../templates/notification_template.yaml'
+    - icon: mdi:alert
+      name: ACHTUNG der Alarm ist scharf
+# Alarm Disarmed Not Home
+- type: conditional
+  conditions:
+    - entity: alarm_control_panel.alarmanlage
+      state: disarmed
+    - entity: group.all_persons
+      state_not: home
+  card:
+    !include
+    - '../templates/notification_template.yaml'
+    - icon: mdi:alert-circle
+      name: Niemand zu Hause und Alarm aus!
+
